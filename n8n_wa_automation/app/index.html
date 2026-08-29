@@ -32,6 +32,7 @@
       --status-hadir: #10b981;
       --status-tidak: #f43f5e;
       --status-pending: #f59e0b;
+      --status-jemput: #3b82f6;
       --wa-chat-bg: #0b141a;
       --wa-bubble-bg: #005c4b;
     }
@@ -357,6 +358,7 @@
     .filter-pills {
       display: flex;
       gap: 0.4rem;
+      flex-wrap: wrap;
     }
 
     .pill-btn {
@@ -375,6 +377,18 @@
       background: rgba(99, 102, 241, 0.2);
       border-color: var(--accent-indigo);
       color: #a5b4fc;
+    }
+
+    .pill-btn-jemput {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.3);
+      color: #60a5fa;
+    }
+
+    .pill-btn-jemput.active {
+      background: rgba(59, 130, 246, 0.3);
+      border-color: #3b82f6;
+      color: white;
     }
 
     /* Table Design */
@@ -440,6 +454,16 @@
       background: rgba(245, 158, 11, 0.15);
       color: var(--status-pending);
       border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .badge-jemput {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--status-jemput);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
     }
 
     /* Template & Live Preview Layout */
@@ -661,7 +685,7 @@
         <div class="logo-icon"><i class="fa-brands fa-whatsapp"></i></div>
         <div>
           <div class="logo-title">WA Automation Suite</div>
-          <div class="logo-subtitle">Konfirmasi Kehadiran Welcome Maba 2026</div>
+          <div class="logo-subtitle">Konfirmasi Kehadiran & Penjemputan Maba 2026</div>
         </div>
       </div>
 
@@ -693,22 +717,22 @@
       </div>
 
       <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
+          <i class="fa-solid fa-car-side"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statPenjemputan" style="color: var(--status-jemput);">0</div>
+          <div class="stat-label">Butuh Penjemputan</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
         <div class="stat-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
           <i class="fa-solid fa-circle-check"></i>
         </div>
         <div class="stat-info">
           <div class="stat-value" id="statHadir" style="color: var(--status-hadir);">0</div>
           <div class="stat-label">Konfirmasi Hadir</div>
-        </div>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-icon" style="background: rgba(244, 63, 94, 0.15); color: #fb7185;">
-          <i class="fa-solid fa-circle-xmark"></i>
-        </div>
-        <div class="stat-info">
-          <div class="stat-value" id="statTidak" style="color: var(--status-tidak);">0</div>
-          <div class="stat-label">Tidak Bisa Hadir</div>
         </div>
       </div>
 
@@ -730,7 +754,7 @@
         <i class="fa-solid fa-file-excel"></i>
         <h3>Upload File Excel Formulir Pendaftaran Maba (.xlsx / .csv)</h3>
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.35rem;">
-          Mendukung otomatis parsing kolom Google Form: <code>Nama lengkap</code>, <code>Nomor WhatsApp (Aktif)</code>, <code>Fakultas</code>, <code>Program studi</code>, <code>Asal Kota</code>
+          Mendukung otomatis parsing data pendaftaran &amp; deteksi Maba yang <strong>membutuhkan penjemputan</strong>!
         </p>
         <input type="file" id="fileInput" accept=".xlsx, .xls, .csv" style="display: none;" onchange="handleFileUpload(event)">
       </div>
@@ -761,6 +785,7 @@
 
           <div class="filter-pills">
             <button class="pill-btn active" onclick="setFilter('semua', this)">Semua</button>
+            <button class="pill-btn pill-btn-jemput" onclick="setFilter('jemput', this)">🚗 Butuh Penjemputan</button>
             <button class="pill-btn" onclick="setFilter('Hadir', this)">Hadir</button>
             <button class="pill-btn" onclick="setFilter('Tidak Hadir', this)">Tidak Hadir</button>
             <button class="pill-btn" onclick="setFilter('Belum Konfirmasi', this)">Belum Balas</button>
@@ -776,6 +801,7 @@
                 <th>Nomor WhatsApp</th>
                 <th>Fakultas / Prodi</th>
                 <th>Asal Kota</th>
+                <th>Penjemputan</th>
                 <th>Hari, Tanggal</th>
                 <th>Waktu</th>
                 <th>Status</th>
@@ -797,6 +823,11 @@
         <div class="panel">
           <div class="panel-header">
             <div class="panel-title"><i class="fa-solid fa-pen"></i> Edit Format Pesan Konfirmasi</div>
+            
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-outline" style="font-size: 0.75rem; padding: 0.4rem 0.75rem;" onclick="loadPreset('umum')">📋 Preset Umum</button>
+              <button class="btn btn-wa" style="font-size: 0.75rem; padding: 0.4rem 0.75rem;" onclick="loadPreset('jemputan')">🚗 Preset Penjemputan</button>
+            </div>
           </div>
 
           <div class="form-group">
@@ -816,9 +847,11 @@
 
 Semoga sehat selalu ya.
 
-Menjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.
+Menjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran dan penjemputan nih.
 
-Apakah Kakak dipastikan bisa hadir di acara kita?
+Berdasarkan data pendaftaran, Kakak memerlukan bantuan penjemputan transportasi.
+
+Apakah Kakak dipastikan bisa hadir dan membutuhkan penjemputan di acara kita?
 
 🗓 Hari/Tanggal: {tanggal}
 ⏰ Waktu: {waktu}
@@ -826,9 +859,11 @@ Apakah Kakak dipastikan bisa hadir di acara kita?
 
 Mohon balas pesan ini dengan format:
 
-[Hadir / Tidak Hadir]
+[Hadir + Butuh Penjemputan / Hadir (Berangkat Sendiri) / Tidak Hadir]
 
-Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨</textarea>
+Serta cantumkan Titik Penjemputan Kakak (misal: Stasiun Gubeng / Terminal Purabaya / Bandara Juanda).
+
+Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Terima kasih banyak! 🙏✨</textarea>
           </div>
 
           <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem;">
@@ -925,23 +960,30 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
       <form onsubmit="saveNewPeserta(event)">
         <div class="form-group">
           <label>Nama Lengkap Peserta</label>
-          <input type="text" id="modalNama" required placeholder="Contoh: Sarina Agnesia Sitio">
+          <input type="text" id="modalNama" required placeholder="Contoh: Grace Natalie Rismaduma Sihite">
         </div>
         <div class="form-group">
           <label>Nomor WhatsApp (Aktif)</label>
-          <input type="text" id="modalWA" required placeholder="Contoh: 085947769750">
+          <input type="text" id="modalWA" required placeholder="Contoh: 082185433752">
         </div>
         <div class="form-group">
           <label>Fakultas</label>
-          <input type="text" id="modalFakultas" placeholder="Contoh: FISIPOL">
+          <input type="text" id="modalFakultas" placeholder="Contoh: FMIPA">
         </div>
         <div class="form-group">
           <label>Program Studi</label>
-          <input type="text" id="modalProdi" placeholder="Contoh: ILMU POLITIK">
+          <input type="text" id="modalProdi" placeholder="Contoh: S1 Sains Aktuaria">
         </div>
         <div class="form-group">
           <label>Asal Kota</label>
-          <input type="text" id="modalKota" placeholder="Contoh: Medan">
+          <input type="text" id="modalKota" placeholder="Contoh: Sidikalang, Medan">
+        </div>
+        <div class="form-group">
+          <label>Membutuhkan Penjemputan?</label>
+          <select id="modalJemput">
+            <option value="true">Ya, Membutuhkan Penjemputan</option>
+            <option value="false">Tidak (Berangkat Sendiri)</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Hari, Tanggal</label>
@@ -982,13 +1024,15 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
       return str;
     }
 
-    // Initial Mock Data derived from Google Form responses
+    // 7 Participants who explicitly requested pickup (from Google Form responses)
     const defaultData = [
-      { id: 1, nama: "Sarina Agnesia Sitio", wa: "6285947769750", fakultas: "FISIPOL", prodi: "ILMU POLITIK", kota: "Medan", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
-      { id: 2, nama: "Dita Saraswati", wa: "62895380129150", fakultas: "FMIPA", prodi: "Sains Aktuaria", kota: "Sidoarjo", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Hadir" },
-      { id: 3, nama: "Grace Natalie Rismadi", wa: "6282185433752", fakultas: "FMIPA", prodi: "S1 Sains Aktuaria", kota: "Sidikalang, Medan", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Tidak Hadir" },
-      { id: 4, nama: "Richard Zulyo Sitakar", wa: "6287285567205", fakultas: "Fakultas Vokasi", prodi: "D4 Teknik Mesin", kota: "Batam", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
-      { id: 5, nama: "Kornelius Yosia Gunawan", wa: "6285876805565", fakultas: "Teknik", prodi: "Teknik Informatika", kota: "Kota Mojokerto", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" }
+      { id: 3, nama: "Grace Natalie Rismaduma Sihite", wa: "6282185433752", fakultas: "FMIPA", prodi: "S1 Sains Aktuaria", kota: "Sidikalang, Medan", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
+      { id: 4, nama: "Richard Zulyo Sitakar", wa: "6287285567205", fakultas: "Fakultas Vokasi", prodi: "D4 Teknik Mesin", kota: "Batam", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
+      { id: 9, nama: "Ryan Boantua Panjaitan", wa: "6287780460960", fakultas: "Vokasi", prodi: "D-4 Tata boga", kota: "Jakarta Timur", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
+      { id: 31, nama: "Edwell Putra Hirohito Gaspersz", wa: "6281248077746", fakultas: "Teknik", prodi: "Teknik Mesin", kota: "Sorong", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
+      { id: 50, nama: "Sveta Restyarsa Tisnandaru", wa: "6282141541460", fakultas: "Vokasi", prodi: "D4 Desain Grafis", kota: "Surabaya", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
+      { id: 73, nama: "Susan Sonya Silalahi", wa: "6281234567890", fakultas: "FISIPOL", prodi: "Ilmu Komunikasi", kota: "Medan", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
+      { id: 74, nama: "Wahyuni Ningsi Marpaung", wa: "6289876543210", fakultas: "FMIPA", prodi: "Biologi", kota: "Pematangsiantar", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" }
     ];
 
     let pesertaList = JSON.parse(localStorage.getItem('wa_maba_peserta')) || defaultData;
@@ -1016,8 +1060,8 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
 
     function updateStats() {
       document.getElementById('statTotal').innerText = pesertaList.length;
+      document.getElementById('statPenjemputan').innerText = pesertaList.filter(p => p.jemput).length;
       document.getElementById('statHadir').innerText = pesertaList.filter(p => p.status === 'Hadir').length;
-      document.getElementById('statTidak').innerText = pesertaList.filter(p => p.status === 'Tidak Hadir').length;
       document.getElementById('statPending').innerText = pesertaList.filter(p => p.status === 'Belum Konfirmasi').length;
     }
 
@@ -1048,12 +1092,14 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
                             (p.wa || '').includes(search) ||
                             (p.prodi || '').toLowerCase().includes(search) ||
                             (p.kota || '').toLowerCase().includes(search);
-        const matchFilter = currentFilter === 'semua' || p.status === currentFilter;
+        let matchFilter = true;
+        if (currentFilter === 'jemput') matchFilter = p.jemput === true;
+        else if (currentFilter !== 'semua') matchFilter = p.status === currentFilter;
         return matchSearch && matchFilter;
       });
 
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 2rem; color: var(--text-muted);">Tidak ada data peserta ditemukan</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; padding: 2rem; color: var(--text-muted);">Tidak ada data peserta ditemukan</td></tr>`;
         return;
       }
 
@@ -1061,6 +1107,10 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
         let badgeClass = 'badge-pending';
         if (p.status === 'Hadir') badgeClass = 'badge-hadir';
         if (p.status === 'Tidak Hadir') badgeClass = 'badge-tidak';
+
+        const jemputBadge = p.jemput 
+          ? `<span class="badge-jemput"><i class="fa-solid fa-car"></i> Butuh Jemput</span>` 
+          : `<span style="color: var(--text-muted); font-size: 0.75rem;">-</span>`;
 
         return `
           <tr>
@@ -1072,6 +1122,7 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
               <div style="font-size: 0.75rem; color: var(--text-muted);">${p.prodi || '-'}</div>
             </td>
             <td>${p.kota || '-'}</td>
+            <td>${jemputBadge}</td>
             <td>${p.tanggal}</td>
             <td>${p.waktu}</td>
             <td>
@@ -1123,6 +1174,19 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
       window.open(`https://wa.me/${cleanWa}?text=${text}`, '_blank');
     }
 
+    // Preset Message Loaders
+    function loadPreset(type) {
+      const textarea = document.getElementById('templateTextarea');
+      if (type === 'jemputan') {
+        textarea.value = `Halo Kak {nama}! 👋\n\nSemoga sehat selalu ya.\n\nMenjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran dan penjemputan nih.\n\nBerdasarkan data pendaftaran, Kakak memerlukan bantuan penjemputan transportasi.\n\nApakah Kakak dipastikan bisa hadir dan membutuhkan penjemputan di acara kita?\n\n🗓 Hari/Tanggal: {tanggal}\n⏰ Waktu: {waktu}\n📍 Lokasi: {lokasi}\n\nMohon balas pesan ini dengan format:\n\n[Hadir + Butuh Penjemputan / Hadir (Berangkat Sendiri) / Tidak Hadir]\n\nSerta cantumkan Titik Penjemputan Kakak (misal: Stasiun Gubeng / Terminal Purabaya / Bandara Juanda).\n\nKonfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Terima kasih banyak! 🙏✨`;
+        showToast('Preset Template Penjemputan dimuat!');
+      } else {
+        textarea.value = `Halo Kak {nama}! 👋\n\nSemoga sehat selalu ya.\n\nMenjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.\n\nApakah Kakak dipastikan bisa hadir di acara kita?\n\n🗓 Hari/Tanggal: {tanggal}\n⏰ Waktu: {waktu}\n📍 Lokasi: {lokasi}\n\nMohon balas pesan ini dengan format:\n\n[Hadir / Tidak Hadir]\n\nKonfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨`;
+        showToast('Preset Template Kehadiran Umum dimuat!');
+      }
+      updateLivePreview();
+    }
+
     // Modal Add
     function openAddModal() { document.getElementById('addModal').classList.add('active'); }
     function closeAddModal() { document.getElementById('addModal').classList.remove('active'); }
@@ -1136,6 +1200,7 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
         fakultas: document.getElementById('modalFakultas').value || '-',
         prodi: document.getElementById('modalProdi').value || '-',
         kota: document.getElementById('modalKota').value || '-',
+        jemput: document.getElementById('modalJemput').value === 'true',
         tanggal: document.getElementById('modalTanggal').value,
         waktu: document.getElementById('modalWaktu').value,
         lokasi: document.getElementById('modalLokasi').value,
@@ -1163,7 +1228,6 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
 
         if (jsonData.length > 0) {
           pesertaList = jsonData.map((row, idx) => {
-            // Find key by matching column names from Google Forms export
             const getVal = (possibleKeys) => {
               for (const k of possibleKeys) {
                 const foundKey = Object.keys(row).find(key => key.trim().toLowerCase().includes(k.toLowerCase()));
@@ -1177,6 +1241,9 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
             const fakultasVal = getVal(['Fakultas', 'fakultas']) || '-';
             const prodiVal = getVal(['Program studi', 'Prodi', 'prodi']) || '-';
             const kotaVal = getVal(['Asal Kota', 'Kota', 'kota', 'Asal']) || '-';
+            const transVal = getVal(['transportasi', 'jemputan', 'bantuan']);
+            
+            const isNeedJemput = transVal.toLowerCase().includes('ya') || transVal.toLowerCase().includes('jemputan');
 
             return {
               id: Date.now() + idx,
@@ -1185,6 +1252,7 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
               fakultas: fakultasVal,
               prodi: prodiVal,
               kota: kotaVal,
+              jemput: isNeedJemput,
               tanggal: 'Senin, 31 Agustus 2026',
               waktu: '17.30 (Open Gate) - Selesai',
               lokasi: 'Ketintang Madya no.66',
@@ -1204,7 +1272,7 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
       const ws = XLSX.utils.json_to_sheet(pesertaList);
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, "Status Peserta Maba");
-      XLSX.writeFile(wb, "status_kehadiran_maba_2026.xlsx");
+      XLSX.writeFile(wb, "status_kehadiran_penjemputan_maba_2026.xlsx");
       showToast('File Excel berhasil didownload!');
     }
 
@@ -1226,12 +1294,12 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
 
     function updateLivePreview() {
       const sample = pesertaList[0] || {
-        nama: "Sarina Agnesia Sitio",
+        nama: "Grace Natalie Rismaduma Sihite",
         tanggal: "Senin, 31 Agustus 2026",
         waktu: "17.30 (Open Gate) - Selesai",
         lokasi: "Ketintang Madya no.66",
-        prodi: "ILMU POLITIK",
-        kota: "Medan"
+        prodi: "S1 Sains Aktuaria",
+        kota: "Sidikalang, Medan"
       };
 
       document.getElementById('previewMessageBody').innerText = formatMessage(sample);
@@ -1243,9 +1311,7 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
     }
 
     function resetTemplate() {
-      document.getElementById('templateTextarea').value = `Halo Kak {nama}! 👋\n\nSemoga sehat selalu ya.\n\nMenjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.\n\nApakah Kakak dipastikan bisa hadir di acara kita?\n\n🗓 Hari/Tanggal: {tanggal}\n⏰ Waktu: {waktu}\n📍 Lokasi: {lokasi}\n\nMohon balas pesan ini dengan format:\n\n[Hadir / Tidak Hadir]\n\nKonfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨`;
-      updateLivePreview();
-      showToast('Template dikembalikan ke default');
+      loadPreset('jemputan');
     }
 
     // n8n Functions
