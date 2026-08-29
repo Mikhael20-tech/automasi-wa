@@ -18,13 +18,13 @@
         "options": {
           "response": {
             "response": {
-              "responseFormat": "file"
+              "responseFormat": "text"
             }
           }
         }
       },
       "id": "fetch-sheet-csv",
-      "name": "Ambil Data Google Sheets (Tanpa Auth)",
+      "name": "Ambil Data Google Sheets CSV",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
@@ -34,12 +34,12 @@
     },
     {
       "parameters": {
-        "options": {}
+        "jsCode": "const csvText = $input.first().json.data || $input.first().body || '';\n\nif (!csvText || csvText.includes('<!DOCTYPE html>') || csvText.includes('<html')) {\n  throw new Error('Google Sheet belum di-Share ke Public! Buka Google Sheet -> Share -> Ganti ke \"Anyone with the link can view\"');\n}\n\n// Parse CSV text into JSON items\nfunction parseCSV(text) {\n  const lines = text.split(/\\r?\\n/).filter(line => line.trim());\n  if (lines.length < 2) return [];\n  \n  // Parse Header row\n  const parseLine = (line) => {\n    const values = [];\n    let val = '';\n    let inQuotes = false;\n    for (let i = 0; i < line.length; i++) {\n      const char = line[i];\n      if (char === '\"') inQuotes = !inQuotes;\n      else if (char === ',' && !inQuotes) {\n        values.push(val.trim().replace(/^\"|\"$/g, ''));\n        val = '';\n      } else val += char;\n    }\n    values.push(val.trim().replace(/^\"|\"$/g, ''));\n    return values;\n  };\n\n  const headers = parseLine(lines[0]);\n  const results = [];\n\n  for (let i = 1; i < lines.length; i++) {\n    const currentline = parseLine(lines[i]);\n    const rowObj = {};\n    headers.forEach((header, index) => {\n      rowObj[header] = currentline[index] || '';\n    });\n    results.push({ json: rowObj });\n  }\n  return results;\n}\n\nreturn parseCSV(csvText);"
       },
       "id": "parse-csv-node",
-      "name": "Extract Data CSV Peserta",
-      "type": "n8n-nodes-base.extractFromFile",
-      "typeVersion": 1,
+      "name": "Parse & Format Data CSV",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
         660,
         300
@@ -130,25 +130,25 @@
       "main": [
         [
           {
-            "node": "Ambil Data Google Sheets (Tanpa Auth)",
+            "node": "Ambil Data Google Sheets CSV",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Ambil Data Google Sheets (Tanpa Auth)": {
+    "Ambil Data Google Sheets CSV": {
       "main": [
         [
           {
-            "node": "Extract Data CSV Peserta",
+            "node": "Parse & Format Data CSV",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Extract Data CSV Peserta": {
+    "Parse & Format Data CSV": {
       "main": [
         [
           {
