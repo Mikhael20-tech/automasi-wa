@@ -1,5 +1,5 @@
 {
-  "name": "Otomasi Webhook Auto-Update Balasan WA (Hadir / Tidak Hadir)",
+  "name": "Otomasi Webhook Auto-Receive Balasan WA",
   "nodes": [
     {
       "parameters": {
@@ -20,42 +20,14 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "const body = $json.body || $json;\nconst sender = body.sender || body.from || body.phone || '';\nconst messageText = (body.message || body.text || '').trim().toLowerCase();\n\nlet status = 'Belum Konfirmasi';\nif (messageText.includes('hadir') && !messageText.includes('tidak')) {\n  status = 'Hadir';\n} else if (messageText.includes('tidak hadir') || messageText.includes('tidak')) {\n  status = 'Tidak Hadir';\n}\n\n// Normalisasi nomor WA (hilangkan +, @c.us, dll)\nlet cleanPhone = sender.replace(/[^0-9]/g, '');\nif (cleanPhone.startsWith('0')) cleanPhone = '62' + cleanPhone.substring(1);\nelse if (cleanPhone.startsWith('8')) cleanPhone = '62' + cleanPhone;\n\nreturn {\n  json: {\n    nomor_wa_clean: cleanPhone,\n    pesan_diterima: messageText,\n    status_kehadiran: status,\n    waktu_balas: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })\n  }\n};"
+        "jsCode": "const body = $json.body || $json;\nconst sender = body.sender || body.from || body.phone || '';\nconst messageText = (body.message || body.text || '').trim();\n\nlet status = 'Belum Konfirmasi';\nconst lowerMsg = messageText.toLowerCase();\nif (lowerMsg.includes('hadir') && !lowerMsg.includes('tidak')) {\n  status = 'Hadir';\n} else if (lowerMsg.includes('tidak hadir') || lowerMsg.includes('tidak')) {\n  status = 'Tidak Hadir';\n}\n\n// Normalisasi nomor WA\nlet cleanPhone = sender.replace(/[^0-9]/g, '');\nif (cleanPhone.startsWith('0')) cleanPhone = '62' + cleanPhone.substring(1);\nelse if (cleanPhone.startsWith('8')) cleanPhone = '62' + cleanPhone;\n\nreturn {\n  json: {\n    nomor_wa: cleanPhone,\n    pesan_masuk: messageText,\n    status_deteksi: status,\n    waktu_diterima: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })\n  }\n};"
       },
       "id": "parse-balasan-node",
-      "name": "Deteksi Jawaban (Hadir/Tidak)",
+      "name": "Deteksi Pesan Balasan",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
         440,
-        300
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "sheetId": {
-          "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1XU5LzIrpCxuMt3cmve7RIenDD5BmUgu3W46hml4kxT4/edit#gid=701539303",
-          "mode": "url"
-        },
-        "range": "A:Z",
-        "keyRow": "Nomor WhatsApp (Aktif)",
-        "keyRowValue": "={{ $json.nomor_wa_clean }}",
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Status_Kehadiran": "={{ $json.status_kehadiran }}"
-          }
-        },
-        "options": {}
-      },
-      "id": "update-google-sheets",
-      "name": "Update Status Kehadiran di Google Sheets",
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.5,
-      "position": [
-        660,
         300
       ]
     }
@@ -65,18 +37,7 @@
       "main": [
         [
           {
-            "node": "Deteksi Jawaban (Hadir/Tidak)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Deteksi Jawaban (Hadir/Tidak)": {
-      "main": [
-        [
-          {
-            "node": "Update Status Kehadiran di Google Sheets",
+            "node": "Deteksi Pesan Balasan",
             "type": "main",
             "index": 0
           }
