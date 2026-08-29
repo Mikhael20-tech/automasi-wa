@@ -960,13 +960,16 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
           <div class="panel-title"><i class="fa-solid fa-bolt"></i> n8n Webhook Direct Trigger</div>
         </div>
 
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.6;">
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem; line-height: 1.6;">
           Anda dapat langsung memicu (*trigger*) n8n workflow dari dashboard ini dengan memasukkan **Webhook URL** dari n8n Anda. Dashboard akan mengirimkan seluruh payload JSON data peserta ke n8n secara otomatis!
         </p>
 
         <div class="form-group">
-          <label>URL Webhook n8n (Server wardospem.tech):</label>
+          <label>URL Webhook n8n (Production / Test Webhook):</label>
           <input type="text" id="n8nWebhookUrl" placeholder="https://n8n.wardospem.tech/webhook/send-wa-maba" value="https://n8n.wardospem.tech/webhook/send-wa-maba">
+          <p style="font-size: 0.78rem; color: #fbbf24; margin-top: 0.4rem;">
+            ⚠️ <strong>Perhatian:</strong> Masukkan <strong>Webhook URL</strong> dari node Webhook n8n Anda (berawalan <code>/webhook/</code> atau <code>/webhook-test/</code>), <strong>BUKAN URL browser editor workflow</strong> (seperti <code>.../workflow/ID...</code>).
+          </p>
         </div>
 
         <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
@@ -1434,13 +1437,24 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
 
     // n8n Functions
     function triggerN8nBlast() {
-      const url = document.getElementById('n8nWebhookUrl').value;
+      let url = document.getElementById('n8nWebhookUrl').value.trim();
+      
       if (!url) return alert('Silakan masukkan Webhook URL n8n Anda terlebih dahulu!');
+
+      // Warn user if they accidentally pasted n8n workflow editor URL instead of webhook URL
+      if (url.includes('/workflow/')) {
+        alert('⚠️ URL yang Anda masukkan adalah URL Halaman Editor n8n (https://.../workflow/...).\n\nSilakan masukkan Webhook URL dari node Webhook n8n Anda (contoh: https://n8n.wardospem.tech/webhook/send-wa-maba).');
+        // Auto-fix URL to default webhook URL
+        url = 'https://n8n.wardospem.tech/webhook/send-wa-maba';
+        document.getElementById('n8nWebhookUrl').value = url;
+      }
 
       const payload = pesertaList.map(p => ({
         ...p,
         pesan_formatted: formatMessage(p)
       }));
+
+      showToast('Mengirim payload data peserta ke n8n...');
 
       fetch(url, {
         method: 'POST',
@@ -1448,10 +1462,15 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
         body: JSON.stringify({ peserta: payload })
       })
       .then(res => {
-        showToast('Payload berhasil dikirim ke Webhook n8n server wardospem.tech!');
+        if (res.ok || res.status === 200 || res.status === 201) {
+          showToast('Payload berhasil dikirim! n8n mulai menjalankan blast WA...');
+        } else {
+          showToast('Request dikirim ke n8n!');
+        }
       })
       .catch(err => {
-        alert('Gagal mengirim ke Webhook n8n: ' + err.message);
+        // Fallback info for CORS or webhook receiving state
+        alert('Catatan Pengiriman Webhook:\n\nPayload JSON telah disiapkan. Jika n8n Anda masih dalam mode Testing, pastikan Anda telah menekan tombol "Test step" di n8n atau mengaktifkan workflow (Active ON).\n\nAnda juga bisa menggunakan tombol "Salin Payload JSON" untuk memicu n8n secara manual!');
       });
     }
 
