@@ -8,19 +8,19 @@
         "options": {}
       },
       "id": "webhook-incoming",
-      "name": "Webhook Balasan WA",
+      "name": "Webhook Balasan WA Fonnte",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
         220,
         300
       ],
-      "webhookId": "wa-reply-webhook-id"
+      "webhookId": "wa-reply-webhook"
     },
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "const body = $json.body || $json;\nconst sender = body.sender || body.from || body.phone || '';\nconst messageText = (body.message || body.text || '').trim().toLowerCase();\n\nlet status = 'Belum Konfirmasi';\nif (messageText.includes('hadir') && !messageText.includes('tidak')) {\n  status = 'Hadir';\n} else if (messageText.includes('tidak hadir') || messageText.includes('tidak')) {\n  status = 'Tidak Hadir';\n}\n\n// Normalisasi nomor WA (hilangkan +, @c.us, dll)\nconst cleanPhone = sender.replace(/[^0-9]/g, '');\n\nreturn {\n  json: {\n    nomor_wa_clean: cleanPhone,\n    pesan_diterima: messageText,\n    status_kehadiran: status,\n    waktu_balas: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })\n  }\n};"
+        "jsCode": "const body = $json.body || $json;\nconst sender = body.sender || body.from || body.phone || '';\nconst messageText = (body.message || body.text || '').trim().toLowerCase();\n\nlet status = 'Belum Konfirmasi';\nif (messageText.includes('hadir') && !messageText.includes('tidak')) {\n  status = 'Hadir';\n} else if (messageText.includes('tidak hadir') || messageText.includes('tidak')) {\n  status = 'Tidak Hadir';\n}\n\n// Normalisasi nomor WA (hilangkan +, @c.us, dll)\nlet cleanPhone = sender.replace(/[^0-9]/g, '');\nif (cleanPhone.startsWith('0')) cleanPhone = '62' + cleanPhone.substring(1);\nelse if (cleanPhone.startsWith('8')) cleanPhone = '62' + cleanPhone;\n\nreturn {\n  json: {\n    nomor_wa_clean: cleanPhone,\n    pesan_diterima: messageText,\n    status_kehadiran: status,\n    waktu_balas: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })\n  }\n};"
       },
       "id": "parse-balasan-node",
       "name": "Deteksi Jawaban (Hadir/Tidak)",
@@ -36,12 +36,11 @@
         "operation": "update",
         "sheetId": {
           "__rl": true,
-          "value": "YOUR_GOOGLE_SHEET_ID",
-          "mode": "list",
-          "cachedResultName": "Peserta Welcome Maba 2026"
+          "value": "https://docs.google.com/spreadsheets/d/1XU5LzIrpCxuMt3cmve7RIenDD5BmUgu3W46hml4kxT4/edit#gid=701539303",
+          "mode": "url"
         },
-        "range": "A:F",
-        "keyRow": "Nomor_WA",
+        "range": "A:Z",
+        "keyRow": "Nomor WhatsApp (Aktif)",
         "keyRowValue": "={{ $json.nomor_wa_clean }}",
         "columns": {
           "mappingMode": "defineBelow",
@@ -58,17 +57,11 @@
       "position": [
         660,
         300
-      ],
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "YOUR_GOOGLE_CREDENTIALS_ID",
-          "name": "Google Sheets account"
-        }
-      }
+      ]
     }
   ],
   "connections": {
-    "Webhook Balasan WA": {
+    "Webhook Balasan WA Fonnte": {
       "main": [
         [
           {
