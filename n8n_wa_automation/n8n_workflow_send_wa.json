@@ -14,19 +14,19 @@
     },
     {
       "parameters": {
-        "operation": "read",
-        "sheetId": {
-          "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1XU5LzIrpCxuMt3cmve7RIenDD5BmUgu3W46hml4kxT4/edit#gid=701539303",
-          "mode": "url"
-        },
-        "range": "A:Z",
-        "options": {}
+        "url": "https://docs.google.com/spreadsheets/d/1XU5LzIrpCxuMt3cmve7RIenDD5BmUgu3W46hml4kxT4/gviz/tq?tqx=out:csv&gid=701539303",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
       },
-      "id": "google-sheets-node",
-      "name": "Ambil Data Peserta (Google Sheets)",
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.5,
+      "id": "fetch-sheet-csv",
+      "name": "Ambil Data Google Sheets (Tanpa Auth)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
         440,
         300
@@ -34,15 +34,28 @@
     },
     {
       "parameters": {
+        "options": {}
+      },
+      "id": "parse-csv-node",
+      "name": "Extract Data CSV Peserta",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        660,
+        300
+      ]
+    },
+    {
+      "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "const getVal = (possibleKeys) => {\n  for (const k of possibleKeys) {\n    const foundKey = Object.keys($json).find(key => key.trim().toLowerCase().includes(k.toLowerCase()));\n    if (foundKey && $json[foundKey]) return String($json[foundKey]).trim();\n  }\n  return '';\n};\n\nconst nama = getVal(['Nama lengkap', 'Nama', 'nama']) || 'Peserta';\nconst rawWa = getVal(['Nomor WhatsApp', 'WhatsApp', 'wa', 'hp', 'telepon']);\nlet cleanWa = String(rawWa).replace(/[^0-9]/g, '');\nif (cleanWa.startsWith('0')) cleanWa = '62' + cleanWa.substring(1);\nelse if (cleanWa.startsWith('8')) cleanWa = '62' + cleanWa;\n\nconst hariTanggal = $json.Hari_Tanggal || 'Senin, 31 Agustus 2026';\nconst waktu = $json.Waktu || '17.30 (Open Gate) - Selesai';\nconst lokasi = $json.Lokasi || 'Ketintang Madya no.66';\n\nconst pesan = `Halo Kak ${nama}! 👋\n\nSemoga sehat selalu ya.\n\nMenjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.\n\nApakah Kakak dipastikan bisa hadir di acara kita?\n\n🗓 Hari/Tanggal: ${hariTanggal}\n⏰ Waktu: ${waktu}\n📍 Lokasi: ${lokasi}\n\nMohon balas pesan ini dengan format:\n\n[Hadir / Tidak Hadir]\n\nKonfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨`;\n\nreturn {\n  json: {\n    ...$json,\n    target_wa: cleanWa,\n    pesan_formatted: pesan\n  }\n};"
+        "jsCode": "const getVal = (possibleKeys) => {\n  for (const k of possibleKeys) {\n    const foundKey = Object.keys($json).find(key => key.trim().toLowerCase().includes(k.toLowerCase()));\n    if (foundKey && $json[foundKey]) return String($json[foundKey]).trim();\n  }\n  return '';\n};\n\nconst nama = getVal(['Nama lengkap', 'Nama', 'nama']) || 'Peserta';\nconst rawWa = getVal(['Nomor WhatsApp', 'WhatsApp', 'wa', 'hp', 'telepon']);\nlet cleanWa = String(rawWa).replace(/[^0-9]/g, '');\nif (cleanWa.startsWith('0')) cleanWa = '62' + cleanWa.substring(1);\nelse if (cleanWa.startsWith('8')) cleanWa = '62' + cleanWa;\n\nconst hariTanggal = 'Senin, 31 Agustus 2026';\nconst waktu = '17.30 (Open Gate) - Selesai';\nconst lokasi = 'Ketintang Madya no.66';\n\nconst pesan = `Halo Kak ${nama}! 👋\n\nSemoga sehat selalu ya.\n\nMenjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.\n\nApakah Kakak dipastikan bisa hadir di acara kita?\n\n🗓 Hari/Tanggal: ${hariTanggal}\n⏰ Waktu: ${waktu}\n📍 Lokasi: ${lokasi}\n\nMohon balas pesan ini dengan format:\n\n[Hadir / Tidak Hadir]\n\nKonfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨`;\n\nreturn {\n  json: {\n    ...$json,\n    target_wa: cleanWa,\n    pesan_formatted: pesan\n  }\n};"
       },
       "id": "format-pesan-node",
       "name": "Format Pesan WA",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        660,
+        880,
         300
       ]
     },
@@ -55,7 +68,7 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        880,
+        1100,
         300
       ]
     },
@@ -88,11 +101,11 @@
         "options": {}
       },
       "id": "send-wa-http-node",
-      "name": "Kirim WA via Gateway (HTTP)",
+      "name": "Kirim WA via Fonnte API",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1100,
+        1320,
         300
       ]
     },
@@ -106,7 +119,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1320,
+        1540,
         300
       ],
       "webhookId": "delay-wait-webhook"
@@ -117,14 +130,25 @@
       "main": [
         [
           {
-            "node": "Ambil Data Peserta (Google Sheets)",
+            "node": "Ambil Data Google Sheets (Tanpa Auth)",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Ambil Data Peserta (Google Sheets)": {
+    "Ambil Data Google Sheets (Tanpa Auth)": {
+      "main": [
+        [
+          {
+            "node": "Extract Data CSV Peserta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Data CSV Peserta": {
       "main": [
         [
           {
@@ -150,14 +174,14 @@
       "main": [
         [
           {
-            "node": "Kirim WA via Gateway (HTTP)",
+            "node": "Kirim WA via Fonnte API",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Kirim WA via Gateway (HTTP)": {
+    "Kirim WA via Fonnte API": {
       "main": [
         [
           {
