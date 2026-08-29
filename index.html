@@ -934,11 +934,11 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
         </div>
         <div class="form-group">
           <label>Waktu Acara</label>
-          <input type="text" id="modalWaktu" value="08.00 - 12.00 WIB">
+          <input type="text" id="modalWaktu" value="17.30 (Open Gate) - Selesai">
         </div>
         <div class="form-group">
           <label>Lokasi Acara</label>
-          <input type="text" id="modalLokasi" value="Auditorium Utama Lt. 3">
+          <input type="text" id="modalLokasi" value="Ketintang Madya no.66">
         </div>
         <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem;">
           <button type="button" class="btn btn-outline" onclick="closeAddModal()">Batal</button>
@@ -957,10 +957,10 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
   <script>
     // Initial State Data
     const defaultData = [
-      { id: 1, nama: "Budi Santoso", wa: "6281234567890", tanggal: "Sabtu, 12 September 2026", waktu: "08.00 - 12.00 WIB", lokasi: "Auditorium Utama Lt. 3", status: "Belum Konfirmasi" },
-      { id: 2, nama: "Siti Rahma", wa: "6289876543210", tanggal: "Sabtu, 12 September 2026", waktu: "08.00 - 12.00 WIB", lokasi: "Auditorium Utama Lt. 3", status: "Hadir" },
-      { id: 3, nama: "Andi Pratama", wa: "6285512345678", tanggal: "Sabtu, 12 September 2026", waktu: "08.00 - 12.00 WIB", lokasi: "Auditorium Utama Lt. 3", status: "Tidak Hadir" },
-      { id: 4, nama: "Dewi Lestari", wa: "6287711223344", tanggal: "Sabtu, 12 September 2026", waktu: "08.00 - 12.00 WIB", lokasi: "Auditorium Utama Lt. 3", status: "Belum Konfirmasi" }
+      { id: 1, nama: "Budi Santoso", wa: "6281234567890", tanggal: "Sabtu, 12 September 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
+      { id: 2, nama: "Siti Rahma", wa: "6289876543210", tanggal: "Sabtu, 12 September 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Hadir" },
+      { id: 3, nama: "Andi Pratama", wa: "6285512345678", tanggal: "Sabtu, 12 September 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Tidak Hadir" },
+      { id: 4, nama: "Dewi Lestari", wa: "6287711223344", tanggal: "Sabtu, 12 September 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" }
     ];
 
     let pesertaList = JSON.parse(localStorage.getItem('wa_maba_peserta')) || defaultData;
@@ -1127,8 +1127,8 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
             nama: row.Nama || row.nama || `Peserta ${idx+1}`,
             wa: String(row.Nomor_WA || row.wa || row.WhatsApp || '').replace(/[^0-9]/g, ''),
             tanggal: row.Hari_Tanggal || row.tanggal || 'Sabtu, 12 September 2026',
-            waktu: row.Waktu || row.waktu || '08.00 - 12.00 WIB',
-            lokasi: row.Lokasi || row.lokasi || 'Auditorium Utama Lt. 3',
+            waktu: row.Waktu || row.waktu || '17.30 (Open Gate) - Selesai',
+            lokasi: row.Lokasi || row.lokasi || 'Ketintang Madya no.66',
             status: row.Status_Kehadiran || row.status || 'Belum Konfirmasi'
           }));
 
