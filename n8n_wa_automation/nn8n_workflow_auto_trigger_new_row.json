@@ -12,9 +12,8 @@
         },
         "documentId": {
           "__rl": true,
-          "value": "YOUR_GOOGLE_SHEET_ID",
-          "mode": "list",
-          "cachedResultName": "Formulir Pendaftaran Peserta Welcome Maba 2026 (jawaban)"
+          "value": "1XU5LzIrpCxuMt3cmve7RIenDD5BmUgu3W46hml4kxT4",
+          "mode": "id"
         },
         "sheetName": {
           "__rl": true,
@@ -30,18 +29,12 @@
       "position": [
         220,
         300
-      ],
-      "credentials": {
-        "googleSheetsTriggerOAuth2Api": {
-          "id": "YOUR_GOOGLE_CREDENTIALS_ID",
-          "name": "Google Sheets Trigger account"
-        }
-      }
+      ]
     },
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "const nama = $json['Nama lengkap'] || $json.Nama || 'Peserta';\nconst rawWa = $json['Nomor WhatsApp (Aktif)'] || $json.Nomor_WA || '';\n\n// Format nomor WA Indonesia\nlet cleanWa = String(rawWa).replace(/[^0-9]/g, '');\nif (cleanWa.startsWith('0')) cleanWa = '62' + cleanWa.substring(1);\nelse if (cleanWa.startsWith('8')) cleanWa = '62' + cleanWa;\n\nconst hariTanggal = $json.Hari_Tanggal || 'Senin, 31 Agustus 2026';\nconst waktu = $json.Waktu || '17.30 (Open Gate) - Selesai';\nconst lokasi = $json.Lokasi || 'Ketintang Madya no.66';\n\nconst pesan = `Halo Kak ${nama}! 👋\n\nSemoga sehat selalu ya.\n\nMenjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.\n\nApakah Kakak dipastikan bisa hadir di acara kita?\n\n🗓 Hari/Tanggal: ${hariTanggal}\n⏰ Waktu: ${waktu}\n📍 Lokasi: ${lokasi}\n\nMohon balas pesan ini dengan format:\n\n[Hadir / Tidak Hadir]\n\nKonfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨`;\n\nreturn {\n  json: {\n    ...$json,\n    target_wa: cleanWa,\n    pesan_formatted: pesan\n  }\n};"
+        "jsCode": "const nama = $json['Nama lengkap'] || $json.Nama || 'Peserta';\nconst rawWa = $json['Nomor WhatsApp (Aktif)'] || $json.Nomor_WA || '';\n\n// Format nomor WA Indonesia\nlet cleanWa = String(rawWa).replace(/[^0-9]/g, '');\nif (cleanWa.startsWith('0')) cleanWa = '62' + cleanWa.substring(1);\nelse if (cleanWa.startsWith('8')) cleanWa = '62' + cleanWa;\n\nconst hariTanggal = 'Senin, 31 Agustus 2026';\nconst waktu = '17.30 (Open Gate) - Selesai';\nconst lokasi = 'Ketintang Madya no.66';\n\nconst pesan = `Halo Kak ${nama}! 👋\n\nSemoga sehat selalu ya.\n\nMenjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.\n\nApakah Kakak dipastikan bisa hadir di acara kita?\n\n🗓 Hari/Tanggal: ${hariTanggal}\n⏰ Waktu: ${waktu}\n📍 Lokasi: ${lokasi}\n\nMohon balas pesan ini dengan format:\n\n[Hadir / Tidak Hadir]\n\nKonfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨`;\n\nreturn {\n  json: {\n    ...$json,\n    target_wa: cleanWa,\n    pesan_formatted: pesan\n  }\n};"
       },
       "id": "format-pesan-node",
       "name": "Format Pesan WA Otomatis",
@@ -61,7 +54,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "YOUR_FONNTE_API_TOKEN"
+              "value": "K5LGm1X1P2qLDkedpBoT"
             }
           ]
         },
