@@ -1,61 +1,33 @@
 {
-  "name": "Otomasi Blast WA Welcome Maba 2026",
+  "name": "Otomasi Blast WA Welcome Maba 2026 (Via Vercel Webhook)",
   "nodes": [
     {
-      "parameters": {},
-      "id": "start-node",
-      "name": "When clicking 'Execute Workflow'",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "send-wa-maba",
+        "options": {}
+      },
+      "id": "webhook-trigger-node",
+      "name": "Webhook dari Website Vercel",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
       "position": [
         220,
         300
-      ]
+      ],
+      "webhookId": "send-wa-maba"
     },
     {
       "parameters": {
-        "url": "https://docs.google.com/spreadsheets/d/1XU5LzIrpCxuMt3cmve7RIenDD5BmUgu3W46hml4kxT4/gviz/tq?tqx=out:csv&gid=701539303",
-        "options": {
-          "response": {
-            "response": {
-              "responseFormat": "text"
-            }
-          }
-        }
+        "fieldToSplitOut": "body.peserta",
+        "options": {}
       },
-      "id": "fetch-sheet-csv",
-      "name": "Ambil Data Google Sheets CSV",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
+      "id": "split-peserta-node",
+      "name": "Extract Daftar Peserta Maba",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
       "position": [
         440,
-        300
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "const csvText = $input.first().json.data || $input.first().body || '';\n\nif (!csvText || csvText.includes('<!DOCTYPE html>') || csvText.includes('<html')) {\n  throw new Error('Google Sheet belum di-Share ke Public! Buka Google Sheet -> Share -> Ganti ke \"Anyone with the link can view\"');\n}\n\n// Parse CSV text into JSON items\nfunction parseCSV(text) {\n  const lines = text.split(/\\r?\\n/).filter(line => line.trim());\n  if (lines.length < 2) return [];\n  \n  // Parse Header row\n  const parseLine = (line) => {\n    const values = [];\n    let val = '';\n    let inQuotes = false;\n    for (let i = 0; i < line.length; i++) {\n      const char = line[i];\n      if (char === '\"') inQuotes = !inQuotes;\n      else if (char === ',' && !inQuotes) {\n        values.push(val.trim().replace(/^\"|\"$/g, ''));\n        val = '';\n      } else val += char;\n    }\n    values.push(val.trim().replace(/^\"|\"$/g, ''));\n    return values;\n  };\n\n  const headers = parseLine(lines[0]);\n  const results = [];\n\n  for (let i = 1; i < lines.length; i++) {\n    const currentline = parseLine(lines[i]);\n    const rowObj = {};\n    headers.forEach((header, index) => {\n      rowObj[header] = currentline[index] || '';\n    });\n    results.push({ json: rowObj });\n  }\n  return results;\n}\n\nreturn parseCSV(csvText);"
-      },
-      "id": "parse-csv-node",
-      "name": "Parse & Format Data CSV",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        660,
-        300
-      ]
-    },
-    {
-      "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "const getVal = (possibleKeys) => {\n  for (const k of possibleKeys) {\n    const foundKey = Object.keys($json).find(key => key.trim().toLowerCase().includes(k.toLowerCase()));\n    if (foundKey && $json[foundKey]) return String($json[foundKey]).trim();\n  }\n  return '';\n};\n\nconst nama = getVal(['Nama lengkap', 'Nama', 'nama']) || 'Peserta';\nconst rawWa = getVal(['Nomor WhatsApp', 'WhatsApp', 'wa', 'hp', 'telepon']);\nlet cleanWa = String(rawWa).replace(/[^0-9]/g, '');\nif (cleanWa.startsWith('0')) cleanWa = '62' + cleanWa.substring(1);\nelse if (cleanWa.startsWith('8')) cleanWa = '62' + cleanWa;\n\nconst hariTanggal = 'Senin, 31 Agustus 2026';\nconst waktu = '17.30 (Open Gate) - Selesai';\nconst lokasi = 'Ketintang Madya no.66';\n\nconst pesan = `Halo Kak ${nama}! 👋\n\nSemoga sehat selalu ya.\n\nMenjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.\n\nApakah Kakak dipastikan bisa hadir di acara kita?\n\n🗓 Hari/Tanggal: ${hariTanggal}\n⏰ Waktu: ${waktu}\n📍 Lokasi: ${lokasi}\n\nMohon balas pesan ini dengan format:\n\n[Hadir / Tidak Hadir]\n\nKonfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨`;\n\nreturn {\n  json: {\n    ...$json,\n    target_wa: cleanWa,\n    pesan_formatted: pesan\n  }\n};"
-      },
-      "id": "format-pesan-node",
-      "name": "Format Pesan WA",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        880,
         300
       ]
     },
@@ -68,7 +40,7 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        1100,
+        660,
         300
       ]
     },
@@ -90,7 +62,7 @@
           "parameters": [
             {
               "name": "target",
-              "value": "={{ $json.target_wa }}"
+              "value": "={{ $json.wa }}"
             },
             {
               "name": "message",
@@ -105,7 +77,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1320,
+        880,
         300
       ]
     },
@@ -119,47 +91,25 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1540,
+        1100,
         300
       ],
       "webhookId": "delay-wait-webhook"
     }
   ],
   "connections": {
-    "When clicking 'Execute Workflow'": {
+    "Webhook dari Website Vercel": {
       "main": [
         [
           {
-            "node": "Ambil Data Google Sheets CSV",
+            "node": "Extract Daftar Peserta Maba",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Ambil Data Google Sheets CSV": {
-      "main": [
-        [
-          {
-            "node": "Parse & Format Data CSV",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Parse & Format Data CSV": {
-      "main": [
-        [
-          {
-            "node": "Format Pesan WA",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Format Pesan WA": {
+    "Extract Daftar Peserta Maba": {
       "main": [
         [
           {
