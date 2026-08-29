@@ -728,9 +728,9 @@
       <!-- File Upload Zone -->
       <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
         <i class="fa-solid fa-file-excel"></i>
-        <h3>Upload File Excel (.xlsx) / CSV Peserta</h3>
+        <h3>Upload File Excel Formulir Pendaftaran Maba (.xlsx / .csv)</h3>
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.35rem;">
-          Klik di sini atau tarik file ke dalam area ini
+          Mendukung otomatis parsing kolom Google Form: <code>Nama lengkap</code>, <code>Nomor WhatsApp (Aktif)</code>, <code>Fakultas</code>, <code>Program studi</code>, <code>Asal Kota</code>
         </p>
         <input type="file" id="fileInput" accept=".xlsx, .xls, .csv" style="display: none;" onchange="handleFileUpload(event)">
       </div>
@@ -738,7 +738,7 @@
       <div class="panel">
         <div class="panel-header">
           <div class="panel-title">
-            <i class="fa-solid fa-table-list"></i> Daftar Kontak Peserta
+            <i class="fa-solid fa-table-list"></i> Daftar Kontak Peserta Welcome Maba 2026
           </div>
           <div style="display: flex; gap: 0.5rem;">
             <button class="btn btn-outline" onclick="openAddModal()">
@@ -756,7 +756,7 @@
         <div class="controls-bar">
           <div class="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Cari nama atau nomor WA..." oninput="renderTable()">
+            <input type="text" id="searchInput" placeholder="Cari nama, WA, prodi, atau kota..." oninput="renderTable()">
           </div>
 
           <div class="filter-pills">
@@ -774,9 +774,10 @@
                 <th>No</th>
                 <th>Nama Peserta</th>
                 <th>Nomor WhatsApp</th>
+                <th>Fakultas / Prodi</th>
+                <th>Asal Kota</th>
                 <th>Hari, Tanggal</th>
                 <th>Waktu</th>
-                <th>Lokasi</th>
                 <th>Status</th>
                 <th>Aksi WA Direct</th>
               </tr>
@@ -805,6 +806,8 @@
               <button class="tag-btn" onclick="insertTag('{tanggal}')">{tanggal}</button>
               <button class="tag-btn" onclick="insertTag('{waktu}')">{waktu}</button>
               <button class="tag-btn" onclick="insertTag('{lokasi}')">{lokasi}</button>
+              <button class="tag-btn" onclick="insertTag('{prodi}')">{prodi}</button>
+              <button class="tag-btn" onclick="insertTag('{kota}')">{kota}</button>
             </div>
           </div>
 
@@ -922,11 +925,23 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
       <form onsubmit="saveNewPeserta(event)">
         <div class="form-group">
           <label>Nama Lengkap Peserta</label>
-          <input type="text" id="modalNama" required placeholder="Contoh: Budi Santoso">
+          <input type="text" id="modalNama" required placeholder="Contoh: Sarina Agnesia Sitio">
         </div>
         <div class="form-group">
-          <label>Nomor WhatsApp (Diawali 62)</label>
-          <input type="text" id="modalWA" required placeholder="Contoh: 6281234567890">
+          <label>Nomor WhatsApp (Aktif)</label>
+          <input type="text" id="modalWA" required placeholder="Contoh: 085947769750">
+        </div>
+        <div class="form-group">
+          <label>Fakultas</label>
+          <input type="text" id="modalFakultas" placeholder="Contoh: FISIPOL">
+        </div>
+        <div class="form-group">
+          <label>Program Studi</label>
+          <input type="text" id="modalProdi" placeholder="Contoh: ILMU POLITIK">
+        </div>
+        <div class="form-group">
+          <label>Asal Kota</label>
+          <input type="text" id="modalKota" placeholder="Contoh: Medan">
         </div>
         <div class="form-group">
           <label>Hari, Tanggal</label>
@@ -955,12 +970,25 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
   </div>
 
   <script>
-    // Initial State Data
+    // Utility to format Indonesian phone numbers (08xxx -> 628xxx)
+    function cleanPhoneNumber(raw) {
+      if (!raw) return '';
+      let str = String(raw).trim().replace(/[^0-9]/g, '');
+      if (str.startsWith('0')) {
+        str = '62' + str.substring(1);
+      } else if (str.startsWith('8')) {
+        str = '62' + str;
+      }
+      return str;
+    }
+
+    // Initial Mock Data derived from Google Form responses
     const defaultData = [
-      { id: 1, nama: "Budi Santoso", wa: "6281234567890", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
-      { id: 2, nama: "Siti Rahma", wa: "6289876543210", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Hadir" },
-      { id: 3, nama: "Andi Pratama", wa: "6285512345678", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Tidak Hadir" },
-      { id: 4, nama: "Dewi Lestari", wa: "6287711223344", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" }
+      { id: 1, nama: "Sarina Agnesia Sitio", wa: "6285947769750", fakultas: "FISIPOL", prodi: "ILMU POLITIK", kota: "Medan", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
+      { id: 2, nama: "Dita Saraswati", wa: "62895380129150", fakultas: "FMIPA", prodi: "Sains Aktuaria", kota: "Sidoarjo", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Hadir" },
+      { id: 3, nama: "Grace Natalie Rismadi", wa: "6282185433752", fakultas: "FMIPA", prodi: "S1 Sains Aktuaria", kota: "Sidikalang, Medan", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Tidak Hadir" },
+      { id: 4, nama: "Richard Zulyo Sitakar", wa: "6287285567205", fakultas: "Fakultas Vokasi", prodi: "D4 Teknik Mesin", kota: "Batam", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
+      { id: 5, nama: "Kornelius Yosia Gunawan", wa: "6285876805565", fakultas: "Teknik", prodi: "Teknik Informatika", kota: "Kota Mojokerto", tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" }
     ];
 
     let pesertaList = JSON.parse(localStorage.getItem('wa_maba_peserta')) || defaultData;
@@ -1003,10 +1031,12 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
     function formatMessage(p) {
       const template = document.getElementById('templateTextarea').value;
       return template
-        .replace(/{nama}/g, p.nama)
-        .replace(/{tanggal}/g, p.tanggal)
-        .replace(/{waktu}/g, p.waktu)
-        .replace(/{lokasi}/g, p.lokasi);
+        .replace(/{nama}/g, p.nama || 'Peserta')
+        .replace(/{tanggal}/g, p.tanggal || 'Senin, 31 Agustus 2026')
+        .replace(/{waktu}/g, p.waktu || '17.30 (Open Gate) - Selesai')
+        .replace(/{lokasi}/g, p.lokasi || 'Ketintang Madya no.66')
+        .replace(/{prodi}/g, p.prodi || '-')
+        .replace(/{kota}/g, p.kota || '-');
     }
 
     function renderTable() {
@@ -1014,13 +1044,16 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
       const search = document.getElementById('searchInput').value.toLowerCase();
 
       const filtered = pesertaList.filter(p => {
-        const matchSearch = p.nama.toLowerCase().includes(search) || p.wa.includes(search);
+        const matchSearch = (p.nama || '').toLowerCase().includes(search) || 
+                            (p.wa || '').includes(search) ||
+                            (p.prodi || '').toLowerCase().includes(search) ||
+                            (p.kota || '').toLowerCase().includes(search);
         const matchFilter = currentFilter === 'semua' || p.status === currentFilter;
         return matchSearch && matchFilter;
       });
 
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 2rem; color: var(--text-muted);">Tidak ada data peserta ditemukan</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 2rem; color: var(--text-muted);">Tidak ada data peserta ditemukan</td></tr>`;
         return;
       }
 
@@ -1034,9 +1067,13 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
             <td>${idx + 1}</td>
             <td><strong>${p.nama}</strong></td>
             <td><code>${p.wa}</code></td>
+            <td>
+              <div>${p.fakultas || '-'}</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">${p.prodi || '-'}</div>
+            </td>
+            <td>${p.kota || '-'}</td>
             <td>${p.tanggal}</td>
             <td>${p.waktu}</td>
-            <td>${p.lokasi}</td>
             <td>
               <select onchange="updateStatus(${p.id}, this.value)" style="padding: 0.25rem 0.5rem; border-radius: 20px; font-size: 0.75rem; width: auto;" class="status-badge ${badgeClass}">
                 <option value="Belum Konfirmasi" ${p.status === 'Belum Konfirmasi' ? 'selected' : ''}>Belum Balas</option>
@@ -1082,7 +1119,7 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
       const p = pesertaList.find(item => item.id === id);
       if (!p) return;
       const text = encodeURIComponent(formatMessage(p));
-      const cleanWa = p.wa.replace(/[^0-9]/g, '');
+      const cleanWa = cleanPhoneNumber(p.wa);
       window.open(`https://wa.me/${cleanWa}?text=${text}`, '_blank');
     }
 
@@ -1095,7 +1132,10 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
       const newP = {
         id: Date.now(),
         nama: document.getElementById('modalNama').value,
-        wa: document.getElementById('modalWA').value.replace(/[^0-9]/g, ''),
+        wa: cleanPhoneNumber(document.getElementById('modalWA').value),
+        fakultas: document.getElementById('modalFakultas').value || '-',
+        prodi: document.getElementById('modalProdi').value || '-',
+        kota: document.getElementById('modalKota').value || '-',
         tanggal: document.getElementById('modalTanggal').value,
         waktu: document.getElementById('modalWaktu').value,
         lokasi: document.getElementById('modalLokasi').value,
@@ -1109,7 +1149,7 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
       showToast(`Peserta ${newP.nama} berhasil ditambahkan!`);
     }
 
-    // Excel Upload Handler
+    // Smart Google Form Excel Upload Handler
     function handleFileUpload(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -1122,19 +1162,39 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
         const jsonData = XLSX.utils.sheet_to_json(firstSheet);
 
         if (jsonData.length > 0) {
-          pesertaList = jsonData.map((row, idx) => ({
-            id: Date.now() + idx,
-            nama: row.Nama || row.nama || `Peserta ${idx+1}`,
-            wa: String(row.Nomor_WA || row.wa || row.WhatsApp || '').replace(/[^0-9]/g, ''),
-            tanggal: row.Hari_Tanggal || row.tanggal || 'Senin, 31 Agustus 2026',
-            waktu: row.Waktu || row.waktu || '17.30 (Open Gate) - Selesai',
-            lokasi: row.Lokasi || row.lokasi || 'Ketintang Madya no.66',
-            status: row.Status_Kehadiran || row.status || 'Belum Konfirmasi'
-          }));
+          pesertaList = jsonData.map((row, idx) => {
+            // Find key by matching column names from Google Forms export
+            const getVal = (possibleKeys) => {
+              for (const k of possibleKeys) {
+                const foundKey = Object.keys(row).find(key => key.trim().toLowerCase().includes(k.toLowerCase()));
+                if (foundKey && row[foundKey]) return String(row[foundKey]).trim();
+              }
+              return '';
+            };
+
+            const namaVal = getVal(['Nama lengkap', 'Nama', 'nama']) || `Peserta ${idx+1}`;
+            const waVal = cleanPhoneNumber(getVal(['Nomor WhatsApp', 'WhatsApp', 'wa', 'hp', 'telepon']));
+            const fakultasVal = getVal(['Fakultas', 'fakultas']) || '-';
+            const prodiVal = getVal(['Program studi', 'Prodi', 'prodi']) || '-';
+            const kotaVal = getVal(['Asal Kota', 'Kota', 'kota', 'Asal']) || '-';
+
+            return {
+              id: Date.now() + idx,
+              nama: namaVal,
+              wa: waVal,
+              fakultas: fakultasVal,
+              prodi: prodiVal,
+              kota: kotaVal,
+              tanggal: 'Senin, 31 Agustus 2026',
+              waktu: '17.30 (Open Gate) - Selesai',
+              lokasi: 'Ketintang Madya no.66',
+              status: 'Belum Konfirmasi'
+            };
+          });
 
           saveToStorage();
           renderTable();
-          showToast(`Berhasil mengimpor ${jsonData.length} peserta dari Excel!`);
+          showToast(`Berhasil mengimpor ${jsonData.length} peserta dari Excel Google Form!`);
         }
       };
       reader.readAsArrayBuffer(file);
@@ -1166,10 +1226,12 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima 
 
     function updateLivePreview() {
       const sample = pesertaList[0] || {
-        nama: "Budi Santoso",
+        nama: "Sarina Agnesia Sitio",
         tanggal: "Senin, 31 Agustus 2026",
         waktu: "17.30 (Open Gate) - Selesai",
-        lokasi: "Ketintang Madya no.66"
+        lokasi: "Ketintang Madya no.66",
+        prodi: "ILMU POLITIK",
+        kota: "Medan"
       };
 
       document.getElementById('previewMessageBody').innerText = formatMessage(sample);
