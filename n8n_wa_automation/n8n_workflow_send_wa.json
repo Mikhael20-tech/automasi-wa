@@ -1,0 +1,193 @@
+{
+  "name": "Otomasi Blast WA Welcome Maba 2026",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "start-node",
+      "name": "When clicking 'Execute Workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "sheetId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Peserta Welcome Maba 2026"
+        },
+        "range": "A:F",
+        "options": {}
+      },
+      "id": "google-sheets-node",
+      "name": "Ambil Data Peserta (Google Sheets)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        440,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_CREDENTIALS_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const nama = $json.Nama || 'Peserta';\nconst target = $json.Nomor_WA || '';\nconst hariTanggal = $json.Hari_Tanggal || 'Sabtu, 12 September 2026';\nconst waktu = $json.Waktu || '08.00 - 12.00 WIB';\nconst lokasi = $json.Lokasi || 'Auditorium Utama Lt. 3';\n\nconst pesan = `Halo Kak ${nama}! 👋\n\nSemoga sehat selalu ya.\n\nMenjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.\n\nApakah Kakak dipastikan bisa hadir di acara kita?\n\n🗓 Hari/Tanggal: ${hariTanggal}\n⏰ Waktu: ${waktu}\n📍 Lokasi: ${lokasi}\n\nMohon balas pesan ini dengan format:\n\n[Hadir / Tidak Hadir]\n\nKonfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨`;\n\nreturn {\n  json: {\n    ...$json,\n    pesan_formatted: pesan,\n    target_wa: target\n  }\n};"
+      },
+      "id": "format-pesan-node",
+      "name": "Format Pesan WA",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "loop-node",
+      "name": "Loop Item (Satu per Satu)",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        880,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.fonnte.com/send",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "YOUR_FONNTE_API_TOKEN"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "target",
+              "value": "={{ $json.target_wa }}"
+            },
+            {
+              "name": "message",
+              "value": "={{ $json.pesan_formatted }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "send-wa-http-node",
+      "name": "Kirim WA via Gateway (HTTP)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 7,
+        "unit": "seconds"
+      },
+      "id": "delay-node",
+      "name": "Jeda Delay (7 Detik)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1320,
+        300
+      ],
+      "webhookId": "delay-wait-webhook"
+    }
+  ],
+  "connections": {
+    "When clicking 'Execute Workflow'": {
+      "main": [
+        [
+          {
+            "node": "Ambil Data Peserta (Google Sheets)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ambil Data Peserta (Google Sheets)": {
+      "main": [
+        [
+          {
+            "node": "Format Pesan WA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Pesan WA": {
+      "main": [
+        [
+          {
+            "node": "Loop Item (Satu per Satu)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Item (Satu per Satu)": {
+      "main": [
+        [
+          {
+            "node": "Kirim WA via Gateway (HTTP)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Kirim WA via Gateway (HTTP)": {
+      "main": [
+        [
+          {
+            "node": "Jeda Delay (7 Detik)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Jeda Delay (7 Detik)": {
+      "main": [
+        [
+          {
+            "node": "Loop Item (Satu per Satu)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

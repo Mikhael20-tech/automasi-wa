@@ -1,0 +1,97 @@
+{
+  "name": "Otomasi Webhook Auto-Update Balasan WA (Hadir / Tidak Hadir)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "wa-reply-webhook",
+        "options": {}
+      },
+      "id": "webhook-incoming",
+      "name": "Webhook Balasan WA",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        300
+      ],
+      "webhookId": "wa-reply-webhook-id"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const body = $json.body || $json;\nconst sender = body.sender || body.from || body.phone || '';\nconst messageText = (body.message || body.text || '').trim().toLowerCase();\n\nlet status = 'Belum Konfirmasi';\nif (messageText.includes('hadir') && !messageText.includes('tidak')) {\n  status = 'Hadir';\n} else if (messageText.includes('tidak hadir') || messageText.includes('tidak')) {\n  status = 'Tidak Hadir';\n}\n\n// Normalisasi nomor WA (hilangkan +, @c.us, dll)\nconst cleanPhone = sender.replace(/[^0-9]/g, '');\n\nreturn {\n  json: {\n    nomor_wa_clean: cleanPhone,\n    pesan_diterima: messageText,\n    status_kehadiran: status,\n    waktu_balas: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })\n  }\n};"
+      },
+      "id": "parse-balasan-node",
+      "name": "Deteksi Jawaban (Hadir/Tidak)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "sheetId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Peserta Welcome Maba 2026"
+        },
+        "range": "A:F",
+        "keyRow": "Nomor_WA",
+        "keyRowValue": "={{ $json.nomor_wa_clean }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status_Kehadiran": "={{ $json.status_kehadiran }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "update-google-sheets",
+      "name": "Update Status Kehadiran di Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        660,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_CREDENTIALS_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Balasan WA": {
+      "main": [
+        [
+          {
+            "node": "Deteksi Jawaban (Hadir/Tidak)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deteksi Jawaban (Hadir/Tidak)": {
+      "main": [
+        [
+          {
+            "node": "Update Status Kehadiran di Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

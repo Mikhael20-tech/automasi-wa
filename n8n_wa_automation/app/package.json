@@ -1,0 +1,9 @@
+{
+  "name": "wa-automation-welcome-maba-2026",
+  "version": "1.0.0",
+  "description": "WhatsApp Automation & n8n Dashboard Welcome Maba 2026",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}

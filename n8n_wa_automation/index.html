@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Otomasi WhatsApp - Welcome Maba 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --primary: #25d366;
+      --primary-hover: #1eaa53;
+      --accent: #6366f1;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --wa-chat-bg: #0b141a;
+      --wa-bubble-bg: #005c4b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      background: rgba(37, 211, 102, 0.15);
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      color: var(--primary);
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #ffffff, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 0.375rem;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    textarea {
+      min-height: 200px;
+      resize: vertical;
+    }
+
+    /* WA Phone Mockup Preview */
+    .phone-mockup {
+      background: var(--wa-chat-bg);
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 420px;
+    }
+
+    .phone-header {
+      background: #202c33;
+      padding: 0.875rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #6366f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+    }
+
+    .header-info {
+      flex: 1;
+    }
+
+    .header-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .header-status {
+      font-size: 0.75rem;
+      color: var(--primary);
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 1.25rem;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .bubble {
+      align-self: flex-start;
+      background: var(--wa-bubble-bg);
+      color: #e9edef;
+      padding: 0.875rem;
+      border-radius: 0.5rem 0.5rem 0.5rem 0;
+      max-width: 88%;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .bubble-time {
+      text-align: right;
+      font-size: 0.6875rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 0.25rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: var(--primary);
+      color: #0f172a;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .action-bar {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">⚡ n8n + WhatsApp Automation</span>
+      <h1>Otomasi Pesan Konfirmasi Welcome Maba 2026</h1>
+      <p class="subtitle">Pratinjau pesan, sesuaikan parameter acara, dan uji kirim via WhatsApp</p>
+    </header>
+
+    <div class="grid">
+      <!-- Input Panel -->
+      <div class="card">
+        <div class="card-title">📝 Parameter Acara & Template</div>
+        
+        <div class="form-group">
+          <label>Nama Peserta (Simulasi)</label>
+          <input type="text" id="inputNama" value="Budi Santoso">
+        </div>
+
+        <div class="form-group">
+          <label>Nomor WhatsApp (dengan kode 62)</label>
+          <input type="text" id="inputWA" value="6281234567890">
+        </div>
+
+        <div class="form-group">
+          <label>🗓 Hari / Tanggal</label>
+          <input type="text" id="inputTanggal" value="Sabtu, 12 September 2026">
+        </div>
+
+        <div class="form-group">
+          <label>⏰ Waktu Acara</label>
+          <input type="text" id="inputWaktu" value="08.00 - 12.00 WIB">
+        </div>
+
+        <div class="form-group">
+          <label>📍 Lokasi Acara</label>
+          <input type="text" id="inputLokasi" value="Auditorium Utama Lt. 3">
+        </div>
+
+        <div class="action-bar">
+          <button class="btn" onclick="testDirectWA()">📱 Uji Kirim via WhatsApp</button>
+          <button class="btn btn-secondary" onclick="copyTemplate()">📋 Salin Pesan</button>
+        </div>
+      </div>
+
+      <!-- Live WA Chat Preview -->
+      <div class="card" style="display: flex; flex-direction: column;">
+        <div class="card-title">💬 Live Chat Preview</div>
+        
+        <div class="phone-mockup">
+          <div class="phone-header">
+            <div class="avatar">PM</div>
+            <div class="header-info">
+              <div class="header-name">Panitia Welcome Maba 2026</div>
+              <div class="header-status">Online</div>
+            </div>
+          </div>
+          <div class="chat-body">
+            <div class="bubble">
+              <span id="previewText"></span>
+              <div class="bubble-time">22.15 ✔✔</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Table Sample -->
+    <div class="card" style="margin-top: 1.5rem;">
+      <div class="card-title">📊 Sample Data Peserta (Disinkronkan ke n8n / Google Sheets)</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nama Peserta</th>
+            <th>Nomor WA</th>
+            <th>Hari, Tanggal</th>
+            <th>Waktu</th>
+            <th>Lokasi</th>
+            <th>Aksi Quick Send</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const sampleData = [
+      { nama: "Budi Santoso", wa: "6281234567890", tanggal: "Sabtu, 12 September 2026", waktu: "08.00 - 12.00 WIB", lokasi: "Auditorium Utama Lt. 3" },
+      { nama: "Siti Rahma", wa: "6289876543210", tanggal: "Sabtu, 12 September 2026", waktu: "08.00 - 12.00 WIB", lokasi: "Auditorium Utama Lt. 3" },
+      { nama: "Andi Pratama", wa: "6285512345678", tanggal: "Sabtu, 12 September 2026", waktu: "08.00 - 12.00 WIB", lokasi: "Auditorium Utama Lt. 3" }
+    ];
+
+    function generateMessage(nama, tanggal, waktu, lokasi) {
+      return `Halo Kak ${nama}! 👋\n\nSemoga sehat selalu ya.\n\nMenjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.\n\nApakah Kakak dipastikan bisa hadir di acara kita?\n\n🗓 Hari/Tanggal: ${tanggal}\n⏰ Waktu: ${waktu}\n📍 Lokasi: ${lokasi}\n\nMohon balas pesan ini dengan format:\n\n[Hadir / Tidak Hadir]\n\nKonfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨`;
+    }
+
+    function updatePreview() {
+      const nama = document.getElementById('inputNama').value || '[Nama Peserta]';
+      const tanggal = document.getElementById('inputTanggal').value || '[Hari, Tanggal]';
+      const waktu = document.getElementById('inputWaktu').value || '[Jam]';
+      const lokasi = document.getElementById('inputLokasi').value || '[Nama Tempat/Lokasi]';
+
+      document.getElementById('previewText').innerText = generateMessage(nama, tanggal, waktu, lokasi);
+    }
+
+    function testDirectWA() {
+      const wa = document.getElementById('inputWA').value.replace(/[^0-9]/g, '');
+      const nama = document.getElementById('inputNama').value;
+      const tanggal = document.getElementById('inputTanggal').value;
+      const waktu = document.getElementById('inputWaktu').value;
+      const lokasi = document.getElementById('inputLokasi').value;
+
+      const text = encodeURIComponent(generateMessage(nama, tanggal, waktu, lokasi));
+      window.open(`https://wa.me/${wa}?text=${text}`, '_blank');
+    }
+
+    function sendToPeserta(wa, nama, tanggal, waktu, lokasi) {
+      const text = encodeURIComponent(generateMessage(nama, tanggal, waktu, lokasi));
+      window.open(`https://wa.me/${wa}?text=${text}`, '_blank');
+    }
+
+    function copyTemplate() {
+      const text = document.getElementById('previewText').innerText;
+      navigator.clipboard.writeText(text);
+      alert('Pesan berhasil disalin!');
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = sampleData.map(item => `
+        <tr>
+          <td><strong>${item.nama}</strong></td>
+          <td>${item.wa}</td>
+          <td>${item.tanggal}</td>
+          <td>${item.waktu}</td>
+          <td>${item.lokasi}</td>
+          <td>
+            <button class="btn" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;" onclick="sendToPeserta('${item.wa}', '${item.nama}', '${item.tanggal}', '${item.waktu}', '${item.lokasi}')">
+              📱 Kirim WA
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    document.querySelectorAll('input').forEach(input => input.addEventListener('input', updatePreview));
+
+    updatePreview();
+    renderTable();
+  </script>
+</body>
+</html>

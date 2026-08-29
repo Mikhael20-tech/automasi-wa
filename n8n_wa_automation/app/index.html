@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WA Automation Dashboard - Welcome Maba 2026</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- SheetJS CDN for Excel parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #070b12;
+      --bg-card: rgba(15, 23, 42, 0.75);
+      --bg-card-hover: rgba(30, 41, 59, 0.85);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(37, 211, 102, 0.3);
+      --wa-green: #25d366;
+      --wa-green-hover: #1eaa53;
+      --accent-indigo: #6366f1;
+      --accent-indigo-hover: #4f46e5;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --status-hadir: #10b981;
+      --status-tidak: #f43f5e;
+      --status-pending: #f59e0b;
+      --wa-chat-bg: #0b141a;
+      --wa-bubble-bg: #005c4b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(37, 211, 102, 0.1) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding-bottom: 3rem;
+    }
+
+    /* Top Navigation Header */
+    header {
+      background: rgba(11, 17, 32, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+    }
+
+    .header-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #25d366, #059669);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #0f172a;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
+    }
+
+    .logo-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 0.35rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-indigo);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    }
+
+    .tab-btn:hover:not(.active) {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Main Container Layout */
+    main {
+      max-width: 1300px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Stat Summary Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .stat-info .stat-value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .stat-info .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Tab Contents */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card Panels */
+    .panel {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .panel-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .panel-title i {
+      color: var(--wa-green);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-wa {
+      background: linear-gradient(135deg, #25d366, #059669);
+      color: #05190e;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-wa:hover {
+      background: linear-gradient(135deg, #1eaa53, #047857);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--accent-indigo);
+      color: white;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-indigo-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-danger {
+      background: rgba(244, 63, 94, 0.15);
+      color: #f43f5e;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .btn-danger:hover {
+      background: rgba(244, 63, 94, 0.25);
+    }
+
+    /* Data Controls & Search */
+    .controls-bar {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .search-box input {
+      padding-left: 2.75rem;
+    }
+
+    input, textarea, select {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.9rem;
+      width: 100%;
+      transition: all 0.2s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--accent-indigo);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Filter Pills */
+    .filter-pills {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .pill-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pill-btn.active {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: var(--accent-indigo);
+      color: #a5b4fc;
+    }
+
+    /* Table Design */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+
+    thead {
+      background: rgba(30, 41, 59, 0.6);
+    }
+
+    th {
+      padding: 0.9rem 1.25rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .badge-hadir {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--status-hadir);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-tidak {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--status-tidak);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .badge-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--status-pending);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    /* Template & Live Preview Layout */
+    .template-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.75rem;
+    }
+
+    @media (max-width: 960px) {
+      .template-grid { grid-template-columns: 1fr; }
+    }
+
+    .placeholder-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 0.75rem 0;
+    }
+
+    .tag-btn {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-family: monospace;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tag-btn:hover {
+      background: rgba(99, 102, 241, 0.3);
+      color: white;
+    }
+
+    /* WhatsApp Phone Frame */
+    .phone-wrapper {
+      background: var(--wa-chat-bg);
+      border-radius: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .phone-top-bar {
+      background: #202c33;
+      padding: 0.85rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .phone-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #3b82f6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: white;
+    }
+
+    .phone-user-details {
+      flex: 1;
+    }
+
+    .phone-user-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .phone-user-status {
+      font-size: 0.75rem;
+      color: var(--wa-green);
+    }
+
+    .phone-chat-screen {
+      flex: 1;
+      padding: 1.25rem;
+      overflow-y: auto;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-bubble {
+      align-self: flex-start;
+      background: var(--wa-bubble-bg);
+      color: #e9edef;
+      padding: 1rem;
+      border-radius: 0.75rem 0.75rem 0.75rem 0;
+      max-width: 90%;
+      font-size: 0.875rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .chat-timestamp {
+      text-align: right;
+      font-size: 0.6875rem;
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: 0.35rem;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 540px;
+      padding: 1.75rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    /* Drop Area */
+    .drop-zone {
+      border: 2px dashed rgba(99, 102, 241, 0.4);
+      background: rgba(99, 102, 241, 0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 1.5rem;
+    }
+
+    .drop-zone:hover {
+      background: rgba(99, 102, 241, 0.1);
+      border-color: var(--accent-indigo);
+    }
+
+    .drop-zone i {
+      font-size: 2.2rem;
+      color: var(--accent-indigo);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--border-highlight);
+      color: var(--text-main);
+      padding: 0.9rem 1.4rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-icon"><i class="fa-brands fa-whatsapp"></i></div>
+        <div>
+          <div class="logo-title">WA Automation Suite</div>
+          <div class="logo-subtitle">Konfirmasi Kehadiran Welcome Maba 2026</div>
+        </div>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('peserta')">
+          <i class="fa-solid fa-users"></i> Data Peserta
+        </button>
+        <button class="tab-btn" onclick="switchTab('template')">
+          <i class="fa-solid fa-pen-to-square"></i> Template Pesan
+        </button>
+        <button class="tab-btn" onclick="switchTab('n8n')">
+          <i class="fa-solid fa-bolt"></i> n8n Integration
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Stat Summary Cards Bar -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">
+          <i class="fa-solid fa-user-group"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statTotal">0</div>
+          <div class="stat-label">Total Peserta</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statHadir" style="color: var(--status-hadir);">0</div>
+          <div class="stat-label">Konfirmasi Hadir</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(244, 63, 94, 0.15); color: #fb7185;">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statTidak" style="color: var(--status-tidak);">0</div>
+          <div class="stat-label">Tidak Bisa Hadir</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statPending" style="color: var(--status-pending);">0</div>
+          <div class="stat-label">Belum Konfirmasi</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 1: DATA PESERTA -->
+    <div id="tab-peserta" class="tab-content active">
+      <!-- File Upload Zone -->
+      <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+        <i class="fa-solid fa-file-excel"></i>
+        <h3>Upload File Excel (.xlsx) / CSV Peserta</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.35rem;">
+          Klik di sini atau tarik file ke dalam area ini
+        </p>
+        <input type="file" id="fileInput" accept=".xlsx, .xls, .csv" style="display: none;" onchange="handleFileUpload(event)">
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <i class="fa-solid fa-table-list"></i> Daftar Kontak Peserta
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-outline" onclick="openAddModal()">
+              <i class="fa-solid fa-plus"></i> Tambah Peserta
+            </button>
+            <button class="btn btn-outline" onclick="exportDataExcel()">
+              <i class="fa-solid fa-download"></i> Export Excel
+            </button>
+            <button class="btn btn-danger" onclick="clearData()">
+              <i class="fa-solid fa-trash"></i> Reset Data
+            </button>
+          </div>
+        </div>
+
+        <div class="controls-bar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Cari nama atau nomor WA..." oninput="renderTable()">
+          </div>
+
+          <div class="filter-pills">
+            <button class="pill-btn active" onclick="setFilter('semua', this)">Semua</button>
+            <button class="pill-btn" onclick="setFilter('Hadir', this)">Hadir</button>
+            <button class="pill-btn" onclick="setFilter('Tidak Hadir', this)">Tidak Hadir</button>
+            <button class="pill-btn" onclick="setFilter('Belum Konfirmasi', this)">Belum Balas</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Peserta</th>
+                <th>Nomor WhatsApp</th>
+                <th>Hari, Tanggal</th>
+                <th>Waktu</th>
+                <th>Lokasi</th>
+                <th>Status</th>
+                <th>Aksi WA Direct</th>
+              </tr>
+            </thead>
+            <tbody id="pesertaTableBody">
+              <!-- Data rows rendered here dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: TEMPLATE PESAN & LIVE PREVIEW -->
+    <div id="tab-template" class="tab-content">
+      <div class="template-grid">
+        <!-- Template Editor -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title"><i class="fa-solid fa-pen"></i> Edit Format Pesan Konfirmasi</div>
+          </div>
+
+          <div class="form-group">
+            <label>Sematkan Parameter Variabel (Klik untuk menyisipkan):</label>
+            <div class="placeholder-tags">
+              <button class="tag-btn" onclick="insertTag('{nama}')">{nama}</button>
+              <button class="tag-btn" onclick="insertTag('{tanggal}')">{tanggal}</button>
+              <button class="tag-btn" onclick="insertTag('{waktu}')">{waktu}</button>
+              <button class="tag-btn" onclick="insertTag('{lokasi}')">{lokasi}</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <textarea id="templateTextarea" oninput="updateLivePreview()">Halo Kak {nama}! 👋
+
+Semoga sehat selalu ya.
+
+Menjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.
+
+Apakah Kakak dipastikan bisa hadir di acara kita?
+
+🗓 Hari/Tanggal: {tanggal}
+⏰ Waktu: {waktu}
+📍 Lokasi: {lokasi}
+
+Mohon balas pesan ini dengan format:
+
+[Hadir / Tidak Hadir]
+
+Konfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨</textarea>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem;">
+            <button class="btn btn-primary" onclick="saveTemplate()">
+              <i class="fa-solid fa-floppy-disk"></i> Simpan Template
+            </button>
+            <button class="btn btn-outline" onclick="resetTemplate()">
+              <i class="fa-solid fa-rotate-left"></i> Reset Default
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Phone Simulator -->
+        <div class="panel" style="display: flex; flex-direction: column;">
+          <div class="panel-header">
+            <div class="panel-title"><i class="fa-brands fa-whatsapp"></i> Live Chat WhatsApp Preview</div>
+          </div>
+
+          <div class="phone-wrapper">
+            <div class="phone-top-bar">
+              <div class="phone-avatar">PM</div>
+              <div class="phone-user-details">
+                <div class="phone-user-name">Panitia Welcome Maba 2026</div>
+                <div class="phone-user-status">Online</div>
+              </div>
+            </div>
+            <div class="phone-chat-screen">
+              <div class="chat-bubble">
+                <span id="previewMessageBody"></span>
+                <div class="chat-timestamp">22:15 <i class="fa-solid fa-check-double" style="color: #53bdeb;"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: N8N INTEGRATION & AUTOMATION -->
+    <div id="tab-n8n" class="tab-content">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title"><i class="fa-solid fa-bolt"></i> n8n Webhook Direct Trigger</div>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.6;">
+          Anda dapat langsung memicu (*trigger*) n8n workflow dari dashboard ini dengan memasukkan **Webhook URL** dari n8n Anda. Dashboard akan mengirimkan seluruh payload JSON data peserta ke n8n secara otomatis!
+        </p>
+
+        <div class="form-group">
+          <label>URL Webhook n8n (Production / Test Webhook):</label>
+          <input type="text" id="n8nWebhookUrl" placeholder="https://n8n.domainanda.com/webhook/send-wa-maba" value="https://n8n.domainanda.com/webhook/send-wa-maba">
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+          <button class="btn btn-wa" onclick="triggerN8nBlast()">
+            <i class="fa-solid fa-paper-plane"></i> Kirim Payload Ke n8n & Jalankan Blast
+          </button>
+          <button class="btn btn-outline" onclick="copyN8nJsonPayload()">
+            <i class="fa-solid fa-copy"></i> Salin Payload JSON Data Peserta
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Files Reference Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title"><i class="fa-solid fa-folder-open"></i> Berkas n8n Workflow Siap Pakai di Komputer Anda</div>
+        </div>
+
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem;">
+          <li style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>1. Broadcast Workflow JSON</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Import ke n8n untuk membuat otomatisasi pengiriman WA massal</div>
+            </div>
+            <code style="background: rgba(0,0,0,0.4); padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.8rem; color: #a5b4fc;">n8n_workflow_send_wa.json</code>
+          </li>
+          <li style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>2. Webhook Receive Reply JSON</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Import ke n8n untuk deteksi otomatis balasan Hadir / Tidak Hadir</div>
+            </div>
+            <code style="background: rgba(0,0,0,0.4); padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.8rem; color: #a5b4fc;">n8n_workflow_receive_reply.json</code>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Tambah Peserta -->
+  <div class="modal-overlay" id="addModal">
+    <div class="modal-card">
+      <div class="modal-title">Tambah Peserta Baru</div>
+      <form onsubmit="saveNewPeserta(event)">
+        <div class="form-group">
+          <label>Nama Lengkap Peserta</label>
+          <input type="text" id="modalNama" required placeholder="Contoh: Budi Santoso">
+        </div>
+        <div class="form-group">
+          <label>Nomor WhatsApp (Diawali 62)</label>
+          <input type="text" id="modalWA" required placeholder="Contoh: 6281234567890">
+        </div>
+        <div class="form-group">
+          <label>Hari, Tanggal</label>
+          <input type="text" id="modalTanggal" value="Sabtu, 12 September 2026">
+        </div>
+        <div class="form-group">
+          <label>Waktu Acara</label>
+          <input type="text" id="modalWaktu" value="08.00 - 12.00 WIB">
+        </div>
+        <div class="form-group">
+          <label>Lokasi Acara</label>
+          <input type="text" id="modalLokasi" value="Auditorium Utama Lt. 3">
+        </div>
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-outline" onclick="closeAddModal()">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification element -->
+  <div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check" style="color: var(--wa-green); font-size: 1.2rem;"></i>
+    <span id="toastMsg">Pemberitahuan</span>
+  </div>
+
+  <script>
+    // Initial State Data
+    const defaultData = [
+      { id: 1, nama: "Budi Santoso", wa: "6281234567890", tanggal: "Sabtu, 12 September 2026", waktu: "08.00 - 12.00 WIB", lokasi: "Auditorium Utama Lt. 3", status: "Belum Konfirmasi" },
+      { id: 2, nama: "Siti Rahma", wa: "6289876543210", tanggal: "Sabtu, 12 September 2026", waktu: "08.00 - 12.00 WIB", lokasi: "Auditorium Utama Lt. 3", status: "Hadir" },
+      { id: 3, nama: "Andi Pratama", wa: "6285512345678", tanggal: "Sabtu, 12 September 2026", waktu: "08.00 - 12.00 WIB", lokasi: "Auditorium Utama Lt. 3", status: "Tidak Hadir" },
+      { id: 4, nama: "Dewi Lestari", wa: "6287711223344", tanggal: "Sabtu, 12 September 2026", waktu: "08.00 - 12.00 WIB", lokasi: "Auditorium Utama Lt. 3", status: "Belum Konfirmasi" }
+    ];
+
+    let pesertaList = JSON.parse(localStorage.getItem('wa_maba_peserta')) || defaultData;
+    let currentFilter = 'semua';
+
+    function saveToStorage() {
+      localStorage.setItem('wa_maba_peserta', JSON.stringify(pesertaList));
+      updateStats();
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+      event.currentTarget.classList.add('active');
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+    }
+
+    function updateStats() {
+      document.getElementById('statTotal').innerText = pesertaList.length;
+      document.getElementById('statHadir').innerText = pesertaList.filter(p => p.status === 'Hadir').length;
+      document.getElementById('statTidak').innerText = pesertaList.filter(p => p.status === 'Tidak Hadir').length;
+      document.getElementById('statPending').innerText = pesertaList.filter(p => p.status === 'Belum Konfirmasi').length;
+    }
+
+    function setFilter(filter, el) {
+      currentFilter = filter;
+      document.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
+      el.classList.add('active');
+      renderTable();
+    }
+
+    function formatMessage(p) {
+      const template = document.getElementById('templateTextarea').value;
+      return template
+        .replace(/{nama}/g, p.nama)
+        .replace(/{tanggal}/g, p.tanggal)
+        .replace(/{waktu}/g, p.waktu)
+        .replace(/{lokasi}/g, p.lokasi);
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('pesertaTableBody');
+      const search = document.getElementById('searchInput').value.toLowerCase();
+
+      const filtered = pesertaList.filter(p => {
+        const matchSearch = p.nama.toLowerCase().includes(search) || p.wa.includes(search);
+        const matchFilter = currentFilter === 'semua' || p.status === currentFilter;
+        return matchSearch && matchFilter;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 2rem; color: var(--text-muted);">Tidak ada data peserta ditemukan</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map((p, idx) => {
+        let badgeClass = 'badge-pending';
+        if (p.status === 'Hadir') badgeClass = 'badge-hadir';
+        if (p.status === 'Tidak Hadir') badgeClass = 'badge-tidak';
+
+        return `
+          <tr>
+            <td>${idx + 1}</td>
+            <td><strong>${p.nama}</strong></td>
+            <td><code>${p.wa}</code></td>
+            <td>${p.tanggal}</td>
+            <td>${p.waktu}</td>
+            <td>${p.lokasi}</td>
+            <td>
+              <select onchange="updateStatus(${p.id}, this.value)" style="padding: 0.25rem 0.5rem; border-radius: 20px; font-size: 0.75rem; width: auto;" class="status-badge ${badgeClass}">
+                <option value="Belum Konfirmasi" ${p.status === 'Belum Konfirmasi' ? 'selected' : ''}>Belum Balas</option>
+                <option value="Hadir" ${p.status === 'Hadir' ? 'selected' : ''}>Hadir</option>
+                <option value="Tidak Hadir" ${p.status === 'Tidak Hadir' ? 'selected' : ''}>Tidak Hadir</option>
+              </select>
+            </td>
+            <td>
+              <div style="display: flex; gap: 0.4rem;">
+                <button class="btn btn-wa" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="sendSingleWA(${p.id})">
+                  <i class="fa-brands fa-whatsapp"></i> Kirim
+                </button>
+                <button class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.75rem;" onclick="deletePeserta(${p.id})">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function updateStatus(id, newStatus) {
+      const item = pesertaList.find(p => p.id === id);
+      if (item) {
+        item.status = newStatus;
+        saveToStorage();
+        renderTable();
+        showToast(`Status ${item.nama} diperbarui ke ${newStatus}`);
+      }
+    }
+
+    function deletePeserta(id) {
+      if (confirm('Yakin ingin menghapus peserta ini?')) {
+        pesertaList = pesertaList.filter(p => p.id !== id);
+        saveToStorage();
+        renderTable();
+        showToast('Peserta berhasil dihapus');
+      }
+    }
+
+    function sendSingleWA(id) {
+      const p = pesertaList.find(item => item.id === id);
+      if (!p) return;
+      const text = encodeURIComponent(formatMessage(p));
+      const cleanWa = p.wa.replace(/[^0-9]/g, '');
+      window.open(`https://wa.me/${cleanWa}?text=${text}`, '_blank');
+    }
+
+    // Modal Add
+    function openAddModal() { document.getElementById('addModal').classList.add('active'); }
+    function closeAddModal() { document.getElementById('addModal').classList.remove('active'); }
+
+    function saveNewPeserta(e) {
+      e.preventDefault();
+      const newP = {
+        id: Date.now(),
+        nama: document.getElementById('modalNama').value,
+        wa: document.getElementById('modalWA').value.replace(/[^0-9]/g, ''),
+        tanggal: document.getElementById('modalTanggal').value,
+        waktu: document.getElementById('modalWaktu').value,
+        lokasi: document.getElementById('modalLokasi').value,
+        status: 'Belum Konfirmasi'
+      };
+
+      pesertaList.push(newP);
+      saveToStorage();
+      renderTable();
+      closeAddModal();
+      showToast(`Peserta ${newP.nama} berhasil ditambahkan!`);
+    }
+
+    // Excel Upload Handler
+    function handleFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const data = new Uint8Array(evt.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+        const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+
+        if (jsonData.length > 0) {
+          pesertaList = jsonData.map((row, idx) => ({
+            id: Date.now() + idx,
+            nama: row.Nama || row.nama || `Peserta ${idx+1}`,
+            wa: String(row.Nomor_WA || row.wa || row.WhatsApp || '').replace(/[^0-9]/g, ''),
+            tanggal: row.Hari_Tanggal || row.tanggal || 'Sabtu, 12 September 2026',
+            waktu: row.Waktu || row.waktu || '08.00 - 12.00 WIB',
+            lokasi: row.Lokasi || row.lokasi || 'Auditorium Utama Lt. 3',
+            status: row.Status_Kehadiran || row.status || 'Belum Konfirmasi'
+          }));
+
+          saveToStorage();
+          renderTable();
+          showToast(`Berhasil mengimpor ${jsonData.length} peserta dari Excel!`);
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function exportDataExcel() {
+      const ws = XLSX.utils.json_to_sheet(pesertaList);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Status Peserta Maba");
+      XLSX.writeFile(wb, "status_kehadiran_maba_2026.xlsx");
+      showToast('File Excel berhasil didownload!');
+    }
+
+    function clearData() {
+      if (confirm('Yakin ingin mereset seluruh data peserta?')) {
+        pesertaList = [];
+        saveToStorage();
+        renderTable();
+        showToast('Data peserta berhasil di-reset.');
+      }
+    }
+
+    // Template Functions
+    function insertTag(tag) {
+      const textarea = document.getElementById('templateTextarea');
+      textarea.value += tag;
+      updateLivePreview();
+    }
+
+    function updateLivePreview() {
+      const sample = pesertaList[0] || {
+        nama: "Budi Santoso",
+        tanggal: "Sabtu, 12 September 2026",
+        waktu: "08.00 - 12.00 WIB",
+        lokasi: "Auditorium Utama Lt. 3"
+      };
+
+      document.getElementById('previewMessageBody').innerText = formatMessage(sample);
+    }
+
+    function saveTemplate() {
+      localStorage.setItem('wa_template_maba', document.getElementById('templateTextarea').value);
+      showToast('Template pesan berhasil disimpan!');
+    }
+
+    function resetTemplate() {
+      document.getElementById('templateTextarea').value = `Halo Kak {nama}! 👋\n\nSemoga sehat selalu ya.\n\nMenjelang acara Welcome Maba 2026, kami dari tim panitia ingin melakukan konfirmasi kehadiran nih.\n\nApakah Kakak dipastikan bisa hadir di acara kita?\n\n🗓 Hari/Tanggal: {tanggal}\n⏰ Waktu: {waktu}\n📍 Lokasi: {lokasi}\n\nMohon balas pesan ini dengan format:\n\n[Hadir / Tidak Hadir]\n\nKonfirmasi Kakak sangat membantu kami dalam penyiapan tempat & konsumsi. Terima kasih banyak! 🙏✨`;
+      updateLivePreview();
+      showToast('Template dikembalikan ke default');
+    }
+
+    // n8n Functions
+    function triggerN8nBlast() {
+      const url = document.getElementById('n8nWebhookUrl').value;
+      if (!url) return alert('Silakan masukkan Webhook URL n8n Anda terlebih dahulu!');
+
+      const payload = pesertaList.map(p => ({
+        ...p,
+        pesan_formatted: formatMessage(p)
+      }));
+
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ peserta: payload })
+      })
+      .then(res => {
+        showToast('Payload berhasil dikirim ke Webhook n8n!');
+      })
+      .catch(err => {
+        alert('Gagal mengirim ke Webhook n8n: ' + err.message);
+      });
+    }
+
+    function copyN8nJsonPayload() {
+      const payload = pesertaList.map(p => ({
+        ...p,
+        pesan_formatted: formatMessage(p)
+      }));
+      navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
+      showToast('Payload JSON disalin ke clipboard!');
+    }
+
+    // Init
+    updateStats();
+    renderTable();
+    updateLivePreview();
+  </script>
+</body>
+</html>
