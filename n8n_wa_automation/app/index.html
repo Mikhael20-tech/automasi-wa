@@ -151,16 +151,16 @@
     /* Stat Summary Cards */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.25rem;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
       margin-bottom: 2rem;
     }
 
-    @media (max-width: 900px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 1100px) {
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
     }
-    @media (max-width: 600px) {
-      .stats-grid { grid-template-columns: 1fr; }
+    @media (max-width: 700px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     .stat-card {
@@ -168,10 +168,10 @@
       backdrop-filter: blur(16px);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 1.25rem;
+      padding: 1.1rem;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.85rem;
       transition: transform 0.2s;
     }
 
@@ -181,23 +181,24 @@
     }
 
     .stat-icon {
-      width: 48px;
-      height: 48px;
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.25rem;
+      font-size: 1.15rem;
+      flex-shrink: 0;
     }
 
     .stat-info .stat-value {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 800;
       line-height: 1.2;
     }
 
     .stat-info .stat-label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       font-weight: 500;
     }
@@ -286,6 +287,16 @@
     .btn-primary:hover {
       background: var(--accent-indigo-hover);
       transform: translateY(-1px);
+    }
+
+    .btn-warning {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-warning:hover {
+      background: rgba(245, 158, 11, 0.25);
     }
 
     .btn-outline {
@@ -391,6 +402,18 @@
       color: white;
     }
 
+    .pill-btn-double {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: #fbbf24;
+    }
+
+    .pill-btn-double.active {
+      background: rgba(245, 158, 11, 0.3);
+      border-color: #f59e0b;
+      color: white;
+    }
+
     /* Table Design */
     .table-responsive {
       overflow-x: auto;
@@ -425,6 +448,10 @@
 
     tbody tr:hover {
       background: rgba(255, 255, 255, 0.02);
+    }
+
+    tr.row-double {
+      background: rgba(245, 158, 11, 0.08) !important;
     }
 
     /* Status Badges */
@@ -464,6 +491,17 @@
       border-radius: 6px;
       font-size: 0.7rem;
       font-weight: 700;
+    }
+
+    .badge-double-tag {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      margin-left: 0.4rem;
     }
 
     /* Template & Live Preview Layout */
@@ -717,6 +755,16 @@
       </div>
 
       <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+          <i class="fa-solid fa-clone"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statDouble" style="color: #fbbf24;">0</div>
+          <div class="stat-label">Data Double (Ganda)</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
         <div class="stat-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
           <i class="fa-solid fa-car-side"></i>
         </div>
@@ -754,7 +802,7 @@
         <i class="fa-solid fa-file-excel"></i>
         <h3>Upload File Excel Formulir Pendaftaran Maba (.xlsx / .csv)</h3>
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.35rem;">
-          Mendukung otomatis parsing data pendaftaran &amp; deteksi Maba yang <strong>membutuhkan penjemputan</strong>!
+          Mendukung otomatis parsing data, deteksi Maba penjemputan, &amp; <strong>pemeriksaan data ganda (double data)</strong>!
         </p>
         <input type="file" id="fileInput" accept=".xlsx, .xls, .csv" style="display: none;" onchange="handleFileUpload(event)">
       </div>
@@ -764,7 +812,10 @@
           <div class="panel-title">
             <i class="fa-solid fa-table-list"></i> Daftar Kontak Peserta Welcome Maba 2026
           </div>
-          <div style="display: flex; gap: 0.5rem;">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="btn btn-warning" onclick="deduplicateData()">
+              <i class="fa-solid fa-broom"></i> Bersihkan Double Data
+            </button>
             <button class="btn btn-outline" onclick="openAddModal()">
               <i class="fa-solid fa-plus"></i> Tambah Peserta
             </button>
@@ -785,6 +836,7 @@
 
           <div class="filter-pills">
             <button class="pill-btn active" onclick="setFilter('semua', this)">Semua</button>
+            <button class="pill-btn pill-btn-double" onclick="setFilter('double', this)">⚠️ Double Data (<span id="pillDoubleCount">0</span>)</button>
             <button class="pill-btn pill-btn-jemput" onclick="setFilter('jemput', this)">🚗 Butuh Penjemputan</button>
             <button class="pill-btn" onclick="setFilter('Hadir', this)">Hadir</button>
             <button class="pill-btn" onclick="setFilter('Tidak Hadir', this)">Tidak Hadir</button>
@@ -1024,12 +1076,13 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
       return str;
     }
 
-    // 7 Participants who explicitly requested pickup (from Google Form responses)
+    // Default sample data including intentional double entry for demonstration
     const defaultData = [
       { id: 3, nama: "Grace Natalie Rismaduma Sihite", wa: "6282185433752", fakultas: "FMIPA", prodi: "S1 Sains Aktuaria", kota: "Sidikalang, Medan", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
       { id: 4, nama: "Richard Zulyo Sitakar", wa: "6287285567205", fakultas: "Fakultas Vokasi", prodi: "D4 Teknik Mesin", kota: "Batam", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
       { id: 9, nama: "Ryan Boantua Panjaitan", wa: "6287780460960", fakultas: "Vokasi", prodi: "D-4 Tata boga", kota: "Jakarta Timur", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
       { id: 31, nama: "Edwell Putra Hirohito Gaspersz", wa: "6281248077746", fakultas: "Teknik", prodi: "Teknik Mesin", kota: "Sorong", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
+      { id: 32, nama: "Edwell Putra Hirohito Gaspersz", wa: "6281248077746", fakultas: "Teknik", prodi: "Teknik Mesin", kota: "Sorong", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" }, // Duplicate sample
       { id: 50, nama: "Sveta Restyarsa Tisnandaru", wa: "6282141541460", fakultas: "Vokasi", prodi: "D4 Desain Grafis", kota: "Surabaya", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
       { id: 73, nama: "Susan Sonya Silalahi", wa: "6281234567890", fakultas: "FISIPOL", prodi: "Ilmu Komunikasi", kota: "Medan", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
       { id: 74, nama: "Wahyuni Ningsi Marpaung", wa: "6289876543210", fakultas: "FMIPA", prodi: "Biologi", kota: "Pematangsiantar", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" }
@@ -1058,11 +1111,66 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
       document.getElementById(`tab-${tabId}`).classList.add('active');
     }
 
+    function getDuplicateIds() {
+      const waCount = {};
+      const nameCount = {};
+
+      pesertaList.forEach(p => {
+        if (p.wa) waCount[p.wa] = (waCount[p.wa] || 0) + 1;
+        if (p.nama) {
+          const nKey = p.nama.toLowerCase().trim();
+          nameCount[nKey] = (nameCount[nKey] || 0) + 1;
+        }
+      });
+
+      const doubleSet = new Set();
+      pesertaList.forEach(p => {
+        const isWaDouble = p.wa && waCount[p.wa] > 1;
+        const isNameDouble = p.nama && nameCount[p.nama.toLowerCase().trim()] > 1;
+        if (isWaDouble || isNameDouble) {
+          doubleSet.add(p.id);
+        }
+      });
+
+      return doubleSet;
+    }
+
     function updateStats() {
+      const doubleSet = getDuplicateIds();
+
       document.getElementById('statTotal').innerText = pesertaList.length;
+      document.getElementById('statDouble').innerText = doubleSet.size;
+      document.getElementById('pillDoubleCount').innerText = doubleSet.size;
       document.getElementById('statPenjemputan').innerText = pesertaList.filter(p => p.jemput).length;
       document.getElementById('statHadir').innerText = pesertaList.filter(p => p.status === 'Hadir').length;
       document.getElementById('statPending').innerText = pesertaList.filter(p => p.status === 'Belum Konfirmasi').length;
+    }
+
+    function deduplicateData() {
+      const seenWA = new Set();
+      const seenName = new Set();
+      const initialCount = pesertaList.length;
+
+      pesertaList = pesertaList.filter(p => {
+        const waKey = p.wa ? p.wa.trim() : '';
+        const nameKey = p.nama ? p.nama.toLowerCase().trim() : '';
+
+        if (waKey && seenWA.has(waKey)) return false;
+        if (nameKey && seenName.has(nameKey)) return false;
+
+        if (waKey) seenWA.add(waKey);
+        if (nameKey) seenName.add(nameKey);
+        return true;
+      });
+
+      const removedCount = initialCount - pesertaList.length;
+      saveToStorage();
+      renderTable();
+      if (removedCount > 0) {
+        showToast(`Berhasil membersihkan ${removedCount} data ganda (double data)!`);
+      } else {
+        showToast('Tidak ada data ganda ditemukan.');
+      }
     }
 
     function setFilter(filter, el) {
@@ -1086,6 +1194,7 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
     function renderTable() {
       const tbody = document.getElementById('pesertaTableBody');
       const search = document.getElementById('searchInput').value.toLowerCase();
+      const doubleSet = getDuplicateIds();
 
       const filtered = pesertaList.filter(p => {
         const matchSearch = (p.nama || '').toLowerCase().includes(search) || 
@@ -1093,7 +1202,8 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
                             (p.prodi || '').toLowerCase().includes(search) ||
                             (p.kota || '').toLowerCase().includes(search);
         let matchFilter = true;
-        if (currentFilter === 'jemput') matchFilter = p.jemput === true;
+        if (currentFilter === 'double') matchFilter = doubleSet.has(p.id);
+        else if (currentFilter === 'jemput') matchFilter = p.jemput === true;
         else if (currentFilter !== 'semua') matchFilter = p.status === currentFilter;
         return matchSearch && matchFilter;
       });
@@ -1108,14 +1218,18 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
         if (p.status === 'Hadir') badgeClass = 'badge-hadir';
         if (p.status === 'Tidak Hadir') badgeClass = 'badge-tidak';
 
+        const isDouble = doubleSet.has(p.id);
+        const doubleTag = isDouble ? `<span class="badge-double-tag">⚠️ Ganda</span>` : '';
+        const rowClass = isDouble ? 'row-double' : '';
+
         const jemputBadge = p.jemput 
           ? `<span class="badge-jemput"><i class="fa-solid fa-car"></i> Butuh Jemput</span>` 
           : `<span style="color: var(--text-muted); font-size: 0.75rem;">-</span>`;
 
         return `
-          <tr>
+          <tr class="${rowClass}">
             <td>${idx + 1}</td>
-            <td><strong>${p.nama}</strong></td>
+            <td><strong>${p.nama}</strong> ${doubleTag}</td>
             <td><code>${p.wa}</code></td>
             <td>
               <div>${p.fakultas || '-'}</div>
@@ -1214,7 +1328,7 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
       showToast(`Peserta ${newP.nama} berhasil ditambahkan!`);
     }
 
-    // Smart Google Form Excel Upload Handler
+    // Smart Google Form Excel Upload Handler with Duplicate Detection
     function handleFileUpload(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -1262,7 +1376,12 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
 
           saveToStorage();
           renderTable();
-          showToast(`Berhasil mengimpor ${jsonData.length} peserta dari Excel Google Form!`);
+          const doubles = getDuplicateIds();
+          if (doubles.size > 0) {
+            showToast(`Mengimpor ${jsonData.length} peserta. Ditemukan ${doubles.size} data ganda!`);
+          } else {
+            showToast(`Berhasil mengimpor ${jsonData.length} peserta tanpa data ganda!`);
+          }
         }
       };
       reader.readAsArrayBuffer(file);
