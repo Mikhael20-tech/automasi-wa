@@ -965,8 +965,8 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
         </p>
 
         <div class="form-group">
-          <label>URL Webhook n8n (Production / Test Webhook):</label>
-          <input type="text" id="n8nWebhookUrl" placeholder="https://n8n.domainanda.com/webhook/send-wa-maba" value="https://n8n.domainanda.com/webhook/send-wa-maba">
+          <label>URL Webhook n8n (Server wardospem.tech):</label>
+          <input type="text" id="n8nWebhookUrl" placeholder="https://n8n.wardospem.tech/webhook/send-wa-maba" value="https://n8n.wardospem.tech/webhook/send-wa-maba">
         </div>
 
         <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
@@ -988,8 +988,8 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
         <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem;">
           <li style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
             <div>
-              <strong>1. Broadcast Workflow JSON</strong>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">Import ke n8n untuk membuat otomatisasi pengiriman WA massal</div>
+              <strong>1. Broadcast Workflow JSON (Direct Webhook)</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Import ke n8n untuk membuat otomatisasi pengiriman WA massal tanpa auth Google</div>
             </div>
             <code style="background: rgba(0,0,0,0.4); padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.8rem; color: #a5b4fc;">n8n_workflow_send_wa.json</code>
           </li>
@@ -1076,13 +1076,12 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
       return str;
     }
 
-    // Default sample data including intentional double entry for demonstration
+    // Default sample data including 7 pickup participants
     const defaultData = [
       { id: 3, nama: "Grace Natalie Rismaduma Sihite", wa: "6282185433752", fakultas: "FMIPA", prodi: "S1 Sains Aktuaria", kota: "Sidikalang, Medan", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
       { id: 4, nama: "Richard Zulyo Sitakar", wa: "6287285567205", fakultas: "Fakultas Vokasi", prodi: "D4 Teknik Mesin", kota: "Batam", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
       { id: 9, nama: "Ryan Boantua Panjaitan", wa: "6287780460960", fakultas: "Vokasi", prodi: "D-4 Tata boga", kota: "Jakarta Timur", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
       { id: 31, nama: "Edwell Putra Hirohito Gaspersz", wa: "6281248077746", fakultas: "Teknik", prodi: "Teknik Mesin", kota: "Sorong", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
-      { id: 32, nama: "Edwell Putra Hirohito Gaspersz", wa: "6281248077746", fakultas: "Teknik", prodi: "Teknik Mesin", kota: "Sorong", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" }, // Duplicate sample
       { id: 50, nama: "Sveta Restyarsa Tisnandaru", wa: "6282141541460", fakultas: "Vokasi", prodi: "D4 Desain Grafis", kota: "Surabaya", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
       { id: 73, nama: "Susan Sonya Silalahi", wa: "6281234567890", fakultas: "FISIPOL", prodi: "Ilmu Komunikasi", kota: "Medan", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" },
       { id: 74, nama: "Wahyuni Ningsi Marpaung", wa: "6289876543210", fakultas: "FMIPA", prodi: "Biologi", kota: "Pematangsiantar", jemput: true, tanggal: "Senin, 31 Agustus 2026", waktu: "17.30 (Open Gate) - Selesai", lokasi: "Ketintang Madya no.66", status: "Belum Konfirmasi" }
@@ -1449,7 +1448,7 @@ Konfirmasi Kakak sangat membantu kami dalam penyiapan penjemputan & konsumsi. Te
         body: JSON.stringify({ peserta: payload })
       })
       .then(res => {
-        showToast('Payload berhasil dikirim ke Webhook n8n!');
+        showToast('Payload berhasil dikirim ke Webhook n8n server wardospem.tech!');
       })
       .catch(err => {
         alert('Gagal mengirim ke Webhook n8n: ' + err.message);
