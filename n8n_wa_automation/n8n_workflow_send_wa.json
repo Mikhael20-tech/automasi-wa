@@ -83,11 +83,11 @@
     },
     {
       "parameters": {
-        "amount": 7,
+        "amount": 30,
         "unit": "seconds"
       },
       "id": "delay-node",
-      "name": "Jeda Delay (7 Detik)",
+      "name": "Jeda Delay (30 Detik Safe Anti-Spam)",
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
@@ -135,14 +135,14 @@
       "main": [
         [
           {
-            "node": "Jeda Delay (7 Detik)",
+            "node": "Jeda Delay (30 Detik Safe Anti-Spam)",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Jeda Delay (7 Detik)": {
+    "Jeda Delay (30 Detik Safe Anti-Spam)": {
       "main": [
         [
           {
