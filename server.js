@@ -4,7 +4,8 @@ const path = require('path');
 const { URL } = require('url');
 
 const PORT = 8765;
-const ROOT_DIR = path.resolve(__dirname);
+const ROOT_DIR = path.basename(__dirname) === 'tv' ? path.resolve(__dirname, '..') : __dirname;
+const TV_DIR = path.join(ROOT_DIR, 'tv');
 
 // Category mapping for VisionPlus channels
 const categoryMap = {
@@ -82,11 +83,9 @@ function rewriteMpd(mpdText, mpdUrl, host) {
   rewritten = rewritten.replace(
     /(\s(?:media|initialization))="([^"]+)"/g,
     (match, attr, value) => {
-      // Skip if already absolute
       if (value.startsWith('http://') || value.startsWith('https://')) {
         return `${attr}="http://${host}/stream/${value}"`;
       }
-      // Make relative URL absolute via proxy
       const absUrl = baseUrl + value;
       return `${attr}="http://${host}/stream/${absUrl}"`;
     }
@@ -112,8 +111,12 @@ async function getLiveVisionPlusPlaylist(host) {
 
   // 1. Add verified 100% active DRM Channels (MPEG-DASH with ClearKey Decryption)
   try {
-    const drmJsonPath = path.join(ROOT_DIR, 'working_drm_channels.json');
-    if (fs.existsSync(drmJsonPath)) {
+    const drmJsonPath = [
+      path.join(TV_DIR, 'working_drm_channels.json'),
+      path.join(ROOT_DIR, 'working_drm_channels.json')
+    ].find(p => fs.existsSync(p));
+
+    if (drmJsonPath) {
       const drmChannels = JSON.parse(fs.readFileSync(drmJsonPath, 'utf8'));
       for (const ch of drmChannels) {
         processed.push(`#KODIPROP:inputstream.adaptive.license_type=clearkey`);
@@ -132,8 +135,12 @@ async function getLiveVisionPlusPlaylist(host) {
 
   // 2. Add verified 100% active Web Channels (HLS Bebas DRM)
   try {
-    const workingJsonPath = path.join(ROOT_DIR, 'working_web_channels.json');
-    if (fs.existsSync(workingJsonPath)) {
+    const workingJsonPath = [
+      path.join(TV_DIR, 'working_web_channels.json'),
+      path.join(ROOT_DIR, 'working_web_channels.json')
+    ].find(p => fs.existsSync(p));
+
+    if (workingJsonPath) {
       const webChannels = JSON.parse(fs.readFileSync(workingJsonPath, 'utf8'));
       for (const ch of webChannels) {
         processed.push(`#EXTINF:-1 tvg-id="${ch.name}" tvg-logo="${ch.logo}" group-title="${ch.group || 'TV Nasional (Bebas DRM)'}",${ch.name}`);
@@ -142,6 +149,26 @@ async function getLiveVisionPlusPlaylist(host) {
     }
   } catch (e) {
     console.warn('[Playlist] Error loading working_web_channels:', e.message);
+  }
+
+  // 3. Fallback: korea_channels_gist.m3u or visionplus.m3u
+  try {
+    const fallbackM3U = [
+      path.join(ROOT_DIR, 'korea_channels_gist.m3u'),
+      path.join(ROOT_DIR, 'visionplus.m3u')
+    ].find(p => fs.existsSync(p));
+
+    if (fallbackM3U) {
+      const content = fs.readFileSync(fallbackM3U, 'utf8');
+      const lines = content.split(/\r?\n/);
+      for (const line of lines) {
+        if (!line.trim().startsWith('#EXTM3U') && line.trim().length > 0) {
+          processed.push(line);
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('[Playlist] Error loading fallback M3U:', e.message);
   }
 
   cachedPlaylist = processed.join('\n');
@@ -165,8 +192,8 @@ const server = http.createServer(async (req, res) => {
 
   const rawUrl = req.url;
 
-  // 1. VisionPlus Live Playlist: /api/visionplus.m3u
-  if (rawUrl.startsWith('/api/visionplus.m3u')) {
+  // 1. VisionPlus Live Playlist: /api/visionplus.m3u or /tv/api/visionplus.m3u
+  if (rawUrl.startsWith('/api/visionplus.m3u') || rawUrl.startsWith('/tv/api/visionplus.m3u')) {
     try {
       const playlist = await getLiveVisionPlusPlaylist(host);
       res.writeHead(200, {
@@ -332,43 +359,50 @@ const server = http.createServer(async (req, res) => {
 
   // 5. Static Files
   let pathname = new URL(req.url, `http://${host}`).pathname;
-  if (pathname === '/' || pathname === '') pathname = '/tv/index.html';
-  if (pathname === '/tv') {
-    res.writeHead(302, { 'Location': '/tv/' });
-    res.end();
-    return;
-  }
-  if (pathname === '/tv/') pathname = '/tv/index.html';
-
-  const filePath = path.join(ROOT_DIR, decodeURIComponent(pathname));
-  if (!filePath.startsWith(ROOT_DIR)) {
-    res.writeHead(403, { 'Content-Type': 'text/plain' });
-    res.end('Forbidden');
-    return;
+  if (pathname === '/' || pathname === '' || pathname === '/tv' || pathname === '/tv/') {
+    pathname = '/tv/index.html';
   }
 
-  fs.stat(filePath, (err, stats) => {
-    if (err || !stats.isFile()) {
-      // favicon fallback
-      if (pathname === '/favicon.ico') {
-        res.writeHead(204);
-        res.end();
-        return;
-      }
-      res.writeHead(404, { 'Content-Type': 'text/plain' });
-      res.end('File Not Found: ' + pathname);
+  // Resolve file from TV_DIR or ROOT_DIR
+  let filePath = null;
+  if (pathname.startsWith('/tv/')) {
+    const relTvPath = pathname.substring(4); // e.g. "index.html", "style.css", "app.js"
+    const cand1 = path.join(TV_DIR, decodeURIComponent(relTvPath));
+    const cand2 = path.join(ROOT_DIR, decodeURIComponent(pathname));
+    if (fs.existsSync(cand1) && fs.statSync(cand1).isFile()) {
+      filePath = cand1;
+    } else if (fs.existsSync(cand2) && fs.statSync(cand2).isFile()) {
+      filePath = cand2;
+    }
+  } else {
+    const cand1 = path.join(TV_DIR, decodeURIComponent(pathname));
+    const cand2 = path.join(ROOT_DIR, decodeURIComponent(pathname));
+    if (fs.existsSync(cand1) && fs.statSync(cand1).isFile()) {
+      filePath = cand1;
+    } else if (fs.existsSync(cand2) && fs.statSync(cand2).isFile()) {
+      filePath = cand2;
+    }
+  }
+
+  if (!filePath) {
+    if (pathname === '/favicon.ico') {
+      res.writeHead(204);
+      res.end();
       return;
     }
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('File Not Found: ' + pathname);
+    return;
+  }
 
-    const ext = path.extname(filePath).toLowerCase();
-    const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+  const ext = path.extname(filePath).toLowerCase();
+  const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
-    res.writeHead(200, {
-      'Content-Type': contentType,
-      'Access-Control-Allow-Origin': '*'
-    });
-    fs.createReadStream(filePath).pipe(res);
+  res.writeHead(200, {
+    'Content-Type': contentType,
+    'Access-Control-Allow-Origin': '*'
   });
+  fs.createReadStream(filePath).pipe(res);
 });
 
 server.listen(PORT, () => {
