@@ -151,26 +151,6 @@ async function getLiveVisionPlusPlaylist(host) {
     console.warn('[Playlist] Error loading working_web_channels:', e.message);
   }
 
-  // 3. Fallback: korea_channels_gist.m3u or visionplus.m3u
-  try {
-    const fallbackM3U = [
-      path.join(ROOT_DIR, 'korea_channels_gist.m3u'),
-      path.join(ROOT_DIR, 'visionplus.m3u')
-    ].find(p => fs.existsSync(p));
-
-    if (fallbackM3U) {
-      const content = fs.readFileSync(fallbackM3U, 'utf8');
-      const lines = content.split(/\r?\n/);
-      for (const line of lines) {
-        if (!line.trim().startsWith('#EXTM3U') && line.trim().length > 0) {
-          processed.push(line);
-        }
-      }
-    }
-  } catch (e) {
-    console.warn('[Playlist] Error loading fallback M3U:', e.message);
-  }
-
   cachedPlaylist = processed.join('\n');
   return cachedPlaylist;
 }
