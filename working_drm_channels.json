@@ -1,0 +1,65 @@
+[
+  {
+    "name": "beIN Sports 1",
+    "group": "Sports & Racing (DRM ClearKey)",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Logo_bein_sports_1.png",
+    "type": "clearkey",
+    "key": "335dad778109954503dcbb21dc92015f:24bfd75d436cbf73168a2a2dccd40281",
+    "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/ghwcl6hv68/out/v1/83536910d8034e9b9895a20fbe1c1687/cenc.mpd",
+    "needsProxy": false
+  },
+  {
+    "name": "beIN Sports 2",
+    "group": "Sports & Racing (DRM ClearKey)",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Logo_bein_sports_2.png",
+    "type": "clearkey",
+    "key": "0b42be2664d7e811d04f3e504e0924c5:ae24090123b8c72ac5404dc152847cb8",
+    "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/8m8cd46i1t/out/v1/83985c68e4174e90a58a1f2c024be4c9/cenc.mpd",
+    "needsProxy": false
+  },
+  {
+    "name": "beIN Sports 3",
+    "group": "Sports & Racing (DRM ClearKey)",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Logo_bein_sports_3.png",
+    "type": "clearkey",
+    "key": "7995c724a13748ed970840a8ab5bb9b3:67bdaf1e2175b9ff682fcdf0e2354b1e",
+    "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/q4u5nwaogz/out/v1/18de6d3e65934f3a8de4358e69eab86c/cenc.mpd",
+    "needsProxy": false
+  },
+  {
+    "name": "TNT SPORTS 1",
+    "group": "Sports & Racing (DRM ClearKey)",
+    "logo": "https://static-wbd-cdn.wbd.com/s3_assets/wp-content/uploads/2024/01/TNT-Sports-Logo.png",
+    "type": "clearkey",
+    "key": "69a5aa835a061ce64a630d1046727e40:d02feac8a999bd06bf4059bf33411749",
+    "url": "https://a96aivottlinear-a.akamaihd.net/OTTB/iad-nitro/live/clients/dash/enc/rhf2dwosdt/out/v1/ee550d2a68d846c797e6ce4de2e8b76d/cenc.mpd",
+    "needsProxy": false
+  },
+  {
+    "name": "TNT SPORTS 2",
+    "group": "Sports & Racing (DRM ClearKey)",
+    "logo": "https://static-wbd-cdn.wbd.com/s3_assets/wp-content/uploads/2024/01/TNT-Sports-Logo.png",
+    "type": "clearkey",
+    "key": "f3df7843080ae743bf865dc5fdf64c68:567c863bc12eb74788ea74888c042e1b",
+    "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/puehlftk5j/out/v1/f7f0da1ee112481ca0024e6d4dd97f4a/cenc.mpd",
+    "needsProxy": false
+  },
+  {
+    "name": "F1 TV",
+    "group": "Sports & Racing (DRM ClearKey)",
+    "logo": "https://logodownload.org/wp-content/uploads/2024/05/f1-tv-logo.png",
+    "type": "clearkey",
+    "key": "505616380de706936e493fdd1c25d0b6:5b313f49c63c682236eab3357400e216",
+    "url": "https://a184aivottlinear-a.akamaihd.net/OTTB/iad-nitro/live/clients/dash/enc/5fjow0mrvw/out/v1/f870533ee24b4f3bb98d2afe4b1e1bac/cenc.mpd",
+    "needsProxy": false
+  },
+  {
+    "name": "MotoGP Channel",
+    "group": "Sports & Racing (DRM ClearKey)",
+    "logo": "https://cdn.motorsport.com/images/mgl/YN1RZ4b2/s1000/motogp-logo.jpg",
+    "type": "clearkey",
+    "key": "e03f302ec4dabcccca82cc9f76731ec9:53503f5ce624f15d59725f54b6d08018",
+    "url": "https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/wjeweupwyc/out/v1/8197c8e055c94a868623653ac55c10bf/cenc.mpd",
+    "needsProxy": false
+  }
+]

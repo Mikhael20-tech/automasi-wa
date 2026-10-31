@@ -1,0 +1,446 @@
+[
+  {
+    "name": "Hits Movies",
+    "group": "Movies & Entertainment",
+    "logo": "https://static.wikia.nocookie.net/logos/images/1/16/HITS_Movies_logo.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000139/1024.m3u8"
+  },
+  {
+    "name": "Rock Action",
+    "group": "Movies & Entertainment",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000120/1024.m3u8"
+  },
+  {
+    "name": "Rock Entertainment",
+    "group": "Movies & Entertainment",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000110/1024.m3u8"
+  },
+  {
+    "name": "Celestial Movies",
+    "group": "Movies & Entertainment",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000032/1024.m3u8"
+  },
+  {
+    "name": "Zee Bioskop",
+    "group": "Movies & Entertainment",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000061/1024.m3u8"
+  },
+  {
+    "name": "BBC Earth",
+    "group": "Movies & Entertainment",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000116/1024.m3u8"
+  },
+  {
+    "name": "SPOTV 2 (MotoGP & Badminton)",
+    "group": "Sports & Racing (DRM ClearKey)",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000138/1024.m3u8"
+  },
+  {
+    "name": "Soccer Channel",
+    "group": "Sports & Racing (DRM ClearKey)",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000144/1024.m3u8"
+  },
+  {
+    "name": "Sportstar 2",
+    "group": "Sports & Racing (DRM ClearKey)",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000124/1024.m3u8"
+  },
+  {
+    "name": "Kids TV",
+    "group": "Movies & Entertainment",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000135/1024.m3u8"
+  },
+  {
+    "name": "Sindonews TV",
+    "group": "TV Nasional (Bebas DRM)",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000128/1024.m3u8"
+  },
+  {
+    "name": "Celebrities TV",
+    "group": "TV Nasional (Bebas DRM)",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000015/1024.m3u8"
+  },
+  {
+    "name": "Musik TV",
+    "group": "TV Nasional (Bebas DRM)",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000129/1024.m3u8"
+  },
+  {
+    "name": "MOJI TV",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h207/index.m3u8"
+  },
+  {
+    "name": "Metro TV",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h12/index.m3u8"
+  },
+  {
+    "name": "DAAI TV",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://pull.daaiplus.com/live-DAAIPLUS/live-DAAIPLUS_HD.m3u8"
+  },
+  {
+    "name": "ELSHINTA TV (DENS)",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayasd-1.dens.tv/h/h216/stream.m3u8?app_type=web&userid=lite&chname=Elshinta_TV"
+  },
+  {
+    "name": "GARUDA TV HD",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://hgmtv.com:19360/garudatvlivestreaming/garudatvlivestreaming.m3u8"
+  },
+  {
+    "name": "BERITA SATU",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h314/stream.m3u8?app_type=web&userid=lite&chname=Berita_Satu"
+  },
+  {
+    "name": "BTV SD",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h313/S1/mnf.m3u8"
+  },
+  {
+    "name": "BERITA SATU SD",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h314/S1/mnf.m3u8"
+  },
+  {
+    "name": "BTV",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h313/stream.m3u8?app_type=web&userid=lite&chname=BTV"
+  },
+  {
+    "name": "TVRI DENS",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h17/index.m3u8?app_type=web&userid=lite&chname=TVRI"
+  },
+  {
+    "name": "DENS SHOWBIZ",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "Movies & Entertainment",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h244/index.m3u8?app_type=web&userid=lite&chname=DensShowBiz"
+  },
+  {
+    "name": "TVRI SPORT DENS",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h19/index.m3u8?app_type=web&userid=lite&chname=TVRI_Sport"
+  },
+  {
+    "name": "DENS KNOWLEDGE",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "Movies & Entertainment",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h236/index.m3u8?app_type=web&userid=lite&chname=DensKnowledge"
+  },
+  {
+    "name": "DAAI TV DENS",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h16/index.m3u8?app_type=web&userid=lite&chname=DAAI_TV"
+  },
+  {
+    "name": "INDOSIANA TV HD",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://tvstreamcast.com/indonesiana.m3u8"
+  },
+  {
+    "name": "MAGNA CHANNEL HD",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://edge.medcom.id/live-edge/smil:magna.smil/playlist.m3u8"
+  },
+  {
+    "name": "MAGNA CHANNEL (DENS)",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h24/index.m3u8"
+  },
+  {
+    "name": "RTV (DENS)",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h10/index.m3u8"
+  },
+  {
+    "name": "NUSANTARA TV HD",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://nusantaratv.siar.us/nusantaratv/live/playlist.m3u8"
+  },
+  {
+    "name": "OXYGEN TV",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://cdn4-reg2.mm.oxygen.id:8080/hls/oxygentv-web/index.m3u8"
+  },
+  {
+    "name": "TVRI",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://ott-balancer.tvri.go.id/live/eds/Nasional/hls/Nasional.m3u8"
+  },
+  {
+    "name": "TVRI WORLD",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://ott-balancer.tvri.go.id/live/eds/TVRIWorld/hls/TVRIWorld.m3u8"
+  },
+  {
+    "name": "MDTV",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "http://khano.nng.cloudns.us/live/m3u8/id/6cdb3402d11f58d.m3u8"
+  },
+  {
+    "name": "JTV SURABAYA",
+    "logo": "   ",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "http://122.248.43.242:1935/JTVSURABAYA/_definst_/myStream/playlist.m3u8"
+  },
+  {
+    "name": "METRO TV",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://edge.medcom.id/live-edge/smil:metro.smil/playlist.m3u8"
+  },
+  {
+    "name": "JOWO CHANNEL",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "TV Nasional (Bebas DRM)",
+    "url": "https://op-flashcon-digdayasd-1.dens.tv/h/h215/stream.m3u8?app_type=web&userid=lite&chname=Channel_Jowo"
+  },
+  {
+    "name": "AVA Series Iraq",
+    "logo": "https://i.postimg.cc/qq12QBhr/Marvel-Logo-shareext.jpg",
+    "group": "Movies & Entertainment",
+    "url": "https://avaserieshls.wns.live/hls/stream.m3u8"
+  },
+  {
+    "name": "MovieFone",
+    "logo": "https://cdn.moviefone.com/legacy/assets/moviefone-website-logo.png",
+    "group": "Movies & Entertainment",
+    "url": "https://connection3-ent-br.tcl.wurl.tv/playlist.m3u8"
+  },
+  {
+    "name": "AVA Family",
+    "logo": "https://i.imgur.com/QwBGLzK.png",
+    "group": "Movies & Entertainment",
+    "url": "https://familyhls.avatv.live/hls/stream.m3u8?checkedby:iptvcat.com"
+  },
+  {
+    "name": "Action Hollywood Movies HD",
+    "logo": "https://github.com/inspirationlinks/m3u/raw/live/Logos/ActionHollywoodMovies.png",
+    "group": "Movies & Entertainment",
+    "url": "https://cdn-apse1-prod.tsv2.amagi.tv/linear/amg01076-lightningintern-actionhollywood-samsungnz/playlist.m3u8"
+  },
+  {
+    "name": "GLOBAL NEWS",
+    "logo": "   ",
+    "group": "Berita & Internasional",
+    "url": "https://live.corusdigitaldev.com/groupd/live/49a91e7f-1023-430f-8d66-561055f3d0f7/live.isml/live-audio_1=96000-video=2499968.m3u8"
+  },
+  {
+    "name": "CBS News",
+    "logo": "https://i.imgur.com/kDqyJcP.jpg",
+    "group": "Berita & Internasional",
+    "url": "https://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master.m3u8"
+  },
+  {
+    "name": "WION",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "Berita & Internasional",
+    "url": "https://d7x8z4yuq42qn.cloudfront.net/index_7.m3u8"
+  },
+  {
+    "name": "TEST SLOT",
+    "logo": "",
+    "group": "Berita & Internasional",
+    "url": "https://d7x8z4yuq42qn.cloudfront.net/index_5.m3u8"
+  },
+  {
+    "name": "CNN Brasil",
+    "logo": "https://iili.io/Jhv9smQ.png",
+    "group": "Berita & Internasional",
+    "url": "https://d25usgadhphvwi.cloudfront.net/hls/main.m3u8"
+  },
+  {
+    "name": "CNN-News18",
+    "logo": "https://iili.io/Jbn2ZyG.png",
+    "group": "Berita & Internasional",
+    "url": "https://n18syndication.akamaized.net/bpk-tv/CNN_News18_NW18_MOB/output01/index.m3u8"
+  },
+  {
+    "name": "DW ARAB",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "Berita & Internasional",
+    "url": "https://dwamdstream103.akamaized.net/hls/live/2015526/dwstream103/master.m3u8"
+  },
+  {
+    "name": "DW ENGLISH",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "Berita & Internasional",
+    "url": "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/master.m3u8"
+  },
+  {
+    "name": "DW ESPANOL",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "Berita & Internasional",
+    "url": "https://dwamdstream104.akamaized.net/hls/live/2015530/dwstream104/master.m3u8"
+  },
+  {
+    "name": "DW ENGLISH (DENS)",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "Berita & Internasional",
+    "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h213/index.m3u8"
+  },
+  {
+    "name": "BLOOMBERG TV",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "Berita & Internasional",
+    "url": "https://liveprodusphoenixeast.global.ssl.fastly.net/USPhx-HD/Channel-TX-USPhx-AWS-virginia-1/Source-USPhx-16k-1-s6lk2-BP-07-02-81ykIWnsMsg_live.m3u8"
+  },
+  {
+    "name": "SKY NEWS",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "Berita & Internasional",
+    "url": "https://linear901-oo-hls0-prd-gtm.delivery.skycdp.com/v1/master/6404a5d732e04991ed59ac7790b61cc065c9aabd/prod-gb-lin-skynews-hls-25-web/master.m3u8?ads.cdn=https://linear901-oo-hls0-prd-gtm.delivery.skycdp.com&ads.csid=sitesection:SkyNews:Web&manifest.mthost=7a38d30e7dd84cd0872ab4f691c38f58&manifest.region=mediatailor.eu-west-1.amazonaws.com"
+  },
+  {
+    "name": "SIC Notícias",
+    "logo": "https://iili.io/JhkyrRR.png",
+    "group": "Berita & Internasional",
+    "url": "https://cdnapisec.kaltura.com/p/4526593/sp/4526593/playManifest/entryId/1_j8ztwihx/deliveryProfileId/672/protocol/https/format/applehttp/a.m3u8"
+  },
+  {
+    "name": "CNBC BAZAR",
+    "logo": "   ",
+    "group": "Berita & Internasional",
+    "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Bazaar_NW18_MOB/output01/index.m3u8"
+  },
+  {
+    "name": "CNBC 18",
+    "logo": "   ",
+    "group": "Berita & Internasional",
+    "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_TV18_NW18_MOB/output01/index.m3u8"
+  },
+  {
+    "name": "CNBC TV 18 PRIME",
+    "logo": "   ",
+    "group": "Berita & Internasional",
+    "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Tv18_Prime_HD_NW18_MOB/output01/index.m3u8"
+  },
+  {
+    "name": "ZEE NEWS",
+    "logo": "https://iili.io/JbnK1vn.png",
+    "group": "Berita & Internasional",
+    "url": "https://dknttpxmr0dwf.cloudfront.net/index_2.m3u8"
+  },
+  {
+    "name": "Zee Business",
+    "logo": "https://iili.io/JbnK0YX.png",
+    "group": "Berita & Internasional",
+    "url": "https://dwby15d04agvq.cloudfront.net/index_5.m3u8"
+  },
+  {
+    "name": "CNBC Awaaz",
+    "logo": "https://iili.io/JbnKw4S.png",
+    "group": "Berita & Internasional",
+    "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Awaaz_NW18_MOB/output01/index.m3u8"
+  },
+  {
+    "name": "Voice Of America",
+    "logo": "https://w7.pngwing.com/pngs/494/982/png-transparent-united-states-voice-of-america-internet-radio-voa-amharic-broadcasting-united-states-text-logo-united-states.png",
+    "group": "Berita & Internasional",
+    "url": "https://voa-ingest.akamaized.net/hls/live/2033874/tvmc06/playlist_1080.m3u8"
+  },
+  {
+    "name": "RUSIA TODAY",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "Berita & Internasional",
+    "url": "https://rt-glb.rttv.com/dvr/rtnews/playlist.m3u8"
+  },
+  {
+    "name": "CHANNEL NEWS ASIA HD",
+    "logo": "https://i.ibb.co/fxkH20y/cna.png",
+    "group": "Berita & Internasional",
+    "url": "https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index.m3u8"
+  },
+  {
+    "name": "BBC ARAB",
+    "logo": "https://cdn.phototourl.com/free/2026-05-29-6da5ca00-8436-470b-91b7-f2ddecaef7b1.png",
+    "group": "Berita & Internasional",
+    "url": "https://vs-hls-pushb-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_arabic_tv/t=3840/v=pv14/b=5070016/main.m3u8?checkedby:iptvcat.com"
+  },
+  {
+    "name": "5TV Corrientes (480p) [Not 24/7]",
+    "logo": "https://i.imgur.com/mSn7ACs.png",
+    "group": "Berita & Internasional",
+    "url": "http://www.coninfo.net:1935/tvcinco/live1/playlist.m3u8"
+  },
+  {
+    "name": "Africa 24",
+    "logo": "",
+    "group": "Berita & Internasional",
+    "url": "https://edge12.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8"
+  },
+  {
+    "name": "CNA",
+    "logo": "",
+    "group": "Berita & Internasional",
+    "url": "https://live1.mediadesk.al/cnatvlive.m3u8"
+  },
+  {
+    "name": "FOX NEWS",
+    "logo": "",
+    "group": "Berita & Internasional",
+    "url": "http://247preview.foxnews.com/hls/live/2020027/fncv3preview/primary.m3u8"
+  },
+  {
+    "name": "GB News",
+    "logo": "",
+    "group": "Berita & Internasional",
+    "url": "https://cdn-apse1-prod.tsv2.amagi.tv/linear/amg01076-lightningintern-gbnewsnz-samsungnz/playlist.m3u8"
+  },
+  {
+    "name": "India Today",
+    "logo": "",
+    "group": "Berita & Internasional",
+    "url": "https://indiatodaylive.akamaized.net/hls/live/2014320/indiatoday/indiatodaylive/playlist.m3u8"
+  },
+  {
+    "name": "NDTV",
+    "logo": "",
+    "group": "Berita & Internasional",
+    "url": "https://ndtvindiaelemarchana.akamaized.net/hls/live/2003679-b/ndtvindia/master.m3u8"
+  },
+  {
+    "name": "NDTV 24X7",
+    "logo": "",
+    "group": "Berita & Internasional",
+    "url": "https://ndtv24x7elemarchana.akamaized.net/hls/live/2003678-b/ndtv24x7/master.m3u8"
+  }
+]

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VisionPlus & NusaTV — Live Streaming Indonesia</title>
+  <meta name="description" content="Nonton channel VisionPlus & TV Nasional secara live streaming dengan Google Shaka Player (MPEG-DASH & Widevine DRM)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/tv/style.css" />
+</head>
+<body>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">📺</span>
+        <span class="logo-text">VisionPlus</span>
+      </div>
+      <button id="sidebar-toggle" class="sidebar-toggle" title="Toggle Sidebar">☰</button>
+    </div>
+    <div class="search-wrap">
+      <input id="search-input" type="text" placeholder="🔍 Cari channel..." autocomplete="off" />
+    </div>
+    <div class="group-tabs" id="group-tabs">
+      <button class="group-tab active" data-group="all">Semua</button>
+    </div>
+    <div class="channel-list" id="channel-list">
+      <div class="loading-channels">
+        <div class="spinner"></div>
+        <p>Memuat playlist...</p>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="player-section">
+      <div class="player-wrap" id="player-wrap">
+        <div class="player-placeholder" id="player-placeholder">
+          <div class="placeholder-inner">
+            <div class="tv-icon">📺</div>
+            <h2>Selamat Datang di NusaTV</h2>
+            <p>Pilih channel dari daftar untuk mulai menonton streaming live</p>
+          </div>
+        </div>
+        <video id="video-player" controls playsinline></video>
+        <div class="stream-error" id="stream-error" style="display:none;">
+          <div class="error-inner">
+            <div class="error-icon">⚠️</div>
+            <h3>Stream Tidak Tersedia</h3>
+            <p id="error-msg">Mencoba stream alternatif...</p>
+            <button id="retry-btn" class="retry-btn">🔄 Coba Lagi</button>
+          </div>
+        </div>
+        <div class="buffering-overlay" id="buffering-overlay" style="display:none;">
+          <div class="spinner large"></div>
+        </div>
+      </div>
+      <div class="now-playing" id="now-playing" style="display:none;">
+        <img id="np-logo" src="" alt="" class="np-logo" onerror="this.style.display='none'" />
+        <div class="np-info">
+          <div class="np-badge">● LIVE</div>
+          <h1 id="np-title" class="np-title"></h1>
+          <p id="np-group" class="np-group"></p>
+        </div>
+        <div class="np-controls">
+          <button id="prev-stream-btn" class="ctrl-btn" title="Stream sebelumnya">⏮</button>
+          <button id="next-stream-btn" class="ctrl-btn" title="Stream berikutnya">⏭</button>
+          <button id="fullscreen-btn" class="ctrl-btn" title="Fullscreen">⛶</button>
+          <button id="pip-btn" class="ctrl-btn" title="Picture in Picture">⧉</button>
+        </div>
+      </div>
+    </div>
+    <div class="info-bar">
+      <span id="channel-count-label">Memuat...</span>
+      <span class="info-sep">|</span>
+      <span id="stream-quality-label">-</span>
+      <span class="info-sep">|</span>
+      <span id="current-time-label"></span>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Streaming Engines: Google Shaka Player (DASH & Widevine DRM) + Hls.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.11.7/shaka-player.compiled.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
+  <!-- Application Logic -->
+  <script src="/tv/app.js"></script>
+</body>
+</html>

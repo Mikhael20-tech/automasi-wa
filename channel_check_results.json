@@ -1,0 +1,1015 @@
+{
+  "total": 112,
+  "alive": 111,
+  "dead": 1,
+  "results": [
+    {
+      "name": "KBS 1TV",
+      "group": "Korean Tv",
+      "line": 7,
+      "url": "https://backup.760515.xyz/playlist/KBS1-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "KBS 2TV",
+      "group": "Korean Tv",
+      "line": 11,
+      "url": "https://backup.760515.xyz/playlist/KBS2-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "MBC",
+      "group": "Korean Tv",
+      "line": 15,
+      "url": "https://backup.760515.xyz/playlist/MBC-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "SBS",
+      "group": "Korean Tv",
+      "line": 19,
+      "url": "https://allanf181.github.io/adaptive-streams/streams/kr/SBSTV.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "EBS 1TV",
+      "group": "Korean Tv",
+      "line": 23,
+      "url": "https://backup.760515.xyz/playlist/EBS1-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "KBS Drama",
+      "group": "Korean Tv",
+      "line": 27,
+      "url": "http://koreatv.dothome.co.kr/kbsdrama.php",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "KBS Joy",
+      "group": "Korean Tv",
+      "line": 30,
+      "url": "http://koreatv.dothome.co.kr/kbsjoy.php",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "KBS Life",
+      "group": "Korean Tv",
+      "line": 33,
+      "url": "http://koreatv.dothome.co.kr/kbslife.php",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "KBS Story",
+      "group": "Korean Tv",
+      "line": 36,
+      "url": "http://koreatv.dothome.co.kr/kbsstory.php",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "KBS 24",
+      "group": "Korean Tv",
+      "line": 39,
+      "url": "https://jmp2.uk/stvp-KR5100001TH",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "KBS Music",
+      "group": "Korean Tv",
+      "line": 42,
+      "url": "https://32e8419d959d4d7688f8b9b1ed3dc869.mediatailor.ap-northeast-2.amazonaws.com/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ctp689jis2dnq/8bec6200-6073-49b3-91a8-e286953fdfa7/2.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "KBS World",
+      "group": "Korean Tv",
+      "line": 45,
+      "url": "https://stream8.cinerama.uz/1448/tracks-v1a1/mono.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "tvN",
+      "group": "Korean Tv",
+      "line": 48,
+      "url": "https://backup.760515.xyz/playlist/tvN-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "tvN Show",
+      "group": "Korean Tv",
+      "line": 52,
+      "url": "https://backup.760515.xyz/playlist/tvN SHOW-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "tvN Drama",
+      "group": "Korean Tv",
+      "line": 56,
+      "url": "https://backup.760515.xyz/playlist/tvN DRAMA-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "tvN Story",
+      "group": "Korean Tv",
+      "line": 60,
+      "url": "https://jmp2.uk/stvp-KRBC3200014XZ",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "tvN Sport",
+      "group": "Korean Tv",
+      "line": 63,
+      "url": "https://jmp2.uk/stvp-KRBC800015MH",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "CJ ENM Movie (OCN)",
+      "group": "Korean Tv",
+      "line": 66,
+      "url": "https://jmp2.uk/stvp-KRBC32000191N",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "Mnet",
+      "group": "Korean Tv",
+      "line": 69,
+      "url": "https://backup.760515.xyz/playlist/Mnet-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "CJ OnStyle",
+      "group": "Korean Tv",
+      "line": 73,
+      "url": "https://live-ch1.cjonstyle.net/cjmalllive/stream2/playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "JTBC",
+      "group": "Korean Tv",
+      "line": 76,
+      "url": "https://backup.760515.xyz/playlist/JTBC-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "JTBC2",
+      "group": "Korean Tv",
+      "line": 80,
+      "url": "https://backup.760515.xyz/playlist/JTBC2-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "JTBC4",
+      "group": "Korean Tv",
+      "line": 84,
+      "url": "https://backup.760515.xyz/playlist/JTBC4-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "JTBC News",
+      "group": "Korean Tv",
+      "line": 88,
+      "url": "https://jmp2.uk/stvp-KRBC46000173Y",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "JTBC Golf",
+      "group": "Korean Tv",
+      "line": 91,
+      "url": "https://jmp2.uk/stvp-KRBD5200002XY",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "PLAYY Movie",
+      "group": "Korean Tv",
+      "line": 94,
+      "url": "https://ads.its-newid.net/api/manifest.m3u8?tp=samsung_tvplus&channel_name=geniemovie&channel_id=newid_210&apikey=b97c7a7d0c82424bb607e141ef215779&auth=4bc7a483-105eccc8-407d24f8-caedd6fe&ads.live=%5BCONTENT_LIVE%5D&ads.device_did=%7BPSID%7D&ads.ifa=%5BIFA%5D&ads.ifatype=%5BIFA_TYPE%5D&ads.lat=%5BLMT%5D&ads.donotsell=%5BDNS%5D&ads.ip=%5BIP%5D&ads.gdpr=%5BGDPR%5D&ads.gdprconsent=%5BGDPR_CONSENT%5D&ads.country=%5BCOUNTRY%5D&ads.us_privacy=%7BUS_PRIVACY%7D&ads.appstoreurl=%5BAPP_STOREURL%5D&ads.bundleid=%5BAPP_BUNDLE%5D&ads.app.name=%7BAPP_NAME%7D&ads.appversion=%5BAPP_VERSION%5D&ads.devicetype=%5BDEVICE_TYPE%5D&ads.devicemake=%5BDEVICE_MAKE%5D&ads.devicemodel=%5BDEVICE_MODEL%5D&ads.targetad=%5BTARGETAD_ALLOWED%5D&ads.content_title=%5BPROGRAM_TITLE%5D&ads.content_series=%5BSERIES_TITLE%5D&ads.content_season=%5BSEASON_TITLE%5D&ads.content_episode=%5BEPISODE_NO%5D&ads.content_length=%5BCONTENT_LENGTH%5D&ads.device.dnt=%7BTARGETOPT%7D&ads.app_domain=%7BAPP_DOMAIN%7D&nh=true&ads.device_did=%7BPSID%7D&ads.device_dnt=%7BTARGETOPT%7D&ads.app_domain=%7BAPP_DOMAIN%7D&ads.app_name=%7BAPP_NAME%7D&ads.ssai_vendor=SSSLIVE&ads.afsdk_params=%7BAFSDK_VALUE%7D&ads.service_id=KR12000017G",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "Hipddeum",
+      "group": "Korean Tv",
+      "line": 97,
+      "url": "https://ads.its-newid.net/api/manifest.m3u8?tp=samsung_tvplus&channel_name=%ED%9E%99%EC%9C%BC%EB%9C%B8&channel_id=newid_067&apikey=b97c7a7d0c82424bb607e141ef215779&auth=e32513b0-2b41a042-5975596d-f1f2ba74&ads.live=%5BCONTENT_LIVE%5D&ads.device_did=%7BPSID%7D&ads.ifa=%5BIFA%5D&ads.ifatype=%5BIFA_TYPE%5D&ads.lat=%5BLMT%5D&ads.donotsell=%5BDNS%5D&ads.ip=%5BIP%5D&ads.gdpr=%5BGDPR%5D&ads.gdprconsent=%5BGDPR_CONSENT%5D&ads.country=%5BCOUNTRY%5D&ads.us_privacy=%7BUS_PRIVACY%7D&ads.appstoreurl=%5BAPP_STOREURL%5D&ads.bundleid=%5BAPP_BUNDLE%5D&ads.app.name=%7BAPP_NAME%7D&ads.appversion=%5BAPP_VERSION%5D&ads.devicetype=%5BDEVICE_TYPE%5D&ads.devicemake=%5BDEVICE_MAKE%5D&ads.devicemodel=%5BDEVICE_MODEL%5D&ads.targetad=%5BTARGETAD_ALLOWED%5D&ads.content_title=%5BPROGRAM_TITLE%5D&ads.content_series=%5BSERIES_TITLE%5D&ads.content_season=%5BSEASON_TITLE%5D&ads.content_episode=%5BEPISODE_NO%5D&ads.content_length=%5BCONTENT_LENGTH%5D&ads.device.dnt=%7BTARGETOPT%7D&ads.app_domain=%7BAPP_DOMAIN%7D&nh=true&ads.device_did=%7BPSID%7D&ads.device_dnt=%7BTARGETOPT%7D&ads.app_domain=%7BAPP_DOMAIN%7D&ads.app_name=%7BAPP_NAME%7D&ads.ssai_vendor=SSSLIVE&ads.afsdk_params=%7BAFSDK_VALUE%7D&ads.service_id=KR260000274",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "Pluto TV Yoga",
+      "group": "Korean Tv",
+      "line": 100,
+      "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5d8bcf50672e87000965e6eb/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=DNT&architecture=&buildVersion=&clientDeviceType=0&deviceDNT=0&deviceId=web&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=DNT&includeExtendedEvents=false&serverSideAds=false&sid=123",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/x-mpegurl"
+    },
+    {
+      "name": "Pluto TV Fitness",
+      "group": "Korean Tv",
+      "line": 103,
+      "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5d8bcf15672e87000965e6ea/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=DNT&architecture=&buildVersion=&clientDeviceType=0&deviceDNT=0&deviceId=web&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=DNT&includeExtendedEvents=false&serverSideAds=false&sid=123",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/x-mpegurl"
+    },
+    {
+      "name": "CTS 기독교",
+      "group": "Korean Tv",
+      "line": 106,
+      "url": "https://video.cdn.cts.tv/index_2.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "YTN",
+      "group": "Korean Tv",
+      "line": 109,
+      "url": "https://backup.760515.xyz/playlist/YTN-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "YTN2",
+      "group": "Korean Tv",
+      "line": 113,
+      "url": "https://backup.760515.xyz/playlist/YTN2-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "YTN Science",
+      "group": "Korean Tv",
+      "line": 117,
+      "url": "https://backup.760515.xyz/playlist/YTN사이언스-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "Yonhap News TV",
+      "group": "Korean Tv",
+      "line": 121,
+      "url": "https://backup.760515.xyz/playlist/연합뉴스TV-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "Channel A",
+      "group": "Korean Tv",
+      "line": 125,
+      "url": "https://backup.760515.xyz/playlist/채널A-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "Channel A Plus",
+      "group": "Korean Tv",
+      "line": 129,
+      "url": "https://backup.760515.xyz/playlist/채널A플러스-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "TV CHOSUN",
+      "group": "Korean Tv",
+      "line": 133,
+      "url": "https://backup.760515.xyz/playlist/TV CHOSUN-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "TV CHOSUN 2",
+      "group": "Korean Tv",
+      "line": 137,
+      "url": "https://backup.760515.xyz/playlist/TV CHOSUN 2-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "MBN",
+      "group": "Korean Tv",
+      "line": 141,
+      "url": "https://backup.760515.xyz/playlist/MBN-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "MBN Plus",
+      "group": "Korean Tv",
+      "line": 145,
+      "url": "https://backup.760515.xyz/playlist/MBN 플러스-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "Zhonghua TV (중화TV)",
+      "group": "Korean Tv",
+      "line": 149,
+      "url": "https://backup.760515.xyz/playlist/중화TV-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "History Korea (히스토리)",
+      "group": "Korean Tv",
+      "line": 153,
+      "url": "https://backup.760515.xyz/playlist/히스토리-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "NATV (국회방송)",
+      "group": "Korean Tv",
+      "line": 157,
+      "url": "https://backup.760515.xyz/playlist/국회방송(NATV)-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "ANIBOX",
+      "group": "Korean Tv",
+      "line": 161,
+      "url": "https://backup.760515.xyz/playlist/ANIBOX-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "Animax (애니맥스)",
+      "group": "Korean Tv",
+      "line": 165,
+      "url": "https://backup.760515.xyz/playlist/애니맥스-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "Tooniverse (투니버스)",
+      "group": "Korean Tv",
+      "line": 169,
+      "url": "https://backup.760515.xyz/playlist/투니버스-playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "SBS G1",
+      "group": "Korean Tv",
+      "line": 173,
+      "url": "http://61.82.49.4:1935/live/_definst_/tv.stream/chunklist_w432889607.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "CJB",
+      "group": "Korean Tv",
+      "line": 176,
+      "url": "https://wowza1.cjb.co.kr/live/cjbtv/playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "JIBS",
+      "group": "Korean Tv",
+      "line": 179,
+      "url": "http://123.140.197.22/stream/1/play.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "SBS JTV",
+      "group": "Korean Tv",
+      "line": 182,
+      "url": "http://61.85.197.53:1935/jtv_live/myStream/playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "SBS TJB",
+      "group": "Korean Tv",
+      "line": 185,
+      "url": "https://vod.tjb.co.kr/live/_definst_/tv/playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "DAEJEON MBC",
+      "group": "Korean Tv",
+      "line": 188,
+      "url": "https://ns1.tjmbc.co.kr/live/myStream.sdp/playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "GANGWON MBC",
+      "group": "Korean Tv",
+      "line": 191,
+      "url": "http://123.254.93.7:1935/tvlive/livestream2/playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "MOKPO MBC",
+      "group": "Korean Tv",
+      "line": 194,
+      "url": "https://vod.mpmbc.co.kr/a_live/25246741/ch001/playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "F1 TV",
+      "group": "Sports",
+      "line": 206,
+      "url": "https://a184aivottlinear-a.akamaihd.net/OTTB/iad-nitro/live/clients/dash/enc/5fjow0mrvw/out/v1/f870533ee24b4f3bb98d2afe4b1e1bac/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "beIN Sports 1",
+      "group": "Sports",
+      "line": 214,
+      "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/ghwcl6hv68/out/v1/83536910d8034e9b9895a20fbe1c1687/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "beIN Sports 2",
+      "group": "Sports",
+      "line": 222,
+      "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/8m8cd46i1t/out/v1/83985c68e4174e90a58a1f2c024be4c9/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "beIN Sports 3",
+      "group": "Sports",
+      "line": 230,
+      "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/q4u5nwaogz/out/v1/18de6d3e65934f3a8de4358e69eab86c/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "beIN Sports 1 (V+)",
+      "group": "Sports",
+      "line": 233,
+      "url": "https://d6m3sfa7e58z5.cloudfront.net/out/v1/3b0660e05eed4d769521eb0275aab3ab/index.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "beIN Sports 2 (V+)",
+      "group": "Sports",
+      "line": 236,
+      "url": "https://d6m3sfa7e58z5.cloudfront.net/out/v1/cfca527d0f16403396a71b2d3d54c32f/index.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "beIN Sports 3 (V+)",
+      "group": "Sports",
+      "line": 239,
+      "url": "https://d6m3sfa7e58z5.cloudfront.net/out/v1/a265695db5cb461095cbfefc02ad793b/index.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "TENNIS 2 FHD",
+      "group": "Sports",
+      "line": 247,
+      "url": "https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/bfigtl960n/out/v1/5ba5484550e84681bff2e8ca994266c1/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "MotoGP Channel",
+      "group": "Sports",
+      "line": 255,
+      "url": "https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/wjeweupwyc/out/v1/8197c8e055c94a868623653ac55c10bf/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "TNT SPORTS 2",
+      "group": "Sports",
+      "line": 258,
+      "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/puehlftk5j/out/v1/f7f0da1ee112481ca0024e6d4dd97f4a/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "TSN SPORTS 1",
+      "group": "Sports",
+      "line": 269,
+      "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/w0rehjjrwe/out/v1/69a2a7041395406b970598f61680e7cf/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "TSN SPORTS 2",
+      "group": "Sports",
+      "line": 277,
+      "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/cjglydxghe/out/v1/8977baf175da4b94873194613dd3fe55/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "TSN SPORTS 3",
+      "group": "Sports",
+      "line": 285,
+      "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/lsibpqruq1/out/v1/748887d614a84913ba8bcdf3c82823e6/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "TSN SPORTS 4",
+      "group": "Sports",
+      "line": 293,
+      "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/ihys8nw4wv/out/v1/fde190f369484bc6b6117cc16cd82a9f/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "TSN SPORTS 5",
+      "group": "Sports",
+      "line": 301,
+      "url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/cscevwljkq/out/v1/972185041b244140860b7d56398e9aaf/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "SpoTV",
+      "group": "Sports",
+      "line": 304,
+      "url": "https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_spotvhd.mpd",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "SpoTV 2",
+      "group": "Sports",
+      "line": 311,
+      "url": "https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/dr_spotv2hd.mpd",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "FUBO SPORTS 1",
+      "group": "Sports",
+      "line": 323,
+      "url": "https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/3b7qwiqzk3/out/v1/9f14895badca43e6a716db021dcd0c31/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "FUBO SPORTS 2",
+      "group": "Sports",
+      "line": 331,
+      "url": "https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/uiffe4jhf0/out/v1/3534efafca8c4815adbb4d2e9a1fe003/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "HBO Boxing",
+      "group": "Sports",
+      "line": 338,
+      "url": "https://otte.live.fly.ww.aiv-cdn.net/dub-nitro/live/clients/dash/enc/cmtyd9kpfe/out/v1/813bba04214e4f4dab57f0129365635a/cenc.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "MOTORVISION+",
+      "group": "Sports",
+      "line": 343,
+      "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h09/index.m3u8?app_type=web&userid=lite&chname=Motorvision%2B",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "RCTI",
+      "group": "Indonesia Channels",
+      "line": 350,
+      "url": "https://beetv.my.id/xstreamx/rctiplus.m3u8?ch=rcti",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "MNC TV",
+      "group": "Indonesia Channels",
+      "line": 355,
+      "url": "https://beetv.my.id/xstreamx/rctiplus.m3u8?ch=mnctv",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "GTV",
+      "group": "Indonesia Channels",
+      "line": 360,
+      "url": "https://beetv.my.id/xstreamx/rctiplus.m3u8?ch=gtv",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "SCTV",
+      "group": "Indonesia Channels",
+      "line": 365,
+      "url": "http://tvratu.my.id/nissa/index.mpd?id=204&type=dash",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "SCTV",
+      "group": "Indonesia Channels",
+      "line": 369,
+      "url": "https://beetv.my.id/xstreamx/vd.m3u8?ch=sctv",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "Indosiar",
+      "group": "Indonesia Channels",
+      "line": 374,
+      "url": "http://tvratu.my.id/nissa/index.mpd?id=205&type=dash",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "Indosiar",
+      "group": "Indonesia Channels",
+      "line": 378,
+      "url": "https://beetv.my.id/xstreamx/vd.m3u8?ch=indosiar",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "TransTV HD",
+      "group": "Indonesia Channels",
+      "line": 386,
+      "url": "http://20.detik.com/watch/livestreaming-transtv",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "text/html"
+    },
+    {
+      "name": "Trans7 HD",
+      "group": "Indonesia Channels",
+      "line": 392,
+      "url": "http://20.detik.com/watch/livestreaming-trans7",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "text/html"
+    },
+    {
+      "name": "MDTV",
+      "group": "Indonesia Channels",
+      "line": 396,
+      "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h223/02.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "ANTV",
+      "group": "Indonesia Channels",
+      "line": 399,
+      "url": "https://beetv.my.id/xstreamx/vd.m3u8?ch=antv",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "ANTV (DensTV)",
+      "group": "Indonesia Channels",
+      "line": 403,
+      "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h07/index.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "iNews",
+      "group": "Indonesia Channels",
+      "line": 408,
+      "url": "https://beetv.my.id/xstreamx/rctiplus.m3u8?ch=inews",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "Kompas TV HD",
+      "group": "Indonesia Channels",
+      "line": 414,
+      "url": "https://op-flashcon-digdayahd-1.dens.tv/s/s104/index.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "Metro TV",
+      "group": "Indonesia Channels",
+      "line": 418,
+      "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h12/01.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "TVOne (DensTV)",
+      "group": "Indonesia Channels",
+      "line": 421,
+      "url": "https://op-group1-densxvisionhd-1.dens.tv/h/h40/01.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "SindoNews",
+      "group": "Indonesia Channels",
+      "line": 426,
+      "url": "https://cilok99.serv00.net/ythls/xxxx.py/play.m3u8?id=UCGfXjFgIUUTUUlzdG6BenXA",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "text/plain"
+    },
+    {
+      "name": "SIN PO TV",
+      "group": "Indonesia Channels",
+      "line": 431,
+      "url": "https://aspaltvpasti.top/Drmvidbos/Akun121/bosstv.m3u8?id=19046",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/x-mpegURL"
+    },
+    {
+      "name": "MOJI TV (Dens)",
+      "group": "Indonesia Channels",
+      "line": 438,
+      "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h207/index.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "MOJI TV (Video)",
+      "group": "Indonesia Channels",
+      "line": 444,
+      "url": "https://aspaltvpasti.top/Drmvidbos/Akun121/bosstv.m3u8?id=206",
+      "alive": false,
+      "status": "Timeout",
+      "reason": "Timeout (>8s)"
+    },
+    {
+      "name": "DAAI TV (Dens)",
+      "group": "Indonesia Channels",
+      "line": 451,
+      "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h16/01.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "RTV (Dens)",
+      "group": "Indonesia Channels",
+      "line": 455,
+      "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h10/index.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "Nusantara TV (ChannelFeed)",
+      "group": "Indonesia Channels",
+      "line": 463,
+      "url": "https://nusantaratv.siar.us/nusantaratv/live/playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "IDX (V+)",
+      "group": "Indonesia Channels",
+      "line": 472,
+      "url": "https://d2xx73ro32cip.cloudfront.net/out/v1/db34a1b61f414d2181c29f1892bc8d0b/index.mpd",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/dash+xml"
+    },
+    {
+      "name": "TVRI Nasional",
+      "group": "Indonesia Channels",
+      "line": 477,
+      "url": "https://ott-balancer.tvri.go.id/live/eds/Nasional/hls/Nasional-avc1_2500000=10002-mp4a_96000_eng=20000.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "TVRI World",
+      "group": "Indonesia Channels",
+      "line": 484,
+      "url": "https://raw.githubusercontent.com/Bluestraveller13/super-duper-spork/refs/heads/main/TVRIWorld.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "text/plain"
+    },
+    {
+      "name": "BTV",
+      "group": "Indonesia Channels",
+      "line": 487,
+      "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h313/stream.m3u8?app_type=web&userid=lite&chname=BTV",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "CNBC Indonesia",
+      "group": "Indonesia Channels",
+      "line": 492,
+      "url": "https://op-flashcon-digdayahd-1.dens.tv/h/h208/index.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "MAGNA Channel",
+      "group": "Indonesia Channels",
+      "line": 497,
+      "url": "https://edge.medcom.id/live-edge/smil:magna.smil/playlist.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "BN Channel (ChannelFeed)",
+      "group": "Indonesia Channels",
+      "line": 504,
+      "url": "https://cdn.nng.cloudns.us/live/m3u8/id/6183ec225226ccf.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "Indonesiana TV (ChannelFeed)",
+      "group": "Indonesia Channels",
+      "line": 511,
+      "url": "https://tvstreamcast.com/indonesiana.m3u8",
+      "alive": true,
+      "status": "HTTP 206",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "Garuda TV (ChannelFeed)",
+      "group": "Indonesia Channels",
+      "line": 518,
+      "url": "https://hgmtv.com:19360/garudatvlivestreaming/480p.m3u8",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/vnd.apple.mpegurl"
+    },
+    {
+      "name": "HBO",
+      "group": "HBO Group",
+      "line": 529,
+      "url": "http://tv.cloudcdn.me/live.ts?channelId=132161&uid=10223&deviceMac=00:1A:79:07:07:43",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "video/mp2t"
+    },
+    {
+      "name": "HBO Hits",
+      "group": "HBO Group",
+      "line": 536,
+      "url": "http://tv.cloudcdn.me/live.ts?channelId=132160&uid=10223&deviceMac=00:1A:79:07:07:43",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "video/mp2t"
+    },
+    {
+      "name": "HBO Family",
+      "group": "HBO Group",
+      "line": 545,
+      "url": "https://cdnjkt913.transvision.co.id:1000/live/master/4/4028c6856c3db2cc016d055927fe37a4/manifest.mpd",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/octet-stream"
+    },
+    {
+      "name": "HBO Signature",
+      "group": "HBO Group",
+      "line": 554,
+      "url": "https://cdnjkt913.transvision.co.id:1000/live/master/3/4028c6856c3db2cc016d0552e0ca37a2/manifest.mpd",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/octet-stream"
+    },
+    {
+      "name": "Cinemax",
+      "group": "HBO Group",
+      "line": 563,
+      "url": "https://cdnjkt913.transvision.co.id:1000/live/master/1/4028c6856c3db2cc016cdbfc4a1934bf/manifest.mpd",
+      "alive": true,
+      "status": "HTTP 200",
+      "reason": "application/octet-stream"
+    }
+  ]
+}
