@@ -136,10 +136,28 @@ function parseM3U(text) {
 
     // 4. Stream URL
     if (currentMeta && !line.startsWith('#')) {
-      const type = detectStreamType(line);
+      let finalUrl = line.trim();
+
+      // Unwrap direct streams from unnecessary proxies (fixes Vercel Mixed Content & slash collapses)
+      if (finalUrl.includes('/stream/https://')) {
+        finalUrl = finalUrl.substring(finalUrl.indexOf('/stream/https://') + '/stream/'.length);
+      } else if (finalUrl.includes('/stream/https:/')) {
+        finalUrl = 'https://' + finalUrl.substring(finalUrl.indexOf('/stream/https:/') + '/stream/https:/'.length);
+      } else if (finalUrl.includes('/mpd-proxy/https://')) {
+        if (window.location.hostname.includes('vercel.app')) {
+          finalUrl = finalUrl.substring(finalUrl.indexOf('/mpd-proxy/https://') + '/mpd-proxy/'.length);
+        }
+      }
+
+      // If page is on HTTPS, ensure proxy URLs use https:
+      if (window.location.protocol === 'https:' && finalUrl.startsWith('http://' + window.location.host)) {
+        finalUrl = finalUrl.replace('http://', 'https://');
+      }
+
+      const type = detectStreamType(finalUrl);
       const drmObj = parseDrmObj(pendingDrm);
       const stream = {
-        url: line,
+        url: finalUrl,
         type,
         drm: drmObj,
         headers: { ...pendingHdr }

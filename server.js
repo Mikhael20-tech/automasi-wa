@@ -106,7 +106,7 @@ function rewriteMpd(mpdText, mpdUrl, host) {
   return rewritten;
 }
 
-async function getLiveVisionPlusPlaylist(host) {
+async function getLiveVisionPlusPlaylist(host, proto = 'http') {
   const processed = ['#EXTM3U url-tvg="https://bit.ly/IndonesiaEpg"'];
 
   // 1. Add verified 100% active DRM Channels (MPEG-DASH with ClearKey Decryption)
@@ -123,7 +123,7 @@ async function getLiveVisionPlusPlaylist(host) {
         processed.push(`#KODIPROP:inputstream.adaptive.license_key=${ch.key}`);
         processed.push(`#EXTINF:-1 tvg-id="${ch.name}" tvg-logo="${ch.logo}" group-title="${ch.group || 'Sports & Racing (DRM)'}",${ch.name}`);
         if (ch.needsProxy) {
-          processed.push(`http://${host}/mpd-proxy/${ch.url}`);
+          processed.push(`${proto}://${host}/mpd-proxy/${ch.url}`);
         } else {
           processed.push(ch.url);
         }
@@ -144,7 +144,12 @@ async function getLiveVisionPlusPlaylist(host) {
       const webChannels = JSON.parse(fs.readFileSync(workingJsonPath, 'utf8'));
       for (const ch of webChannels) {
         processed.push(`#EXTINF:-1 tvg-id="${ch.name}" tvg-logo="${ch.logo}" group-title="${ch.group || 'TV Nasional (Bebas DRM)'}",${ch.name}`);
-        processed.push(`http://${host}/stream/${ch.url}`);
+        // If the stream is already HTTPS or doesn't need proxy, serve directly!
+        if (ch.url.startsWith('https://') || !ch.needsProxy) {
+          processed.push(ch.url);
+        } else {
+          processed.push(`${proto}://${host}/stream/${ch.url}`);
+        }
       }
     }
   } catch (e) {
@@ -157,6 +162,7 @@ async function getLiveVisionPlusPlaylist(host) {
 
 const server = http.createServer(async (req, res) => {
   const host = req.headers.host || `localhost:${PORT}`;
+  const proto = req.headers['x-forwarded-proto'] || (req.connection && req.connection.encrypted ? 'https' : 'http');
 
   // CORS Preflight
   if (req.method === 'OPTIONS') {
@@ -175,7 +181,7 @@ const server = http.createServer(async (req, res) => {
   // 1. VisionPlus Live Playlist: /api/visionplus.m3u or /tv/api/visionplus.m3u
   if (rawUrl.startsWith('/api/visionplus.m3u') || rawUrl.startsWith('/tv/api/visionplus.m3u')) {
     try {
-      const playlist = await getLiveVisionPlusPlaylist(host);
+      const playlist = await getLiveVisionPlusPlaylist(host, proto);
       res.writeHead(200, {
         'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
         'Access-Control-Allow-Origin': '*',
@@ -237,8 +243,13 @@ const server = http.createServer(async (req, res) => {
 
   // 3. Stream Proxy: /stream/https://... or /tv/stream/https://...
   if (rawUrl.startsWith('/stream/') || rawUrl.startsWith('/tv/stream/')) {
-    const prefix = rawUrl.startsWith('/tv/stream/') ? '/tv/stream/' : '/stream/';
-    const targetUrl = rawUrl.substring(prefix.length);
+    let targetUrl = rawUrl.substring(prefix.length);
+    // Fix collapsed slashes from reverse proxies like Vercel (https:/ to https://)
+    if (targetUrl.startsWith('https:/') && !targetUrl.startsWith('https://')) {
+      targetUrl = 'https://' + targetUrl.substring(7);
+    } else if (targetUrl.startsWith('http:/') && !targetUrl.startsWith('http://')) {
+      targetUrl = 'http://' + targetUrl.substring(6);
+    }
     if (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://')) {
       res.writeHead(400, { 'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*' });
       res.end('Invalid stream URL: ' + targetUrl);
