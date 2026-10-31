@@ -156,6 +156,28 @@ async function getLiveVisionPlusPlaylist(host, proto = 'http') {
     console.warn('[Playlist] Error loading working_web_channels:', e.message);
   }
 
+  // 3. Add verified 100% active Korean TV Channels
+  try {
+    const koreanJsonPath = [
+      path.join(TV_DIR, 'working_korean_channels.json'),
+      path.join(ROOT_DIR, 'working_korean_channels.json')
+    ].find(p => fs.existsSync(p));
+
+    if (koreanJsonPath) {
+      const koreanChannels = JSON.parse(fs.readFileSync(koreanJsonPath, 'utf8'));
+      for (const ch of koreanChannels) {
+        processed.push(`#EXTINF:-1 tvg-id="${ch.name}" tvg-logo="${ch.logo}" group-title="Korean TV",${ch.name}`);
+        if (ch.url.startsWith('https://') || !ch.needsProxy) {
+          processed.push(ch.url);
+        } else {
+          processed.push(`${proto}://${host}/stream/${ch.url}`);
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('[Playlist] Error loading working_korean_channels:', e.message);
+  }
+
   cachedPlaylist = processed.join('\n');
   return cachedPlaylist;
 }
