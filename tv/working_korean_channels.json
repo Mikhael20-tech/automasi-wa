@@ -12,46 +12,10 @@
     "url": "https://backup.760515.xyz/playlist/KBS2-playlist.m3u8"
   },
   {
-    "name": "MBC",
-    "logo": "https://backup.760515.xyz/logo/MBC.png",
-    "group": "Korean TV",
-    "url": "https://backup.760515.xyz/playlist/MBC-playlist.m3u8"
-  },
-  {
-    "name": "SBS",
-    "logo": "https://i.imgur.com/4LHX71N.png",
-    "group": "Korean TV",
-    "url": "https://allanf181.github.io/adaptive-streams/streams/kr/SBSTV.m3u8"
-  },
-  {
     "name": "EBS 1TV",
     "logo": "https://i.imgur.com/jX26YYt.png",
     "group": "Korean TV",
     "url": "https://backup.760515.xyz/playlist/EBS1-playlist.m3u8"
-  },
-  {
-    "name": "KBS Drama",
-    "logo": "https://pjytv.760515.xyz/logo/KBS%20Drama.png",
-    "group": "Korean TV",
-    "url": "http://koreatv.dothome.co.kr/kbsdrama.php"
-  },
-  {
-    "name": "KBS Joy",
-    "logo": "https://pjytv.760515.xyz/logo/KBS%20Joy.png",
-    "group": "Korean TV",
-    "url": "http://koreatv.dothome.co.kr/kbsjoy.php"
-  },
-  {
-    "name": "KBS Life",
-    "logo": "https://i.imgur.com/ZIIb0kU.png",
-    "group": "Korean TV",
-    "url": "http://koreatv.dothome.co.kr/kbslife.php"
-  },
-  {
-    "name": "KBS Story",
-    "logo": "https://pjytv.760515.xyz/logo/KBS%20Story.png",
-    "group": "Korean TV",
-    "url": "http://koreatv.dothome.co.kr/kbsstory.php"
   },
   {
     "name": "KBS 24",
@@ -114,12 +78,6 @@
     "url": "https://backup.760515.xyz/playlist/Mnet-playlist.m3u8"
   },
   {
-    "name": "JTBC",
-    "logo": "https://i.imgur.com/fCruRmS.png",
-    "group": "Korean TV",
-    "url": "https://backup.760515.xyz/playlist/JTBC-playlist.m3u8"
-  },
-  {
     "name": "JTBC2",
     "logo": "https://i.imgur.com/kljWkXS.png",
     "group": "Korean TV",
@@ -156,18 +114,6 @@
     "url": "https://ads.its-newid.net/api/manifest.m3u8?tp=samsung_tvplus&channel_name=%ED%9E%99%EC%9C%BC%EB%9C%B8&channel_id=newid_067&apikey=b97c7a7d0c82424bb607e141ef215779&auth=e32513b0-2b41a042-5975596d-f1f2ba74&ads.live=%5BCONTENT_LIVE%5D&ads.device_did=%7BPSID%7D&ads.ifa=%5BIFA%5D&ads.ifatype=%5BIFA_TYPE%5D&ads.lat=%5BLMT%5D&ads.donotsell=%5BDNS%5D&ads.ip=%5BIP%5D&ads.gdpr=%5BGDPR%5D&ads.gdprconsent=%5BGDPR_CONSENT%5D&ads.country=%5BCOUNTRY%5D&ads.us_privacy=%7BUS_PRIVACY%7D&ads.appstoreurl=%5BAPP_STOREURL%5D&ads.bundleid=%5BAPP_BUNDLE%5D&ads.app.name=%7BAPP_NAME%7D&ads.appversion=%5BAPP_VERSION%5D&ads.devicetype=%5BDEVICE_TYPE%5D&ads.devicemake=%5BDEVICE_MAKE%5D&ads.devicemodel=%5BDEVICE_MODEL%5D&ads.targetad=%5BTARGETAD_ALLOWED%5D&ads.content_title=%5BPROGRAM_TITLE%5D&ads.content_series=%5BSERIES_TITLE%5D&ads.content_season=%5BSEASON_TITLE%5D&ads.content_episode=%5BEPISODE_NO%5D&ads.content_length=%5BCONTENT_LENGTH%5D&ads.device.dnt=%7BTARGETOPT%7D&ads.app_domain=%7BAPP_DOMAIN%7D&nh=true&ads.device_did=%7BPSID%7D&ads.device_dnt=%7BTARGETOPT%7D&ads.app_domain=%7BAPP_DOMAIN%7D&ads.app_name=%7BAPP_NAME%7D&ads.ssai_vendor=SSSLIVE&ads.afsdk_params=%7BAFSDK_VALUE%7D&ads.service_id=KR260000274"
   },
   {
-    "name": "Pluto TV Yoga",
-    "logo": "https://i.imgur.com/G18Sv08.png",
-    "group": "Korean TV",
-    "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5d8bcf50672e87000965e6eb/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=DNT&architecture=&buildVersion=&clientDeviceType=0&deviceDNT=0&deviceId=web&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=DNT&includeExtendedEvents=false&serverSideAds=false&sid=123"
-  },
-  {
-    "name": "Pluto TV Fitness",
-    "logo": "https://i.imgur.com/3Hs6kO8.png",
-    "group": "Korean TV",
-    "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5d8bcf15672e87000965e6ea/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=DNT&architecture=&buildVersion=&clientDeviceType=0&deviceDNT=0&deviceId=web&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=DNT&includeExtendedEvents=false&serverSideAds=false&sid=123"
-  },
-  {
     "name": "CTS 기독교",
     "logo": "https://i.imgur.com/z3L8uNB.png",
     "group": "Korean TV",
@@ -184,18 +130,6 @@
     "logo": "https://i.imgur.com/g6Nhwmb.png",
     "group": "Korean TV",
     "url": "https://backup.760515.xyz/playlist/YTN2-playlist.m3u8"
-  },
-  {
-    "name": "YTN Science",
-    "logo": "https://pjytv.760515.xyz/logo/YTN%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4.png",
-    "group": "Korean TV",
-    "url": "https://backup.760515.xyz/playlist/YTN사이언스-playlist.m3u8"
-  },
-  {
-    "name": "Yonhap News TV",
-    "logo": "https://pjytv.760515.xyz/logo/연합뉴스TV.png",
-    "group": "Korean TV",
-    "url": "https://backup.760515.xyz/playlist/연합뉴스TV-playlist.m3u8"
   },
   {
     "name": "Channel A",
@@ -220,12 +154,6 @@
     "logo": "https://pjytv.760515.xyz/logo/TV%20CHOSUN%202.png",
     "group": "Korean TV",
     "url": "https://backup.760515.xyz/playlist/TV CHOSUN 2-playlist.m3u8"
-  },
-  {
-    "name": "MBN",
-    "logo": "https://pjytv.760515.xyz/logo/MBN.png",
-    "group": "Korean TV",
-    "url": "https://backup.760515.xyz/playlist/MBN-playlist.m3u8"
   },
   {
     "name": "MBN Plus",
@@ -268,30 +196,6 @@
     "logo": "https://pjytv.760515.xyz/logo/투니버스.png",
     "group": "Korean TV",
     "url": "https://backup.760515.xyz/playlist/투니버스-playlist.m3u8"
-  },
-  {
-    "name": "SBS G1",
-    "logo": "https://i.imgur.com/4LHX71N.png",
-    "group": "Korean TV",
-    "url": "http://61.82.49.4:1935/live/_definst_/tv.stream/chunklist_w432889607.m3u8"
-  },
-  {
-    "name": "CJB",
-    "logo": "https://i.imgur.com/4LHX71N.png",
-    "group": "Korean TV",
-    "url": "https://wowza1.cjb.co.kr/live/cjbtv/playlist.m3u8"
-  },
-  {
-    "name": "JIBS",
-    "logo": "https://i.imgur.com/4LHX71N.png",
-    "group": "Korean TV",
-    "url": "http://123.140.197.22/stream/1/play.m3u8"
-  },
-  {
-    "name": "SBS JTV",
-    "logo": "https://i.imgur.com/4LHX71N.png",
-    "group": "Korean TV",
-    "url": "http://61.85.197.53:1935/jtv_live/myStream/playlist.m3u8"
   },
   {
     "name": "SBS TJB",
