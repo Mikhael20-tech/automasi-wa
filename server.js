@@ -57,6 +57,114 @@ const MIME_TYPES = {
 let cachedPlaylist = null;
 let lastPlaylistFetch = 0;
 
+// ============================================================
+// Vidio Live Auto-Refresh Token Scraper & HLS/DASH Rewriter
+// ============================================================
+const vidioTokenCache = {};
+
+async function getVidioStream(channelId) {
+  const now = Date.now();
+  if (vidioTokenCache[channelId] && vidioTokenCache[channelId].expiresAt > now) {
+    return vidioTokenCache[channelId];
+  }
+
+  console.log(`[Vidio Scraper] Refreshing token for channel ${channelId}...`);
+
+  const cookie = 'ahoy_visitor=45d2c1a3-9a34-4c1f-9ef1-147139cd2b5a; country_id=ID; _vidio=true; x_user_token=prNQvxNZ3onTPjBTM3sU; access_token=eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7InR5cGUiOiJhY2Nlc3NfdG9rZW4iLCJ1aWQiOjc4OTQzMTA3fSwiZXhwIjoxNzkzNzA1MjM1fQ.3i72uOcqRosBX1_nsopzwUAmaRsImDWUJEW3DoAJ8j8;';
+  const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36';
+
+  // 1. Fetch channel page to obtain latest streamSignature (clientId & signature)
+  let clientId = '';
+  let signature = '';
+  try {
+    const pageRes = await fetch(`https://www.vidio.com/live/${channelId}`, {
+      headers: {
+        'User-Agent': userAgent,
+        'Referer': 'https://www.vidio.com/',
+        'Cookie': cookie
+      }
+    });
+    if (pageRes.ok) {
+      const html = await pageRes.text();
+      const matchClient = html.match(/clientId[\\"]+:\s*[\\"]+([0-9.]+)/);
+      const matchSig = html.match(/signature[\\"]+:\s*[\\"]+([a-f0-9]{32,64})/);
+      if (matchClient) clientId = matchClient[1];
+      if (matchSig) signature = matchSig[1];
+    }
+  } catch (err) {
+    console.warn(`[Vidio Scraper] Page fetch warning for ${channelId}:`, err.message);
+  }
+
+  // 2. Call Vidio Stream API
+  const apiHeaders = {
+    'Origin': 'https://www.vidio.com',
+    'Referer': 'https://www.vidio.com/',
+    'User-Agent': userAgent,
+    'X-Api-Key': 'CH1ZFsN4N/MIfAds1DL9mP151CNqIpWHqZGRr+LkvUyiq3FRPuP1Kt6aK+pG3nEC1FXt0ZAAJ5FKP8QU8CZ5/liRgivOu0XPxx95b+n9Ep50u+1xM8A+e8Aqqr0ELvoLqbPbciOC95byhupdN9IjfKcQl/qXFNXJnLsvn5L5hM8=',
+    'X-API-Platform': 'web-desktop',
+    'X-Secure-Level': '2',
+    'X-User-Email': 'mikhaelyuli13@gmail.com',
+    'X-User-Id': '78943107',
+    'Cookie': cookie
+  };
+
+  if (clientId) apiHeaders['X-Client'] = clientId;
+  if (signature) apiHeaders['X-Signature'] = signature;
+
+  const apiRes = await fetch(`https://api.vidio.com/livestreamings/${channelId}/stream?initialize=true`, {
+    headers: apiHeaders
+  });
+
+  if (!apiRes.ok) {
+    throw new Error(`Vidio API error: ${apiRes.status} ${apiRes.statusText}`);
+  }
+
+  const json = await apiRes.json();
+  const attrs = json.data?.attributes;
+  if (!attrs || (!attrs.hls && !attrs.dash)) {
+    throw new Error('Vidio API did not return stream URLs');
+  }
+
+  const expiresIn = attrs.expires_in || 7200;
+  vidioTokenCache[channelId] = {
+    hls: attrs.hls,
+    dash: attrs.dash,
+    expiresAt: now + ((expiresIn - 300) * 1000) // Buffer 5 menit sebelum expire
+  };
+
+  console.log(`[Vidio Scraper] Token refreshed for channel ${channelId}. Valid for ${expiresIn}s.`);
+  return vidioTokenCache[channelId];
+}
+
+function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
+  const origin = new URL(manifestUrl).origin;
+  const baseDir = manifestUrl.substring(0, manifestUrl.lastIndexOf('/') + 1);
+  const lines = content.split('\n');
+  const rewritten = lines.map(line => {
+    const trimmed = line.trim();
+    if (!trimmed) return line;
+    // Map tag like #EXT-X-MAP:URI="..."
+    if (trimmed.startsWith('#EXT-X-MAP') && trimmed.includes('URI="')) {
+      return trimmed.replace(/URI="([^"]+)"/, (m, uri) => {
+        const abs = uri.startsWith('http') ? uri : (uri.startsWith('/') ? origin + uri : baseDir + uri);
+        return `URI="${proto}://${host}/stream/${abs}"`;
+      });
+    }
+    // Media tag like #EXT-X-MEDIA:... URI="..."
+    if (trimmed.startsWith('#EXT-X-MEDIA') && trimmed.includes('URI="')) {
+      return trimmed.replace(/URI="([^"]+)"/, (m, uri) => {
+        const abs = uri.startsWith('http') ? uri : (uri.startsWith('/') ? origin + uri : baseDir + uri);
+        return `URI="${proto}://${host}/stream/${abs}"`;
+      });
+    }
+    if (trimmed.startsWith('#')) return line;
+    // Segment or sub-playlist URL
+    const abs = trimmed.startsWith('http') ? trimmed : (trimmed.startsWith('/') ? origin + trimmed : baseDir + trimmed);
+    return `${proto}://${host}/stream/${abs}`;
+  });
+  return rewritten.join('\n');
+}
+
 /**
  * Rewrite a DASH MPD manifest:
  * 1. Convert all relative segment/init URLs to absolute URLs using the MPD's base URL
@@ -200,6 +308,66 @@ const server = http.createServer(async (req, res) => {
 
   const rawUrl = req.url;
 
+  // 0. Vidio Auto-Refresh Stream Endpoint:
+  //    /vidio/:channelId.m3u8 (HLS) or /vidio/:channelId.mpd (DASH)
+  //    Also supports /live/vidio/:channelId... or /tv/vidio/:channelId...
+  const vidioMatch = rawUrl.match(/^\/(?:tv\/|live\/)?vidio\/([a-zA-Z0-9_\-]+)(?:\.(m3u8|mpd))?/);
+  if (vidioMatch) {
+    const channelId = vidioMatch[1];
+    const format = vidioMatch[2] || 'm3u8';
+    try {
+      const streamData = await getVidioStream(channelId);
+      if (format === 'mpd' && streamData.dash) {
+        const targetUrl = streamData.dash;
+        const fetchHeaders = {
+          'Origin': 'https://www.vidio.com',
+          'Referer': 'https://www.vidio.com/',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36'
+        };
+        const remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+        const mpdText = await remoteRes.text();
+        const rewritten = rewriteMpd(mpdText, targetUrl, host);
+        res.writeHead(200, {
+          'Content-Type': 'application/dash+xml; charset=utf-8',
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-cache, no-store'
+        });
+        res.end(rewritten);
+        return;
+      }
+
+      // Default HLS (m3u8)
+      if (streamData.hls) {
+        const targetUrl = streamData.hls;
+        const fetchHeaders = {
+          'Origin': 'https://www.vidio.com',
+          'Referer': 'https://www.vidio.com/',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36'
+        };
+        const remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+        const m3u8Text = await remoteRes.text();
+        const rewritten = rewriteM3u8(m3u8Text, targetUrl, host, proto);
+        res.writeHead(200, {
+          'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-cache, no-store'
+        });
+        res.end(rewritten);
+        return;
+      }
+
+      res.writeHead(404, { 'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*' });
+      res.end(`Channel ${channelId} has no available stream`);
+    } catch (err) {
+      console.error(`[Vidio Stream Error for ${channelId}]:`, err.message);
+      if (!res.headersSent) {
+        res.writeHead(502, { 'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*' });
+        res.end('Vidio Error: ' + err.message);
+      }
+    }
+    return;
+  }
+
   // 1. VisionPlus Live Playlist: /api/visionplus.m3u or /tv/api/visionplus.m3u
   if (rawUrl.startsWith('/api/visionplus.m3u') || rawUrl.startsWith('/tv/api/visionplus.m3u')) {
     try {
@@ -231,10 +399,11 @@ const server = http.createServer(async (req, res) => {
 
     try {
       console.log('[MPD Proxy] Fetching & rewriting:', targetUrl);
+      const isVidio = targetUrl.includes('vidio.com') || targetUrl.includes('akamaized.net');
       const fetchHeaders = {
-        'Origin': 'https://www.visionplus.id',
-        'Referer': 'https://www.visionplus.id/',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36'
+        'Origin': isVidio ? 'https://www.vidio.com' : 'https://www.visionplus.id',
+        'Referer': isVidio ? 'https://www.vidio.com/' : 'https://www.visionplus.id/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36'
       };
 
       const remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
@@ -265,7 +434,8 @@ const server = http.createServer(async (req, res) => {
 
   // 3. Stream Proxy: /stream/https://... or /tv/stream/https://...
   if (rawUrl.startsWith('/stream/') || rawUrl.startsWith('/tv/stream/')) {
-    let targetUrl = rawUrl.substring(prefix.length);
+    const streamPrefix = rawUrl.startsWith('/tv/stream/') ? '/tv/stream/' : '/stream/';
+    let targetUrl = rawUrl.substring(streamPrefix.length);
     // Fix collapsed slashes from reverse proxies like Vercel (https:/ to https://)
     if (targetUrl.startsWith('https:/') && !targetUrl.startsWith('https://')) {
       targetUrl = 'https://' + targetUrl.substring(7);
@@ -279,10 +449,13 @@ const server = http.createServer(async (req, res) => {
     }
 
     try {
+      const isVidio = targetUrl.includes('vidio.com') || targetUrl.includes('akamaized.net');
       const fetchHeaders = {
-        'Origin': 'https://www.visionplus.id',
-        'Referer': 'https://www.visionplus.id/',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36'
+        'Origin': isVidio ? 'https://www.vidio.com' : 'https://www.visionplus.id',
+        'Referer': isVidio ? 'https://www.vidio.com/' : 'https://www.visionplus.id/',
+        'User-Agent': isVidio
+          ? 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36'
+          : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36'
       };
 
       if (req.headers['range']) {
@@ -300,6 +473,17 @@ const server = http.createServer(async (req, res) => {
         'Access-Control-Allow-Headers': '*',
         'Content-Type': remoteRes.headers.get('content-type') || 'application/octet-stream'
       };
+
+      // If it is an M3U8 sub-playlist, rewrite its segment URLs so they also pass through proxy!
+      const isM3u8Path = new URL(targetUrl).pathname.endsWith('.m3u8');
+      if (isM3u8Path || (remoteRes.headers.get('content-type') || '').includes('mpegurl')) {
+        const m3u8Text = await remoteRes.text();
+        const rewritten = rewriteM3u8(m3u8Text, targetUrl, host, proto);
+        responseHeaders['Content-Type'] = 'application/vnd.apple.mpegurl; charset=utf-8';
+        res.writeHead(remoteRes.status, responseHeaders);
+        res.end(rewritten);
+        return;
+      }
 
       if (remoteRes.headers.has('content-length')) {
         responseHeaders['Content-Length'] = remoteRes.headers.get('content-length');

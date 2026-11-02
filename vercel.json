@@ -1,11 +1,22 @@
 {
   "version": 2,
-  "name": "automasi-wa",
   "cleanUrls": true,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/vidio/:path*",
+      "destination": "http://72.60.79.72:8765/vidio/:path*"
+    },
+    {
+      "source": "/stream/:path*",
+      "destination": "http://72.60.79.72:8765/stream/:path*"
+    },
+    {
+      "source": "/tv",
+      "destination": "/tv/index.html"
+    },
+    {
+      "source": "/",
+      "destination": "/tv/index.html"
     }
   ]
 }

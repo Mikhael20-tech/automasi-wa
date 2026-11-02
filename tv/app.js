@@ -149,6 +149,14 @@ function parseM3U(text) {
         }
       }
 
+      // Auto rewrite VPS HTTP URLs to HTTPS via Vercel proxy rewrite
+      if (window.location.protocol === 'https:' && finalUrl.includes('72.60.79.72:8765')) {
+        finalUrl = finalUrl.replace(/https?:\/\/72\.60\.79\.72:8765/, window.location.origin);
+      }
+      if (pendingDrm && pendingDrm.key && pendingDrm.key.includes('72.60.79.72:8765')) {
+        pendingDrm.key = pendingDrm.key.replace(/https?:\/\/72\.60\.79\.72:8765/, window.location.origin);
+      }
+
       // If page is on HTTPS, ensure proxy URLs use https:
       if (window.location.protocol === 'https:' && finalUrl.startsWith('http://' + window.location.host)) {
         finalUrl = finalUrl.replace('http://', 'https://');
@@ -253,10 +261,12 @@ function parseDrmObj(raw) {
 // ============================================================
 async function loadPlaylist() {
   const urls = [
-    '/api/visionplus.m3u',
-    'http://localhost:8765/api/visionplus.m3u',
-    '../visionplus.m3u',
-    '../indonesia_channels.m3u'
+    '/playlist.m3u',
+    '../playlist.m3u',
+    'playlist.m3u',
+    'https://gist.githubusercontent.com/Mikhael20-tech/28af0cc656510032cdab4f311c0af4f4/raw/iptv.m3u',
+    '/akmatv.m3u',
+    '../akmatv.m3u'
   ];
 
   let text = null;
