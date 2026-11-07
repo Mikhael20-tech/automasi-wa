@@ -7,24 +7,185 @@ cd /root/vidio-proxy
 cat << 'EOF' > /root/vidio-proxy/server.js
 const http = require('http');
 const { URL } = require('url');
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
 
 const PORT = 8765;
 const vidioTokenCache = {};
+const recentLogs = [];
+
+let vidioSession = {
+  encryptedApiKey: '',
+  cookieHeader: '',
+  expiresAt: 0
+};
+
+let liga1Cache = {
+  data: null,
+  cachedAt: 0
+};
+
+function addLog(msg) {
+  const line = `[${new Date().toISOString()}] ${msg}`;
+  console.log(line);
+  recentLogs.push(line);
+  if (recentLogs.length > 200) recentLogs.shift();
+}
+
+async function getOrRefreshVidioSession() {
+  const now = Date.now();
+  if (vidioSession.encryptedApiKey && vidioSession.expiresAt > now + 300000) {
+    return vidioSession;
+  }
+
+  addLog('[Auth] Refreshing Vidio API Key & Session from /auth...');
+  const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+
+  const authRes = await fetch('https://api.vidio.com/auth', {
+    method: 'POST',
+    headers: {
+      'Origin': 'https://www.vidio.com',
+      'Referer': 'https://www.vidio.com/',
+      'User-Agent': userAgent
+    }
+  });
+
+  if (!authRes.ok) {
+    throw new Error(`Failed to fetch /auth: ${authRes.status}`);
+  }
+
+  const authData = await authRes.json();
+  if (!authData.api_key) {
+    throw new Error('No api_key in /auth response');
+  }
+
+  const setCookies = authRes.headers.getSetCookie ? authRes.headers.getSetCookie() : [authRes.headers.get('set-cookie')];
+  let cookieHeader = setCookies.filter(Boolean).map(c => c.split(';')[0]).join('; ');
+
+  // Include local account_cookie.txt if present for DRM/account-locked channels
+  const cookieFile = path.join(__dirname, 'account_cookie.txt');
+  if (fs.existsSync(cookieFile)) {
+    try {
+      const extra = fs.readFileSync(cookieFile, 'utf8').trim();
+      if (extra) cookieHeader = cookieHeader ? `${cookieHeader}; ${extra}` : extra;
+    } catch (e) {}
+  }
+
+  const key = 'dPr0QImQ7bc5o9LMntNba2DOsSbZcjUh';
+  const iv = 'C8RWsrtFsoeyCyPt';
+  const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+  const encryptedKey = cipher.update(authData.api_key, 'utf-8', 'base64') + cipher.final('base64');
+
+  let expiresAt = now + 86400000;
+  if (authData.api_key_expires_at) {
+    expiresAt = new Date(authData.api_key_expires_at).getTime();
+  }
+
+  vidioSession = {
+    encryptedApiKey: encryptedKey,
+    cookieHeader: cookieHeader || 'country_id=ID;',
+    expiresAt: expiresAt
+  };
+
+  addLog(`[Auth] Obtained new API key, valid until ${new Date(expiresAt).toISOString()}`);
+  return vidioSession;
+}
+
+// Auto-detect currently ongoing BRI Liga 1 match
+async function getActiveLiga1Match() {
+  const now = Date.now();
+  if (liga1Cache.data && (now - liga1Cache.cachedAt < 60000)) {
+    return liga1Cache.data;
+  }
+
+  try {
+    const session = await getOrRefreshVidioSession();
+    const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+
+    const res = await fetch('https://api.vidio.com/search?q=BRI+Liga+1', {
+      headers: {
+        'Origin': 'https://www.vidio.com',
+        'Referer': 'https://www.vidio.com/',
+        'User-Agent': userAgent,
+        'X-Api-Key': session.encryptedApiKey,
+        'X-API-Platform': 'web-desktop',
+        'X-Secure-Level': '2',
+        'Cookie': session.cookieHeader
+      }
+    });
+
+    if (res.ok) {
+      const json = await res.json();
+      const schedules = (json.included || []).filter(item => 
+        item.attributes?.content_type === 'livestreaming_schedule' ||
+        item.id?.includes('livestreaming_schedule')
+      );
+
+      for (const s of schedules) {
+        const attrs = s.attributes || {};
+        const startTime = new Date(attrs.start_time).getTime();
+        const endTime = new Date(attrs.end_time).getTime();
+
+        // Active if now is within 15 minutes before start until end
+        if (now >= (startTime - 15 * 60 * 1000) && now <= endTime) {
+          const matchId = String(attrs.livestreaming_id || '');
+          if (matchId && matchId !== '205') {
+            liga1Cache = {
+              data: {
+                id: matchId,
+                title: attrs.title || 'BRI Super League',
+                startTime,
+                endTime
+              },
+              cachedAt: now
+            };
+            addLog(`[Liga1 Scraper] Active match found: ${attrs.title} (Livestream ID: ${matchId})`);
+            return liga1Cache.data;
+          }
+        }
+      }
+    }
+  } catch (err) {
+    addLog(`[Liga1 Scraper] Error searching match: ${err.message}`);
+  }
+
+  liga1Cache = { data: null, cachedAt: now };
+  return null;
+}
 
 async function getVidioStream(channelId) {
+  // Resolve alias
+  if (channelId === 'liga1' || channelId === 'bola' || channelId === 'indosiar-auto') {
+    const activeMatch = await getActiveLiga1Match();
+    if (activeMatch) {
+      try {
+        return await getVidioStream(activeMatch.id);
+      } catch (err) {
+        addLog(`[Stream] Failed to get match stream ${activeMatch.id}: ${err.message}. Falling back to 205.`);
+      }
+    }
+    // Fallback to Indosiar regular
+    return await getVidioStream('205');
+  }
+
   const now = Date.now();
   if (vidioTokenCache[channelId] && vidioTokenCache[channelId].expiresAt > now) {
     return vidioTokenCache[channelId];
   }
 
-  const cookie = 'ahoy_visitor=45d2c1a3-9a34-4c1f-9ef1-147139cd2b5a; country_id=ID; _vidio=true; x_user_token=prNQvxNZ3onTPjBTM3sU; access_token=eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7InR5cGUiOiJhY2Nlc3NfdG9rZW4iLCJ1aWQiOjc4OTQzMTA3fSwiZXhwIjoxNzkzNzA1MjM1fQ.3i72uOcqRosBX1_nsopzwUAmaRsImDWUJEW3DoAJ8j8;';
-  const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36';
+  const session = await getOrRefreshVidioSession();
+  const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
 
   let clientId = '';
   let signature = '';
   try {
     const pageRes = await fetch(`https://www.vidio.com/live/${channelId}`, {
-      headers: { 'User-Agent': userAgent, 'Referer': 'https://www.vidio.com/', 'Cookie': cookie }
+      headers: {
+        'User-Agent': userAgent,
+        'Referer': 'https://www.vidio.com/',
+        'Cookie': session.cookieHeader
+      }
     });
     if (pageRes.ok) {
       const html = await pageRes.text();
@@ -33,18 +194,18 @@ async function getVidioStream(channelId) {
       if (matchClient) clientId = matchClient[1];
       if (matchSig) signature = matchSig[1];
     }
-  } catch (err) {}
+  } catch (err) {
+    addLog(`[Stream] Warning fetching live page for ${channelId}: ${err.message}`);
+  }
 
   const apiHeaders = {
     'Origin': 'https://www.vidio.com',
-    'Referer': 'https://www.vidio.com/',
+    'Referer': `https://www.vidio.com/live/${channelId}`,
     'User-Agent': userAgent,
-    'X-Api-Key': 'CH1ZFsN4N/MIfAds1DL9mP151CNqIpWHqZGRr+LkvUyiq3FRPuP1Kt6aK+pG3nEC1FXt0ZAAJ5FKP8QU8CZ5/liRgivOu0XPxx95b+n9Ep50u+1xM8A+e8Aqqr0ELvoLqbPbciOC95byhupdN9IjfKcQl/qXFNXJnLsvn5L5hM8=',
+    'X-Api-Key': session.encryptedApiKey,
     'X-API-Platform': 'web-desktop',
     'X-Secure-Level': '2',
-    'X-User-Email': 'mikhaelyuli13@gmail.com',
-    'X-User-Id': '78943107',
-    'Cookie': cookie
+    'Cookie': session.cookieHeader
   };
 
   if (clientId) apiHeaders['X-Client'] = clientId;
@@ -54,16 +215,37 @@ async function getVidioStream(channelId) {
     headers: apiHeaders
   });
 
-  if (!apiRes.ok) throw new Error(`Vidio API error: ${apiRes.status}`);
+  if (!apiRes.ok) {
+    const errText = await apiRes.text().catch(() => '');
+    if (errText.includes('invalid_api_key') || errText.includes('Unauthorized application')) {
+      vidioSession.expiresAt = 0;
+    }
+    if (errText.includes('not_yet_started')) {
+      addLog(`[Stream] Event ${channelId} not yet started. Falling back to Indosiar 205.`);
+      if (channelId !== '205') return await getVidioStream('205');
+    }
+    throw new Error(`Vidio API error (${channelId}): ${apiRes.status} ${errText}`);
+  }
 
   const json = await apiRes.json();
   const attrs = json.data?.attributes;
-  if (!attrs || !attrs.hls) throw new Error('No stream URLs');
+  if (!attrs || (!attrs.hls && !attrs.dash)) throw new Error('No stream URLs');
 
-  const expiresIn = attrs.expires_in || 7200;
+  let hlsUrl = attrs.hls || '';
+  if (hlsUrl.startsWith('http://')) hlsUrl = 'https://' + hlsUrl.substring(7);
+
+  let dashUrl = attrs.dash || '';
+  if (dashUrl.startsWith('http://')) dashUrl = 'https://' + dashUrl.substring(7);
+
+  const expMatch = (hlsUrl || dashUrl).match(/exp=(\d+)/);
+  const expiresAt = expMatch ? (parseInt(expMatch[1]) * 1000 - 30000) : (now + 180000);
+
   vidioTokenCache[channelId] = {
-    hls: attrs.hls,
-    expiresAt: now + ((expiresIn - 300) * 1000)
+    hls: hlsUrl,
+    dash: dashUrl,
+    custom_data: attrs.custom_data || {},
+    license_servers: attrs.license_servers || {},
+    expiresAt: expiresAt
   };
   return vidioTokenCache[channelId];
 }
@@ -71,30 +253,53 @@ async function getVidioStream(channelId) {
 function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
   const origin = new URL(manifestUrl).origin;
   const baseDir = manifestUrl.substring(0, manifestUrl.lastIndexOf('/') + 1);
-  return content.split('\n').map(line => {
-    const trimmed = line.trim();
-    if (!trimmed) return line;
-    if (trimmed.startsWith('#EXT-X-MAP') && trimmed.includes('URI="')) {
-      return trimmed.replace(/URI="([^"]+)"/, (m, uri) => {
-        const abs = uri.startsWith('http') ? uri : (uri.startsWith('/') ? origin + uri : baseDir + uri);
+  const rawLines = content.split('\n');
+  const lines = [];
+
+  const hasH264 = content.includes('CODECS="avc1');
+  let skipNext = false;
+
+  for (let i = 0; i < rawLines.length; i++) {
+    let l = rawLines[i];
+    if (l.startsWith('#EXT-X-STREAM-INF:')) {
+      if (hasH264 && (l.includes('CODECS="hvc1') || l.includes('CODECS="hev1'))) {
+        skipNext = true;
+        continue;
+      }
+    } else if (skipNext) {
+      skipNext = false;
+      continue;
+    }
+
+    l = l.replace(/,PATHWAY-ID="[^"]+"/g, '');
+    lines.push(l);
+  }
+
+  return lines.map(line => {
+    if (line.startsWith('#EXT-X-MAP') && line.includes('URI="')) {
+      return line.replace(/URI="([^"]+)"/, (m, uri) => {
+        let abs = uri.startsWith('http') ? uri : (uri.startsWith('/') ? origin + uri : baseDir + uri);
+        if (abs.startsWith('http://')) abs = 'https://' + abs.substring(7);
         return `URI="${proto}://${host}/stream/${abs}"`;
       });
     }
-    if (trimmed.startsWith('#EXT-X-MEDIA') && trimmed.includes('URI="')) {
-      return trimmed.replace(/URI="([^"]+)"/, (m, uri) => {
-        const abs = uri.startsWith('http') ? uri : (uri.startsWith('/') ? origin + uri : baseDir + uri);
+    if (line.startsWith('#EXT-X-MEDIA') && line.includes('URI="')) {
+      return line.replace(/URI="([^"]+)"/, (m, uri) => {
+        let abs = uri.startsWith('http') ? uri : (uri.startsWith('/') ? origin + uri : baseDir + uri);
+        if (abs.startsWith('http://')) abs = 'https://' + abs.substring(7);
         return `URI="${proto}://${host}/stream/${abs}"`;
       });
     }
-    if (trimmed.startsWith('#')) return line;
-    const abs = trimmed.startsWith('http') ? trimmed : (trimmed.startsWith('/') ? origin + trimmed : baseDir + trimmed);
+    if (line.startsWith('#')) return line;
+    let abs = line.startsWith('http') ? line : (line.startsWith('/') ? origin + line : baseDir + line);
+    if (abs.startsWith('http://')) abs = 'https://' + abs.substring(7);
     return `${proto}://${host}/stream/${abs}`;
   }).join('\n');
 }
 
 const server = http.createServer(async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', '*');
 
   if (req.method === 'OPTIONS') { res.writeHead(204); res.end(); return; }
@@ -103,70 +308,233 @@ const server = http.createServer(async (req, res) => {
   const proto = req.headers['x-forwarded-proto'] || 'http';
   const rawUrl = req.url;
 
-  // Web Player for browser
-  if (rawUrl === '/' || rawUrl === '/index.html' || rawUrl.startsWith('/player')) {
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(`<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Vidio TV Web Player</title>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <style>
-    body { background: #0f172a; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
-    video { width: 100%; max-width: 900px; border-radius: 12px; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .channels { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
-    button { background: #2563eb; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-    button:hover { background: #1d4ed8; transform: translateY(-2px); }
-  </style>
-</head>
-<body>
-  <h2>📺 Vidio Live Stream Web Player</h2>
-  <video id="video" controls autoplay></video>
-  <div class="channels">
-    <button onclick="playChannel('1561')">RTV</button>
-    <button onclick="playChannel('205')">Indosiar</button>
-    <button onclick="playChannel('204')">SCTV</button>
-    <button onclick="playChannel('8237')">Mentari TV</button>
-    <button onclick="playChannel('206')">Moji</button>
-    <button onclick="playChannel('733')">Trans TV</button>
-    <button onclick="playChannel('734')">Trans 7</button>
-  </div>
-  <script>
-    const video = document.getElementById('video');
-    let hls = null;
-    function playChannel(id) {
-      const url = '/vidio/' + id + '.m3u8';
-      if (Hls.isSupported()) {
-        if (hls) hls.destroy();
-        hls = new Hls();
-        hls.loadSource(url);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = url;
-        video.play();
-      }
-    }
-    playChannel('1561');
-  </script>
-</body>
-</html>`);
+  addLog(`${req.method} ${rawUrl}`);
+
+  // Diagnostic Logs
+  if (rawUrl === '/logs') {
+    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end(recentLogs.join('\n'));
     return;
   }
 
-  const vidioMatch = rawUrl.match(/^\/(?:tv\/|live\/)?vidio\/([a-zA-Z0-9_\-]+)(?:\.m3u8)?/);
-  if (vidioMatch) {
-    const channelId = vidioMatch[1];
+  // Active Liga 1 Match Status API
+  if (rawUrl === '/vidio/liga1/status') {
+    const match = await getActiveLiga1Match();
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
+    res.end(JSON.stringify({
+      active: !!match,
+      match: match || null,
+      fallback: '205 (Indosiar)'
+    }, null, 2));
+    return;
+  }
+
+  // Playlist M3U Service
+  if (rawUrl === '/akmatv.m3u' || rawUrl === '/playlist.m3u' || rawUrl === '/api/visionplus.m3u') {
+    const candidatePaths = [
+      path.join(__dirname, 'playlist.m3u'),
+      path.join(__dirname, 'akmatv.m3u'),
+      path.join(__dirname, '..', 'playlist.m3u')
+    ];
+    for (const p of candidatePaths) {
+      if (fs.existsSync(p)) {
+        res.writeHead(200, { 'Content-Type': 'audio/x-mpegurl; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
+        res.end(fs.readFileSync(p));
+        return;
+      }
+    }
+  }
+
+  // Modern NusaTV Web App (from tv/ folder)
+  if (rawUrl === '/' || rawUrl === '/index.html' || rawUrl === '/tv' || rawUrl === '/tv/') {
+    const candidatePaths = [
+      path.join(__dirname, 'tv', 'index.html'),
+      path.join(__dirname, 'index.html')
+    ];
+    for (const p of candidatePaths) {
+      if (fs.existsSync(p)) {
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        res.end(fs.readFileSync(p));
+        return;
+      }
+    }
+  }
+
+  if (rawUrl === '/tv/app.js' || rawUrl === '/app.js') {
+    const candidatePaths = [
+      path.join(__dirname, 'tv', 'app.js'),
+      path.join(__dirname, 'app.js')
+    ];
+    for (const p of candidatePaths) {
+      if (fs.existsSync(p)) {
+        res.writeHead(200, { 'Content-Type': 'application/javascript; charset=utf-8' });
+        res.end(fs.readFileSync(p));
+        return;
+      }
+    }
+  }
+
+  if (rawUrl === '/tv/style.css' || rawUrl === '/style.css') {
+    const candidatePaths = [
+      path.join(__dirname, 'tv', 'style.css'),
+      path.join(__dirname, 'style.css')
+    ];
+    for (const p of candidatePaths) {
+      if (fs.existsSync(p)) {
+        res.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8' });
+        res.end(fs.readFileSync(p));
+        return;
+      }
+    }
+  }
+
+  // 1. Widevine DRM License Proxy
+  if (rawUrl.startsWith('/vidio/license')) {
+    const parsedUrl = new URL(rawUrl, `http://${host}`);
+    let channelId = parsedUrl.searchParams.get('id') || '205';
+
+    if (channelId === 'liga1' || channelId === 'bola' || channelId === 'indosiar-auto') {
+      const match = await getActiveLiga1Match();
+      channelId = match ? match.id : '205';
+    }
+
     try {
       const streamData = await getVidioStream(channelId);
-      const remoteRes = await fetch(streamData.hls, {
+      const widevineToken = streamData.custom_data?.widevine;
+      if (!widevineToken) {
+        addLog(`[License] ERROR: No Widevine token for channel ${channelId}`);
+        res.writeHead(400, { 'Content-Type': 'text/plain' });
+        res.end('No Widevine token found for channel ' + channelId);
+        return;
+      }
+
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      const challengeBody = Buffer.concat(chunks);
+      addLog(`[License] Received challenge for ${channelId}, size: ${challengeBody.length} bytes`);
+
+      const licUrl = streamData.license_servers?.drm_license_url || 'https://license.vidio.com/ri/licenseManager.do';
+      const licenseRes = await fetch(licUrl, {
+        method: 'POST',
+        headers: {
+          'Origin': 'https://www.vidio.com',
+          'Referer': 'https://www.vidio.com/',
+          'pallycon-customdata-v2': widevineToken,
+          'Content-Type': 'application/octet-stream',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        },
+        body: challengeBody
+      });
+
+      const resBuffer = Buffer.from(await licenseRes.arrayBuffer());
+      addLog(`[License] Upstream PallyCon status: ${licenseRes.status}, resp size: ${resBuffer.length} bytes`);
+
+      res.writeHead(licenseRes.status, {
+        'Content-Type': 'application/octet-stream',
+        'Access-Control-Allow-Origin': '*'
+      });
+      res.end(resBuffer);
+      return;
+    } catch (e) {
+      addLog(`[License] Exception: ${e.message}`);
+      if (!res.headersSent) {
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('License Error: ' + e.message);
+      }
+      return;
+    }
+  }
+
+  // 2. MPEG-DASH (.mpd) Proxy for DRM Channels
+  const mpdMatch = rawUrl.match(/^\/(?:tv\/|live\/)?vidio\/([a-zA-Z0-9_\-]+)\.mpd/);
+  if (mpdMatch) {
+    let channelId = mpdMatch[1];
+    try {
+      let streamData = await getVidioStream(channelId);
+      if (!streamData.dash) {
+        if (streamData.hls) {
+          res.writeHead(302, { 'Location': `/vidio/${channelId}.m3u8` });
+          res.end();
+          return;
+        }
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('No DASH MPD available for channel ' + channelId);
+        return;
+      }
+
+      let remoteRes = await fetch(streamData.dash, {
         headers: {
           'Origin': 'https://www.vidio.com',
           'Referer': 'https://www.vidio.com/',
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
       });
+
+      if (remoteRes.status === 403 || remoteRes.status === 401) {
+        delete vidioTokenCache[channelId];
+        streamData = await getVidioStream(channelId);
+        remoteRes = await fetch(streamData.dash, {
+          headers: {
+            'Origin': 'https://www.vidio.com',
+            'Referer': 'https://www.vidio.com/',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          }
+        });
+      }
+
+      const mpdText = await remoteRes.text();
+      const dashOrigin = new URL(streamData.dash).origin;
+      const dashBaseDir = streamData.dash.substring(0, streamData.dash.lastIndexOf('/') + 1);
+      const proxyBaseUrl = `${proto}://${host}/stream/${dashBaseDir}`;
+      let rewritten = mpdText;
+      if (rewritten.includes('<BaseURL>')) {
+        rewritten = rewritten.replace(/<BaseURL>([^<]+)<\/BaseURL>/g, (m, bUrl) => {
+          const fullBase = bUrl.startsWith('http') ? bUrl : (bUrl.startsWith('/') ? dashOrigin + bUrl : dashOrigin + '/' + bUrl);
+          return `<BaseURL>${proto}://${host}/stream/${fullBase}</BaseURL>`;
+        });
+      } else {
+        rewritten = rewritten.replace(/<Period([^>]*)>/, `<Period$1>\n    <BaseURL>${proxyBaseUrl}</BaseURL>`);
+      }
+
+      res.writeHead(200, {
+        'Content-Type': 'application/dash+xml; charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Cache-Control': 'no-cache, no-store'
+      });
+      res.end(rewritten);
+      return;
+    } catch (err) {
+      if (!res.headersSent) { res.writeHead(502, { 'Content-Type': 'text/plain' }); res.end('Error: ' + err.message); }
+      return;
+    }
+  }
+
+  // 3. HLS (.m3u8) Proxy for Non-DRM Channels
+  const vidioMatch = rawUrl.match(/^\/(?:tv\/|live\/)?vidio\/([a-zA-Z0-9_\-]+)(?:\.m3u8)?/);
+  if (vidioMatch) {
+    const channelId = vidioMatch[1];
+    try {
+      let streamData = await getVidioStream(channelId);
+      let remoteRes = await fetch(streamData.hls, {
+        headers: {
+          'Origin': 'https://www.vidio.com',
+          'Referer': 'https://www.vidio.com/',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+      });
+
+      if (remoteRes.status === 403 || remoteRes.status === 401) {
+        delete vidioTokenCache[channelId];
+        streamData = await getVidioStream(channelId);
+        remoteRes = await fetch(streamData.hls, {
+          headers: {
+            'Origin': 'https://www.vidio.com',
+            'Referer': 'https://www.vidio.com/',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          }
+        });
+      }
+
       const m3u8Text = await remoteRes.text();
       const rewritten = rewriteM3u8(m3u8Text, streamData.hls, host, proto);
       res.writeHead(200, {
@@ -182,10 +550,15 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // 4. Reverse Proxy for Media Segments (.m4s, .ts, .mp4)
   if (rawUrl.startsWith('/stream/')) {
     let targetUrl = rawUrl.substring('/stream/'.length);
     if (targetUrl.startsWith('https:/') && !targetUrl.startsWith('https://')) targetUrl = 'https://' + targetUrl.substring(7);
     else if (targetUrl.startsWith('http:/') && !targetUrl.startsWith('http://')) targetUrl = 'http://' + targetUrl.substring(6);
+
+    if (targetUrl.startsWith('http://')) {
+      targetUrl = 'https://' + targetUrl.substring(7);
+    }
 
     try {
       const fetchHeaders = {
@@ -231,8 +604,10 @@ const server = http.createServer(async (req, res) => {
   res.end('Not Found\n');
 });
 
-server.listen(PORT, '0.0.0.0', () => console.log('Listening on ' + PORT));
+server.listen(PORT, '0.0.0.0', () => addLog('Listening on ' + PORT));
+
 EOF
 
-pm2 restart vidio-proxy
-echo "🎉 Update selesai!"
+# Restart pm2 or start if not running
+pm2 restart vidio-proxy || pm2 start /root/vidio-proxy/server.js --name vidio-proxy
+pm2 save

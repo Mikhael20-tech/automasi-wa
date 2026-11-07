@@ -1,21 +1,21 @@
 #EXTM3U url-tvg="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" refresh="3600"
 
-#EXTINF:-1 tvg-id="RTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rtv.png" group-title="Indonesia Channels",RTV (Vidio 24/7)
+#EXTINF:-1 tvg-id="RTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rtv.png" group-title="Indonesia Channels",RTV
 http://72.60.79.72:8765/vidio/1561.m3u8
 
-#EXTINF:-1 tvg-id="Indosiar" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_indosiar.png" group-title="Indonesia Channels",Indosiar (Vidio 24/7)
+#EXTINF:-1 tvg-id="Indosiar" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_indosiar.png" group-title="Indonesia Channels",Indosiar
 http://72.60.79.72:8765/vidio/205.m3u8
 
-#EXTINF:-1 tvg-id="SCTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_sctv.png" group-title="Indonesia Channels",SCTV (Vidio 24/7)
+#EXTINF:-1 tvg-id="SCTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_sctv.png" group-title="Indonesia Channels",SCTV
 http://72.60.79.72:8765/vidio/204.m3u8
 
-#EXTINF:-1 tvg-id="Moji" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_moji.png" group-title="Indonesia Channels",Moji (Vidio 24/7)
+#EXTINF:-1 tvg-id="Moji" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_moji.png" group-title="Indonesia Channels",Moji
 http://72.60.79.72:8765/vidio/206.m3u8
 
-#EXTINF:-1 tvg-id="Mentari TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_mentaritv.png" group-title="Indonesia Channels",Mentari TV (Vidio 24/7)
+#EXTINF:-1 tvg-id="Mentari TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_mentaritv.png" group-title="Indonesia Channels",Mentari TV
 http://72.60.79.72:8765/vidio/8237.m3u8
 
-#EXTINF:-1 tvg-id="Trans TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_transtv.png" group-title="Indonesia Channels",Trans TV (Vidio 24/7)
+#EXTINF:-1 tvg-id="Trans TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_transtv.png" group-title="Indonesia Channels",Trans TV
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
 #KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vidio/license?id=733
@@ -27,37 +27,37 @@ http://72.60.79.72:8765/vidio/733.mpd
 #KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vidio/license?id=6362
 http://72.60.79.72:8765/vidio/6362.mpd
 
-#EXTINF:-1 tvg-id="Trans7" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_trans7.png" group-title="Indonesia Channels",Trans7 (Vidio 24/7)
+#EXTINF:-1 tvg-id="Trans7" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_trans7.png" group-title="Indonesia Channels",Trans7
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
 #KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vidio/license?id=734
 http://72.60.79.72:8765/vidio/734.mpd
 
-#EXTINF:-1 tvg-id="ANTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_antv.png" group-title="Indonesia Channels",ANTV (Vidio 24/7)
+#EXTINF:-1 tvg-id="ANTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_antv.png" group-title="Indonesia Channels",ANTV
 http://72.60.79.72:8765/vidio/782.m3u8
 
-#EXTINF:-1 tvg-id="TVOne" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvone.png" group-title="Indonesia Channels",TVOne (Vidio 24/7)
+#EXTINF:-1 tvg-id="TVOne" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvone.png" group-title="Indonesia Channels",TVOne
 http://72.60.79.72:8765/vidio/783.m3u8
 
-#EXTINF:-1 tvg-id="Kompas TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_kompastv.png" group-title="Indonesia Channels",Kompas TV (Vidio 24/7)
-http://72.60.79.72:8765/vidio/874.m3u8
+#EXTINF:-1 tvg-id="Kompas TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_kompastv.png" group-title="Indonesia Channels",Kompas TV
+https://op-flashcon-digdayahd-1.dens.tv/s/s104/index.m3u8
 
-#EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="Indonesia Channels",Metro TV (Vidio 24/7)
+#EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="Indonesia Channels",Metro TV
 http://72.60.79.72:8765/vidio/777.m3u8
 
-#EXTINF:-1 tvg-id="TVRI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvri.png" group-title="Indonesia Channels",TVRI (Vidio 24/7)
+#EXTINF:-1 tvg-id="TVRI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvri.png" group-title="Indonesia Channels",TVRI
 http://72.60.79.72:8765/vidio/6441.m3u8
 
-#EXTINF:-1 tvg-id="BTV" tvg-logo="https://thumbor.prod.vidiocdn.com/8w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/6165/btv.jpg" group-title="Indonesia Channels",BTV (Vidio 24/7)
+#EXTINF:-1 tvg-id="BTV" tvg-logo="https://thumbor.prod.vidiocdn.com/8w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/6165/btv.jpg" group-title="Indonesia Channels",BTV
 http://72.60.79.72:8765/vidio/6165.m3u8
 
-#EXTINF:-1 tvg-id="MDTV" tvg-logo="https://thumbor.prod.vidiocdn.com/6w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/875/mdtv.jpg" group-title="Indonesia Channels",MDTV (Vidio 24/7)
+#EXTINF:-1 tvg-id="MDTV" tvg-logo="https://thumbor.prod.vidiocdn.com/6w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/875/mdtv.jpg" group-title="Indonesia Channels",MDTV
 http://72.60.79.72:8765/vidio/875.m3u8
 
-#EXTINF:-1 tvg-id="SPOTV" tvg-logo="https://thumbor.prod.vidiocdn.com/9w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/17139/spotv.jpg" group-title="Sports",SPOTV (Vidio 24/7)
+#EXTINF:-1 tvg-id="SPOTV" tvg-logo="https://thumbor.prod.vidiocdn.com/9w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/17139/spotv.jpg" group-title="Sports",SPOTV
 http://72.60.79.72:8765/vidio/17139.m3u8
 
-#EXTINF:-1 tvg-id="SPOTV 2" tvg-logo="https://thumbor.prod.vidiocdn.com/7w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/17140/spotv2.jpg" group-title="Sports",SPOTV 2 (Vidio 24/7)
+#EXTINF:-1 tvg-id="SPOTV 2" tvg-logo="https://thumbor.prod.vidiocdn.com/7w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/17140/spotv2.jpg" group-title="Sports",SPOTV 2
 http://72.60.79.72:8765/vidio/17140.m3u8
 
 #EXTINF:-1 tvg-id="RCTI.id@SD" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://thumbor.prod.vidiocdn.com/9c-sEWp6Du7DoWDn56cjma0gMpY=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/665/337c4d.png" group-title="Indonesia Channels",RCTI (Vision+)

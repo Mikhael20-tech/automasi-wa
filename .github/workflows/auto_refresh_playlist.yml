@@ -1,0 +1,61 @@
+name: Auto-Refresh IPTV Playlist
+
+on:
+  schedule:
+    # Run every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    # Allows 1-click manual trigger anytime from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-playlist:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Auto-Refresh & Fallback Checker
+        run: |
+          python auto_refresh_playlist.py
+
+      - name: Commit & Push to Repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add playlist.m3u
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(iptv): auto-refresh healthy channels & fallbacks [skip ci]"
+            git push origin main
+          else
+            echo "No changes detected in playlist.m3u"
+          fi
+
+      - name: Sync to GitHub Gist
+        env:
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+        run: |
+          if [ -n "$GIST_TOKEN" ]; then
+            echo "Syncing updated playlist to GitHub Gist..."
+            git clone "https://${GIST_TOKEN}@gist.github.com/28af0cc656510032cdab4f311c0af4f4.git" /tmp/gist_sync
+            cp playlist.m3u /tmp/gist_sync/iptv.m3u
+            cd /tmp/gist_sync
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add iptv.m3u
+            if ! git diff --staged --quiet; then
+              git commit -m "auto: update verified channels via GitHub Actions"
+              git push origin main
+            fi
+            echo "Successfully updated GitHub Gist!"
+          else
+            echo "GIST_TOKEN secret not configured, skipping Gist sync."
+          fi
