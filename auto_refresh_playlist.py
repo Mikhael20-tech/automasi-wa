@@ -190,17 +190,14 @@ def main():
     print(f"   ⏱️  Time Elapsed:   {time.time() - start_time:.2f}s")
     print("=" * 60 + "\n")
 
-    # Generate updated playlist.m3u
-    # Keep channels that are alive, or keep channels marked with VPS/Direct
+    # Generate updated playlist.m3u while preserving section headers and structure
     out_lines = [header.strip()]
     for ch in channels:
-        # Match from verified
-        v = next((item for item in verified_channels if item['name'] == ch['name']), ch)
         out_lines.append("")
-        out_lines.append(v['extinf'])
-        for m in v['meta']:
+        out_lines.append(ch['extinf'])
+        for m in ch['meta']:
             out_lines.append(m)
-        out_lines.append(v['url'])
+        out_lines.append(ch['url'])
 
     output_content = "\n".join(out_lines) + "\n"
     with open(playlist_file, 'w', encoding='utf-8') as f:
@@ -210,3 +207,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
