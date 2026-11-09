@@ -187,7 +187,10 @@ https://vod.tjb.co.kr/live/_definst_/tv/playlist.m3u8
 https://ns1.tjmbc.co.kr/live/myStream.sdp/playlist.m3u8
 
 #EXTINF:-1 tvg-name="Gangwon MBC" tvg-logo="https://backup.760515.xyz/logo/MBC.png" group-title="Korean Tv", GANGWON MBC
-http://123.254.93.7:1935/tvlive/livestream2/playlist.m3u8
+https://stream.chmbc.co.kr/TV/myStream/playlist.m3u8
+
+#EXTINF:-1 tvg-name="Jeju MBC" tvg-logo="https://backup.760515.xyz/logo/MBC.png" group-title="Korean Tv", JEJU MBC
+https://wowza.jejumbc.com/live/tv_jejumbc/playlist.m3u8
 
 #EXTINF:-1 tvg-name="Mokpo MBC" tvg-logo="https://backup.760515.xyz/logo/MBC.png" group-title="Korean Tv", MOKPO MBC
 https://vod.mpmbc.co.kr/a_live/25246741/ch001/playlist.m3u8
