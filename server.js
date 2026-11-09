@@ -265,9 +265,13 @@ function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
   let skipNext = false;
 
   for (let i = 0; i < rawLines.length; i++) {
-    let l = rawLines[i];
+    let l = rawLines[i].trim();
+    if (!l) continue; // Skip empty lines completely so they don't become bogus URLs!
+
     if (l.startsWith('#EXT-X-STREAM-INF:')) {
-      if (hasH264 && (l.includes('CODECS="hvc1') || l.includes('CODECS="hev1'))) {
+      // Prioritize standard H.264 (avc1) for maximum TV hardware decoding compatibility!
+      // Skip AV1 (av01) and HEVC (hvc1/hev1) if H.264 is available to prevent TV freezing/stuck pictures
+      if (hasH264 && (l.includes('CODECS="av01') || l.includes('CODECS="hvc1') || l.includes('CODECS="hev1'))) {
         skipNext = true;
         continue;
       }
