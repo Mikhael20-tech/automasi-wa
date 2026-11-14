@@ -1,0 +1,82 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="Indosiar" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_indosiar.png" group-title="VIDIO",Indosiar
+http://72.60.79.72:8765/vidio/205.m3u8
+
+#EXTINF:-1 tvg-id="SCTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_sctv.png" group-title="VIDIO",SCTV
+http://72.60.79.72:8765/vidio/204.m3u8
+
+#EXTINF:-1 tvg-id="Moji" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_moji.png" group-title="VIDIO",Moji
+http://72.60.79.72:8765/vidio/206.m3u8
+
+#EXTINF:-1 tvg-id="Mentari TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_mentaritv.png" group-title="VIDIO",Mentari TV
+http://72.60.79.72:8765/vidio/8237.m3u8
+
+#EXTINF:-1 tvg-id="RTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rtv.png" group-title="VIDIO",RTV (Vidio)
+http://72.60.79.72:8765/vidio/1561.m3u8
+
+#EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="VIDIO",Metro TV (Vidio)
+http://72.60.79.72:8765/vidio/777.m3u8
+
+#EXTINF:-1 tvg-id="TVOne" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvone.png" group-title="VIDIO",TVOne (Vidio)
+http://72.60.79.72:8765/vidio/783.m3u8
+
+#EXTINF:-1 tvg-id="ANTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_antv.png" group-title="VIDIO",ANTV (Vidio)
+http://72.60.79.72:8765/vidio/782.m3u8
+
+#EXTINF:-1 tvg-id="BTV" tvg-logo="https://thumbor.prod.vidiocdn.com/8w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/6165/btv.jpg" group-title="VIDIO",BTV
+http://72.60.79.72:8765/vidio/6165.m3u8
+
+#EXTINF:-1 tvg-id="Jak TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/c/c5/Jak_TV_2021.png" group-title="VIDIO",Jak TV (Vidio)
+http://72.60.79.72:8765/vidio/5415.m3u8
+
+#EXTINF:-1 tvg-id="JTV" tvg-logo="https://thumbor.prod.vidiocdn.com/RFPy_yTRC9PPPbHGeJlLQgt-RaE=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/9713/a11faf.png" group-title="VIDIO",JTV
+http://72.60.79.72:8765/vidio/9713.m3u8
+
+#EXTINF:-1 tvg-id="Garuda TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/30/Garuda_TV.png" group-title="VIDIO",Garuda TV
+http://72.60.79.72:8765/vidio/18162.m3u8
+
+#EXTINF:-1 tvg-id="Berita Satu" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/e0/BeritaSatu_2022.png" group-title="VIDIO",Berita Satu
+http://72.60.79.72:8765/vidio/18280.m3u8
+
+#EXTINF:-1 tvg-id="Sin Po TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/9/91/Sin_Po_TV.png" group-title="VIDIO",Sin Po TV
+http://72.60.79.72:8765/vidio/19046.m3u8
+
+#EXTINF:-1 tvg-id="NusantaraTV.id@SD" tvg-logo="https://thumbor.prod.vidiocdn.com/npPL9VlWMJ5owmeupR7ucPjdGl4=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/7432/bfecbc.png" group-title="VIDIO",Nusantara TV
+http://72.60.79.72:8765/vidio/7432.m3u8
+
+#EXTINF:-1 tvg-id="TVRI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvri.png" group-title="VIDIO",TVRI Nasional (Vidio)
+http://72.60.79.72:8765/vidio/6441.m3u8
+
+#EXTINF:-1 tvg-id="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="VIDIO",TVRI Sport HD
+https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD.m3u8
+
+#EXTINF:-1 tvg-id="TVRI World" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TVRI_World.svg/1200px-TVRI_World.svg.png" group-title="VIDIO",TVRI World
+https://ott-balancer.tvri.go.id/live/eds/TVRIWorld/hls/TVRIWorld.m3u8
+
+#EXTINF:-1 tvg-id="TVRI Jatim" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/TVRI_Jawa_Timur.svg/1200px-TVRI_Jawa_Timur.svg.png" group-title="VIDIO",TVRI Jawa Timur
+https://ott-balancer.tvri.go.id/live/eds/Jatim/hls/Jatim.m3u8
+
+#EXTINF:-1 tvg-id="CNA" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/6/62/CNA_%28TV_network%29_logo.svg" group-title="VIDIO",CNA (Channel NewsAsia)
+http://72.60.79.72:8765/vidio/6411.m3u8
+
+#EXTINF:-1 tvg-id="Al Jazeera" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Al_Jazeera_English_logo.svg/1200px-Al_Jazeera_English_logo.svg.png" group-title="VIDIO",Al Jazeera English (Vidio)
+http://72.60.79.72:8765/vidio/6410.m3u8
+
+#EXTINF:-1 tvg-id="Euronews" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Euronews_2016_logo.svg/1200px-Euronews_2016_logo.svg.png" group-title="VIDIO",Euronews
+http://72.60.79.72:8765/vidio/6412.m3u8
+
+#EXTINF:-1 tvg-id="DW English" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Deutsche_Welle_logo.svg/1200px-Deutsche_Welle_logo.svg.png" group-title="VIDIO",DW English
+http://72.60.79.72:8765/vidio/5075.m3u8
+
+#EXTINF:-1 tvg-id="ABC Australia" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/e/e5/ABC_Australia_logo.svg/1200px-ABC_Australia_logo.svg.png" group-title="VIDIO",ABC Australia
+http://72.60.79.72:8765/vidio/7150.m3u8
+
+#EXTINF:-1 tvg-id="NHK World" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/NHK_World-Japan_logo.svg/1200px-NHK_World-Japan_logo.svg.png" group-title="VIDIO",NHK World Japan
+http://72.60.79.72:8765/vidio/7968.m3u8
+
+#EXTINF:-1 tvg-id="Bloomberg" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Bloomberg_Television_logo.svg/1200px-Bloomberg_Television_logo.svg.png" group-title="VIDIO",Bloomberg TV
+http://72.60.79.72:8765/vidio/22252.m3u8
+
+#EXTINF:-1 tvg-id="France 24" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/6/65/France_24_logo.svg/1200px-France_24_logo.svg.png" group-title="VIDIO",France 24 English
+http://72.60.79.72:8765/vidio/22337.m3u8
+
