@@ -320,92 +320,104 @@ https://dash2.antik.sk/stream/nvidia_eurosport1/playlist_cenc.mpd
 #EXTVLCOPT:http-user-agent=Mozilla/5.0
 https://dash2.antik.sk/stream/nvidia_eurosport2/playlist_cenc.mpd
 # ==========================================
-# 🇮🇩 INDONESIA CHANNELS
+# 📺 VIDIO
 # ==========================================
 
-#EXTINF:-1 tvg-id="RTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rtv.png" group-title="Indonesia Channels",RTV
-http://72.60.79.72:8765/vidio/1561.m3u8
-
-#EXTINF:-1 tvg-id="Indosiar" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_indosiar.png" group-title="Indonesia Channels",Indosiar
+#EXTINF:-1 tvg-id="Indosiar" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_indosiar.png" group-title="VIDIO",Indosiar
 http://72.60.79.72:8765/vidio/205.m3u8
 
-#EXTINF:-1 tvg-id="SCTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_sctv.png" group-title="Indonesia Channels",SCTV
+#EXTINF:-1 tvg-id="SCTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_sctv.png" group-title="VIDIO",SCTV
 http://72.60.79.72:8765/vidio/204.m3u8
 
-#EXTINF:-1 tvg-id="Moji" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_moji.png" group-title="Indonesia Channels",Moji
+#EXTINF:-1 tvg-id="Moji" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_moji.png" group-title="VIDIO",Moji
 http://72.60.79.72:8765/vidio/206.m3u8
 
-#EXTINF:-1 tvg-id="Moji" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_moji.png" group-title="Indonesia Channels",Moji TV (Dens Backup)
-https://op-flashcon-digdayahd-1.dens.tv/h/h207/index.m3u8
-
-#EXTINF:-1 tvg-id="Mentari TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_mentaritv.png" group-title="Indonesia Channels",Mentari TV
+#EXTINF:-1 tvg-id="Mentari TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_mentaritv.png" group-title="VIDIO",Mentari TV
 http://72.60.79.72:8765/vidio/8237.m3u8
 
-#EXTINF:-1 tvg-id="Trans TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_transtv.png" group-title="Indonesia Channels",Trans TV
+#EXTINF:-1 tvg-id="BTV" tvg-logo="https://thumbor.prod.vidiocdn.com/8w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/6165/btv.jpg" group-title="VIDIO",BTV
+http://72.60.79.72:8765/vidio/6165.m3u8
+
+#EXTINF:-1 tvg-id="MDTV" tvg-logo="https://thumbor.prod.vidiocdn.com/6w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/875/mdtv.jpg" group-title="VIDIO",MDTV
+http://72.60.79.72:8765/vidio/875.m3u8
+
+#EXTINF:-1 tvg-id="JTV" tvg-logo="https://thumbor.prod.vidiocdn.com/RFPy_yTRC9PPPbHGeJlLQgt-RaE=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/9713/a11faf.png" group-title="VIDIO",JTV
+http://72.60.79.72:8765/vidio/9713.m3u8
+
+#EXTINF:-1 tvg-id="NusantaraTV.id@SD" tvg-logo="https://thumbor.prod.vidiocdn.com/npPL9VlWMJ5owmeupR7ucPjdGl4=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/7432/bfecbc.png" group-title="VIDIO",Nusantara TV
+https://nusantaratv.siar.us/nusantaratv/live/playlist.m3u8
+
+#EXTINF:-1 tvg-id="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="VIDIO",TVRI Sport HD
+https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD.m3u8
+
+#EXTINF:-1 tvg-id="TVRI World" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TVRI_World.svg/1200px-TVRI_World.svg.png" group-title="VIDIO",TVRI World
+https://ott-balancer.tvri.go.id/live/eds/TVRIWorld/hls/TVRIWorld.m3u8
+
+#EXTINF:-1 tvg-id="TVRI Jatim" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/TVRI_Jawa_Timur.svg/1200px-TVRI_Jawa_Timur.svg.png" group-title="VIDIO",TVRI Jawa Timur
+https://ott-balancer.tvri.go.id/live/eds/Jatim/hls/Jatim.m3u8
+
+# ==========================================
+# 🌟 VISION+
+# ==========================================
+
+#EXTINF:-1 tvg-id="ANTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_antv.png" group-title="VISION+",ANTV
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/antv/512.m3u8
+
+#EXTINF:-1 tvg-id="Trans TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_transtv.png" group-title="VISION+",Trans TV (Vision+)
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/transtv/512.m3u8
+
+#EXTINF:-1 tvg-id="Trans7" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_trans7.png" group-title="VISION+",Trans7 (Vision+)
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/trans7/512.m3u8
+
+#EXTINF:-1 tvg-id="TVOne" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvone.png" group-title="VISION+",TVOne
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/tvone/512.m3u8
+
+#EXTINF:-1 tvg-id="Kompas TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_kompastv.png" group-title="VISION+",Kompas TV
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/kompas/512.m3u8
+
+#EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="VISION+",Metro TV
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/metrotv/512.m3u8
+
+#EXTINF:-1 tvg-id="RTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rtv.png" group-title="VISION+",RTV
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/rtv/512.m3u8
+
+#EXTINF:-1 tvg-id="TVRI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvri.png" group-title="VISION+",TVRI Nasional
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/tvri/512.m3u8
+
+#EXTINF:-1 tvg-id="Jak TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/c/c5/Jak_TV_2021.png" group-title="VISION+",Jak TV
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/jaktv/512.m3u8
+
+#EXTINF:-1 tvg-id="DAAITV.id@SD" tvg-logo="https://thumbor.prod.vidiocdn.com/0r_rhIVANc6dsGvQ76616ZSqF04=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/6482/e83fcf.png" group-title="VISION+",DAAI TV
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/daaitv/512.m3u8
+
+#EXTINF:-1 tvg-id="Vision Prime" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Vision_Prime.png" group-title="VISION+",Vision Prime
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/visionprime/512.m3u8
+
+#EXTINF:-1 tvg-id="DMI Channel" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/4/4e/DMI_Channel.png" group-title="VISION+",DMI Channel
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/dmi/512.m3u8
+
+# ==========================================
+# 📡 TRANSVISION
+# ==========================================
+
+#EXTINF:-1 tvg-id="CNNIndonesia.id@SD" tvg-logo="https://cdn.cnnindonesia.com/cnnid/images/logo_cnn_fav.png?v=10.15.2" group-title="TRANSVISION",CNN Indonesia
+https://op-flashcon-digdayahd-1.dens.tv/h/h14/index.m3u8
+
+#EXTINF:-1 tvg-id="CNBCIndonesia.id@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/id/3/35/CNBC_Indonesia.png" group-title="TRANSVISION",CNBC Indonesia
+https://op-flashcon-digdayahd-1.dens.tv/h/h15/index.m3u8
+
+#EXTINF:-1 tvg-id="Trans TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_transtv.png" group-title="TRANSVISION",Trans TV (CubMu Backup)
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
 #KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vidio/license?id=733
 http://72.60.79.72:8765/vidio/733.mpd
 
-#EXTINF:-1 tvg-id="Trans7" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_trans7.png" group-title="Indonesia Channels",Trans7
+#EXTINF:-1 tvg-id="Trans7" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_trans7.png" group-title="TRANSVISION",Trans7 (CubMu Backup)
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
 #KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vidio/license?id=734
 http://72.60.79.72:8765/vidio/734.mpd
 
-#EXTINF:-1 tvg-id="ANTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_antv.png" group-title="Indonesia Channels",ANTV
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/antv/512.m3u8
-
-#EXTINF:-1 tvg-id="TVOne" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvone.png" group-title="Indonesia Channels",TVOne
-http://72.60.79.72:8765/vidio/783.m3u8
-
-#EXTINF:-1 tvg-id="Kompas TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_kompastv.png" group-title="Indonesia Channels",Kompas TV
-https://op-flashcon-digdayahd-1.dens.tv/s/s104/index.m3u8
-
-#EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="Indonesia Channels",Metro TV
-http://72.60.79.72:8765/vidio/777.m3u8
-
-#EXTINF:-1 tvg-id="TVRI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvri.png" group-title="Indonesia Channels",TVRI
-http://72.60.79.72:8765/vidio/6441.m3u8
-
-#EXTINF:-1 tvg-id="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="Indonesia Channels",TVRI Sport HD
-https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD.m3u8
-
-#EXTINF:-1 tvg-id="TVRI World" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TVRI_World.svg/1200px-TVRI_World.svg.png" group-title="Indonesia Channels",TVRI World
-https://ott-balancer.tvri.go.id/live/eds/TVRIWorld/hls/TVRIWorld.m3u8
-
-#EXTINF:-1 tvg-id="TVRI Jatim" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/TVRI_Jawa_Timur.svg/1200px-TVRI_Jawa_Timur.svg.png" group-title="Indonesia Channels",TVRI Jawa Timur
-https://ott-balancer.tvri.go.id/live/eds/Jatim/hls/Jatim.m3u8
-
-#EXTINF:-1 tvg-id="BTV" tvg-logo="https://thumbor.prod.vidiocdn.com/8w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/6165/btv.jpg" group-title="Indonesia Channels",BTV
-http://72.60.79.72:8765/vidio/6165.m3u8
-
-#EXTINF:-1 tvg-id="MDTV" tvg-logo="https://thumbor.prod.vidiocdn.com/6w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/875/mdtv.jpg" group-title="Indonesia Channels",MDTV
-http://72.60.79.72:8765/vidio/875.m3u8
-
-#EXTINF:-1 tvg-id="CNNIndonesia.id@SD" tvg-logo="https://cdn.cnnindonesia.com/cnnid/images/logo_cnn_fav.png?v=10.15.2" group-title="Indonesia Channels",CNN Indonesia
-https://op-flashcon-digdayahd-1.dens.tv/h/h14/index.m3u8
-
-#EXTINF:-1 tvg-id="CNBCIndonesia.id@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/id/3/35/CNBC_Indonesia.png" group-title="Indonesia Channels",CNBC Indonesia
-https://op-flashcon-digdayahd-1.dens.tv/h/h15/index.m3u8
-
-#EXTINF:-1 tvg-id="NusantaraTV.id@SD" tvg-logo="https://thumbor.prod.vidiocdn.com/npPL9VlWMJ5owmeupR7ucPjdGl4=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/7432/bfecbc.png" group-title="Indonesia Channels",Nusantara TV
-https://nusantaratv.siar.us/nusantaratv/live/playlist.m3u8
-
-#EXTINF:-1 tvg-id="JTV" tvg-logo="https://thumbor.prod.vidiocdn.com/RFPy_yTRC9PPPbHGeJlLQgt-RaE=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/9713/a11faf.png" group-title="Indonesia Channels",JTV
-http://72.60.79.72:8765/vidio/9713.m3u8
-
-#EXTINF:-1 tvg-id="DAAITV.id@SD" tvg-logo="https://thumbor.prod.vidiocdn.com/0r_rhIVANc6dsGvQ76616ZSqF04=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/6482/e83fcf.png" group-title="Indonesia Channels",DAAI TV
-https://pull.daaiplus.com/live-DAAIPLUS/live-DAAIPLUS_HD.m3u8
-
-#EXTINF:-1 tvg-id="Sindonews TV" tvg-logo="https://nabelsakha.com/wp-content/uploads/2023/10/Sindonews.png" group-title="Indonesia Channels",Sindonews TV
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000128/1024.m3u8
-
-#EXTINF:-1 tvg-id="Celebrities TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/e0/Celebrities_TV_logo.png" group-title="Indonesia Channels",Celebrities TV
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000015/1024.m3u8
-
-#EXTINF:-1 tvg-id="Musik TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/ea/Musik_TV.png" group-title="Indonesia Channels",Musik TV
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000129/1024.m3u8
 # ==========================================
 # 🎬 MOVIES & ENTERTAINMENT
 # ==========================================
