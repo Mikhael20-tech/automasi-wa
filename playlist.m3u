@@ -3,6 +3,7 @@
 # 🔴 LIVE EVENT (BOLA & EVENT KHUSUS)
 # ==========================================
 
+
 #EXTINF:-1 tvg-id="LIVE_EVENT_1" tvg-name="LIVE EVENT 1" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_live.png" group-title="LIVE EVENT", 🔴 [LIVE EVENT 1] BOLA / EVENT SPESIAL
 http://72.60.79.72:8765/live/event.m3u8
 
@@ -59,11 +60,11 @@ https://backup.760515.xyz/playlist/tvN-playlist.m3u8
 
 #EXTINF:-1 tvg-name="tvN Show" tvg-logo="https://pjytv.760515.xyz/logo/tvN%20SHOW.png" group-title="Korean Tv", tvN Show
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/tvN SHOW-playlist.m3u8
+https://backup.760515.xyz/playlist/tvN%20SHOW-playlist.m3u8
 
 #EXTINF:-1 tvg-name="tvN Drama" tvg-logo="https://pjytv.760515.xyz/logo/tvN%20DRAMA.png" group-title="Korean Tv", tvN Drama
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/tvN DRAMA-playlist.m3u8
+https://backup.760515.xyz/playlist/tvN%20DRAMA-playlist.m3u8
 
 #EXTINF:-1 tvg-name="tvN Story" tvg-logo="https://i.imgur.com/4qG64jW.png" group-title="Korean Tv", tvN Story
 https://jmp2.uk/stvp-KRBC3200014XZ
@@ -98,11 +99,11 @@ https://jmp2.uk/stvp-KRBC46000173Y
 
 #EXTINF:-1 tvg-name="Channel A" tvg-logo="https://pjytv.760515.xyz/logo/채널A.png" group-title="Korean Tv", Channel A
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/채널A-playlist.m3u8
+https://backup.760515.xyz/playlist/%EC%B1%84%EB%84%90A-playlist.m3u8
 
 #EXTINF:-1 tvg-name="Channel A Plus" tvg-logo="https://pjytv.760515.xyz/logo/채널A플러스.png" group-title="Korean Tv", Channel A Plus
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/채널A플러스-playlist.m3u8
+https://backup.760515.xyz/playlist/%EC%B1%84%EB%84%90A%ED%94%8C%EB%9F%AC%EC%8A%A4-playlist.m3u8
 
 #EXTINF:-1 tvg-name="MBN" tvg-logo="https://pjytv.760515.xyz/logo/MBN.png" group-title="Korean Tv", MBN
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
@@ -110,19 +111,19 @@ https://backup.760515.xyz/playlist/MBN-playlist.m3u8
 
 #EXTINF:-1 tvg-name="MBN Plus" tvg-logo="https://pjytv.760515.xyz/logo/MBN%20플러스.png" group-title="Korean Tv", MBN Plus
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/MBN 플러스-playlist.m3u8
+https://backup.760515.xyz/playlist/MBN%20%ED%94%8C%EB%9F%AC%EC%8A%A4-playlist.m3u8
 
 #EXTINF:-1 tvg-name="Zhonghua TV" tvg-logo="https://pjytv.760515.xyz/logo/중화TV.png" group-title="Korean Tv", Zhonghua TV (중화TV)
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/중화TV-playlist.m3u8
+https://backup.760515.xyz/playlist/%EC%A4%91%ED%99%94TV-playlist.m3u8
 
 #EXTINF:-1 tvg-name="History Korea" tvg-logo="https://pjytv.760515.xyz/logo/히스토리.png" group-title="Korean Tv", History Korea (히스토리)
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/히스토리-playlist.m3u8
+https://backup.760515.xyz/playlist/%ED%9E%88%EC%8A%A4%ED%86%A0%EB%A6%AC-playlist.m3u8
 
 #EXTINF:-1 tvg-name="NATV" tvg-logo="https://pjytv.760515.xyz/logo/국회방송(NATV).png" group-title="Korean Tv", NATV (국회방송)
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/국회방송(NATV)-playlist.m3u8
+https://backup.760515.xyz/playlist/%EA%B5%AD%ED%9A%8C%EB%B0%A9%EC%86%A1%28NATV%29-playlist.m3u8
 
 #EXTINF:-1 tvg-name="SBS G1" tvg-logo="https://i.imgur.com/4LHX71N.png" group-title="Korean Tv", SBS G1
 http://61.82.49.4:1935/live/_definst_/tv.stream/chunklist_w432889607.m3u8
@@ -164,13 +165,13 @@ https://vod.ikbc.co.kr/KBCTV/tv/playlist.m3u8
 https://stream.ubc.co.kr/hls/ubctvstream/1_2/index.m3u8
 
 #EXTINF:-1 tvg-name="Arirang TV" tvg-logo="https://i.imgur.com/Asu5pE9.png" group-title="Korean Tv", Arirang TV
-http://amdlive-ch01.ctnd.com.edgesuite.net/arirang_1ch/smil:arirang_1ch.smil/playlist.m3u8
+http://amdlive-ch01.ctnd.com.edgesuite.net/arirang_1ch/smil%3Aarirang_1ch.smil/playlist.m3u8
 
 #EXTINF:-1 tvg-name="Arirang UN" tvg-logo="https://i.imgur.com/Jdy3WNm.png" group-title="Korean Tv", Arirang UN
-https://amdlive-ch02-ctnd-com.akamaized.net/arirang_2ch/smil:arirang_2ch.smil/playlist.m3u8
+https://amdlive-ch02-ctnd-com.akamaized.net/arirang_2ch/smil%3Aarirang_2ch.smil/playlist.m3u8
 
 #EXTINF:-1 tvg-name="Arirang Radio" tvg-logo="https://i.imgur.com/dtfiG9k.png" group-title="Korean Tv", Arirang Radio
-http://amdlive-ch01.ctnd.com.edgesuite.net/arirang_3ch/smil:arirang_3ch.smil/playlist.m3u8
+http://amdlive-ch01.ctnd.com.edgesuite.net/arirang_3ch/smil%3Aarirang_3ch.smil/playlist.m3u8
 
 #EXTINF:-1 tvg-name="EBS English" tvg-logo="https://i.imgur.com/5wLJzb0.png" group-title="Korean Tv", EBS English
 https://ebsonair.ebs.co.kr/plus3familypc/familypc1m/playlist.m3u8
@@ -191,7 +192,7 @@ https://backup.760515.xyz/playlist/YTN2-playlist.m3u8
 
 #EXTINF:-1 tvg-name="Yonhap News TV" tvg-logo="https://pjytv.760515.xyz/logo/연합뉴스TV.png" group-title="Korean Tv", Yonhap News TV
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/연합뉴스TV-playlist.m3u8
+https://backup.760515.xyz/playlist/%EC%97%B0%ED%95%A9%EB%89%B4%EC%8A%A4TV-playlist.m3u8
 
 #EXTINF:-1 tvg-name="KBS Dokdo" tvg-logo="https://i.imgur.com/Asu5pE9.png" group-title="Korean Tv", KBS Dokdo
 http://kbs-dokdo.gscdn.com/dokdo_300/dokdo_300.stream/playlist.m3u8
@@ -223,17 +224,8 @@ https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/8m8cd46i1t/out/v1
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
 https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/q4u5nwaogz/out/v1/18de6d3e65934f3a8de4358e69eab86c/cenc.mpd
 
-#EXTINF:-1 tvg-id="SPOTV 2" tvg-logo="https://thumbor.prod.vidiocdn.com/7w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/17140/spotv2.jpg" group-title="Sports Channels",SPOTV 2 (MotoGP & Badminton)
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000138/1024.m3u8
-
-#EXTINF:-1 tvg-id="Soccer Channel" tvg-logo="https://mimipipi22.github.io/logo/sports/soccer.jpg" group-title="Sports Channels",Soccer Channel
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000144/1024.m3u8
-
-#EXTINF:-1 tvg-id="Sportstar 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/d/d7/Sportstars_2.png" group-title="Sports Channels",Sportstar 2
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000124/1024.m3u8
-
 #EXTINF:-1 tvg-id="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="Sports Channels",TVRI Sport HD
-https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD-avc1_1200000=10001-mp4a_128000=20001.m3u8
+https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD-avc1_1200000%3D10001-mp4a_128000%3D20001.m3u8
 
 #EXTINF:-1 tvg-id="plex.tv.F1.Channel.plex" tvg-logo="https://logodownload.org/wp-content/uploads/2024/05/f1-tv-logo.png" group-title="Sports Channels",F1 TV
 #KODIPROP:inputstreamaddon=inputstream.adaptive
@@ -302,7 +294,7 @@ https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/cscevwljkq/out/v1
 #EXTINF:-1 tvg-id="Motorvision" tvg-logo="https://i.imgur.com/WhTcCyi.jpeg" group-title="Sports Channels",MOTORVISION+ (DensTV)
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0/v2206
 #EXTVLCOPT:http-referrer=https://www.dens.tv/
-https://op-flashcon-digdayahd-1.dens.tv/h/h09/index.m3u8?app_type=web&userid=lite&chname=Motorvision%2B
+https://op-flashcon-digdayahd-1.dens.tv/h/h09/index.m3u8?app_type=web&userid=lite&chname=Motorvision%252B
 
 #EXTINF:-1 tvg-name="EUROSPORT 1" tvg-logo="https://mimipipi22.github.io/logo/antik/eurosport1.jpg" group-title="Sports Channels",EUROSPORT 1
 #KODIPROP:inputstreamaddon=inputstream.adaptive
@@ -375,7 +367,7 @@ http://72.60.79.72:8765/vidio/7432.m3u8
 http://72.60.79.72:8765/vidio/6441.m3u8
 
 #EXTINF:-1 tvg-id="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="VIDIO",TVRI Sport HD
-https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD-avc1_1200000=10001-mp4a_128000=20001.m3u8
+https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD-avc1_1200000%3D10001-mp4a_128000%3D20001.m3u8
 
 #EXTINF:-1 tvg-id="TVRI World" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TVRI_World.svg/1200px-TVRI_World.svg.png" group-title="VIDIO",TVRI World
 https://ott-balancer.tvri.go.id/live/eds/TVRIWorld/hls/TVRIWorld.m3u8
@@ -533,37 +525,6 @@ https://op-flashcon-digdayahd-1.dens.tv/h/h14/index.m3u8
 #EXTINF:-1 tvg-id="CNBCIndonesia.id@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/id/3/35/CNBC_Indonesia.png" group-title="TRANSVISION",CNBC Indonesia
 https://op-flashcon-digdayahd-1.dens.tv/h/h15/index.m3u8
 
-#EXTINF:-1 tvg-id="Trans TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_transtv.png" group-title="TRANSVISION",Trans TV (CubMu Backup)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vidio/license?id=733
-http://72.60.79.72:8765/vidio/733.mpd
-
-#EXTINF:-1 tvg-id="Trans7" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_trans7.png" group-title="TRANSVISION",Trans7 (CubMu Backup)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vidio/license?id=734
-http://72.60.79.72:8765/vidio/734.mpd
-
-# ==========================================
-# 🎬 MOVIES & ENTERTAINMENT
-# ==========================================
-
-#EXTINF:-1 tvg-id="Rock Action" tvg-logo="https://i.imgur.com/l6lmlqG.png" group-title="Movies & Entertainment",Rock Action
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000120/1024.m3u8
-
-#EXTINF:-1 tvg-id="Rock Entertainment" tvg-logo="https://i.imgur.com/l6lmlqG.png" group-title="Movies & Entertainment",Rock Entertainment
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000110/1024.m3u8
-
-#EXTINF:-1 tvg-id="Hits Movies" tvg-logo="https://static.wikia.nocookie.net/logos/images/1/16/HITS_Movies_logo.png" group-title="Movies & Entertainment",Hits Movies
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000139/1024.m3u8
-
-#EXTINF:-1 tvg-id="Celestial Movies" tvg-logo="https://i.imgur.com/l6lmlqG.png" group-title="Movies & Entertainment",Celestial Movies
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000032/1024.m3u8
-
-#EXTINF:-1 tvg-id="Zee Bioskop" tvg-logo="https://i.imgur.com/l6lmlqG.png" group-title="Movies & Entertainment",Zee Bioskop
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000061/1024.m3u8
-
 #EXTINF:-1 tvg-logo="https://cdn88-accio.its-newid.net/channel/newid_008/lg_channels/img/channel_logo/default/channel_logo.png" group-title="Movies & Entertainment",K-DRAMA+
 https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=425
 
@@ -576,14 +537,11 @@ https://freem3u.xyz/api/live/play.m3u8?vid=213
 # 👶 KIDS CHANNEL
 # ==========================================
 
-#EXTINF:-1 tvg-id="Kids TV" tvg-logo="https://www.visionplus.id/images/repository/623/623-LOGO-m.png" group-title="Kids Channel",Kids TV
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000135/1024.m3u8
-
 #EXTINF:-1 tvg-name="Animax" tvg-logo="https://pjytv.760515.xyz/logo/애니맥스.png" group-title="Kids Channel",Animax
-https://backup.760515.xyz/playlist/애니맥스-playlist.m3u8
+https://backup.760515.xyz/playlist/%EC%95%A0%EB%8B%88%EB%A7%A5%EC%8A%A4-playlist.m3u8
 
 #EXTINF:-1 tvg-name="Tooniverse" tvg-logo="https://pjytv.760515.xyz/logo/투니버스.png" group-title="Kids Channel",Tooniverse
-https://backup.760515.xyz/playlist/투니버스-playlist.m3u8
+https://backup.760515.xyz/playlist/%ED%88%AC%EB%8B%88%EB%B2%84%EC%8A%A4-playlist.m3u8
 
 #EXTINF:-1 tvg-name="ANIBOX" tvg-logo="https://i.imgur.com/5SZfGmy.png" group-title="Kids Channel",ANIBOX
 https://backup.760515.xyz/playlist/ANIBOX-playlist.m3u8
@@ -594,11 +552,8 @@ https://ebsonair.ebs.co.kr/ebsufamilypc/familypc1m/playlist.m3u8
 # 📚 KNOWLEDGE & DOCUMENTARY
 # ==========================================
 
-#EXTINF:-1 tvg-id="BBC Earth" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/5/56/Sony_BBC_Earth.png" group-title="Knowledge and Documentary",BBC Earth
-http://202.80.222.20/cdn/iptv/Tvod/001/channel2000116/1024.m3u8
-
 #EXTINF:-1 tvg-id="Dens Knowledge" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_knowledge.png" group-title="Knowledge and Documentary",DENS Knowledge
 https://op-flashcon-digdayahd-1.dens.tv/h/h236/index.m3u8?app_type=web&userid=lite&chname=DensKnowledge
 
 #EXTINF:-1 tvg-name="History Korea" tvg-logo="https://pjytv.760515.xyz/logo/히스토리.png" group-title="Knowledge and Documentary",History Korea
-https://backup.760515.xyz/playlist/히스토리-playlist.m3u8
+https://backup.760515.xyz/playlist/%ED%9E%88%EC%8A%A4%ED%86%A0%EB%A6%AC-playlist.m3u8

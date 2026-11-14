@@ -1,19 +1,9 @@
 #EXTM3U
+
 #EXTINF:-1 tvg-id="CNNIndonesia.id@SD" tvg-logo="https://cdn.cnnindonesia.com/cnnid/images/logo_cnn_fav.png?v=10.15.2" group-title="TRANSVISION",CNN Indonesia
 https://op-flashcon-digdayahd-1.dens.tv/h/h14/index.m3u8
 
+
 #EXTINF:-1 tvg-id="CNBCIndonesia.id@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/id/3/35/CNBC_Indonesia.png" group-title="TRANSVISION",CNBC Indonesia
 https://op-flashcon-digdayahd-1.dens.tv/h/h15/index.m3u8
-
-#EXTINF:-1 tvg-id="Trans TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_transtv.png" group-title="TRANSVISION",Trans TV (CubMu Backup)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vidio/license?id=733
-http://72.60.79.72:8765/vidio/733.mpd
-
-#EXTINF:-1 tvg-id="Trans7" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_trans7.png" group-title="TRANSVISION",Trans7 (CubMu Backup)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vidio/license?id=734
-http://72.60.79.72:8765/vidio/734.mpd
 
