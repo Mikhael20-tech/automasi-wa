@@ -17,8 +17,8 @@ http://72.60.79.72:8765/vidio/8237.m3u8
 #EXTINF:-1 tvg-id="RTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rtv.png" group-title="VIDIO",RTV (Vidio)
 http://72.60.79.72:8765/vidio/1561.m3u8
 
-#EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="VIDIO",Metro TV (Vidio)
-http://72.60.79.72:8765/vidio/777.m3u8
+#EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="VIDIO",Metro TV
+https://op-flashcon-digdayahd-1.dens.tv/h/h12/01.m3u8
 
 #EXTINF:-1 tvg-id="TVOne" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvone.png" group-title="VIDIO",TVOne (Vidio)
 http://72.60.79.72:8765/vidio/783.m3u8
@@ -51,7 +51,7 @@ http://72.60.79.72:8765/vidio/7432.m3u8
 http://72.60.79.72:8765/vidio/6441.m3u8
 
 #EXTINF:-1 tvg-id="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="VIDIO",TVRI Sport HD
-https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD.m3u8
+https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD-avc1_1200000=10001-mp4a_128000=20001.m3u8
 
 #EXTINF:-1 tvg-id="TVRI World" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TVRI_World.svg/1200px-TVRI_World.svg.png" group-title="VIDIO",TVRI World
 https://ott-balancer.tvri.go.id/live/eds/TVRIWorld/hls/TVRIWorld.m3u8

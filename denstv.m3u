@@ -6,7 +6,7 @@ https://op-flashcon-digdayahd-1.dens.tv/h/h207/index.m3u8
 https://op-flashcon-digdayahd-1.dens.tv/s/s104/index.m3u8
 
 #EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="DENSTV",Metro TV (DensTV)
-https://op-flashcon-digdayahd-1.dens.tv/h/h12/index.m3u8
+https://op-flashcon-digdayahd-1.dens.tv/h/h12/01.m3u8
 
 #EXTINF:-1 tvg-id="TVOne" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvone.png" group-title="DENSTV",TVOne (DensTV)
 https://op-flashcon-digdayahd-1.dens.tv/h/h40/01.m3u8
@@ -36,7 +36,7 @@ https://op-flashcon-digdayahd-1.dens.tv/h/h223/02.m3u8
 https://op-flashcon-digdayasd-1.dens.tv/h/h216/stream.m3u8
 
 #EXTINF:-1 tvg-id="Channel Jowo" tvg-logo="https://upload.wikimedia.org/wikipedia/id/thumb/7/7b/Logo_Channel_Jowo.png/250px-Logo_Channel_Jowo.png" group-title="DENSTV",Channel Jowo (DensTV)
-https://op-flashcon-digdayasd-1.dens.tv/h/h215/stream.m3u8
+https://op-flashcon-digdayasd-1.dens.tv/h/h215/S2/mnf.m3u8
 
 #EXTINF:-1 tvg-id="Dens ShowBiz" tvg-logo="https://picture.dens.tv/wp/img/whatson_v2/1280x720/Logo%20DFC.png" group-title="DENSTV",Dens ShowBiz
 https://op-flashcon-digdayahd-1.dens.tv/h/h244/index.m3u8

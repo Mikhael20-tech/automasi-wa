@@ -232,8 +232,8 @@ http://202.80.222.20/cdn/iptv/Tvod/001/channel2000144/1024.m3u8
 #EXTINF:-1 tvg-id="Sportstar 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/d/d7/Sportstars_2.png" group-title="Sports Channels",Sportstar 2
 http://202.80.222.20/cdn/iptv/Tvod/001/channel2000124/1024.m3u8
 
-#EXTINF:-1 tvg-id="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="Sports Channels",TVRI Sport HD (Dens)
-https://op-flashcon-digdayahd-1.dens.tv/h/h19/index.m3u8?app_type=web&userid=lite&chname=TVRI_Sport
+#EXTINF:-1 tvg-id="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="Sports Channels",TVRI Sport HD
+https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD-avc1_1200000=10001-mp4a_128000=20001.m3u8
 
 #EXTINF:-1 tvg-id="plex.tv.F1.Channel.plex" tvg-logo="https://logodownload.org/wp-content/uploads/2024/05/f1-tv-logo.png" group-title="Sports Channels",F1 TV
 #KODIPROP:inputstreamaddon=inputstream.adaptive
@@ -341,8 +341,8 @@ http://72.60.79.72:8765/vidio/8237.m3u8
 #EXTINF:-1 tvg-id="RTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rtv.png" group-title="VIDIO",RTV (Vidio)
 http://72.60.79.72:8765/vidio/1561.m3u8
 
-#EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="VIDIO",Metro TV (Vidio)
-http://72.60.79.72:8765/vidio/777.m3u8
+#EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="VIDIO",Metro TV
+https://op-flashcon-digdayahd-1.dens.tv/h/h12/01.m3u8
 
 #EXTINF:-1 tvg-id="TVOne" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvone.png" group-title="VIDIO",TVOne (Vidio)
 http://72.60.79.72:8765/vidio/783.m3u8
@@ -375,7 +375,7 @@ http://72.60.79.72:8765/vidio/7432.m3u8
 http://72.60.79.72:8765/vidio/6441.m3u8
 
 #EXTINF:-1 tvg-id="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="VIDIO",TVRI Sport HD
-https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD.m3u8
+https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD-avc1_1200000=10001-mp4a_128000=20001.m3u8
 
 #EXTINF:-1 tvg-id="TVRI World" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TVRI_World.svg/1200px-TVRI_World.svg.png" group-title="VIDIO",TVRI World
 https://ott-balancer.tvri.go.id/live/eds/TVRIWorld/hls/TVRIWorld.m3u8
@@ -461,7 +461,7 @@ https://op-flashcon-digdayahd-1.dens.tv/h/h207/index.m3u8
 https://op-flashcon-digdayahd-1.dens.tv/s/s104/index.m3u8
 
 #EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="DENSTV",Metro TV (DensTV)
-https://op-flashcon-digdayahd-1.dens.tv/h/h12/index.m3u8
+https://op-flashcon-digdayahd-1.dens.tv/h/h12/01.m3u8
 
 #EXTINF:-1 tvg-id="TVOne" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvone.png" group-title="DENSTV",TVOne (DensTV)
 https://op-flashcon-digdayahd-1.dens.tv/h/h40/01.m3u8
@@ -491,7 +491,7 @@ https://op-flashcon-digdayahd-1.dens.tv/h/h223/02.m3u8
 https://op-flashcon-digdayasd-1.dens.tv/h/h216/stream.m3u8
 
 #EXTINF:-1 tvg-id="Channel Jowo" tvg-logo="https://upload.wikimedia.org/wikipedia/id/thumb/7/7b/Logo_Channel_Jowo.png/250px-Logo_Channel_Jowo.png" group-title="DENSTV",Channel Jowo (DensTV)
-https://op-flashcon-digdayasd-1.dens.tv/h/h215/stream.m3u8
+https://op-flashcon-digdayasd-1.dens.tv/h/h215/S2/mnf.m3u8
 
 #EXTINF:-1 tvg-id="Dens ShowBiz" tvg-logo="https://picture.dens.tv/wp/img/whatson_v2/1280x720/Logo%20DFC.png" group-title="DENSTV",Dens ShowBiz
 https://op-flashcon-digdayahd-1.dens.tv/h/h244/index.m3u8
