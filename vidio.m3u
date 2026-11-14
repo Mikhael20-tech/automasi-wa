@@ -6,7 +6,7 @@ http://72.60.79.72:8765/vidio/205.m3u8
 http://72.60.79.72:8765/vidio/204.m3u8
 
 #EXTINF:-1 tvg-id="Moji" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_moji.png" group-title="VIDIO",Moji
-http://72.60.79.72:8765/vidio/206.m3u8
+https://op-flashcon-digdayahd-1.dens.tv/h/h207/index.m3u8
 
 #EXTINF:-1 tvg-id="Mentari TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_mentaritv.png" group-title="VIDIO",Mentari TV
 http://72.60.79.72:8765/vidio/8237.m3u8
