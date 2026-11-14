@@ -20,9 +20,6 @@ https://op-flashcon-digdayahd-1.dens.tv/h/h10/index.m3u8
 #EXTINF:-1 tvg-id="TVRI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvri.png" group-title="DENSTV",TVRI Nasional (DensTV)
 https://op-flashcon-digdayahd-1.dens.tv/h/h17/index.m3u8
 
-#EXTINF:-1 tvg-id="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="DENSTV",TVRI Sport (DensTV)
-https://op-flashcon-digdayahd-1.dens.tv/h/h19/index.m3u8
-
 #EXTINF:-1 tvg-id="BTV" tvg-logo="https://thumbor.prod.vidiocdn.com/8w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/6165/btv.jpg" group-title="DENSTV",BTV (DensTV)
 https://op-flashcon-digdayahd-1.dens.tv/h/h313/stream.m3u8
 
@@ -49,9 +46,6 @@ https://op-flashcon-digdayahd-1.dens.tv/h/h221/02.m3u8
 
 #EXTINF:-1 tvg-id="Dens Life & Style" tvg-logo="https://picture.dens.tv/wp/img/whatson_v2/1280x720/Logo%20DFC.png" group-title="DENSTV",Dens Life & Style
 https://op-flashcon-digdayahd-1.dens.tv/h/h222/02.m3u8
-
-#EXTINF:-1 tvg-id="Dens Knowledge" tvg-logo="https://picture.dens.tv/wp/img/whatson_v2/1280x720/Logo%20DFC.png" group-title="DENSTV",Dens Learning & Knowledge
-https://op-flashcon-digdayahd-1.dens.tv/h/h236/index.m3u8
 
 #EXTINF:-1 tvg-id="Dens Play" tvg-logo="https://picture.dens.tv/wp/img/whatson_v2/1280x720/Logo%20DFC.png" group-title="DENSTV",Dens Play
 https://op-flashcon-digdayahd-1.dens.tv/h/h246/index.m3u8
