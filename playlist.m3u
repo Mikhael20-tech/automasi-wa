@@ -354,7 +354,7 @@ http://72.60.79.72:8765/vidio/733.mpd
 http://72.60.79.72:8765/vidio/734.mpd
 
 #EXTINF:-1 tvg-id="ANTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_antv.png" group-title="Indonesia Channels",ANTV
-http://72.60.79.72:8765/vidio/782.m3u8
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/antv/512.m3u8
 
 #EXTINF:-1 tvg-id="TVOne" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvone.png" group-title="Indonesia Channels",TVOne
 http://72.60.79.72:8765/vidio/783.m3u8
