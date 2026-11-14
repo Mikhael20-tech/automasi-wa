@@ -3,7 +3,6 @@
 # 🔴 LIVE EVENT (BOLA & EVENT KHUSUS)
 # ==========================================
 
-
 #EXTINF:-1 tvg-id="LIVE_EVENT_1" tvg-name="LIVE EVENT 1" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_live.png" group-title="LIVE EVENT", 🔴 [LIVE EVENT 1] BOLA / EVENT SPESIAL
 http://72.60.79.72:8765/live/event.m3u8
 
@@ -398,7 +397,6 @@ http://72.60.79.72:8765/vidio/22252.m3u8
 
 #EXTINF:-1 tvg-id="France 24" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/6/65/France_24_logo.svg/1200px-France_24_logo.svg.png" group-title="VIDIO",France 24 English
 http://72.60.79.72:8765/vidio/22337.m3u8
-
 # ==========================================
 # 🌟 VISION+
 # ==========================================
@@ -441,7 +439,6 @@ https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/visionprime/512.m3u8
 
 #EXTINF:-1 tvg-id="DMI Channel" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/4/4e/DMI_Channel.png" group-title="VISION+",DMI Channel
 https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/dmi/512.m3u8
-
 # ==========================================
 # 📡 DENSTV (26 CHANNELS DIRECT HD)
 # ==========================================
@@ -523,7 +520,6 @@ https://op-flashcon-digdayahd-1.dens.tv/h/h217/01.m3u8
 
 #EXTINF:-1 tvg-id="DENS Knowledge" tvg-logo="https://picture.dens.tv/wp/img/whatson_v2/1280x720/Logo%20DFC.png" group-title="DENSTV",DENS Knowledge (DensTV HD)
 https://op-flashcon-digdayahd-1.dens.tv/h/h21/01.m3u8
-
 # ==========================================
 # 🛰️ TRANSVISION
 # ==========================================
