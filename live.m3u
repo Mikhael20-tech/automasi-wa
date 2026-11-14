@@ -1,0 +1,10 @@
+#EXTM3U
+# ==========================================
+# 🔴 PLAYLIST KHUSUS LIVE EVENT / PERTANDINGAN
+# ==========================================
+
+#EXTINF:-1 tvg-id="LIVE_EVENT_1" tvg-name="LIVE EVENT 1" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_live.png" group-title="LIVE EVENT", 🔴 [LIVE EVENT 1] BOLA / EVENT SPESIAL
+http://72.60.79.72:8765/live/event.m3u8
+
+#EXTINF:-1 tvg-id="LIVE_EVENT_2" tvg-name="LIVE EVENT 2" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_live.png" group-title="LIVE EVENT", 🔴 [LIVE EVENT 2] BOLA / EVENT SPESIAL
+http://72.60.79.72:8765/live/event2.m3u8

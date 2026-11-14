@@ -1,124 +1,101 @@
 #EXTM3U
-
 # ==========================================
-# 🇰🇷 KOREAN TV (ALL CHANNELS - UNIFIED)
-
+# 🔴 LIVE EVENT (BOLA & EVENT KHUSUS)
 # ==========================================
 
-#EXTINF:-1 tvg-name="KBS 1TV" tvg-logo="https://backup.760515.xyz/logo/KBS1.png" group-title="Korean Tv", KBS 1TV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36
+#EXTINF:-1 tvg-id="LIVE_EVENT_1" tvg-name="LIVE EVENT 1" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_live.png" group-title="LIVE EVENT", 🔴 [LIVE EVENT 1] BOLA / EVENT SPESIAL
+http://72.60.79.72:8765/live/event.m3u8
+
+#EXTINF:-1 tvg-id="LIVE_EVENT_2" tvg-name="LIVE EVENT 2" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_live.png" group-title="LIVE EVENT", 🔴 [LIVE EVENT 2] BOLA / EVENT SPESIAL
+http://72.60.79.72:8765/live/event2.m3u8
+
+# ==========================================
+# 🇰🇷 KOREAN TV
+# ==========================================
+
+#EXTINF:-1 tvg-name="KBS 1TV" tvg-logo="https://pjytv.760515.xyz/logo/KBS1.png" group-title="Korean Tv", KBS 1TV
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/KBS1-playlist.m3u8
 
-#EXTINF:-1 tvg-name="KBS 2TV" tvg-logo="https://backup.760515.xyz/logo/KBS2.png" group-title="Korean Tv", KBS 2TV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36
+#EXTINF:-1 tvg-name="KBS 2TV" tvg-logo="https://pjytv.760515.xyz/logo/KBS2.png" group-title="Korean Tv", KBS 2TV
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/KBS2-playlist.m3u8
 
 #EXTINF:-1 tvg-name="MBC" tvg-logo="https://backup.760515.xyz/logo/MBC.png" group-title="Korean Tv", MBC
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/MBC-playlist.m3u8
 
-#EXTINF:-1 tvg-name="SBS" tvg-logo="https://i.imgur.com/4LHX71N.png" group-title="Korean Tv", SBS
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+#EXTINF:-1 tvg-name="SBS" tvg-logo="https://pjytv.760515.xyz/logo/SBS.png" group-title="Korean Tv", SBS
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://allanf181.github.io/adaptive-streams/streams/kr/SBSTV.m3u8
 
-#EXTINF:-1 tvg-name="EBS 1TV" tvg-logo="https://i.imgur.com/jX26YYt.png" group-title="Korean Tv", EBS 1TV
+#EXTINF:-1 tvg-name="EBS 1TV" tvg-logo="https://pjytv.760515.xyz/logo/EBS1.png" group-title="Korean Tv", EBS 1TV
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/EBS1-playlist.m3u8
 
-#EXTINF:-1 tvg-name="EBS 2TV" tvg-logo="https://i.imgur.com/jX26YYt.png" group-title="Korean Tv", EBS 2TV
-https://ebsonair.ebs.co.kr/ebs2familypc/familypc1m/playlist.m3u8
+#EXTINF:-1 tvg-name="KBS Drama" tvg-logo="https://i.imgur.com/7bWn6aU.png" group-title="Korean Tv", KBS Drama
+http://koreatv.dothome.co.kr/kbsdrama.php
 
-#EXTINF:-1 tvg-name="JTBC Sports" tvg-logo="https://i.imgur.com/wa4KC7z.png" group-title="Korean Tv", JTBC Sports
-https://tistory1.daumcdn.net/tistory/2864460/skin/images/CATV_541_6A79C475.m3u8
+#EXTINF:-1 tvg-name="KBS Joy" tvg-logo="https://i.imgur.com/Kz8j81P.png" group-title="Korean Tv", KBS Joy
+http://koreatv.dothome.co.kr/kbsjoy.php
 
-#EXTINF:-1 tvg-name="tvN Drama (Backup)" tvg-logo="https://i.imgur.com/f91ieU8.png" group-title="Korean Tv", tvN Drama (Backup)
-https://tistory1.daumcdn.net/tistory/2864460/skin/images/CATV_66_B4A2AB43.m3u8
+#EXTINF:-1 tvg-name="KBS Life" tvg-logo="https://i.imgur.com/Z4w29zN.png" group-title="Korean Tv", KBS Life
+http://koreatv.dothome.co.kr/kbslife.php
 
-#EXTINF:-1 tvg-name="KBS 24" tvg-logo="https://i.imgur.com/ObWsxCy.png" group-title="Korean Tv", KBS 24
+#EXTINF:-1 tvg-name="KBS Story" tvg-logo="https://i.imgur.com/7bWn6aU.png" group-title="Korean Tv", KBS Story
+http://koreatv.dothome.co.kr/kbsstory.php
+
+#EXTINF:-1 tvg-name="KBS 24" tvg-logo="https://i.imgur.com/qLhV07W.png" group-title="Korean Tv", KBS 24
 https://jmp2.uk/stvp-KR5100001TH
 
-#EXTINF:-1 tvg-name="KBS Music" tvg-logo="https://backup.760515.xyz/logo/KBS1.png" group-title="Korean Tv", KBS Music
+#EXTINF:-1 tvg-name="KBS Music" tvg-logo="https://i.imgur.com/0iH10vN.png" group-title="Korean Tv", KBS Music
 https://32e8419d959d4d7688f8b9b1ed3dc869.mediatailor.ap-northeast-2.amazonaws.com/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ctp689jis2dnq/8bec6200-6073-49b3-91a8-e286953fdfa7/2.m3u8
 
-#EXTINF:-1 tvg-name="KBS World" tvg-logo="https://i.imgur.com/F50NjOw.png" group-title="Korean Tv", KBS World
+#EXTINF:-1 tvg-name="KBS World" tvg-logo="https://i.imgur.com/01WnC7t.png" group-title="Korean Tv", KBS World
 https://stream8.cinerama.uz/1448/tracks-v1a1/mono.m3u8
 
 #EXTINF:-1 tvg-name="tvN" tvg-logo="https://pjytv.760515.xyz/logo/tvN.png" group-title="Korean Tv", tvN
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/tvN-playlist.m3u8
 
-#EXTINF:-1 tvg-name="tvN Show" tvg-logo="https://i.imgur.com/8OobmvS.png" group-title="Korean Tv", tvN Show
+#EXTINF:-1 tvg-name="tvN Show" tvg-logo="https://pjytv.760515.xyz/logo/tvN%20SHOW.png" group-title="Korean Tv", tvN Show
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/tvN SHOW-playlist.m3u8
 
-#EXTINF:-1 tvg-name="tvN Drama" tvg-logo="https://i.imgur.com/f91ieU8.png" group-title="Korean Tv", tvN Drama
+#EXTINF:-1 tvg-name="tvN Drama" tvg-logo="https://pjytv.760515.xyz/logo/tvN%20DRAMA.png" group-title="Korean Tv", tvN Drama
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/tvN DRAMA-playlist.m3u8
 
-#EXTINF:-1 tvg-name="tvN Story" tvg-logo="https://i.imgur.com/zy0bmH6.png" group-title="Korean Tv", tvN Story
+#EXTINF:-1 tvg-name="tvN Story" tvg-logo="https://i.imgur.com/4qG64jW.png" group-title="Korean Tv", tvN Story
 https://jmp2.uk/stvp-KRBC3200014XZ
 
-#EXTINF:-1 tvg-name="tvN Sport" tvg-logo="https://i.imgur.com/NUKYwPr.png" group-title="Korean Tv", tvN Sport
+#EXTINF:-1 tvg-name="tvN Sport" tvg-logo="https://i.imgur.com/Kj7X31G.png" group-title="Korean Tv", tvN Sport
 https://jmp2.uk/stvp-KRBC800015MH
 
-#EXTINF:-1 tvg-name="CJ ENM Movie" tvg-logo="https://i.imgur.com/JiSfEBv.png" group-title="Korean Tv", CJ ENM Movie (OCN)
+#EXTINF:-1 tvg-name="CJ ENM Movie (OCN)" tvg-logo="https://i.imgur.com/1B6G8qQ.png" group-title="Korean Tv", CJ ENM Movie (OCN)
 https://jmp2.uk/stvp-KRBC32000191N
 
 #EXTINF:-1 tvg-name="Mnet" tvg-logo="https://pjytv.760515.xyz/logo/Mnet.png" group-title="Korean Tv", Mnet
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/Mnet-playlist.m3u8
 
-#EXTINF:-1 tvg-name="CJ OnStyle" tvg-logo="https://i.imgur.com/OYmOL20.png" group-title="Korean Tv", CJ OnStyle
+#EXTINF:-1 tvg-name="CJ OnStyle" tvg-logo="https://i.imgur.com/x0qj01M.png" group-title="Korean Tv", CJ OnStyle
 https://live-ch1.cjonstyle.net/cjmalllive/stream2/playlist.m3u8
 
-#EXTINF:-1 tvg-name="JTBC" tvg-logo="https://i.imgur.com/fCruRmS.png" group-title="Korean Tv", JTBC
+#EXTINF:-1 tvg-name="JTBC" tvg-logo="https://pjytv.760515.xyz/logo/JTBC.png" group-title="Korean Tv", JTBC
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/JTBC-playlist.m3u8
 
-#EXTINF:-1 tvg-name="JTBC2" tvg-logo="https://i.imgur.com/kljWkXS.png" group-title="Korean Tv", JTBC2
+#EXTINF:-1 tvg-name="JTBC2" tvg-logo="https://pjytv.760515.xyz/logo/JTBC2.png" group-title="Korean Tv", JTBC2
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/JTBC2-playlist.m3u8
 
-#EXTINF:-1 tvg-name="JTBC4" tvg-logo="https://i.imgur.com/dgIXpHS.png" group-title="Korean Tv", JTBC4
+#EXTINF:-1 tvg-name="JTBC4" tvg-logo="https://pjytv.760515.xyz/logo/JTBC4.png" group-title="Korean Tv", JTBC4
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/JTBC4-playlist.m3u8
 
-#EXTINF:-1 tvg-name="JTBC News" tvg-logo="https://i.imgur.com/fCruRmS.png" group-title="Korean Tv", JTBC News
+#EXTINF:-1 tvg-name="JTBC News" tvg-logo="https://i.imgur.com/jE1l9yU.png" group-title="Korean Tv", JTBC News
 https://jmp2.uk/stvp-KRBC46000173Y
-
-#EXTINF:-1 tvg-name="JTBC Golf" tvg-logo="https://i.imgur.com/wa4KC7z.png" group-title="Korean Tv", JTBC Golf
-https://jmp2.uk/stvp-KRBD5200002XY
-
-#EXTINF:-1 tvg-name="PLAYY Movie" tvg-logo="https://i.imgur.com/pooFL15.png" group-title="Korean Tv", PLAYY Movie
-https://ads.its-newid.net/api/manifest.m3u8?tp=samsung_tvplus&channel_name=geniemovie&channel_id=newid_210&apikey=b97c7a7d0c82424bb607e141ef215779&auth=4bc7a483-105eccc8-407d24f8-caedd6fe&ads.live=%5BCONTENT_LIVE%5D&ads.device_did=%7BPSID%7D&ads.ifa=%5BIFA%5D&ads.ifatype=%5BIFA_TYPE%5D&ads.lat=%5BLMT%5D&ads.donotsell=%5BDNS%5D&ads.ip=%5BIP%5D&ads.gdpr=%5BGDPR%5D&ads.gdprconsent=%5BGDPR_CONSENT%5D&ads.country=%5BCOUNTRY%5D&ads.us_privacy=%7BUS_PRIVACY%7D&ads.appstoreurl=%5BAPP_STOREURL%5D&ads.bundleid=%5BAPP_BUNDLE%5D&ads.app.name=%7BAPP_NAME%7D&ads.appversion=%5BAPP_VERSION%5D&ads.devicetype=%5BDEVICE_TYPE%5D&ads.devicemake=%5BDEVICE_MAKE%5D&ads.devicemodel=%5BDEVICE_MODEL%5D&ads.targetad=%5BTARGETAD_ALLOWED%5D&ads.content_title=%5BPROGRAM_TITLE%5D&ads.content_series=%5BSERIES_TITLE%5D&ads.content_season=%5BSEASON_TITLE%5D&ads.content_episode=%5BEPISODE_NO%5D&ads.content_length=%5BCONTENT_LENGTH%5D&ads.device.dnt=%7BTARGETOPT%7D&ads.app_domain=%7BAPP_DOMAIN%7D&nh=true&ads.device_did=%7BPSID%7D&ads.device_dnt=%7BTARGETOPT%7D&ads.app_domain=%7BAPP_DOMAIN%7D&ads.app_name=%7BAPP_NAME%7D&ads.ssai_vendor=SSSLIVE&ads.afsdk_params=%7BAFSDK_VALUE%7D&ads.service_id=KR12000017G
-
-#EXTINF:-1 tvg-name="Hipddeum" tvg-logo="https://i.imgur.com/5SZfGmy.png" group-title="Korean Tv", Hipddeum
-https://ads.its-newid.net/api/manifest.m3u8?tp=samsung_tvplus&channel_name=%ED%9E%99%EC%9C%BC%EB%9C%B8&channel_id=newid_067&apikey=b97c7a7d0c82424bb607e141ef215779&auth=e32513b0-2b41a042-5975596d-f1f2ba74&ads.live=%5BCONTENT_LIVE%5D&ads.device_did=%7BPSID%7D&ads.ifa=%5BIFA%5D&ads.ifatype=%5BIFA_TYPE%5D&ads.lat=%5BLMT%5D&ads.donotsell=%5BDNS%5D&ads.ip=%5BIP%5D&ads.gdpr=%5BGDPR%5D&ads.gdprconsent=%5BGDPR_CONSENT%5D&ads.country=%5BCOUNTRY%5D&ads.us_privacy=%7BUS_PRIVACY%7D&ads.appstoreurl=%5BAPP_STOREURL%5D&ads.bundleid=%5BAPP_BUNDLE%5D&ads.app.name=%7BAPP_NAME%7D&ads.appversion=%5BAPP_VERSION%5D&ads.devicetype=%5BDEVICE_TYPE%5D&ads.devicemake=%5BDEVICE_MAKE%5D&ads.devicemodel=%5BDEVICE_MODEL%5D&ads.targetad=%5BTARGETAD_ALLOWED%5D&ads.content_title=%5BPROGRAM_TITLE%5D&ads.content_series=%5BSERIES_TITLE%5D&ads.content_season=%5BSEASON_TITLE%5D&ads.content_episode=%5BEPISODE_NO%5D&ads.content_length=%5BCONTENT_LENGTH%5D&ads.device.dnt=%7BTARGETOPT%7D&ads.app_domain=%7BAPP_DOMAIN%7D&nh=true&ads.device_did=%7BPSID%7D&ads.device_dnt=%7BTARGETOPT%7D&ads.app_domain=%7BAPP_DOMAIN%7D&ads.app_name=%7BAPP_NAME%7D&ads.ssai_vendor=SSSLIVE&ads.afsdk_params=%7BAFSDK_VALUE%7D&ads.service_id=KR260000274
-
-#EXTINF:-1 tvg-name="Pluto TV Yoga" tvg-logo="https://i.imgur.com/G18Sv08.png" group-title="Korean Tv", Pluto TV Yoga
-https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5d8bcf50672e87000965e6eb/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=DNT&architecture=&buildVersion=&clientDeviceType=0&deviceDNT=0&deviceId=web&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=DNT&includeExtendedEvents=false&serverSideAds=false&sid=123
-
-#EXTINF:-1 tvg-name="Pluto TV Fitness" tvg-logo="https://i.imgur.com/3Hs6kO8.png" group-title="Korean Tv", Pluto TV Fitness
-https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5d8bcf15672e87000965e6ea/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=DNT&architecture=&buildVersion=&clientDeviceType=0&deviceDNT=0&deviceId=web&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=DNT&includeExtendedEvents=false&serverSideAds=false&sid=123
-
-#EXTINF:-1 tvg-name="CTS 기독교" tvg-logo="https://i.imgur.com/z3L8uNB.png" group-title="Korean Tv", CTS 기독교
-https://video.cdn.cts.tv/index_2.m3u8
-
-#EXTINF:-1 tvg-name="YTN" tvg-logo="https://pjytv.760515.xyz/logo/YTN.png" group-title="Korean Tv", YTN
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/YTN-playlist.m3u8
-
-#EXTINF:-1 tvg-name="YTN2" tvg-logo="https://i.imgur.com/g6Nhwmb.png" group-title="Korean Tv", YTN2
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/YTN2-playlist.m3u8
-
-#EXTINF:-1 tvg-name="YTN Science" tvg-logo="https://pjytv.760515.xyz/logo/YTN%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4.png" group-title="Korean Tv", YTN Science
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/YTN사이언스-playlist.m3u8
-
-#EXTINF:-1 tvg-name="Yonhap News TV" tvg-logo="https://pjytv.760515.xyz/logo/연합뉴스TV.png" group-title="Korean Tv", Yonhap News TV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/연합뉴스TV-playlist.m3u8
 
 #EXTINF:-1 tvg-name="Channel A" tvg-logo="https://pjytv.760515.xyz/logo/채널A.png" group-title="Korean Tv", Channel A
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
@@ -127,14 +104,6 @@ https://backup.760515.xyz/playlist/채널A-playlist.m3u8
 #EXTINF:-1 tvg-name="Channel A Plus" tvg-logo="https://pjytv.760515.xyz/logo/채널A플러스.png" group-title="Korean Tv", Channel A Plus
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/채널A플러스-playlist.m3u8
-
-#EXTINF:-1 tvg-name="TV CHOSUN" tvg-logo="https://pjytv.760515.xyz/logo/TV%20CHOSUN.png" group-title="Korean Tv", TV CHOSUN
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/TV CHOSUN-playlist.m3u8
-
-#EXTINF:-1 tvg-name="TV CHOSUN 2" tvg-logo="https://pjytv.760515.xyz/logo/TV%20CHOSUN%202.png" group-title="Korean Tv", TV CHOSUN 2
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/TV CHOSUN 2-playlist.m3u8
 
 #EXTINF:-1 tvg-name="MBN" tvg-logo="https://pjytv.760515.xyz/logo/MBN.png" group-title="Korean Tv", MBN
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
@@ -155,18 +124,6 @@ https://backup.760515.xyz/playlist/히스토리-playlist.m3u8
 #EXTINF:-1 tvg-name="NATV" tvg-logo="https://pjytv.760515.xyz/logo/국회방송(NATV).png" group-title="Korean Tv", NATV (국회방송)
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 https://backup.760515.xyz/playlist/국회방송(NATV)-playlist.m3u8
-
-#EXTINF:-1 tvg-name="ANIBOX" tvg-logo="https://i.imgur.com/5SZfGmy.png" group-title="Korean Tv", ANIBOX
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/ANIBOX-playlist.m3u8
-
-#EXTINF:-1 tvg-name="Animax" tvg-logo="https://pjytv.760515.xyz/logo/애니맥스.png" group-title="Korean Tv", Animax (애니맥스)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/애니맥스-playlist.m3u8
-
-#EXTINF:-1 tvg-name="Tooniverse" tvg-logo="https://pjytv.760515.xyz/logo/투니버스.png" group-title="Korean Tv", Tooniverse (투니버스)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-https://backup.760515.xyz/playlist/투니버스-playlist.m3u8
 
 #EXTINF:-1 tvg-name="SBS G1" tvg-logo="https://i.imgur.com/4LHX71N.png" group-title="Korean Tv", SBS G1
 http://61.82.49.4:1935/live/_definst_/tv.stream/chunklist_w432889607.m3u8
@@ -219,37 +176,29 @@ http://amdlive-ch01.ctnd.com.edgesuite.net/arirang_3ch/smil:arirang_3ch.smil/pla
 #EXTINF:-1 tvg-name="EBS English" tvg-logo="https://i.imgur.com/5wLJzb0.png" group-title="Korean Tv", EBS English
 https://ebsonair.ebs.co.kr/plus3familypc/familypc1m/playlist.m3u8
 
-#EXTINF:-1 tvg-name="EBS Kids" tvg-logo="https://i.imgur.com/62oo8Bx.png" group-title="Korean Tv", EBS Kids
-https://ebsonair.ebs.co.kr/ebsufamilypc/familypc1m/playlist.m3u8
-
-#EXTINF:-1 tvg-name="EBS Plus 1" tvg-logo="https://i.imgur.com/aCeuhon.png" group-title="Korean Tv", EBS Plus 1
+#EXTINF:-1 tvg-name="EBS Plus 1" tvg-logo="https://i.imgur.com/5wLJzb0.png" group-title="Korean Tv", EBS Plus 1
 https://ebsonair.ebs.co.kr/plus1familypc/familypc1m/playlist.m3u8
 
-#EXTINF:-1 tvg-name="EBS Plus 2" tvg-logo="https://i.imgur.com/pllIMGi.png" group-title="Korean Tv", EBS Plus 2
+#EXTINF:-1 tvg-name="EBS Plus 2" tvg-logo="https://i.imgur.com/5wLJzb0.png" group-title="Korean Tv", EBS Plus 2
 https://ebsonair.ebs.co.kr/plus2familypc/familypc1m/playlist.m3u8
 
-#EXTINF:-1 tvg-name="CJ OnStyle Plus" tvg-logo="https://i.imgur.com/OYmOL20.png" group-title="Korean Tv", CJ OnStyle+
-https://live-ch2.cjonstyle.net/cjosplus/live2/playlist.m3u8
+#EXTINF:-1 tvg-name="YTN" tvg-logo="https://pjytv.760515.xyz/logo/YTN.png" group-title="Korean Tv", YTN
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+https://backup.760515.xyz/playlist/YTN-playlist.m3u8
 
-#EXTINF:-1 tvg-name="GS My Shop" tvg-logo="https://image.gsshop.com/ui/gsshop/common/images/header/h1_logo.png" group-title="Korean Tv", GS My Shop
-https://gstv-myshop.gsshop.com/myshop_hd/myshop_hd.stream/playlist.m3u8
+#EXTINF:-1 tvg-name="YTN2" tvg-logo="https://i.imgur.com/g6Nhwmb.png" group-title="Korean Tv", YTN2
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+https://backup.760515.xyz/playlist/YTN2-playlist.m3u8
 
-#EXTINF:-1 tvg-name="Gongyoung Shopping" tvg-logo="https://i.imgur.com/JiSfEBv.png" group-title="Korean Tv", Gongyoung Shopping
-https://etv.publichs.com/live5.stream/playlist.m3u8
+#EXTINF:-1 tvg-name="Yonhap News TV" tvg-logo="https://pjytv.760515.xyz/logo/연합뉴스TV.png" group-title="Korean Tv", Yonhap News TV
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+https://backup.760515.xyz/playlist/연합뉴스TV-playlist.m3u8
 
-#EXTINF:-1 tvg-name="BTN TV" tvg-logo="https://i.imgur.com/sOoS7RQ.png" group-title="Korean Tv", BTN TV
-https://btn.nowcdn.co.kr/btn/btnlive2m/playlist.m3u8
-
-#EXTINF:-1 tvg-name="FGTV" tvg-logo="https://i.ibb.co/crxz0fd/yfgc-hearder-logo.png" group-title="Korean Tv", FGTV
-https://fgtvlive.fgtv.com/smil:fgtv.smil/playlist.m3u8
-
-#EXTINF:-1 tvg-name="ABN Gyeonggi" tvg-logo="https://www.abn.co.kr/resources/images/logo.png" group-title="Korean Tv", ABN Gyeonggi
-https://vod2.abn.co.kr/IPHONE/abn.m3u8
-
-#EXTINF:-1 tvg-name="KBS Dokdo Island Cam" tvg-logo="https://i.imgur.com/7mZnPO5.png" group-title="Korean Tv", KBS Dokdo Live Cam
+#EXTINF:-1 tvg-name="KBS Dokdo" tvg-logo="https://i.imgur.com/Asu5pE9.png" group-title="Korean Tv", KBS Dokdo
 http://kbs-dokdo.gscdn.com/dokdo_300/dokdo_300.stream/playlist.m3u8
+
 # ==========================================
-# ⚽ GLOBAL SPORTS (CLEARKEY / DIRECT)
+# ⚽ SPORTS (GLOBAL & REGIONAL)
 # ==========================================
 
 #EXTINF:-1 tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-id="beIN Sports 1 Indonesia" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/e5/Logo_bein_sports_1.png" group-title="Sports Channels",beIN Sports 1
@@ -276,21 +225,17 @@ https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/8m8cd46i1t/out/v1
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
 https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/q4u5nwaogz/out/v1/18de6d3e65934f3a8de4358e69eab86c/cenc.mpd
 
-#EXTINF:-1 tvg-id="SPOTV" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://www.visionplus.id/images/repository/957/49957-SNAPSHOT-l.png" group-title="Sports Channels",SpoTV (Vision+)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=119&type=drm&token=KITKATTV
-https://d3b0v7fggu5zwm.cloudfront.net/out/v1/b4814ae93ca84dd3bb5b0aff76ca263f/index.mpd
+#EXTINF:-1 tvg-id="SPOTV 2" tvg-logo="https://thumbor.prod.vidiocdn.com/7w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/17140/spotv2.jpg" group-title="Sports Channels",SPOTV 2 (MotoGP & Badminton)
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000138/1024.m3u8
 
-#EXTINF:-1 tvg-id="SPOTV 2" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://www.visionplus.id/images/repository/960/49960-SNAPSHOT-l.png" group-title="Sports Channels",SpoTV 2 (Vision+)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=120&type=drm&token=KITKATTV
-https://d2tjypxxy769fn.cloudfront.net/out/v1/46d9cf39b9a84183b8d5022ac8f4bc41/index.mpd
+#EXTINF:-1 tvg-id="Soccer Channel" tvg-logo="https://mimipipi22.github.io/logo/sports/soccer.jpg" group-title="Sports Channels",Soccer Channel
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000144/1024.m3u8
+
+#EXTINF:-1 tvg-id="Sportstar 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/d/d7/Sportstars_2.png" group-title="Sports Channels",Sportstar 2
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000124/1024.m3u8
+
+#EXTINF:-1 tvg-id="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="Sports Channels",TVRI Sport HD (Dens)
+https://op-flashcon-digdayahd-1.dens.tv/h/h19/index.m3u8?app_type=web&userid=lite&chname=TVRI_Sport
 
 #EXTINF:-1 tvg-id="plex.tv.F1.Channel.plex" tvg-logo="https://logodownload.org/wp-content/uploads/2024/05/f1-tv-logo.png" group-title="Sports Channels",F1 TV
 #KODIPROP:inputstreamaddon=inputstream.adaptive
@@ -300,7 +245,7 @@ https://d2tjypxxy769fn.cloudfront.net/out/v1/46d9cf39b9a84183b8d5022ac8f4bc41/in
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
 https://a184aivottlinear-a.akamaihd.net/OTTB/iad-nitro/live/clients/dash/enc/5fjow0mrvw/out/v1/f870533ee24b4f3bb98d2afe4b1e1bac/cenc.mpd
 
-#EXTINF:-1 tvg-id="plex.tv.MotoGP.Channel.plex" tvg-name="" tvg-logo="https://cdn.motorsport.com/images/mgl/YN1RZ4b2/s1000/motogp-logo.jpg" group-title="Sports Channels",MotoGP Channel
+#EXTINF:-1 tvg-id="plex.tv.MotoGP.Channel.plex" tvg-logo="https://cdn.motorsport.com/images/mgl/YN1RZ4b2/s1000/motogp-logo.jpg" group-title="Sports Channels",MotoGP Channel
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=dash
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
@@ -356,12 +301,12 @@ https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/ihys8nw4wv/out/v1
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
 https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/cscevwljkq/out/v1/972185041b244140860b7d56398e9aaf/cenc.mpd
 
-#EXTINF:-1 tvg-id="Motorvision" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://i.imgur.com/WhTcCyi.jpeg" group-title="Sports Channels",MOTORVISION+ (DensTV)
+#EXTINF:-1 tvg-id="Motorvision" tvg-logo="https://i.imgur.com/WhTcCyi.jpeg" group-title="Sports Channels",MOTORVISION+ (DensTV)
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0/v2206
 #EXTVLCOPT:http-referrer=https://www.dens.tv/
 https://op-flashcon-digdayahd-1.dens.tv/h/h09/index.m3u8?app_type=web&userid=lite&chname=Motorvision%2B
 
-#EXTINF:-1 tvg-name="" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-id="" tvg-logo="https://mimipipi22.github.io/logo/antik/eurosport1.jpg" group-title="Sports Channels",EUROSPORT 1
+#EXTINF:-1 tvg-name="EUROSPORT 1" tvg-logo="https://mimipipi22.github.io/logo/antik/eurosport1.jpg" group-title="Sports Channels",EUROSPORT 1
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=dash
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
@@ -369,90 +314,16 @@ https://op-flashcon-digdayahd-1.dens.tv/h/h09/index.m3u8?app_type=web&userid=lit
 #EXTVLCOPT:http-user-agent=Mozilla/5.0
 https://dash2.antik.sk/stream/nvidia_eurosport1/playlist_cenc.mpd
 
-#EXTINF:-1 tvg-name="" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-id="" tvg-logo="https://mimipipi22.github.io/logo/antik/eurosport2.jpg" group-title="Sports Channels",EUROSPORT 2
+#EXTINF:-1 tvg-name="EUROSPORT 2" tvg-logo="https://mimipipi22.github.io/logo/antik/eurosport2.jpg" group-title="Sports Channels",EUROSPORT 2
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=dash
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=11223344556677889900112233445566:4b80724d0ef86bcb2c21f7999d67739d
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (iPhone14,6; U; CPU iPhone OS 15_4 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Version/10.0 Mobile/19E241 Safari/602.1
+#EXTVLCOPT:http-user-agent=Mozilla/5.0
 https://dash2.antik.sk/stream/nvidia_eurosport2/playlist_cenc.mpd
+
 # ==========================================
-# 🏆 VISION+ SPORTS (WIDEVINE DRM)
-# ==========================================
-
-#EXTINF:-1 tvg-id="Sportstars.id" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-name="Sportstars 1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/3f/Sportstars.png" group-title="Sports Channels",SPORTSTARS
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=112&type=drm&token=KITKATTV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/index.mpd|Referer=https://www.visionplus.id/&Origin=https://www.visionplus.id&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-
-#EXTINF:-1 tvg-id="Sportstars.2.id" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-name="Sportstars 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/d/d7/Sportstars_2.png" group-title="Sports Channels",SPORTSTARS 2 (Vision+)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=113&type=drm&token=KITKATTV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-https://d3b0v7fggu5zwm.cloudfront.net/out/v1/d2c68a3dfb644808b416bd90dcc92d5f/index.mpd|Referer=https://www.visionplus.id/&Origin=https://www.visionplus.id&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-
-#EXTINF:-1 tvg-id="Sportstars.3.id" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-name="Sportstars 3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a3/Sportstars_3.png" group-title="Sports Channels",SPORTSTARS 3 (Vision+)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=114&type=drm&token=KITKATTV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-https://d2xz2v5wuvgur6.cloudfront.net/out/v1/6f5596513af749c19d0bcdac013dda3c/index.mpd|Referer=https://www.visionplus.id/&Origin=https://www.visionplus.id&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-
-#EXTINF:-1 tvg-id="Sportstars.4.id" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-name="Sportstars 4" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a4/Sportstars_4.png" group-title="Sports Channels",SPORTSTARS 4 (Vision+)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=205&type=drm&token=KITKATTV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-https://d2xz2v5wuvgur6.cloudfront.net/out/v1/2fcc58ccec8c45e9aa094fb980eb642d/index.mpd|Referer=https://www.visionplus.id/&Origin=https://www.visionplus.id&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-
-#EXTINF:-1 tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-id="beIN Sports 1 Indonesia" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/e5/Logo_bein_sports_1.png" group-title="Sports Channels",beIN Sports 1 (Vision+)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=122&type=drm&token=KITKATTV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-https://d6m3sfa7e58z5.cloudfront.net/out/v1/3b0660e05eed4d769521eb0275aab3ab/index.mpd|Referer=https://www.visionplus.id/&Origin=https://www.visionplus.id&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-
-#EXTINF:-1 tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-id="beIN Sports 2 Indonesia" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/c/c9/Logo_bein_sports_2.png" group-title="Sports Channels",beIN Sports 2 (Vision+)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=123&type=drm&token=KITKATTV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-https://d6m3sfa7e58z5.cloudfront.net/out/v1/cfca527d0f16403396a71b2d3d54c32f/index.mpd|Referer=https://www.visionplus.id/&Origin=https://www.visionplus.id&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-
-#EXTINF:-1 tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-id="beIN Sports 3 Indonesia" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/c/c4/Logo_bein_sports_3.png" group-title="Sports Channels",beIN Sports 3 (Vision+)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=124&type=drm&token=KITKATTV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-https://d6m3sfa7e58z5.cloudfront.net/out/v1/a265695db5cb461095cbfefc02ad793b/index.mpd|Referer=https://www.visionplus.id/&Origin=https://www.visionplus.id&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-
-#EXTINF:-1 tvg-id="Soccer.Channel.id" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-name="Soccer Channel" tvg-logo="https://mimipipi22.github.io/logo/sports/soccer.jpg" group-title="Sports Channels",SOCCER CHANNEL(Vision+)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=115&type=drm&token=KITKATTV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-https://d2xz2v5wuvgur6.cloudfront.net/out/v1/63c0da12bb4d48afbaf053f51dff2353/index.mpd|Referer=https://www.visionplus.id/&Origin=https://www.visionplus.id&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-# ==========================================
-# Indonesia
+# 🇮🇩 INDONESIA CHANNELS
 # ==========================================
 
 #EXTINF:-1 tvg-id="RTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rtv.png" group-title="Indonesia Channels",RTV
@@ -467,24 +338,23 @@ http://72.60.79.72:8765/vidio/204.m3u8
 #EXTINF:-1 tvg-id="Moji" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_moji.png" group-title="Indonesia Channels",Moji
 http://72.60.79.72:8765/vidio/206.m3u8
 
+#EXTINF:-1 tvg-id="Moji" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_moji.png" group-title="Indonesia Channels",Moji TV (Dens Backup)
+https://op-flashcon-digdayahd-1.dens.tv/h/h207/index.m3u8
+
 #EXTINF:-1 tvg-id="Mentari TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_mentaritv.png" group-title="Indonesia Channels",Mentari TV
 http://72.60.79.72:8765/vidio/8237.m3u8
 
-#EXTINF:-1 tvg-id="Trans7.id@SD" group-title="Trial Channel" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_trans7.png",Trans7
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
+#EXTINF:-1 tvg-id="Trans TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_transtv.png" group-title="Indonesia Channels",Trans TV
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=7&type=drm&token=apistech
-https://d2tjypxxy769fn.cloudfront.net/out/v1/0fd7b7d368bc44bc9b4dece20acc3e33/index.mpd
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vidio/license?id=733
+http://72.60.79.72:8765/vidio/733.mpd
 
-#EXTINF:-1 tvg-id="TransTV.id@SD" group-title="Trial Channel" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_transtv.png",TransTV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
+#EXTINF:-1 tvg-id="Trans7" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_trans7.png" group-title="Indonesia Channels",Trans7
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=6&type=drm&token=apistech
-https://d2xz2v5wuvgur6.cloudfront.net/out/v1/7a69cfc9e135493f87ac4efd63000429/index.mpd
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vidio/license?id=734
+http://72.60.79.72:8765/vidio/734.mpd
 
 #EXTINF:-1 tvg-id="ANTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_antv.png" group-title="Indonesia Channels",ANTV
 http://72.60.79.72:8765/vidio/782.m3u8
@@ -516,89 +386,14 @@ http://72.60.79.72:8765/vidio/6165.m3u8
 #EXTINF:-1 tvg-id="MDTV" tvg-logo="https://thumbor.prod.vidiocdn.com/6w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/875/mdtv.jpg" group-title="Indonesia Channels",MDTV
 http://72.60.79.72:8765/vidio/875.m3u8
 
-#EXTINF:-1 tvg-id="RCTI.id@SD" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://thumbor.prod.vidiocdn.com/9c-sEWp6Du7DoWDn56cjma0gMpY=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/665/337c4d.png" group-title="Indonesia Channels",RCTI (Vision+)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=1&type=drm&token=KITKATTV
-https://r-plus.sedotcw3.workers.dev/index.m3u8?id=rcti
-
-#EXTINF:-1 tvg-id="MNCTV.id@SD" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://thumbor.prod.vidiocdn.com/H-nyot3OCOIHY7qtKmguKyIUeBw=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/870/ca65b5.png" group-title="Indonesia Channels",MNC TV (Vision+)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=2&type=drm&token=KITKATTV
-https://r-plus.sedotcw3.workers.dev/index.m3u8?id=mnctv
-
-#EXTINF:-1 tvg-id="GTV.id@SD" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://thumbor.prod.vidiocdn.com/6uEQ8IC06gH6XiMTVHtlRr1HAOE=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/778/810229.png" group-title="Indonesia Channels",Global TV (Vision+)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=3&type=drm&token=KITKATTV
-https://d2tjypxxy769fn.cloudfront.net/out/v1/b8b9b1d5f80f45649b4a3619291551ab/index.mpd
-
-#EXTINF:-1 tvg-id="ArirangTV.kr@SD" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://www.mncvision.id/userfiles/image/channel/channel_351.png" group-title="Korean Channels",Arirang (Vision+)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=164&type=drm&token=KITKATTV
-https://dv6fza91pwlw3.cloudfront.net/out/v1/6f059cfe2653405aab54a7887f92ac39/index.mpd
-
-#EXTINF:-1 tvg-id="tvNAsia.hk@SD" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://e7.pngegg.com/pngimages/120/627/png-clipart-south-korea-tvn-television-channel-television-show-fight-miscellaneous-television-thumbnail.png" group-title="Korean Channels",TVN (Vision+)
-#KODIPROP:inputstream.adaptive.stream_headers=origin=https://www.visionplus.id&referer=https://www.visionplus.id/&user-agent=Vision+/11.3.7 (4.2407240952) Vision+ (Linux;Android 11) ExoPlayerLib/2.19.1
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=73&type=drm&token=KITKATTV
-https://d84q7nw4qf3j3.cloudfront.net/out/v1/6dc5412d26ea4e65961c825d866f2a34/index.mpd
-
-#EXTINF:-1 tvg-id="tvNMoviesAsia.hk@SD" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://www.mncvision.id/userfiles/image/channel/channel_25.png" group-title="Korean Channels",TvN movies HD (Vision+)
-#KODIPROP:inputstream.adaptive.stream_headers=origin=https://www.visionplus.id&referer=https://www.visionplus.id/&user-agent=Vision+/11.3.7 (4.2407240952) Vision+ (Linux;Android 11) ExoPlayerLib/2.19.1
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=46&type=drm&token=KITKATTV
-https://d2tjypxxy769fn.cloudfront.net/out/v1/096d5cf064294e7ea3a7f59ee2899669/index.mpd
-
-#EXTINF:-1 tvg-id="KBS.World.id" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-name="KBS World (HD)" tvg-logo="https://mimipipi22.github.io/logo/international/kbsworld.jpg" group-title="Korean Channels",KBS World (HD)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=hls
-#KODIPROP:contentlookup=false
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
-https://freem3u.xyz/api/live/play.m3u8?vid=213
-
-#EXTINF:-1 tvg-logo="https://cdn88-accio.its-newid.net/channel/newid_008/lg_channels/img/channel_logo/default/channel_logo.png" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" group-title="Korean Channels",K-DRAMA+
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0
-https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=425
-
-#EXTINF:-1 tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://cdn88-accio.its-newid.net/channel/newid_009/lg_channels/img/default/channel_logo/channel_logo.png" group-title="Korean Channels",NEW KMOVIES
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0
-https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=7737
-
-#EXTINF:-1 tvg-id="iNews.id@SD" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://thumbor.prod.vidiocdn.com/BmeGg2IWkB_FAVPDviCk8gP8qcw=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/5409/c40666.png" group-title="Indonesia Channels",iNews
-#EXTVLCOPT:http-user-agent=android-R+
-#EXTVLCOPT:http-referrer=https://www.rctiplus.com/
-https://r-plus.sedotcw3.workers.dev/index.m3u8?id=inews
-
 #EXTINF:-1 tvg-id="CNNIndonesia.id@SD" tvg-logo="https://cdn.cnnindonesia.com/cnnid/images/logo_cnn_fav.png?v=10.15.2" group-title="Indonesia Channels",CNN Indonesia
-#EXTVLCOPT:http-referrer=https://www.dens.tv/
-#EXTVLCOPT:http-origin=https://www.dens.tv
 https://op-flashcon-digdayahd-1.dens.tv/h/h14/index.m3u8
 
 #EXTINF:-1 tvg-id="CNBCIndonesia.id@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/id/3/35/CNBC_Indonesia.png" group-title="Indonesia Channels",CNBC Indonesia
-#EXTVLCOPT:http-referrer=https://www.dens.tv/
-#EXTVLCOPT:http-origin=https://www.dens.tv
 https://op-flashcon-digdayahd-1.dens.tv/h/h15/index.m3u8
 
 #EXTINF:-1 tvg-id="NusantaraTV.id@SD" tvg-logo="https://thumbor.prod.vidiocdn.com/npPL9VlWMJ5owmeupR7ucPjdGl4=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/7432/bfecbc.png" group-title="Indonesia Channels",Nusantara TV
 https://nusantaratv.siar.us/nusantaratv/live/playlist.m3u8
-
-#EXTINF:-1 tvg-id="GarudaTV.id@SD" tvg-logo="https://thumbor.prod.vidiocdn.com/qtIYvE-mjwMPwd-VUxilo2gFiAI=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/18162/b4bea2.png" group-title="Indonesia Channels",Garuda TV
-https://hgmtv.com:19360/garudatvlivestreaming/480p.m3u8
 
 #EXTINF:-1 tvg-id="JTV" tvg-logo="https://thumbor.prod.vidiocdn.com/RFPy_yTRC9PPPbHGeJlLQgt-RaE=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/9713/a11faf.png" group-title="Indonesia Channels",JTV
 http://72.60.79.72:8765/vidio/9713.m3u8
@@ -606,50 +401,71 @@ http://72.60.79.72:8765/vidio/9713.m3u8
 #EXTINF:-1 tvg-id="DAAITV.id@SD" tvg-logo="https://thumbor.prod.vidiocdn.com/0r_rhIVANc6dsGvQ76616ZSqF04=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/6482/e83fcf.png" group-title="Indonesia Channels",DAAI TV
 https://pull.daaiplus.com/live-DAAIPLUS/live-DAAIPLUS_HD.m3u8
 
-#EXTINF:-1 tvg-id="SindoNewsTV.id@SD" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://nabelsakha.com/wp-content/uploads/2023/10/Sindonews.png" group-title="Indonesia Channels",SindoNews (Vision+)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=5&type=drm&token=KITKATTV
-https://d43tg978oium5.cloudfront.net/out/v1/8c2df39f9b2842fbb997b89378841ad9/index.mpd
+#EXTINF:-1 tvg-id="Sindonews TV" tvg-logo="https://nabelsakha.com/wp-content/uploads/2023/10/Sindonews.png" group-title="Indonesia Channels",Sindonews TV
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000128/1024.m3u8
 
-#EXTINF:-1 tvg-id="ROCKAction.sg@SD" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://i.imgur.com/l6lmlqG.png" group-title="Movies & Entertainment",Rock Action (Vision+)
-#KODIPROP:inputstream.adaptive.stream_headers=origin=https://www.visionplus.id&referer=https://www.visionplus.id/&user-agent=Vision+/11.3.7 (4.2407240952) Vision+ (Linux;Android 11) ExoPlayerLib/2.19.1
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=93&type=drm&token=KITKATTV
-https://d84q7nw4qf3j3.cloudfront.net/out/v1/010bb28c19b64975b318d3b00f58b18b/index.mpd
+#EXTINF:-1 tvg-id="Celebrities TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/e0/Celebrities_TV_logo.png" group-title="Indonesia Channels",Celebrities TV
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000015/1024.m3u8
 
-#EXTINF:-1 tvg-id="56" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://www.visionplus.id/images/repository/623/623-LOGO-m.png" group-title="Kids Channel",Kids TV (Vision+)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=56&type=drm&token=KITKATTV
-https://d3b0v7fggu5zwm.cloudfront.net/out/v1/9041826689ae4f9c9619576d411fa989/index.mpd
+#EXTINF:-1 tvg-id="Musik TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/ea/Musik_TV.png" group-title="Indonesia Channels",Musik TV
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000129/1024.m3u8
 
-#EXTINF:-1 tvg-id="AnimaxAsia.sg@SD" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" group-title="Kids Channel" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_animax.png",Animax (Vision+)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=65&type=drm&token=KITKATTV
-https://d84q7nw4qf3j3.cloudfront.net/out/v1/ab3ef0f0e4144c3c8b7e60f1873a3bcc/index.mpd
+# ==========================================
+# 🎬 MOVIES & ENTERTAINMENT
+# ==========================================
 
-#EXTINF:-1 tvg-id="BBCEarth.uk@Asia" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/5/56/Sony_BBC_Earth.png" group-title="Knowledge and Documentary",BBC Earth (Vision+)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=102&type=drm&token=KITKATTV
-https://d84q7nw4qf3j3.cloudfront.net/out/v1/4e5b2a283adf462c8b6b55b2ef059fac/index.mpd
+#EXTINF:-1 tvg-id="Rock Action" tvg-logo="https://i.imgur.com/l6lmlqG.png" group-title="Movies & Entertainment",Rock Action
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000120/1024.m3u8
 
-#EXTINF:-1 tvg-id="Love Nature" tvg-url="https://raw.githubusercontent.com/apistech/project/refs/heads/main/epgs/guide.xml" tvg-logo="https://blueantmedia.com/wp-content/uploads/2025/02/LoveNature2024_Logo_Coral-300x119.png" group-title="Knowledge and Documentary",Love Nature (Vision+)
-#KODIPROP:inputstream.adaptive.stream_headers=origin=https://www.visionplus.id&referer=https://www.visionplus.id/&user-agent=Vision+/11.3.7 (4.2407240952) Vision+ (Linux;Android 11) ExoPlayerLib/2.19.1
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://vision.mikrofast.web.id/license?id=105&type=drm&token=KITKATTV
-https://d2xz2v5wuvgur6.cloudfront.net/out/v1/15500e8f0dc44058ba0431d39a8fed57/index.mpd
+#EXTINF:-1 tvg-id="Rock Entertainment" tvg-logo="https://i.imgur.com/l6lmlqG.png" group-title="Movies & Entertainment",Rock Entertainment
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000110/1024.m3u8
+
+#EXTINF:-1 tvg-id="Hits Movies" tvg-logo="https://static.wikia.nocookie.net/logos/images/1/16/HITS_Movies_logo.png" group-title="Movies & Entertainment",Hits Movies
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000139/1024.m3u8
+
+#EXTINF:-1 tvg-id="Celestial Movies" tvg-logo="https://i.imgur.com/l6lmlqG.png" group-title="Movies & Entertainment",Celestial Movies
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000032/1024.m3u8
+
+#EXTINF:-1 tvg-id="Zee Bioskop" tvg-logo="https://i.imgur.com/l6lmlqG.png" group-title="Movies & Entertainment",Zee Bioskop
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000061/1024.m3u8
+
+#EXTINF:-1 tvg-logo="https://cdn88-accio.its-newid.net/channel/newid_008/lg_channels/img/channel_logo/default/channel_logo.png" group-title="Movies & Entertainment",K-DRAMA+
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=425
+
+#EXTINF:-1 tvg-logo="https://cdn88-accio.its-newid.net/channel/newid_009/lg_channels/img/default/channel_logo/channel_logo.png" group-title="Movies & Entertainment",NEW KMOVIES
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=7737
+
+#EXTINF:-1 tvg-id="KBS.World.id" tvg-name="KBS World (HD)" tvg-logo="https://mimipipi22.github.io/logo/international/kbsworld.jpg" group-title="Movies & Entertainment",KBS World (HD)
+https://freem3u.xyz/api/live/play.m3u8?vid=213
+
+# ==========================================
+# 👶 KIDS CHANNEL
+# ==========================================
+
+#EXTINF:-1 tvg-id="Kids TV" tvg-logo="https://www.visionplus.id/images/repository/623/623-LOGO-m.png" group-title="Kids Channel",Kids TV
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000135/1024.m3u8
+
+#EXTINF:-1 tvg-name="Animax" tvg-logo="https://pjytv.760515.xyz/logo/애니맥스.png" group-title="Kids Channel",Animax
+https://backup.760515.xyz/playlist/애니맥스-playlist.m3u8
+
+#EXTINF:-1 tvg-name="Tooniverse" tvg-logo="https://pjytv.760515.xyz/logo/투니버스.png" group-title="Kids Channel",Tooniverse
+https://backup.760515.xyz/playlist/투니버스-playlist.m3u8
+
+#EXTINF:-1 tvg-name="ANIBOX" tvg-logo="https://i.imgur.com/5SZfGmy.png" group-title="Kids Channel",ANIBOX
+https://backup.760515.xyz/playlist/ANIBOX-playlist.m3u8
+
+#EXTINF:-1 tvg-name="EBS Kids" tvg-logo="https://i.imgur.com/62oo8Bx.png" group-title="Kids Channel",EBS Kids
+https://ebsonair.ebs.co.kr/ebsufamilypc/familypc1m/playlist.m3u8
+
+# ==========================================
+# 📚 KNOWLEDGE & DOCUMENTARY
+# ==========================================
+
+#EXTINF:-1 tvg-id="BBC Earth" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/5/56/Sony_BBC_Earth.png" group-title="Knowledge and Documentary",BBC Earth
+http://202.80.222.20/cdn/iptv/Tvod/001/channel2000116/1024.m3u8
+
+#EXTINF:-1 tvg-id="Dens Knowledge" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_knowledge.png" group-title="Knowledge and Documentary",DENS Knowledge
+https://op-flashcon-digdayahd-1.dens.tv/h/h236/index.m3u8?app_type=web&userid=lite&chname=DensKnowledge
+
+#EXTINF:-1 tvg-name="History Korea" tvg-logo="https://pjytv.760515.xyz/logo/히스토리.png" group-title="Knowledge and Documentary",History Korea
+https://backup.760515.xyz/playlist/히스토리-playlist.m3u8

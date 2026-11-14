@@ -229,6 +229,18 @@ async function getVidioStream(channelId) {
       addLog(`[Stream] Event ${channelId} not yet started. Falling back to Indosiar 205.`);
       if (channelId !== '205') return await getVidioStream('205');
     }
+    if (errText.includes('right_blocked')) {
+      addLog(`[Stream] Channel ${channelId} right_blocked. Checking redirect...`);
+      const bannerMatch = errText.match(/\/live\/(\d+)/);
+      if (bannerMatch && bannerMatch[1] && bannerMatch[1] !== channelId) {
+        addLog(`[Stream] Attempting redirect to event channel ${bannerMatch[1]}...`);
+        try {
+          return await getVidioStream(bannerMatch[1]);
+        } catch (e2) {
+          addLog(`[Stream] Event stream ${bannerMatch[1]} failed: ${e2.message}`);
+        }
+      }
+    }
     throw new Error(`Vidio API error (${channelId}): ${apiRes.status} ${errText}`);
   }
 
@@ -392,6 +404,175 @@ const server = http.createServer(async (req, res) => {
       if (fs.existsSync(p)) {
         res.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8' });
         res.end(fs.readFileSync(p));
+        return;
+      }
+    }
+  }
+
+  // ==========================================
+  // --- LIVE EVENT MANAGEMENT & STREAMING ---
+  // ==========================================
+  const event1File = path.join(__dirname, 'event_url.txt');
+  const event2File = path.join(__dirname, 'event2_url.txt');
+
+  // Web UI & API to set or view Live Event URL
+  if (rawUrl === '/event' || rawUrl === '/set-event' || rawUrl.startsWith('/event?') || rawUrl.startsWith('/set-event?')) {
+    const parsedUrl = new URL(rawUrl, `http://${host}`);
+    let newUrl = parsedUrl.searchParams.get('url');
+    const slot = parsedUrl.searchParams.get('slot') === '2' ? 2 : 1;
+    const targetFile = slot === 2 ? event2File : event1File;
+
+    if (req.method === 'POST') {
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      const body = Buffer.concat(chunks).toString('utf-8');
+      const params = new URLSearchParams(body);
+      if (params.has('url')) newUrl = params.get('url');
+    }
+
+    if (typeof newUrl === 'string') {
+      newUrl = newUrl.trim();
+      fs.writeFileSync(targetFile, newUrl, 'utf-8');
+      addLog(`[Live Event] Slot ${slot} updated to: ${newUrl || '(cleared)'}`);
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Event Updated</title><meta http-equiv="refresh" content="2;url=/event"></head><body style="background:#0f172a;color:#fff;font-family:sans-serif;text-align:center;padding:50px;"><h2 style="color:#38bdf8;">✅ Live Event ${slot} Berhasil Diupdate!</h2><p>Target: <code>${newUrl || 'Kosong (Default / Auto Match)'}</code></p><p style="color:#94a3b8;">Mengarahkan kembali dalam 2 detik...</p></body></html>`);
+      return;
+    }
+
+    const cur1 = fs.existsSync(event1File) ? fs.readFileSync(event1File, 'utf-8').trim() : '';
+    const cur2 = fs.existsSync(event2File) ? fs.readFileSync(event2File, 'utf-8').trim() : '';
+
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Event Stream Manager</title>
+  <style>
+    body { background: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
+    .card { background: #1e293b; border-radius: 12px; padding: 25px; max-width: 650px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+    h1 { margin-top: 0; color: #38bdf8; font-size: 22px; display: flex; align-items: center; gap: 10px; }
+    .slot-box { background: #0f172a; border-radius: 8px; padding: 16px; margin-bottom: 20px; border: 1px solid #334155; }
+    .slot-title { font-weight: bold; margin-bottom: 8px; color: #f43f5e; display: flex; justify-content: space-between; }
+    .active-url { font-family: monospace; background: #1e293b; padding: 8px 12px; border-radius: 6px; font-size: 13px; word-break: break-all; color: #a5f3fc; border: 1px solid #475569; }
+    input[type=text] { width: 100%; box-sizing: border-box; padding: 12px; border-radius: 6px; border: 1px solid #475569; background: #1e293b; color: #fff; font-size: 14px; margin-top: 8px; }
+    button { background: #0284c7; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.2s; }
+    button:hover { background: #0369a1; }
+    .btn-danger { background: #e11d48; margin-left: 8px; }
+    .btn-danger:hover { background: #be123c; }
+    .m3u-link { font-size: 13px; color: #94a3b8; margin-top: 6px; }
+    .m3u-link a { color: #38bdf8; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🔴 Live Event Stream Manager</h1>
+    <p style="color:#94a3b8;font-size:14px;">Masukkan link streaming (.m3u8) atau ID Vidio saat ada event bola / pertandingan live. TV akan otomatis memutar link ini tanpa perlu ubah playlist.</p>
+
+    <div class="slot-box">
+      <div class="slot-title"><span>📺 LIVE EVENT 1</span> <span style="font-size:12px;color:#38bdf8;">Slot Utama</span></div>
+      <div class="active-url">${cur1 || '<i>(Belum diset - Otomatis Liga 1 / Soccer Channel)</i>'}</div>
+      <div class="m3u-link">Stream URL TV: <a href="/live/event.m3u8" target="_blank">http://${host}/live/event.m3u8</a></div>
+      <form method="POST" action="/event?slot=1">
+        <input type="text" name="url" placeholder="Paste link .m3u8 atau ID Vidio..." value="${cur1}">
+        <div style="display:flex;">
+          <button type="submit">💾 Simpan Slot 1</button>
+          <button type="button" class="btn-danger" onclick="location.href='/event?slot=1&url='">🗑️ Kosongkan</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="slot-box">
+      <div class="slot-title"><span>📺 LIVE EVENT 2</span> <span style="font-size:12px;color:#38bdf8;">Slot Cadangan</span></div>
+      <div class="active-url">${cur2 || '<i>(Belum diset - Kosong)</i>'}</div>
+      <div class="m3u-link">Stream URL TV: <a href="/live/event2.m3u8" target="_blank">http://${host}/live/event2.m3u8</a></div>
+      <form method="POST" action="/event?slot=2">
+        <input type="text" name="url" placeholder="Paste link .m3u8 atau ID Vidio..." value="${cur2}">
+        <div style="display:flex;">
+          <button type="submit">💾 Simpan Slot 2</button>
+          <button type="button" class="btn-danger" onclick="location.href='/event?slot=2&url='">🗑️ Kosongkan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>`);
+    return;
+  }
+
+  // Handle /live/event.m3u8 and /live/event2.m3u8 (or /event.m3u8)
+  const isEvent1 = rawUrl.startsWith('/live/event.m3u8') || rawUrl === '/event.m3u8';
+  const isEvent2 = rawUrl.startsWith('/live/event2.m3u8') || rawUrl === '/event2.m3u8';
+
+  if (isEvent1 || isEvent2) {
+    const targetFile = isEvent2 ? event2File : event1File;
+    let target = fs.existsSync(targetFile) ? fs.readFileSync(targetFile, 'utf-8').trim() : '';
+
+    // If not set and event 1, check auto Liga 1 / live match
+    if (!target && isEvent1) {
+      const match = await getActiveLiga1Match();
+      if (match) target = match.id;
+    }
+
+    // Fallback if still empty
+    if (!target) {
+      if (isEvent1) {
+        // Fallback to Soccer Channel
+        target = 'http://202.80.222.20/cdn/iptv/Tvod/001/channel2000144/1024.m3u8';
+      } else {
+        res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+        res.end('Belum ada siaran event live yang diatur pada slot ini.\\nAtur URL siaran di http://' + host + '/event');
+        return;
+      }
+    }
+
+    // Check if target is a Vidio Channel ID (numbers only)
+    if (/^\\d+$/.test(target)) {
+      try {
+        const streamData = await getVidioStream(target);
+        const remoteRes = await fetch(streamData.hls, {
+          headers: {
+            'Origin': 'https://www.vidio.com',
+            'Referer': 'https://www.vidio.com/',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          }
+        });
+        const m3u8Text = await remoteRes.text();
+        const rewritten = rewriteM3u8(m3u8Text, streamData.hls, host, proto);
+        res.writeHead(200, {
+          'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-cache, no-store'
+        });
+        res.end(rewritten);
+        return;
+      } catch (err) {
+        addLog(`[Live Event] Error streaming Vidio ID ${target}: ${err.message}`);
+      }
+    }
+
+    // Otherwise target is an external HTTP/HTTPS M3U8 URL
+    if (target.startsWith('http://') || target.startsWith('https://')) {
+      try {
+        const remoteRes = await fetch(target, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          }
+        });
+        const m3u8Text = await remoteRes.text();
+        const rewritten = rewriteM3u8(m3u8Text, target, host, proto);
+        res.writeHead(200, {
+          'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-cache, no-store'
+        });
+        res.end(rewritten);
+        return;
+      } catch (err) {
+        addLog(`[Live Event] Error streaming URL ${target}: ${err.message}`);
+        res.writeHead(502, { 'Content-Type': 'text/plain' });
+        res.end('Error streaming event: ' + err.message);
         return;
       }
     }
