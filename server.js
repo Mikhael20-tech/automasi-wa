@@ -276,7 +276,6 @@ function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
 
   const isVidio = manifestUrl.includes('vidio.com') || manifestUrl.includes('akamaized.net');
   const hasH264 = content.includes('CODECS="avc1');
-  let skipNext = false;
 
   for (let i = 0; i < rawLines.length; i++) {
     let l = rawLines[i].trim();
@@ -288,15 +287,8 @@ function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
     }
 
     if (isVidio) {
-      // Filter out duplicate backup audio and video pathways, keep only primary to prevent TV freeze
+      // Filter out duplicate backup audio, keep only primary to prevent TV freeze
       if (l.startsWith('#EXT-X-MEDIA:TYPE=AUDIO') && l.includes('backup')) {
-        continue;
-      }
-      if (l.startsWith('#EXT-X-STREAM-INF:') && l.includes('backup')) {
-        skipNext = true;
-        continue;
-      }
-      if (l.includes('/backup/')) {
         continue;
       }
       // Ensure primary audio is DEFAULT=YES so TV automatically binds audio to video
@@ -306,28 +298,34 @@ function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
     }
 
     if (l.startsWith('#EXT-X-STREAM-INF:')) {
+      let nextLine = '';
+      let j = i + 1;
+      while (j < rawLines.length && !rawLines[j].trim()) j++;
+      if (j < rawLines.length) nextLine = rawLines[j].trim();
+      i = j;
+
       // Prioritize standard H.264 (avc1) for maximum TV hardware decoding compatibility!
-      // Skip AV1 (av01) and HEVC (hvc1/hev1) if H.264 is available to prevent TV freezing/stuck pictures
       if (hasH264 && (l.includes('CODECS="av01') || l.includes('CODECS="hvc1') || l.includes('CODECS="hev1'))) {
-        skipNext = true;
         continue;
       }
+
+      // Filter out backup pathways for Vidio
+      if (isVidio && (l.includes('backup') || nextLine.includes('/backup/'))) {
+        continue;
+      }
+
       // Vidio Mobile accounts (Gold/Platinum Mobile) return 403 Forbidden on 1080p from Akamai.
       // Filter out 1080p so Android TV / ExoPlayer cleanly selects 720p HD as the top quality!
-      if (isVidio && (l.includes('1920x1080') || l.includes('1080p') || l.includes('RESOLUTION=1920x1080'))) {
-        skipNext = true;
+      if (isVidio && (l.includes('1920x1080') || l.includes('1080p') || nextLine.includes('-1080p/'))) {
         continue;
       }
-    } else if (skipNext) {
-      skipNext = false;
+
+      l = l.replace(/,PATHWAY-ID="[^"]+"/g, '');
+      lines.push(l);
+      if (nextLine) lines.push(nextLine);
       continue;
     }
 
-    if (isVidio && l.includes('-1080p/')) {
-      continue;
-    }
-
-    l = l.replace(/,PATHWAY-ID="[^"]+"/g, '');
     lines.push(l);
   }
 
@@ -1077,9 +1075,9 @@ const server = http.createServer(async (req, res) => {
           delete vidioTokenCache[chId];
           try {
             const freshData = await getVidioStream(chId);
-            const tokenMatch = (freshData.hls || '').match(/hdntl=[^&?\/]+/);
+            const tokenMatch = (freshData.hls || '').match(/hdnt[sl]=[^&?\/]+/);
             if (tokenMatch) {
-              targetUrl = targetUrl.replace(/hdntl=[^/]+/, tokenMatch[0]);
+              targetUrl = targetUrl.replace(/hdnt[sl]=[^/]+/, tokenMatch[0]);
               remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
             }
           } catch (eToken) {
