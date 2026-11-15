@@ -649,7 +649,7 @@ const server = http.createServer(async (req, res) => {
       addLog(`[Vision License ${channelId}] Received challenge: ${challengeBody.length} bytes`);
 
       const mediaMap = {
-        '1002': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/00000000000000001002',
+        '1002': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/HLS/de2cb5b125f744aaae2611e13ecfa4f0/00000000000000001002/00000000000000000112',
         '1010': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/d2c68a3dfb644808b416bd90dcc92d5f/00000000000000001010',
         '1012': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/113af3d432214f62bd6815f976bf2cd6/00000000000000001012'
       };
