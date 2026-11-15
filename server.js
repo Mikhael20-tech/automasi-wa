@@ -411,7 +411,10 @@ const server = http.createServer(async (req, res) => {
       const rewritten = rewriteM3u8(text, targetUrl, host, proto);
       res.writeHead(200, {
         'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
       });
       res.end(rewritten);
       return;
@@ -1097,21 +1100,46 @@ const server = http.createServer(async (req, res) => {
 
       const isM3u8 = new URL(targetUrl).pathname.endsWith('.m3u8') || (remoteRes.headers.get('content-type') || '').includes('mpegurl');
       if (isM3u8) {
+        if (req.method === 'HEAD') {
+          res.writeHead(remoteRes.status, {
+            'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
+            'Access-Control-Allow-Origin': '*',
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+          });
+          res.end();
+          return;
+        }
         const text = await remoteRes.text();
         const rewritten = rewriteM3u8(text, targetUrl, host, proto);
-        res.writeHead(remoteRes.status, { 'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
+        res.writeHead(remoteRes.status, {
+          'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        });
         res.end(rewritten);
         return;
       }
 
       const outHeaders = {
         'Access-Control-Allow-Origin': '*',
-        'Content-Type': remoteRes.headers.get('content-type') || 'application/octet-stream'
+        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+        'Access-Control-Allow-Headers': '*',
+        'Content-Type': remoteRes.headers.get('content-type') || (targetUrl.includes('.m4s') ? 'video/iso.segment' : (targetUrl.includes('.ts') ? 'video/MP2T' : 'application/octet-stream')),
+        'Accept-Ranges': remoteRes.headers.get('accept-ranges') || 'bytes'
       };
       if (remoteRes.headers.get('content-length')) outHeaders['Content-Length'] = remoteRes.headers.get('content-length');
       if (remoteRes.headers.get('content-range')) outHeaders['Content-Range'] = remoteRes.headers.get('content-range');
-      if (remoteRes.headers.get('accept-ranges')) outHeaders['Accept-Ranges'] = remoteRes.headers.get('accept-ranges');
-      if (remoteRes.headers.get('cache-control')) outHeaders['Cache-Control'] = remoteRes.headers.get('cache-control');
+      outHeaders['Cache-Control'] = remoteRes.headers.get('cache-control') || 'public, max-age=30';
+
+      if (req.method === 'HEAD') {
+        res.writeHead(remoteRes.status, outHeaders);
+        res.end();
+        return;
+      }
 
       res.writeHead(remoteRes.status, outHeaders);
       const reader = remoteRes.body.getReader();
