@@ -242,6 +242,14 @@ async function getVidioStream(channelId) {
         }
       }
     }
+    if (channelId === '733') {
+      addLog('[Stream] Trans TV 733 login required, falling back to direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/transtv/512.m3u8', expiresAt: now + 3600000 };
+    }
+    if (channelId === '734') {
+      addLog('[Stream] Trans 7 734 login required, falling back to direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/trans7/512.m3u8', expiresAt: now + 3600000 };
+    }
     throw new Error(`Vidio API error (${channelId}): ${apiRes.status} ${errText}`);
   }
 
@@ -276,6 +284,7 @@ function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
 
   const isVidio = manifestUrl.includes('vidio.com') || manifestUrl.includes('akamaized.net');
   const hasH264 = content.includes('CODECS="avc1');
+  const has720p = content.includes('1280x720') || content.includes('720p');
 
   for (let i = 0; i < rawLines.length; i++) {
     let l = rawLines[i].trim();
@@ -315,8 +324,8 @@ function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
       }
 
       // Vidio Mobile accounts (Gold/Platinum Mobile) return 403 Forbidden on 1080p from Akamai.
-      // Filter out 1080p so Android TV / ExoPlayer cleanly selects 720p HD as the top quality!
-      if (isVidio && (l.includes('1920x1080') || l.includes('1080p') || nextLine.includes('-1080p/'))) {
+      // Filter out 1080p ONLY IF 720p or lower is available so single-1080p channels (like NHK World) are kept!
+      if (isVidio && has720p && (l.includes('1920x1080') || l.includes('1080p') || nextLine.includes('-1080p/'))) {
         continue;
       }
 
