@@ -654,18 +654,18 @@ const server = http.createServer(async (req, res) => {
         '1012': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/113af3d432214f62bd6815f976bf2cd6/00000000000000001012'
       };
       const mediaUrl = mediaMap[channelId] || mediaMap['1002'];
-      const locatorUrl = `https://www.visionplus.id/streamlocators/multirights/getPlayableUrlAndLicense?adsProfile=premium&drm=WV&packaging=DASH&provisioningData=eyJwcm92aXNpb25pbmciOlt7InN5c3RlbSI6InZlcmltYXRyaXgiLCJkYXRhIjpbeyJuYW1lIjoidnVpZCIsInZhbHVlIjoiNzA0YjI4ZjQtMzkyNC00NjA5LWEyOWQtZjc5ZDAyNTc0OTQzIn1dfV19&url=${encodeURIComponent(mediaUrl)}&userSessionToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNzA0YjI4ZjQtMzkyNC00NjA5LWEyOWQtZjc5ZDAyNTc0OTQzIiwiZXhwIjoxNzk0NzM5ODM4LCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.2bcR1cz5wLt8SvyAhFxqIfDyytaaczD_XZQpy-hPfwo`;
+      const locatorUrl = `https://www.visionplus.id/streamlocators/multirights/getPlayableUrlAndLicense?adsProfile=premium&drm=WV&packaging=DASH&provisioningData=eyJwcm92aXNpb25pbmciOlt7InN5c3RlbSI6InZlcmltYXRyaXgiLCJkYXRhIjpbeyJuYW1lIjoidnVpZCIsInZhbHVlIjoiNzA0YjI4ZjQtMzkyNC00NjA5LWEyOWQtZjc5ZDAyNTc0OTQzIn1dfV19&url=${encodeURIComponent(mediaUrl)}&userSessionToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNGY5OGM5ODUtMDZjNC00YTU5LTllMzYtOWMzMWM3OTI4OTcyIiwiZXhwIjoxNzk0NzU5OTg0LCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.-xxcGHur5coqsHujjSMqG2GWeU_RhUnWGV81pzjm-6Q`;
 
       const vRes = await fetch(locatorUrl, {
         headers: {
           'Accept': '*/*',
-          'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNzA0YjI4ZjQtMzkyNC00NjA5LWEyOWQtZjc5ZDAyNTc0OTQzIiwiZXhwIjoxNzk0NzM5ODM4LCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.2bcR1cz5wLt8SvyAhFxqIfDyytaaczD_XZQpy-hPfwo',
+          'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNGY5OGM5ODUtMDZjNC00YTU5LTllMzYtOWMzMWM3OTI4OTcyIiwiZXhwIjoxNzk0NzU5OTg0LCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.-xxcGHur5coqsHujjSMqG2GWeU_RhUnWGV81pzjm-6Q',
           'IRIS-DEVICE-CLASS': 'PC',
           'IRIS-DEVICE-TYPE': 'WINDOWS/CHROME',
           'IRIS-DEVICE-REGION': 'Indonesia',
           'IRIS-APP-VERSION': '11.4.13(0)_prd',
           'IRIS-APP-MODE': 'Normal',
-          'IRIS-HW-DEVICE-ID': '704b28f4-3924-4609-a29d-f79d02574943',
+          'IRIS-HW-DEVICE-ID': '4f98c985-06c4-4a59-9e36-9c31c7928972',
           'IRIS-PROFILE-ID': '30098954',
           'Referer': 'https://www.visionplus.id/webclient/live',
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
