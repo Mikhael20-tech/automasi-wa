@@ -401,9 +401,7 @@ http://72.60.79.72:8765/vidio/22337.m3u8
 # 📡 VISION+ & MNC GROUP (DIRECT HLS NO DRM)
 # ==========================================
 
-#EXTINF:-1 tvg-id="VPlusLive1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Vision_Prime.png" group-title="VISION+",V+ Live (1002 HD)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#EXTINF:-1 tvg-id="VPlusLive" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live (1002 HD VPS)
+#EXTINF:-1 tvg-id="VPlusLive1" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live 1 (1002 HD VPS)
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
@@ -423,33 +421,6 @@ http://72.60.79.72:8765/vision/live/1010/index.mpd
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
 #KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=1012
 http://72.60.79.72:8765/vision/live/1012/index.mpd
-
-#EXTINF:-1 tvg-id="VPlusLive" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live (1002 HD Emon Backup)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://drm.emonaja.com/licence/visionplus/v1/widevine/keyManager/kid/1002/Pollygon.do?hdntl=acl=/licence/visionplus/v1/widevine/keyManager/kid/1002/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=df7cf87150fb7eccb7d00b95dedc08b2856bb50f1c2a98bcc3600e47c49f88a2
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
-https://yuki.emonaja.com/live/visionplus/mediapackage.aws/dash/1002/manifest.mpd?hdntl=acl=/live/visionplus/mediapackage.aws/dash/1002/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=872de2c627bc56fb8d154f3cf627a5c771a6199d84e05d61c339743f865ad70b
-
-#EXTINF:-1 tvg-id="VPlusLive2" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live 2 (1010 HD Emon Backup)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://drm.emonaja.com/licence/visionplus/v1/widevine/keyManager/kid/1010/Pollygon.do?hdntl=acl=/licence/visionplus/v1/widevine/keyManager/kid/1010/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=f0da464673d0ffb07172874f4dc7d084466352020a4e8154c43c6df9ab537816
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
-https://yuki.emonaja.com/live/visionplus/mediapackage.aws/dash/1010/manifest.mpd?hdntl=acl=/live/visionplus/mediapackage.aws/dash/1010/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=c7e0cade269444bb172294ede102dcef3c08330db00bbf3dd4745e7e2669d477
-
-#EXTINF:-1 tvg-id="VPlusLive3" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live 3 (1012 HD Emon Backup)
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://drm.emonaja.com/licence/visionplus/v1/widevine/keyManager/kid/1012/Pollygon.do?hdntl=acl=/licence/visionplus/v1/widevine/keyManager/kid/1012/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=5e134c049ea16e22ef732c794c47a877f1b6060df3ecc9955459d16d6aefd067
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
-https://yuki.emonaja.com/live/visionplus/mediapackage.aws/dash/1012/manifest.mpd?hdntl=acl=/live/visionplus/mediapackage.aws/dash/1012/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=99f1e2c2a829385d8bd29ce2121d17722b55bbb9b1bb5d4460c246c79c0ac250
 
 #EXTINF:-1 tvg-id="Sportstars" tvg-name="Sportstars" group-title="Sports Channels" tvg-logo="https://object-streamo.emonaja.com/img/sportstars.png",Sport Stars HD
 #KODIPROP:inputstreamaddon=inputstream.adaptive
@@ -492,100 +463,100 @@ https://yuki.emonaja.com/live/eds/SPOTV/dash/SPOTV.mpd?hdntl=acl=/live/eds/SPOTV
 https://yuki.emonaja.com/live/eds/SPOTV2/dash/SPOTV2.mpd?hdntl=acl=/live/eds/SPOTV2/dash/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=3a9b627bba67a55c643660be7d438ee237f15b17438c81547d2f0e27f8ff0a64
 
 #EXTINF:-1 tvg-id="RCTI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rcti.png" group-title="VISION+",RCTI (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/rcti/index.m3u8
+http://72.60.79.72:8765/live/web/rcti/index.m3u8
 
 #EXTINF:-1 tvg-id="MNCTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_mnctv.png" group-title="VISION+",MNCTV (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/mnctv/index.m3u8
+http://72.60.79.72:8765/live/web/mnctv/index.m3u8
 
 #EXTINF:-1 tvg-id="GTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_gtv.png" group-title="VISION+",GTV (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/gtv/index.m3u8
+http://72.60.79.72:8765/live/web/gtv/index.m3u8
 
 #EXTINF:-1 tvg-id="iNews" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_inews.png" group-title="VISION+",iNews (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/inews/index.m3u8
+http://72.60.79.72:8765/live/web/inews/index.m3u8
 
 #EXTINF:-1 tvg-id="SindoNews" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/e0/Sindo_News_logo.png" group-title="VISION+",Sindonews TV (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/sindonews/index.m3u8
+http://72.60.79.72:8765/live/web/sindonews/index.m3u8
 
 #EXTINF:-1 tvg-id="IDXChannel" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/5/52/IDX_Channel_logo_2019.png" group-title="VISION+",IDX Channel (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/idx/index.m3u8
+http://72.60.79.72:8765/live/web/idx/index.m3u8
 
 #EXTINF:-1 tvg-id="Celebrities" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/ec/Celebrities_TV.png" group-title="VISION+",Celebrities TV (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/celebrities/index.m3u8
+http://72.60.79.72:8765/live/web/celebrities/index.m3u8
 
 #EXTINF:-1 tvg-id="Vision Prime" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Vision_Prime.png" group-title="VISION+",Vision Prime (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/visionprime/index.m3u8
+http://72.60.79.72:8765/live/web/visionprime/index.m3u8
 
 #EXTINF:-1 tvg-id="HITS" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/36/Hits_%28TV_channel%29_logo.png" group-title="VISION+",HITS (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/hits/index.m3u8
+http://72.60.79.72:8765/live/web/hits/index.m3u8
 
 #EXTINF:-1 tvg-id="HITSMovies" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/HITS_MOVIES_LOGO.png" group-title="VISION+",HITS Movies (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/hitsmovies/index.m3u8
+http://72.60.79.72:8765/live/web/hitsmovies/index.m3u8
 
 #EXTINF:-1 tvg-id="tvN" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/TvN_Asia_logo.svg/1200px-TvN_Asia_logo.svg.png" group-title="VISION+",tvN (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/tvn/index.m3u8
+http://72.60.79.72:8765/live/web/tvn/index.m3u8
 
 #EXTINF:-1 tvg-id="tvNMovies" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/TvN_Movies_logo.svg/1200px-TvN_Movies_logo.svg.png" group-title="VISION+",tvN Movies (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/tvnmovies/index.m3u8
+http://72.60.79.72:8765/live/web/tvnmovies/index.m3u8
 
 #EXTINF:-1 tvg-id="CelestialMovies" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Celestial_Movies_logo.svg/1200px-Celestial_Movies_logo.svg.png" group-title="VISION+",Celestial Movies (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/celestialmovies/index.m3u8
+http://72.60.79.72:8765/live/web/celestialmovies/index.m3u8
 
 #EXTINF:-1 tvg-id="Animax" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Animax_logo_2016.svg/1200px-Animax_logo_2016.svg.png" group-title="VISION+",Animax (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/animax/index.m3u8
+http://72.60.79.72:8765/live/web/animax/index.m3u8
 
 #EXTINF:-1 tvg-id="FightSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/8/82/Fight_Sports_logo.png" group-title="VISION+",Fight Sports (Vision+ HD)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/fightsports/index.m3u8
+http://72.60.79.72:8765/live/web/fightsports/index.m3u8
 
 #EXTINF:-1 tvg-id="ZeeBioskop" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Zee_Bioskop.png/640px-Zee_Bioskop.png" group-title="VISION+",Zee Bioskop (Vision+)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/zeebioskop/index.m3u8
+http://72.60.79.72:8765/live/web/zeebioskop/index.m3u8
 
 #EXTINF:-1 tvg-id="Thrill" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Thrill_logo.svg/1200px-Thrill_logo.svg.png" group-title="VISION+",Thrill (Vision+)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/thrill/index.m3u8
+http://72.60.79.72:8765/live/web/thrill/index.m3u8
 
 #EXTINF:-1 tvg-id="KIX" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Kix_logo.svg/1200px-Kix_logo.svg.png" group-title="VISION+",KIX (Vision+)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/kix/index.m3u8
+http://72.60.79.72:8765/live/web/kix/index.m3u8
 
 #EXTINF:-1 tvg-id="KidsTV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Kids_TV_MNC.png/640px-Kids_TV_MNC.png" group-title="VISION+",Kids TV (Vision+)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/kidstv/index.m3u8
+http://72.60.79.72:8765/live/web/kidstv/index.m3u8
 
 #EXTINF:-1 tvg-id="MusicTV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Music_TV_MNC.png/640px-Music_TV_MNC.png" group-title="VISION+",Music TV (Vision+)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/musictv/index.m3u8
+http://72.60.79.72:8765/live/web/musictv/index.m3u8
 
 #EXTINF:-1 tvg-id="ANTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_antv.png" group-title="VISION+",ANTV
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/antv/512.m3u8
+http://72.60.79.72:8765/live/web/antv/512.m3u8
 
 #EXTINF:-1 tvg-id="Moji" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_moji.png" group-title="VISION+",Moji (Vision+)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/moji/512.m3u8
+http://72.60.79.72:8765/live/web/moji/512.m3u8
 
 #EXTINF:-1 tvg-id="Trans TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_transtv.png" group-title="VISION+",Trans TV (Vision+)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/transtv/512.m3u8
+http://72.60.79.72:8765/live/web/transtv/512.m3u8
 
 #EXTINF:-1 tvg-id="Trans7" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_trans7.png" group-title="VISION+",Trans7 (Vision+)
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/trans7/512.m3u8
+http://72.60.79.72:8765/live/web/trans7/512.m3u8
 
 #EXTINF:-1 tvg-id="TVOne" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvone.png" group-title="VISION+",TVOne
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/tvone/512.m3u8
+http://72.60.79.72:8765/live/web/tvone/512.m3u8
 
 #EXTINF:-1 tvg-id="Kompas TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_kompastv.png" group-title="VISION+",Kompas TV
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/kompas/512.m3u8
+http://72.60.79.72:8765/live/web/kompas/512.m3u8
 
 #EXTINF:-1 tvg-id="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="VISION+",Metro TV
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/metrotv/512.m3u8
+http://72.60.79.72:8765/live/web/metrotv/512.m3u8
 
 #EXTINF:-1 tvg-id="RTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rtv.png" group-title="VISION+",RTV
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/rtv/512.m3u8
+http://72.60.79.72:8765/live/web/rtv/512.m3u8
 
 #EXTINF:-1 tvg-id="TVRI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvri.png" group-title="VISION+",TVRI Nasional
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/tvri/512.m3u8
+http://72.60.79.72:8765/live/web/tvri/512.m3u8
 
 #EXTINF:-1 tvg-id="Jak TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/c/c5/Jak_TV_2021.png" group-title="VISION+",Jak TV
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/jaktv/512.m3u8
+http://72.60.79.72:8765/live/web/jaktv/512.m3u8
 
 #EXTINF:-1 tvg-id="DAAITV.id@SD" tvg-logo="https://thumbor.prod.vidiocdn.com/0r_rhIVANc6dsGvQ76616ZSqF04=/230x230/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/square_image/6482/e83fcf.png" group-title="VISION+",DAAI TV
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/daaitv/512.m3u8
+http://72.60.79.72:8765/live/web/daaitv/512.m3u8
 
 #EXTINF:-1 tvg-id="DMI Channel" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/4/4e/DMI_Channel.png" group-title="VISION+",DMI Channel
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/dmi/512.m3u8
+http://72.60.79.72:8765/live/web/dmi/512.m3u8
 # ==========================================
 # 📡 DENSTV (26 CHANNELS DIRECT HD)
 # ==========================================

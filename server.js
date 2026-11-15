@@ -351,6 +351,36 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Vision+ / RCTI+ HLS Gateway (Proxy-V HLS for FTA & Vision+ channels)
+  if (rawUrl.startsWith('/live/web/')) {
+    const targetUrl = 'https://proxy-v.rctiplus.id' + rawUrl;
+    try {
+      const fetchHeaders = {
+        'Origin': 'https://www.visionplus.id',
+        'Referer': 'https://www.visionplus.id/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
+      };
+      const remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+      if (!remoteRes.ok) {
+        res.writeHead(remoteRes.status);
+        res.end();
+        return;
+      }
+      const text = await remoteRes.text();
+      const rewritten = rewriteM3u8(text, targetUrl, host, proto);
+      res.writeHead(200, {
+        'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
+        'Access-Control-Allow-Origin': '*'
+      });
+      res.end(rewritten);
+      return;
+    } catch (e) {
+      res.writeHead(502);
+      res.end('Gateway Error');
+      return;
+    }
+  }
+
   // Playlist M3U Service
   if (rawUrl === '/akmatv.m3u' || rawUrl === '/playlist.m3u' || rawUrl === '/api/visionplus.m3u') {
     const candidatePaths = [
