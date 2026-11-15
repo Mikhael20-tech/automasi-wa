@@ -1,15 +1,15 @@
 /**
- * Cloudflare Worker: Vision+ Stream Reverse Proxy & Widevine DRM Proxy Server
+ * Cloudflare Worker: Vision+ Stream & DRM License Proxy (Emon Architecture)
  * 
  * 1. DRM License Proxy (/vision/license?ch=...):
  *    - Menerima Widevine Challenge dari OTT Navigator / TiviMate
- *    - Otomatis request fresh token ke Vision+ API
- *    - Menembus server lisensi Verimatrix Multi-DRM
+ *    - Otomatis request token JWT baru ke Vision+ API
+ *    - Menembus server lisensi Verimatrix Multi-DRM MNC 24/7
  * 
- * 2. Media Reverse Proxy (/vision/live/1002/index.mpd & /cf/...):
- *    - Mem-proxy MPD & potongan video chunks (.mp4 / .m4s)
- *    - Menyamarkan User-Agent menjadi Chrome Browser resmi
- *    - Menghilangkan Error 403 Forbidden dari AWS CloudFront selamanya
+ * 2. Media Stream Dispatcher (/vision/live/{ch}/index.mpd):
+ *    - Menggunakan teknik 302 Redirect (seperti arsitektur Emon)
+ *    - Memerintahkan TV (IP asli Indonesia) untuk menarik video langsung ke AWS CloudFront
+ *    - Mencegah error "Geo-blocking / Blocked from your country"
  * 
  * 3. HLS Stream Proxy (/live/web/...):
  *    - Menembus proteksi Referer 403 untuk channel non-DRM (RCTI, MNCTV, tvN, dll)
@@ -18,22 +18,22 @@
 const CHANNEL_TARGETS = {
   '1002': {
     mediaUrl: 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/00000000000000001002',
-    cfBase: 'https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/'
+    mpd: 'https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/index.mpd'
   },
   '1010': {
     mediaUrl: 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/d2c68a3dfb644808b416bd90dcc92d5f/00000000000000001010',
-    cfBase: 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/d2c68a3dfb644808b416bd90dcc92d5f/'
+    mpd: 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/d2c68a3dfb644808b416bd90dcc92d5f/index.mpd'
   },
   '1012': {
     mediaUrl: 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/113af3d432214f62bd6815f976bf2cd6/00000000000000001012',
-    cfBase: 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/113af3d432214f62bd6815f976bf2cd6/'
+    mpd: 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/113af3d432214f62bd6815f976bf2cd6/index.mpd'
   }
 };
 
 const USER_SESSION_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNzA0YjI4ZjQtMzkyNC00NjA5LWEyOWQtZjc5ZDAyNTc0OTQzIiwiZXhwIjoxNzk0NzMwNDM3LCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.ct558TfZFXTX3_t_2tq_YKDbXfaiV3ZCDPrwtx9hl4M';
 const IRIS_HW_ID = '704b28f4-3924-4609-a29d-f79d02574943';
 const IRIS_PROFILE_ID = '30098954';
-const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0';
 
 export default {
   async fetch(request) {
@@ -53,7 +53,7 @@ export default {
 
     // Sambutan jika dibuka langsung di browser
     if (path === '/' || path === '') {
-      return new Response('Vision+ Reverse Proxy & DRM Server is RUNNING 24/7!\n\nEndpoints:\n- /vision/live/{1002|1010|1012}/index.mpd\n- /vision/license?ch={1002|1010|1012}\n- /live/web/{channel}/index.m3u8', {
+      return new Response('Vision+ Stream & DRM License Proxy is RUNNING!\n\nEndpoints:\n- /vision/live/{1002|1010|1012}/index.mpd (302 Direct Stream)\n- /vision/license?ch={1002|1010|1012} (Auto DRM License)\n- /live/web/{channel}/index.m3u8 (Clean HLS)', {
         headers: { 'Content-Type': 'text/plain; charset=utf-8' }
       });
     }
@@ -117,35 +117,42 @@ export default {
     }
 
     // =========================================================================
-    // 2. Media Reverse Proxy untuk CloudFront Dash Segments & MPD
+    // 2. Media Stream Dispatcher (302 Redirect Anti-Geo-Blocking)
     // =========================================================================
-    // A. Format Terstruktur: /vision/live/{ch}/...
-    const liveMatch = path.match(/^\/vision\/live\/(\d+)\/(.*)$/);
+    // Format: /vision/live/{ch}/index.mpd
+    const liveMatch = path.match(/^\/vision\/live\/(\d+)\/?.*$/);
     if (liveMatch) {
       const chId = liveMatch[1];
-      const relPath = liveMatch[2];
       const chConfig = CHANNEL_TARGETS[chId] || CHANNEL_TARGETS['1012'];
-      const targetUrl = chConfig.cfBase + relPath + url.search;
-
-      return proxyMediaStream(request, targetUrl);
-    }
-
-    // B. Format Generic CloudFront: /cf/{domain}/{path}
-    if (path.startsWith('/cf/')) {
-      const targetUrl = 'https://' + path.substring(4) + url.search;
-      return proxyMediaStream(request, targetUrl);
-    }
-
-    // C. Format Parameter URL: /ts?url=...
-    if (path === '/ts') {
-      const q = url.searchParams.get('url');
-      if (!q) return new Response('Missing url parameter', { status: 400 });
-      return proxyMediaStream(request, q);
+      return Response.redirect(chConfig.mpd, 302);
     }
 
     // =========================================================================
     // 3. HLS Stream Proxy untuk Channel Non-DRM (proxy-v.rctiplus.id)
     // =========================================================================
+    if (path === '/ts') {
+      const q = url.searchParams.get('url');
+      if (!q) return new Response('Missing url parameter', { status: 400 });
+      try {
+        const tsRes = await fetch(q, {
+          headers: {
+            'Referer': 'https://www.visionplus.id/',
+            'Origin': 'https://www.visionplus.id',
+            'User-Agent': BROWSER_UA
+          }
+        });
+        return new Response(tsRes.body, {
+          status: tsRes.status,
+          headers: {
+            'Content-Type': tsRes.headers.get('content-type') || 'video/MP2T',
+            'Access-Control-Allow-Origin': '*'
+          }
+        });
+      } catch (e) {
+        return new Response('TS Proxy Error: ' + e.message, { status: 502 });
+      }
+    }
+
     const targetUrl = `https://proxy-v.rctiplus.id${path}${url.search}`;
 
     try {
@@ -200,34 +207,3 @@ export default {
     }
   }
 };
-
-/**
- * Helper: Forward stream video dari CloudFront dengan header Browser resmi
- */
-async function proxyMediaStream(clientReq, targetUrl) {
-  try {
-    const fetchHeaders = {
-      'User-Agent': BROWSER_UA,
-      'Referer': 'https://www.visionplus.id/',
-      'Origin': 'https://www.visionplus.id'
-    };
-    if (clientReq.headers.get('range')) {
-      fetchHeaders['Range'] = clientReq.headers.get('range');
-    }
-
-    const res = await fetch(targetUrl, { headers: fetchHeaders });
-
-    const respHeaders = new Headers(res.headers);
-    respHeaders.set('Access-Control-Allow-Origin', '*');
-    respHeaders.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-    respHeaders.set('Access-Control-Allow-Headers', '*');
-    respHeaders.delete('Content-Security-Policy');
-
-    return new Response(res.body, {
-      status: res.status,
-      headers: respHeaders
-    });
-  } catch (e) {
-    return new Response('Proxy Stream Error: ' + e.message, { status: 502, headers: { 'Access-Control-Allow-Origin': '*' } });
-  }
-}
