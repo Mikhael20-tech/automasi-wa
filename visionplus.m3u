@@ -1,5 +1,12 @@
 #EXTM3U
 
+#EXTINF:-1 tvg-id="RCTI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rcti.png" group-title="VISION+",RCTI (Vision+ Official HD)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=https://multidrm.core.verimatrixcloud.net/widevine?Authorization=eyJraWQiOiJjMTgxOTkzYy1mODUyLTQ0MmQtOTY1Yi1hMmI3MzU4ZGI5NjkiLCJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImlzcyI6InZpc2lvbnBsdXMiLCJzdWIiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMSIsImlhdCI6MTc5NDcxNDk5NywiZXhwIjoxNzk0NzE1NTk3LCJqdGkiOiJkOWQxODNlYS01MzlhLTQxODItYjg0ZC1iNDk1ZGI4Y2QzMjkiLCJhdWQiOiJ1cm46dmVyaW1hdHJpeDptdWx0aWRybSIsInBvbGljeSI6eyJ3aWRldmluZSI6eyJsaWNlbnNlX2R1cmF0aW9uX3NlY29uZHMiOjE0NDAwLCJjYW5fcGxheSI6dHJ1ZSwiY2FuX3JlbmV3Ijp0cnVlLCJjYW5fcGVyc2lzdCI6ZmFsc2V9fSwiaXp6aUN1c3RvbWVyIjoiTU5DOjExMzY2ODE1NSIsIml6emlEZXZpY2VJZCI6IjcwNGIyOGY0LTM5MjQtNDYwOS1hMjlkLWY3OWQwMjU3NDk0MyIsIml6emlWSVAiOmZhbHNlfQ.OqSJYHYD4vqsaKOWky0m3rnJJ8MKwwUphCY_jwxDMm5tVG7D_nIWhUn5dwEjBYALXc5h0_8p6QP0thQQmRV1qw
+https://d2xz2v5wuvgur6.cloudfront.net/out/v1/997ce8767b604fae9fce05379b3b8b3a/index.mpd
+
 #EXTINF:-1 tvg-id="ANTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_antv.png" group-title="VISION+",ANTV
 https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/antv/512.m3u8
 
