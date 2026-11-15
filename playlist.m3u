@@ -403,7 +403,28 @@ http://72.60.79.72:8765/vidio/22337.m3u8
 
 #EXTINF:-1 tvg-id="VPlusLive1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Vision_Prime.png" group-title="VISION+",V+ Live (1002 HD)
 #KODIPROP:inputstreamaddon=inputstream.adaptive
-#EXTINF:-1 tvg-id="VPlusLive" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live (1002 HD)
+#EXTINF:-1 tvg-id="VPlusLive" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live (1002 HD VPS)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=1002
+http://72.60.79.72:8765/vision/live/1002/index.mpd
+
+#EXTINF:-1 tvg-id="VPlusLive2" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live 2 (1010 HD VPS)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=1010
+http://72.60.79.72:8765/vision/live/1010/index.mpd
+
+#EXTINF:-1 tvg-id="VPlusLive3" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live 3 (1012 HD VPS)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=1012
+http://72.60.79.72:8765/vision/live/1012/index.mpd
+
+#EXTINF:-1 tvg-id="VPlusLive" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live (1002 HD Emon Backup)
 #EXTVLCOPT:http-referrer=https://www.visionplus.id/
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
@@ -412,7 +433,7 @@ http://72.60.79.72:8765/vidio/22337.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
 https://yuki.emonaja.com/live/visionplus/mediapackage.aws/dash/1002/manifest.mpd?hdntl=acl=/live/visionplus/mediapackage.aws/dash/1002/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=872de2c627bc56fb8d154f3cf627a5c771a6199d84e05d61c339743f865ad70b
 
-#EXTINF:-1 tvg-id="VPlusLive2" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live 2 (1010 HD)
+#EXTINF:-1 tvg-id="VPlusLive2" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live 2 (1010 HD Emon Backup)
 #EXTVLCOPT:http-referrer=https://www.visionplus.id/
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
@@ -421,7 +442,7 @@ https://yuki.emonaja.com/live/visionplus/mediapackage.aws/dash/1002/manifest.mpd
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
 https://yuki.emonaja.com/live/visionplus/mediapackage.aws/dash/1010/manifest.mpd?hdntl=acl=/live/visionplus/mediapackage.aws/dash/1010/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=c7e0cade269444bb172294ede102dcef3c08330db00bbf3dd4745e7e2669d477
 
-#EXTINF:-1 tvg-id="VPlusLive3" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live 3 (1012 HD)
+#EXTINF:-1 tvg-id="VPlusLive3" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live 3 (1012 HD Emon Backup)
 #EXTVLCOPT:http-referrer=https://www.visionplus.id/
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
