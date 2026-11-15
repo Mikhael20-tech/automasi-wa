@@ -51,3 +51,6 @@ https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/visionprime/512.m3u8
 #EXTINF:-1 tvg-id="DMI Channel" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/4/4e/DMI_Channel.png" group-title="VISION+",DMI Channel
 https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/dmi/512.m3u8
 
+#EXTINF:-1 tvg-id="HITS" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/36/Hits_%28TV_channel%29_logo.png" group-title="VISION+",HITS Movies (Vision+ HD)
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/hits/1024.m3u8
+
