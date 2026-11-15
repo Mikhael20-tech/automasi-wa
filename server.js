@@ -33,14 +33,15 @@ async function getOrRefreshVidioSession() {
   }
 
   addLog('[Auth] Refreshing Vidio API Key & Session from /auth...');
-  const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+  const userAgent = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36';
 
   const authRes = await fetch('https://api.vidio.com/auth', {
     method: 'POST',
     headers: {
-      'Origin': 'https://www.vidio.com',
-      'Referer': 'https://www.vidio.com/',
-      'User-Agent': userAgent
+      'Origin': 'https://m.vidio.com',
+      'Referer': 'https://m.vidio.com/',
+      'User-Agent': userAgent,
+      'X-API-Platform': 'web-mobile'
     }
   });
 
@@ -94,15 +95,15 @@ async function getActiveLiga1Match() {
 
   try {
     const session = await getOrRefreshVidioSession();
-    const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+    const userAgent = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36';
 
     const res = await fetch('https://api.vidio.com/search?q=BRI+Liga+1', {
       headers: {
-        'Origin': 'https://www.vidio.com',
-        'Referer': 'https://www.vidio.com/',
+        'Origin': 'https://m.vidio.com',
+        'Referer': 'https://m.vidio.com/',
         'User-Agent': userAgent,
         'X-Api-Key': session.encryptedApiKey,
-        'X-API-Platform': 'web-desktop',
+        'X-API-Platform': 'web-mobile',
         'X-Secure-Level': '2',
         'Cookie': session.cookieHeader
       }
@@ -180,15 +181,15 @@ async function getVidioStream(channelId) {
   }
 
   const session = await getOrRefreshVidioSession();
-  const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+  const userAgent = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36';
 
   let clientId = '';
   let signature = '';
   try {
-    const pageRes = await fetch(`https://www.vidio.com/live/${channelId}`, {
+    const pageRes = await fetch(`https://m.vidio.com/live/${channelId}`, {
       headers: {
         'User-Agent': userAgent,
-        'Referer': 'https://www.vidio.com/',
+        'Referer': 'https://m.vidio.com/',
         'Cookie': session.cookieHeader
       }
     });
@@ -204,11 +205,11 @@ async function getVidioStream(channelId) {
   }
 
   const apiHeaders = {
-    'Origin': 'https://www.vidio.com',
-    'Referer': `https://www.vidio.com/live/${channelId}`,
+    'Origin': 'https://m.vidio.com',
+    'Referer': `https://m.vidio.com/live/${channelId}`,
     'User-Agent': userAgent,
     'X-Api-Key': session.encryptedApiKey,
-    'X-API-Platform': 'web-desktop',
+    'X-API-Platform': 'web-mobile',
     'X-Secure-Level': '2',
     'Cookie': session.cookieHeader
   };
