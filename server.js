@@ -651,15 +651,15 @@ const server = http.createServer(async (req, res) => {
       const mediaMap = {
         '1002': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/HLS/de2cb5b125f744aaae2611e13ecfa4f0/00000000000000001002/00000000000000000112',
         '1010': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/d2c68a3dfb644808b416bd90dcc92d5f/HLS/ea843b6cc223440c8f2273071d77fa7a/00000000000000001010/00000000000000000113',
-        '1012': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/113af3d432214f62bd6815f976bf2cd6/00000000000000001012'
+        '1012': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/63c0da12bb4d48afbaf053f51dff2353/HLS/b9fc626578f34e0db7ff123168ace53a/00000000000000001012/00000000000000000115'
       };
       const mediaUrl = mediaMap[channelId] || mediaMap['1002'];
-      const locatorUrl = `https://www.visionplus.id/streamlocators/multirights/getPlayableUrlAndLicense?adsProfile=premium&drm=WV&packaging=DASH&provisioningData=eyJwcm92aXNpb25pbmciOlt7InN5c3RlbSI6InZlcmltYXRyaXgiLCJkYXRhIjpbeyJuYW1lIjoidnVpZCIsInZhbHVlIjoiNzA0YjI4ZjQtMzkyNC00NjA5LWEyOWQtZjc5ZDAyNTc0OTQzIn1dfV19&url=${encodeURIComponent(mediaUrl)}&userSessionToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNGY5OGM5ODUtMDZjNC00YTU5LTllMzYtOWMzMWM3OTI4OTcyIiwiZXhwIjoxNzk0NzU5OTg0LCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.-xxcGHur5coqsHujjSMqG2GWeU_RhUnWGV81pzjm-6Q`;
+      const locatorUrl = `https://www.visionplus.id/streamlocators/multirights/getPlayableUrlAndLicense?adsProfile=premium&drm=WV&packaging=DASH&provisioningData=eyJwcm92aXNpb25pbmciOlt7InN5c3RlbSI6InZlcmltYXRyaXgiLCJkYXRhIjpbeyJuYW1lIjoidnVpZCIsInZhbHVlIjoiNGY5OGM5ODUtMDZjNC00YTU5LTllMzYtOWMzMWM3OTI4OTcyIn1dfV19&url=${encodeURIComponent(mediaUrl)}&userSessionToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNGY5OGM5ODUtMDZjNC00YTU5LTllMzYtOWMzMWM3OTI4OTcyIiwiZXhwIjoxNzk0NzYxNDQwLCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.ORAQurqIlLENwpw6Qg4_yIXM5KVisRi_l_KW0MfJvoU`;
 
       const vRes = await fetch(locatorUrl, {
         headers: {
           'Accept': '*/*',
-          'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNGY5OGM5ODUtMDZjNC00YTU5LTllMzYtOWMzMWM3OTI4OTcyIiwiZXhwIjoxNzk0NzU5OTg0LCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.-xxcGHur5coqsHujjSMqG2GWeU_RhUnWGV81pzjm-6Q',
+          'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNGY5OGM5ODUtMDZjNC00YTU5LTllMzYtOWMzMWM3OTI4OTcyIiwiZXhwIjoxNzk0NzYxNDQwLCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.ORAQurqIlLENwpw6Qg4_yIXM5KVisRi_l_KW0MfJvoU',
           'IRIS-DEVICE-CLASS': 'PC',
           'IRIS-DEVICE-TYPE': 'WINDOWS/CHROME',
           'IRIS-DEVICE-REGION': 'Indonesia',
@@ -716,7 +716,7 @@ const server = http.createServer(async (req, res) => {
     const cfBaseMap = {
       '1002': 'https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/',
       '1010': 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/d2c68a3dfb644808b416bd90dcc92d5f/',
-      '1012': 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/113af3d432214f62bd6815f976bf2cd6/'
+      '1012': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/63c0da12bb4d48afbaf053f51dff2353/'
     };
     const targetUrl = (cfBaseMap[chId] || cfBaseMap['1012']) + relPath;
 
