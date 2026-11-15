@@ -751,10 +751,11 @@ const server = http.createServer(async (req, res) => {
     }
 
     try {
+      const isVision = targetUrl.includes('rctiplus.id') || targetUrl.includes('visionplus.id') || targetUrl.includes('cloudfront.net');
       const fetchHeaders = {
-        'Origin': 'https://www.vidio.com',
-        'Referer': 'https://www.vidio.com/',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        'Origin': isVision ? 'https://www.visionplus.id' : 'https://www.vidio.com',
+        'Referer': isVision ? 'https://www.visionplus.id/' : 'https://www.vidio.com/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
       };
       if (req.headers['range']) fetchHeaders['Range'] = req.headers['range'];
 
