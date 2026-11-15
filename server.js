@@ -274,6 +274,7 @@ function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
   const rawLines = content.split('\n');
   const lines = [];
 
+  const isVidio = manifestUrl.includes('vidio.com') || manifestUrl.includes('akamaized.net');
   const hasH264 = content.includes('CODECS="avc1');
   let skipNext = false;
 
@@ -288,8 +289,18 @@ function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
         skipNext = true;
         continue;
       }
+      // Vidio Mobile accounts (Gold/Platinum Mobile) return 403 Forbidden on 1080p from Akamai.
+      // Filter out 1080p so Android TV / ExoPlayer cleanly selects 720p HD as the top quality!
+      if (isVidio && (l.includes('1920x1080') || l.includes('1080p') || l.includes('RESOLUTION=1920x1080'))) {
+        skipNext = true;
+        continue;
+      }
     } else if (skipNext) {
       skipNext = false;
+      continue;
+    }
+
+    if (isVidio && l.includes('-1080p/')) {
       continue;
     }
 
@@ -525,6 +536,87 @@ const server = http.createServer(async (req, res) => {
           <button type="button" class="btn-danger" onclick="location.href='/event?slot=2&url='">🗑️ Kosongkan</button>
         </div>
       </form>
+    </div>
+  </div>
+</body>
+</html>`);
+    return;
+  }
+
+  // Web UI & API to update Vidio account cookie
+  if (rawUrl === '/cookie' || rawUrl === '/vidio-cookie' || rawUrl.startsWith('/cookie?') || rawUrl.startsWith('/vidio-cookie?')) {
+    const cookieFile = path.join(__dirname, 'account_cookie.txt');
+    let newCookie = null;
+
+    if (req.method === 'POST') {
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      const body = Buffer.concat(chunks).toString('utf-8');
+      const params = new URLSearchParams(body);
+      if (params.has('cookie')) newCookie = params.get('cookie');
+      else if (body.includes('=')) newCookie = body;
+    } else {
+      const parsedUrl = new URL(rawUrl, `http://${host}`);
+      if (parsedUrl.searchParams.has('cookie')) newCookie = parsedUrl.searchParams.get('cookie');
+    }
+
+    if (typeof newCookie === 'string') {
+      newCookie = newCookie.trim();
+      fs.writeFileSync(cookieFile, newCookie, 'utf-8');
+      vidioSession = { encryptedApiKey: '', cookieHeader: '', expiresAt: 0 };
+      vidioTokenCache = {};
+      addLog(`[Vidio Cookie] Account cookie updated (${newCookie.length} chars). Cache cleared.`);
+
+      let testStatus = 'Testing stream...';
+      try {
+        const testStream = await getVidioStream('205');
+        testStatus = `Berhasil! Stream Indosiar aktif: ${testStream.hls.substring(0, 60)}...`;
+      } catch (e) {
+        testStatus = `Error validasi stream: ${e.message}`;
+      }
+
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Cookie Updated</title><meta http-equiv="refresh" content="3;url=/cookie"></head><body style="background:#0f172a;color:#fff;font-family:sans-serif;text-align:center;padding:50px;"><h2 style="color:#38bdf8;">✅ Cookie Vidio Berhasil Disimpan & Diaktifkan!</h2><p style="background:#1e293b;padding:15px;border-radius:8px;font-family:monospace;display:inline-block;max-width:80%;word-break:break-all;">${testStatus}</p><p style="color:#94a3b8;">Mengarahkan kembali dalam 3 detik...</p></body></html>`);
+      return;
+    }
+
+    const curCookie = fs.existsSync(cookieFile) ? fs.readFileSync(cookieFile, 'utf-8').trim() : '';
+    const cookiePreview = curCookie ? (curCookie.substring(0, 80) + '... (' + curCookie.length + ' chars)') : '(Belum ada cookie tersimpan)';
+
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vidio Cookie Manager</title>
+  <style>
+    body { background: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
+    .card { background: #1e293b; border-radius: 12px; padding: 25px; max-width: 650px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+    h1 { margin-top: 0; color: #38bdf8; font-size: 22px; }
+    .status-box { background: #0f172a; border-radius: 8px; padding: 16px; margin-bottom: 20px; border: 1px solid #334155; font-family: monospace; font-size: 13px; word-break: break-all; color: #a5f3fc; }
+    textarea { width: 100%; height: 120px; box-sizing: border-box; padding: 12px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 13px; font-family: monospace; }
+    button { background: #0284c7; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 12px; font-size: 14px; }
+    button:hover { background: #0369a1; }
+    .guide { background: #1e1b4b; border-left: 4px solid #6366f1; padding: 12px; border-radius: 6px; font-size: 13px; color: #c7d2fe; margin-top: 15px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🍪 Vidio Cookie & Auth Manager</h1>
+    <p style="color:#94a3b8;font-size:14px;">Masukkan cookie hasil <code>copy(document.cookie)</code> dari browser yang sudah login Vidio Gold / Platinum agar server bisa memutar siaran Vidio di TV tanpa 403 Forbidden.</p>
+    <div style="font-size:12px;color:#94a3b8;margin-bottom:6px;">Status Cookie Aktif:</div>
+    <div class="status-box">${cookiePreview}</div>
+    <form method="POST" action="/cookie">
+      <textarea name="cookie" placeholder="Paste cookie hasil copy(document.cookie) di sini...">${curCookie}</textarea>
+      <button type="submit">💾 Simpan & Aktifkan Akun Vidio</button>
+    </form>
+    <div class="guide">
+      <b>💡 Cara Ambil Cookie Vidio:</b><br>
+      1. Buka <code>https://m.vidio.com</code> di Chrome/browser HP atau Laptop.<br>
+      2. Login ke akun Vidio Anda.<br>
+      3. Buka Console DevTools (F12) lalu ketik <code>copy(document.cookie)</code> dan tekan Enter.<br>
+      4. Paste ke kolom di atas lalu klik <b>Simpan & Aktifkan</b>.
     </div>
   </div>
 </body>
@@ -894,24 +986,21 @@ const server = http.createServer(async (req, res) => {
     const channelId = vidioMatch[1];
     try {
       let streamData = await getVidioStream(channelId);
-      let remoteRes = await fetch(streamData.hls, {
-        headers: {
-          'Origin': 'https://www.vidio.com',
-          'Referer': 'https://www.vidio.com/',
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-        }
-      });
+      const session = await getOrRefreshVidioSession();
+      const mobileUA = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36';
+      const vHeaders = {
+        'Origin': 'https://m.vidio.com',
+        'Referer': 'https://m.vidio.com/',
+        'User-Agent': mobileUA
+      };
+      if (session && session.cookieHeader) vHeaders['Cookie'] = session.cookieHeader;
+
+      let remoteRes = await fetch(streamData.hls, { headers: vHeaders });
 
       if (remoteRes.status === 403 || remoteRes.status === 401) {
         delete vidioTokenCache[channelId];
         streamData = await getVidioStream(channelId);
-        remoteRes = await fetch(streamData.hls, {
-          headers: {
-            'Origin': 'https://www.vidio.com',
-            'Referer': 'https://www.vidio.com/',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-          }
-        });
+        remoteRes = await fetch(streamData.hls, { headers: vHeaders });
       }
 
       const m3u8Text = await remoteRes.text();
@@ -941,12 +1030,19 @@ const server = http.createServer(async (req, res) => {
 
     try {
       const isVision = targetUrl.includes('rctiplus.id') || targetUrl.includes('visionplus.id') || targetUrl.includes('cloudfront.net');
+      const isVidio = targetUrl.includes('vidio.com') || targetUrl.includes('akamaized.net') || targetUrl.includes('vidiostream.com');
+      const mobileUA = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36';
+
       const fetchHeaders = {
-        'Origin': isVision ? 'https://www.visionplus.id' : 'https://www.vidio.com',
-        'Referer': isVision ? 'https://www.visionplus.id/' : 'https://www.vidio.com/',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
+        'Origin': isVision ? 'https://www.visionplus.id' : (isVidio ? 'https://m.vidio.com' : 'https://www.vidio.com'),
+        'Referer': isVision ? 'https://www.visionplus.id/' : (isVidio ? 'https://m.vidio.com/' : 'https://www.vidio.com/'),
+        'User-Agent': isVidio ? mobileUA : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
       };
       if (req.headers['range']) fetchHeaders['Range'] = req.headers['range'];
+
+      if (isVidio && vidioSession && vidioSession.cookieHeader) {
+        fetchHeaders['Cookie'] = vidioSession.cookieHeader;
+      }
 
       const remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
       const isM3u8 = new URL(targetUrl).pathname.endsWith('.m3u8') || (remoteRes.headers.get('content-type') || '').includes('mpegurl');
