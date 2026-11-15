@@ -4,35 +4,32 @@
 # 📡 VISION+ OFFICIAL & MNC GROUP (DIRECT HLS NO DRM)
 # ==========================================
 
-#EXTINF:-1 tvg-id="VPlusLive1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Vision_Prime.png" group-title="VISION+",V+ Live (1002 HD)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
+#EXTINF:-1 tvg-id="VPlusLive" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live (1002 HD)
 #EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0","Referer":"https://www.visionplus.id/"}
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/license?ch=1002|Content-Type=application/octet-stream
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/live/1002/index.mpd
+#KODIPROP:inputstream.adaptive.license_key=https://drm.emonaja.com/licence/visionplus/v1/widevine/keyManager/kid/1002/Pollygon.do?hdntl=acl=/licence/visionplus/v1/widevine/keyManager/kid/1002/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=df7cf87150fb7eccb7d00b95dedc08b2856bb50f1c2a98bcc3600e47c49f88a2
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
+https://yuki.emonaja.com/live/visionplus/mediapackage.aws/dash/1002/manifest.mpd?hdntl=acl=/live/visionplus/mediapackage.aws/dash/1002/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=872de2c627bc56fb8d154f3cf627a5c771a6199d84e05d61c339743f865ad70b
 
-#EXTINF:-1 tvg-id="VPlusLive2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Vision_Prime.png" group-title="VISION+",V+ Live 2 (1010 HD)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
+#EXTINF:-1 tvg-id="VPlusLive2" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live 2 (1010 HD)
 #EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0","Referer":"https://www.visionplus.id/"}
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/license?ch=1010|Content-Type=application/octet-stream
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/live/1010/index.mpd
+#KODIPROP:inputstream.adaptive.license_key=https://drm.emonaja.com/licence/visionplus/v1/widevine/keyManager/kid/1010/Pollygon.do?hdntl=acl=/licence/visionplus/v1/widevine/keyManager/kid/1010/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=f0da464673d0ffb07172874f4dc7d084466352020a4e8154c43c6df9ab537816
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
+https://yuki.emonaja.com/live/visionplus/mediapackage.aws/dash/1010/manifest.mpd?hdntl=acl=/live/visionplus/mediapackage.aws/dash/1010/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=c7e0cade269444bb172294ede102dcef3c08330db00bbf3dd4745e7e2669d477
 
-#EXTINF:-1 tvg-id="VPlusLive3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Vision_Prime.png" group-title="VISION+",V+ Live 3 (1012 HD)
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
+#EXTINF:-1 tvg-id="VPlusLive3" tvg-logo="https://dash.streamized.net/img/vpluslive.png" group-title="VISION+",V+ Live 3 (1012 HD)
 #EXTVLCOPT:http-referrer=https://www.visionplus.id/
-#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0","Referer":"https://www.visionplus.id/"}
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/license?ch=1012|Content-Type=application/octet-stream
-https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/live/1012/index.mpd
+#KODIPROP:inputstream.adaptive.license_key=https://drm.emonaja.com/licence/visionplus/v1/widevine/keyManager/kid/1012/Pollygon.do?hdntl=acl=/licence/visionplus/v1/widevine/keyManager/kid/1012/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=5e134c049ea16e22ef732c794c47a877f1b6060df3ecc9955459d16d6aefd067
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
+https://yuki.emonaja.com/live/visionplus/mediapackage.aws/dash/1012/manifest.mpd?hdntl=acl=/live/visionplus/mediapackage.aws/dash/1012/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=99f1e2c2a829385d8bd29ce2121d17722b55bbb9b1bb5d4460c246c79c0ac250
 
 
 #EXTINF:-1 tvg-id="RCTI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rcti.png" group-title="VISION+",RCTI (Vision+ HD)
