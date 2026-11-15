@@ -8,6 +8,17 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
+    // Handle preflight OPTIONS
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': '*'
+        }
+      });
+    }
+
     // Halaman sambutan jika dibuka di browser biasa
     if (path === '/' || path === '') {
       return new Response('Vision+ Stream Proxy Worker is Running! Silakan panggil path channel, contoh: /live/web/antv/512.m3u8', {
