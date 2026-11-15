@@ -403,30 +403,66 @@ http://72.60.79.72:8765/vidio/22337.m3u8
 
 #EXTINF:-1 tvg-id="VPlusLive1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Vision_Prime.png" group-title="VISION+",V+ Live (1002 HD)
 #KODIPROP:inputstreamaddon=inputstream.adaptive
+#EXTINF:-1 tvg-id="VPlusLive" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Vision_Prime.png" group-title="VISION+",V+ Live (1002 HD)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
 #KODIPROP:inputstream.adaptive.license_key=https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/license?ch=1002|Content-Type=application/octet-stream
-#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
-https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/index.mpd|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/live/1002/index.mpd
 
 #EXTINF:-1 tvg-id="VPlusLive2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Vision_Prime.png" group-title="VISION+",V+ Live 2 (1010 HD)
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
 #KODIPROP:inputstream.adaptive.license_key=https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/license?ch=1010|Content-Type=application/octet-stream
-#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
-https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/index.mpd|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/live/1010/index.mpd
 
 #EXTINF:-1 tvg-id="VPlusLive3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Vision_Prime.png" group-title="VISION+",V+ Live 3 (1012 HD)
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
 #KODIPROP:inputstream.adaptive.license_key=https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/license?ch=1012|Content-Type=application/octet-stream
-#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
-https://d2xz2v5wuvgur6.cloudfront.net/out/v1/63c0da12bb4d48afbaf053f51dff2353/index.mpd|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+https://shiny-brook-b56c.mikhaelyuli13.workers.dev/vision/live/1012/index.mpd
+
+#EXTINF:-1 tvg-id="Sportstars" tvg-name="Sportstars" group-title="Sports Channels" tvg-logo="https://object-streamo.emonaja.com/img/sportstars.png",Sport Stars HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=911e72adf36946afbdbb4f80782a8394:08aec548a851ba64b7172ae7f05cb91c
+https://yuki.emonaja.com/live/eds/SportStars/dash/SportStars.mpd?hdntl=acl=/live/eds/SportStars/dash/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=175f600ee6ecff77648b6651ebcd0bbc494eac9d53a2a7e719d6f38e06718e4c
+
+#EXTINF:-1 tvg-id="Sportstars2" tvg-name="Sportstars2" group-title="Sports Channels" tvg-logo="https://object-streamo.emonaja.com/img/sportstars.png",Sport Stars 2 HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=https://pepek.semar.my.id/sportstars3.html
+https://yuki.emonaja.com/live/eds/SportStars2/dash/SportStars2.mpd?hdntl=acl=/live/eds/SportStars2/dash/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=6367328e3c8eadf3af727179c05860e3d6d6fd0eddd893bf33f5750754e4f7b8
+
+#EXTINF:-1 tvg-id="Sportstars3" tvg-name="Sportstars3" group-title="Sports Channels" tvg-logo="https://object-streamo.emonaja.com/img/sportstars.png",Sport Stars 3 HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=b576e5f5f1bc4cbaa866e5b0face5a30:3377be6c3b5f688ebed687312c9b9d95
+https://yuki.emonaja.com/live/eds/SportStars3/dash/SportStars3.mpd?hdntl=acl=/live/eds/SportStars3/dash/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=df4c267f679f44bd00cc41b2b73fdeb03449ad7fb365470695ca2fa4cbeec2f0
+
+#EXTINF:-1 tvg-id="SoccerChannel.id" tvg-name="Soccer Channel" group-title="Sports Channels" tvg-logo="https://object-streamo.emonaja.com/img/soccerchannel.png",Soccer Channel HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+https://yuki.emonaja.com/live/eds/SoccerChannel/dash/SoccerChannel.mpd?hdntl=acl=/live/eds/SoccerChannel/dash/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=8633b08f4b76a47137c066635a272c32e87f1a30b5ccb21a0a89b0838dc80972
+
+#EXTINF:-1 tvg-id="SPOTV" tvg-name="SPOTV" group-title="Sports Channels" tvg-logo="https://object-streamo.emonaja.com/img/spotv.png",SPOTV HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=3197f7f5086c4315af2b7a94bc9201cb:17462a74739ae0d9855705ffc2c0e1b5
+https://yuki.emonaja.com/live/eds/SPOTV/dash/SPOTV.mpd?hdntl=acl=/live/eds/SPOTV/dash/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=62ff9b687472b9475bbe6c8dbff22bf3729708cc39dda1678536781c54bbc3dd
+
+#EXTINF:-1 tvg-id="SPOTV2" tvg-name="SPOTV 2" group-title="Sports Channels" tvg-logo="https://object-streamo.emonaja.com/img/spotv2.png",SPOTV 2 HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=1539f043249e413d91906036f305831e:671e24fd8d234c7f38d85055815f902a
+https://yuki.emonaja.com/live/eds/SPOTV2/dash/SPOTV2.mpd?hdntl=acl=/live/eds/SPOTV2/dash/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=3a9b627bba67a55c643660be7d438ee237f15b17438c81547d2f0e27f8ff0a64
 
 #EXTINF:-1 tvg-id="RCTI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rcti.png" group-title="VISION+",RCTI (Vision+ HD)
 https://shiny-brook-b56c.mikhaelyuli13.workers.dev/live/web/rcti/index.m3u8
