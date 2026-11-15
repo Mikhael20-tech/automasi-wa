@@ -680,6 +680,10 @@ const server = http.createServer(async (req, res) => {
       addLog(`[Vision License ${channelId}] Received challenge: ${challengeBody.length} bytes`);
 
       const mediaMap = {
+        '1': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/997ce8767b604fae9fce05379b3b8b3a/00000000000000000001',
+        '2': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/d6b026ad50f14b7f9af5ddd5450007d4/00000000000000000002',
+        '3': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/b8b9b1d5f80f45649b4a3619291551ab/00000000000000000003',
+        '4': 'multirights:mediapackage/live//EG_d84q7nw4qf3j3/DASH/34d8dd29eb1d4eba931c7c5ab5f4be09/00000000000000000004',
         '1002': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/HLS/de2cb5b125f744aaae2611e13ecfa4f0/00000000000000001002/00000000000000000112',
         '1010': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/d2c68a3dfb644808b416bd90dcc92d5f/HLS/ea843b6cc223440c8f2273071d77fa7a/00000000000000001010/00000000000000000113',
         '1012': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/63c0da12bb4d48afbaf053f51dff2353/HLS/b9fc626578f34e0db7ff123168ace53a/00000000000000001012/00000000000000000115'
@@ -745,6 +749,10 @@ const server = http.createServer(async (req, res) => {
     const chId = visionLiveMatch[1];
     const relPath = visionLiveMatch[2];
     const cfBaseMap = {
+      '1': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/997ce8767b604fae9fce05379b3b8b3a/',
+      '2': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/d6b026ad50f14b7f9af5ddd5450007d4/',
+      '3': 'https://d2tjypxxy769fn.cloudfront.net/out/v1/b8b9b1d5f80f45649b4a3619291551ab/',
+      '4': 'https://d84q7nw4qf3j3.cloudfront.net/out/v1/34d8dd29eb1d4eba931c7c5ab5f4be09/',
       '1002': 'https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/',
       '1010': 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/d2c68a3dfb644808b416bd90dcc92d5f/',
       '1012': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/63c0da12bb4d48afbaf053f51dff2353/'

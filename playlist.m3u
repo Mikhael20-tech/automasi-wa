@@ -462,17 +462,33 @@ https://yuki.emonaja.com/live/eds/SPOTV/dash/SPOTV.mpd?hdntl=acl=/live/eds/SPOTV
 #KODIPROP:inputstream.adaptive.license_key=1539f043249e413d91906036f305831e:671e24fd8d234c7f38d85055815f902a
 https://yuki.emonaja.com/live/eds/SPOTV2/dash/SPOTV2.mpd?hdntl=acl=/live/eds/SPOTV2/dash/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=3a9b627bba67a55c643660be7d438ee237f15b17438c81547d2f0e27f8ff0a64
 
-#EXTINF:-1 tvg-id="RCTI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rcti.png" group-title="VISION+",RCTI (Vision+ HD)
-http://72.60.79.72:8765/live/web/rcti/index.m3u8
+#EXTINF:-1 tvg-id="RCTI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_rcti.png" group-title="VISION+",RCTI (Vision+ HD VPS)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=1
+http://72.60.79.72:8765/vision/live/1/index.mpd
 
-#EXTINF:-1 tvg-id="MNCTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_mnctv.png" group-title="VISION+",MNCTV (Vision+ HD)
-http://72.60.79.72:8765/live/web/mnctv/index.m3u8
+#EXTINF:-1 tvg-id="MNCTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_mnctv.png" group-title="VISION+",MNCTV (Vision+ HD VPS)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=2
+http://72.60.79.72:8765/vision/live/2/index.mpd
 
-#EXTINF:-1 tvg-id="GTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_gtv.png" group-title="VISION+",GTV (Vision+ HD)
-http://72.60.79.72:8765/live/web/gtv/index.m3u8
+#EXTINF:-1 tvg-id="GTV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_gtv.png" group-title="VISION+",GTV (Vision+ HD VPS)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=3
+http://72.60.79.72:8765/vision/live/3/index.mpd
 
-#EXTINF:-1 tvg-id="iNews" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_inews.png" group-title="VISION+",iNews (Vision+ HD)
-http://72.60.79.72:8765/live/web/inews/index.m3u8
+#EXTINF:-1 tvg-id="iNews" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_inews.png" group-title="VISION+",iNews (Vision+ HD VPS)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=4
+http://72.60.79.72:8765/vision/live/4/index.mpd
 
 #EXTINF:-1 tvg-id="SindoNews" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/e0/Sindo_News_logo.png" group-title="VISION+",Sindonews TV (Vision+ HD)
 http://72.60.79.72:8765/live/web/sindonews/index.m3u8
