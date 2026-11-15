@@ -720,11 +720,40 @@ const server = http.createServer(async (req, res) => {
       if (req.headers['range']) fetchHeaders['Range'] = req.headers['range'];
 
       const remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+
+      // === MPD: inject BaseURL agar segment diambil lewat VPS, bukan CloudFront langsung ===
+      const isMpd = relPath.endsWith('.mpd') || relPath === 'index.mpd';
+      if (isMpd && remoteRes.ok) {
+        let mpdText = await remoteRes.text();
+        // Tentukan VPS base URL untuk channel ini
+        const proto = req.headers['x-forwarded-proto'] || 'http';
+        const host = req.headers['host'] || `72.60.79.72:8765`;
+        const vpsBase = `${proto}://${host}/vision/live/${chId}/`;
+        // Inject <BaseURL> di dalam setiap <Period> supaya relative segment URLs di-resolve ke VPS
+        if (mpdText.includes('<BaseURL>')) {
+          // Ganti BaseURL yang ada dengan VPS base
+          mpdText = mpdText.replace(/<BaseURL>[^<]*<\/BaseURL>/g, `<BaseURL>${vpsBase}</BaseURL>`);
+        } else {
+          // Inject BaseURL baru setelah tag <Period ...>
+          mpdText = mpdText.replace(/(<Period[^>]*>)/g, `$1\n    <BaseURL>${vpsBase}</BaseURL>`);
+        }
+        const respHeaders = {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+          'Access-Control-Allow-Headers': '*',
+          'Content-Type': 'application/dash+xml'
+        };
+        res.writeHead(200, respHeaders);
+        res.end(mpdText);
+        return;
+      }
+
+      // Untuk segment/init files: pass-through biasa
       const respHeaders = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
         'Access-Control-Allow-Headers': '*',
-        'Content-Type': remoteRes.headers.get('content-type') || (targetUrl.endsWith('.mpd') ? 'application/dash+xml' : 'video/mp4')
+        'Content-Type': remoteRes.headers.get('content-type') || 'video/mp4'
       };
       if (remoteRes.headers.get('content-length')) {
         respHeaders['Content-Length'] = remoteRes.headers.get('content-length');
