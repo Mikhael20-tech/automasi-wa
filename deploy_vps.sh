@@ -642,6 +642,70 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // 1b. Vision+ Widevine DRM License Proxy (Auto-Refresh 24/7)
+  if (rawUrl.startsWith('/vision/license')) {
+    const parsedUrl = new URL(rawUrl, `http://${host}`);
+    const channelId = parsedUrl.searchParams.get('ch') || '1002';
+
+    try {
+      const mediaMap = {
+        '1002': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/00000000000000001002',
+        '1010': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/00000000000000001010',
+        '1012': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/63c0da12bb4d48afbaf053f51dff2353/HLS/b9fc626578f34e0db7ff123168ace53a/00000000000000001012/00000000000000000115'
+      };
+      const mediaUrl = mediaMap[channelId] || mediaMap['1002'];
+      const locatorUrl = `https://www.visionplus.id/streamlocators/multirights/getPlayableUrlAndLicense?adsProfile=premium&drm=WV&packaging=DASH&provisioningData=eyJwcm92aXNpb25pbmciOlt7InN5c3RlbSI6InZlcmltYXRyaXgiLCJkYXRhIjpbeyJuYW1lIjoidnVpZCIsInZhbHVlIjoiNzA0YjI4ZjQtMzkyNC00NjA5LWEyOWQtZjc5ZDAyNTc0OTQzIn1dfV19&url=${encodeURIComponent(mediaUrl)}&userSessionToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNzA0YjI4ZjQtMzkyNC00NjA5LWEyOWQtZjc5ZDAyNTc0OTQzIiwiZXhwIjoxNzk0NzMwNDM3LCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.ct558TfZFXTX3_t_2tq_YKDbXfaiV3ZCDPrwtx9hl4M`;
+
+      const vRes = await fetch(locatorUrl, {
+        headers: {
+          'Accept': '*/*',
+          'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNzA0YjI4ZjQtMzkyNC00NjA5LWEyOWQtZjc5ZDAyNTc0OTQzIiwiZXhwIjoxNzk0NzMwNDM3LCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.ct558TfZFXTX3_t_2tq_YKDbXfaiV3ZCDPrwtx9hl4M',
+          'IRIS-DEVICE-CLASS': 'PC',
+          'IRIS-DEVICE-TYPE': 'WINDOWS/CHROME',
+          'IRIS-DEVICE-REGION': 'Indonesia',
+          'IRIS-APP-VERSION': '11.4.13(0)_prd',
+          'IRIS-APP-MODE': 'Normal',
+          'IRIS-HW-DEVICE-ID': '704b28f4-3924-4609-a29d-f79d02574943',
+          'IRIS-PROFILE-ID': '30098954',
+          'Referer': 'https://www.visionplus.id/webclient/live',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+      });
+      const vJson = await vRes.json();
+      const licUrl = vJson.videos?.[0]?.licenses?.[0]?.url;
+      if (!licUrl) throw new Error('No license URL found');
+
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      const challengeBody = Buffer.concat(chunks);
+
+      const licenseRes = await fetch(licUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/octet-stream',
+          'Origin': 'https://www.visionplus.id',
+          'Referer': 'https://www.visionplus.id/',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        },
+        body: challengeBody
+      });
+
+      const resBuffer = Buffer.from(await licenseRes.arrayBuffer());
+      res.writeHead(licenseRes.status, {
+        'Content-Type': 'application/octet-stream',
+        'Access-Control-Allow-Origin': '*'
+      });
+      res.end(resBuffer);
+      return;
+    } catch (e) {
+      if (!res.headersSent) {
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Vision License Error: ' + e.message);
+      }
+      return;
+    }
+  }
+
   // 2. MPEG-DASH (.mpd) Proxy for DRM Channels
   const mpdMatch = rawUrl.match(/^\/(?:tv\/|live\/)?vidio\/([a-zA-Z0-9_\-]+)\.mpd/);
   if (mpdMatch) {
