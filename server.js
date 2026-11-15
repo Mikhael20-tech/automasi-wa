@@ -282,6 +282,29 @@ function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
     let l = rawLines[i].trim();
     if (!l) continue; // Skip empty lines completely so they don't become bogus URLs!
 
+    // Strip Apple Content Steering tags that cause ExoPlayer / Android TV to stall or freeze
+    if (l.startsWith('#EXT-X-CONTENT-STEERING')) {
+      continue;
+    }
+
+    if (isVidio) {
+      // Filter out duplicate backup audio and video pathways, keep only primary to prevent TV freeze
+      if (l.startsWith('#EXT-X-MEDIA:TYPE=AUDIO') && l.includes('backup')) {
+        continue;
+      }
+      if (l.startsWith('#EXT-X-STREAM-INF:') && l.includes('backup')) {
+        skipNext = true;
+        continue;
+      }
+      if (l.includes('/backup/')) {
+        continue;
+      }
+      // Ensure primary audio is DEFAULT=YES so TV automatically binds audio to video
+      if (l.startsWith('#EXT-X-MEDIA:TYPE=AUDIO') && l.includes('DEFAULT=NO')) {
+        l = l.replace('DEFAULT=NO', 'DEFAULT=YES');
+      }
+    }
+
     if (l.startsWith('#EXT-X-STREAM-INF:')) {
       // Prioritize standard H.264 (avc1) for maximum TV hardware decoding compatibility!
       // Skip AV1 (av01) and HEVC (hvc1/hev1) if H.264 is available to prevent TV freezing/stuck pictures
@@ -1044,7 +1067,27 @@ const server = http.createServer(async (req, res) => {
         fetchHeaders['Cookie'] = vidioSession.cookieHeader;
       }
 
-      const remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+      let remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+
+      // Auto token refresh on 403 / 401 for Vidio streams to prevent picture freezing/stuck:
+      if ((remoteRes.status === 403 || remoteRes.status === 401) && isVidio) {
+        const chMatch = targetUrl.match(/\/stream\/([0-9a-zA-Z_\-]+)\/file\//);
+        if (chMatch) {
+          const chId = chMatch[1];
+          delete vidioTokenCache[chId];
+          try {
+            const freshData = await getVidioStream(chId);
+            const tokenMatch = (freshData.hls || '').match(/hdntl=[^&?\/]+/);
+            if (tokenMatch) {
+              targetUrl = targetUrl.replace(/hdntl=[^/]+/, tokenMatch[0]);
+              remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+            }
+          } catch (eToken) {
+            addLog(`[Stream] Token refresh failed for ch ${chId}: ${eToken.message}`);
+          }
+        }
+      }
+
       const isM3u8 = new URL(targetUrl).pathname.endsWith('.m3u8') || (remoteRes.headers.get('content-type') || '').includes('mpegurl');
       if (isM3u8) {
         const text = await remoteRes.text();
@@ -1054,10 +1097,16 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
-      res.writeHead(remoteRes.status, {
+      const outHeaders = {
         'Access-Control-Allow-Origin': '*',
         'Content-Type': remoteRes.headers.get('content-type') || 'application/octet-stream'
-      });
+      };
+      if (remoteRes.headers.get('content-length')) outHeaders['Content-Length'] = remoteRes.headers.get('content-length');
+      if (remoteRes.headers.get('content-range')) outHeaders['Content-Range'] = remoteRes.headers.get('content-range');
+      if (remoteRes.headers.get('accept-ranges')) outHeaders['Accept-Ranges'] = remoteRes.headers.get('accept-ranges');
+      if (remoteRes.headers.get('cache-control')) outHeaders['Cache-Control'] = remoteRes.headers.get('cache-control');
+
+      res.writeHead(remoteRes.status, outHeaders);
       const reader = remoteRes.body.getReader();
       const pump = async () => {
         try {
