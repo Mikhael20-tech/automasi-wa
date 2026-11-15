@@ -641,6 +641,13 @@ const server = http.createServer(async (req, res) => {
     const channelId = parsedUrl.searchParams.get('ch') || '1002';
 
     try {
+      // 1. Baca challenge body dari client (TV) secepat mungkin agar tidak terputus stream-nya
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      const challengeBody = Buffer.concat(chunks);
+      console.log(`[Vision License ${channelId}] Received challenge: ${challengeBody.length} bytes`);
+      addLog(`[Vision License ${channelId}] Received challenge: ${challengeBody.length} bytes`);
+
       const mediaMap = {
         '1002': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/00000000000000001002',
         '1010': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/d2c68a3dfb644808b416bd90dcc92d5f/00000000000000001010',
@@ -666,11 +673,7 @@ const server = http.createServer(async (req, res) => {
       });
       const vJson = await vRes.json();
       const licUrl = vJson.videos?.[0]?.licenses?.[0]?.url;
-      if (!licUrl) throw new Error('No license URL found');
-
-      const chunks = [];
-      for await (const chunk of req) chunks.push(chunk);
-      const challengeBody = Buffer.concat(chunks);
+      if (!licUrl) throw new Error('No license URL found in Vision+ response: ' + JSON.stringify(vJson));
 
       const licenseRes = await fetch(licUrl, {
         method: 'POST',
@@ -684,6 +687,10 @@ const server = http.createServer(async (req, res) => {
       });
 
       const resBuffer = Buffer.from(await licenseRes.arrayBuffer());
+      const preview = resBuffer.toString('utf8').substring(0, 150);
+      console.log(`[Vision License ${channelId}] Verimatrix HTTP ${licenseRes.status}, resp size: ${resBuffer.length}, preview: ${preview}`);
+      addLog(`[Vision License ${channelId}] Verimatrix HTTP ${licenseRes.status}, resp size: ${resBuffer.length}, preview: ${preview}`);
+
       res.writeHead(licenseRes.status, {
         'Content-Type': 'application/octet-stream',
         'Access-Control-Allow-Origin': '*'
@@ -691,6 +698,8 @@ const server = http.createServer(async (req, res) => {
       res.end(resBuffer);
       return;
     } catch (e) {
+      console.error(`[Vision License Error]`, e.message);
+      addLog(`[Vision License Error] ${e.message}`);
       if (!res.headersSent) {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('Vision License Error: ' + e.message);
