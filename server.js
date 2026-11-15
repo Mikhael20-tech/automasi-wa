@@ -643,8 +643,8 @@ const server = http.createServer(async (req, res) => {
     try {
       const mediaMap = {
         '1002': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/00000000000000001002',
-        '1010': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/00000000000000001010',
-        '1012': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/63c0da12bb4d48afbaf053f51dff2353/HLS/b9fc626578f34e0db7ff123168ace53a/00000000000000001012/00000000000000000115'
+        '1010': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/d2c68a3dfb644808b416bd90dcc92d5f/00000000000000001010',
+        '1012': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/113af3d432214f62bd6815f976bf2cd6/00000000000000001012'
       };
       const mediaUrl = mediaMap[channelId] || mediaMap['1002'];
       const locatorUrl = `https://www.visionplus.id/streamlocators/multirights/getPlayableUrlAndLicense?adsProfile=premium&drm=WV&packaging=DASH&provisioningData=eyJwcm92aXNpb25pbmciOlt7InN5c3RlbSI6InZlcmltYXRyaXgiLCJkYXRhIjpbeyJuYW1lIjoidnVpZCIsInZhbHVlIjoiNzA0YjI4ZjQtMzkyNC00NjA5LWEyOWQtZjc5ZDAyNTc0OTQzIn1dfV19&url=${encodeURIComponent(mediaUrl)}&userSessionToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNzA0YjI4ZjQtMzkyNC00NjA5LWEyOWQtZjc5ZDAyNTc0OTQzIiwiZXhwIjoxNzk0NzMwNDM3LCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.ct558TfZFXTX3_t_2tq_YKDbXfaiV3ZCDPrwtx9hl4M`;
@@ -694,6 +694,54 @@ const server = http.createServer(async (req, res) => {
       if (!res.headersSent) {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('Vision License Error: ' + e.message);
+      }
+      return;
+    }
+  }
+
+  // 1c. Vision+ Media Stream Reverse Proxy (MPD & DASH Segments)
+  const visionLiveMatch = rawUrl.match(/^\/vision\/live\/(\d+)\/(.*)$/);
+  if (visionLiveMatch) {
+    const chId = visionLiveMatch[1];
+    const relPath = visionLiveMatch[2];
+    const cfBaseMap = {
+      '1002': 'https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/',
+      '1010': 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/d2c68a3dfb644808b416bd90dcc92d5f/',
+      '1012': 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/113af3d432214f62bd6815f976bf2cd6/'
+    };
+    const targetUrl = (cfBaseMap[chId] || cfBaseMap['1012']) + relPath;
+
+    try {
+      const fetchHeaders = {
+        'Origin': 'https://www.visionplus.id',
+        'Referer': 'https://www.visionplus.id/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
+      };
+      if (req.headers['range']) fetchHeaders['Range'] = req.headers['range'];
+
+      const remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+      const respHeaders = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+        'Access-Control-Allow-Headers': '*',
+        'Content-Type': remoteRes.headers.get('content-type') || (targetUrl.endsWith('.mpd') ? 'application/dash+xml' : 'video/mp4')
+      };
+      if (remoteRes.headers.get('content-length')) {
+        respHeaders['Content-Length'] = remoteRes.headers.get('content-length');
+      }
+
+      res.writeHead(remoteRes.status, respHeaders);
+      const reader = remoteRes.body.getReader();
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) { res.end(); break; }
+        res.write(Buffer.from(value));
+      }
+      return;
+    } catch (e) {
+      if (!res.headersSent) {
+        res.writeHead(502, { 'Content-Type': 'text/plain' });
+        res.end('Vision Proxy Error: ' + e.message);
       }
       return;
     }
