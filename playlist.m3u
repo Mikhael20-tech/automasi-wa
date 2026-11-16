@@ -432,7 +432,7 @@ http://72.60.79.72:8765/vidio/206.m3u8
 #KODIPROP:inputstream.adaptive.license_key=https://aspaltvpasti.top/visionakun/visionakun.php?lic=1&ch=00000000000000000006
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
 #EXTVLCOPT:network-caching=5000
-https://d2xz2v5wuvgur6.cloudfront.net/out/v1/7a69cfc9e135493f87ac4efd63000429/index.mpd
+http://72.60.79.72:8765/vidio/733.mpd
 
 #EXTINF:-1 tvg-id="00000000000000000007" tvg-name="Trans 7" tvg-logo="https://www.visionplus.id/images/repository/586/586-LOGO-l.png" group-title="VIDIO",Trans 7 (Vision+ HD)
 #KODIPROP:inputstream.adaptive.max_bandwidth=3500000
@@ -816,7 +816,7 @@ http://72.60.79.72:8765/live/web/moji/512.m3u8
 #KODIPROP:inputstream.adaptive.license_key=https://aspaltvpasti.top/visionakun/visionakun.php?lic=1&ch=00000000000000000006
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
 #EXTVLCOPT:network-caching=5000
-https://d2xz2v5wuvgur6.cloudfront.net/out/v1/7a69cfc9e135493f87ac4efd63000429/index.mpd
+http://72.60.79.72:8765/vidio/733.mpd
 
 #EXTINF:-1 tvg-id="00000000000000000007" tvg-name="Trans 7" tvg-logo="https://www.visionplus.id/images/repository/586/586-LOGO-l.png" group-title="VISION+",Trans 7 (Vision+ HD)
 #KODIPROP:inputstream.adaptive.max_bandwidth=3500000
