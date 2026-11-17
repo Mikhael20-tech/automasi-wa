@@ -175,6 +175,26 @@ async function getVidioStream(channelId) {
     return await getVidioStream('205');
   }
 
+  // Direct fast routing for MNC & Trans channels (official high-speed non-DRM feeds)
+  if (channelId === 'rcti' || channelId === '674') {
+    return { hls: 'https://proxy-v.rctiplus.id/live/web/rcti/index.m3u8', expiresAt: Date.now() + 3600000 };
+  }
+  if (channelId === 'gtv' || channelId === '778') {
+    return { hls: 'https://proxy-v.rctiplus.id/live/web/gtv/index.m3u8', expiresAt: Date.now() + 3600000 };
+  }
+  if (channelId === 'mnctv' || channelId === '779') {
+    return { hls: 'https://proxy-v.rctiplus.id/live/web/mnctv/index.m3u8', expiresAt: Date.now() + 3600000 };
+  }
+  if (channelId === 'inews' || channelId === '780') {
+    return { hls: 'https://proxy-v.rctiplus.id/live/web/inews/index.m3u8', expiresAt: Date.now() + 3600000 };
+  }
+  if (channelId === '733' || channelId === 'transtv') {
+    return { hls: 'https://proxy-v.rctiplus.id/live/web/transtv/512.m3u8', expiresAt: Date.now() + 3600000 };
+  }
+  if (channelId === '734' || channelId === 'trans7') {
+    return { hls: 'https://proxy-v.rctiplus.id/live/web/trans7/512.m3u8', expiresAt: Date.now() + 3600000 };
+  }
+
   const now = Date.now();
   if (vidioTokenCache[channelId] && vidioTokenCache[channelId].expiresAt > now) {
     return vidioTokenCache[channelId];
