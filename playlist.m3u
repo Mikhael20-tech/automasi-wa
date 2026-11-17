@@ -1043,19 +1043,19 @@ https://video.detik.com/livecnbc/smil:cnbctv/playlist.m3u8
 # ==========================================
 
 #EXTINF:-1 tvg-id="Indosiar" tvg-name="Indosiar Digital" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_indosiar.png" group-title="Digital",Indosiar Digital
-#EXTVLCOPT:network-caching=5000
+#EXTVLCOPT:network-caching=8000
 http://013tv.com:8080/F33848/cbd9779b/162138
 
 #EXTINF:-1 tvg-id="Moji" tvg-name="Moji Digital" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_moji.png" group-title="Digital",Moji Digital
-#EXTVLCOPT:network-caching=5000
+#EXTVLCOPT:network-caching=8000
 http://013tv.com:8080/F33848/cbd9779b/298550
 
 #EXTINF:-1 tvg-id="SCTV" tvg-name="SCTV Digital" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_sctv.png" group-title="Digital",SCTV Digital
-#EXTVLCOPT:network-caching=5000
+#EXTVLCOPT:network-caching=8000
 http://013tv.com:8080/F33848/cbd9779b/162141
 
 #EXTINF:-1 tvg-id="ANTV" tvg-name="ANTV Digital" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_antv.png" group-title="Digital",ANTV Digital
-#EXTVLCOPT:network-caching=5000
+#EXTVLCOPT:network-caching=8000
 http://013tv.com:8080/F33848/cbd9779b/165072
 
 #EXTINF:-1 tvg-id="K-DRAMA+" tvg-name="K-DRAMA+" tvg-logo="https://cdn88-accio.its-newid.net/channel/newid_008/lg_channels/img/channel_logo/default/channel_logo.png" group-title="Movies & Entertainment",K-DRAMA+
