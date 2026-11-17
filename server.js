@@ -5,7 +5,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const PORT = 8765;
-const vidioTokenCache = {};
+let vidioTokenCache = {};
 const recentLogs = [];
 
 let vidioSession = {
@@ -33,15 +33,15 @@ async function getOrRefreshVidioSession() {
   }
 
   addLog('[Auth] Refreshing Vidio API Key & Session from /auth...');
-  const userAgent = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36';
+  const desktopUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36';
 
   const authRes = await fetch('https://api.vidio.com/auth', {
     method: 'POST',
     headers: {
-      'Origin': 'https://m.vidio.com',
-      'Referer': 'https://m.vidio.com/',
-      'User-Agent': userAgent,
-      'X-API-Platform': 'web-mobile'
+      'Origin': 'https://www.vidio.com',
+      'Referer': 'https://www.vidio.com/',
+      'User-Agent': desktopUA,
+      'X-API-Platform': 'web-desktop'
     }
   });
 
@@ -181,15 +181,15 @@ async function getVidioStream(channelId) {
   }
 
   const session = await getOrRefreshVidioSession();
-  const userAgent = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36';
+  const desktopUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36';
 
-  let clientId = '';
-  let signature = '';
+  let clientId = '1794913320.46';
+  let signature = '87ca79c7c3be16c50831a708f5c996442437ca6adc8561d22c8f823b3780097c';
   try {
-    const pageRes = await fetch(`https://m.vidio.com/live/${channelId}`, {
+    const pageRes = await fetch(`https://www.vidio.com/live/${channelId}`, {
       headers: {
-        'User-Agent': userAgent,
-        'Referer': 'https://m.vidio.com/',
+        'User-Agent': desktopUA,
+        'Referer': 'https://www.vidio.com/',
         'Cookie': session.cookieHeader
       }
     });
@@ -205,12 +205,16 @@ async function getVidioStream(channelId) {
   }
 
   const apiHeaders = {
-    'Origin': 'https://m.vidio.com',
-    'Referer': `https://m.vidio.com/live/${channelId}`,
-    'User-Agent': userAgent,
+    'Origin': 'https://www.vidio.com',
+    'Referer': `https://www.vidio.com/live/${channelId}`,
+    'User-Agent': desktopUA,
     'X-Api-Key': session.encryptedApiKey,
-    'X-API-Platform': 'web-mobile',
+    'X-API-Platform': 'web-desktop',
     'X-Secure-Level': '2',
+    'X-Requested-With': 'vidio-next',
+    'luws': 'D63C88EF-F5D7-E309-606A-210C7F270995_99657635',
+    'x-user-email': '24050974086@mhs.unesa.ac.id',
+    'x-user-id': '99657635',
     'Cookie': session.cookieHeader
   };
 
@@ -1020,11 +1024,11 @@ const server = http.createServer(async (req, res) => {
     try {
       let streamData = await getVidioStream(channelId);
       const session = await getOrRefreshVidioSession();
-      const mobileUA = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36';
+      const desktopUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36';
       const vHeaders = {
-        'Origin': 'https://m.vidio.com',
-        'Referer': 'https://m.vidio.com/',
-        'User-Agent': mobileUA
+        'Origin': 'https://www.vidio.com',
+        'Referer': 'https://www.vidio.com/',
+        'User-Agent': desktopUA
       };
       if (session && session.cookieHeader) vHeaders['Cookie'] = session.cookieHeader;
 

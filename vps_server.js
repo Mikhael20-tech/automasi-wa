@@ -5,7 +5,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const PORT = 8765;
-const vidioTokenCache = {};
+let vidioTokenCache = {};
 const recentLogs = [];
 
 let vidioSession = {
