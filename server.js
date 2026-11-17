@@ -1089,12 +1089,12 @@ const server = http.createServer(async (req, res) => {
     try {
       const isVision = targetUrl.includes('rctiplus.id') || targetUrl.includes('visionplus.id') || targetUrl.includes('cloudfront.net');
       const isVidio = targetUrl.includes('vidio.com') || targetUrl.includes('akamaized.net') || targetUrl.includes('vidiostream.com');
-      const mobileUA = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36';
+      const desktopUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36';
 
       const fetchHeaders = {
-        'Origin': isVision ? 'https://www.visionplus.id' : (isVidio ? 'https://m.vidio.com' : 'https://www.vidio.com'),
-        'Referer': isVision ? 'https://www.visionplus.id/' : (isVidio ? 'https://m.vidio.com/' : 'https://www.vidio.com/'),
-        'User-Agent': isVidio ? mobileUA : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
+        'Origin': isVision ? 'https://www.visionplus.id' : 'https://www.vidio.com',
+        'Referer': isVision ? 'https://www.visionplus.id/' : 'https://www.vidio.com/',
+        'User-Agent': desktopUA
       };
       if (req.headers['range']) fetchHeaders['Range'] = req.headers['range'];
 
