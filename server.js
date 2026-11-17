@@ -1047,6 +1047,11 @@ const server = http.createServer(async (req, res) => {
         'User-Agent': desktopUA
       };
       if (session && session.cookieHeader) vHeaders['Cookie'] = session.cookieHeader;
+      if (streamData.hls.includes('rctiplus.id') || streamData.hls.includes('visionplus.id')) {
+        vHeaders['Origin'] = 'https://www.visionplus.id';
+        vHeaders['Referer'] = 'https://www.visionplus.id/';
+        delete vHeaders['Cookie'];
+      }
 
       let remoteRes = await fetch(streamData.hls, { headers: vHeaders });
 
