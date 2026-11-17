@@ -33,14 +33,15 @@ async function getOrRefreshVidioSession() {
   }
 
   addLog('[Auth] Refreshing Vidio API Key & Session from /auth...');
-  const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+  const desktopUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36';
 
   const authRes = await fetch('https://api.vidio.com/auth', {
     method: 'POST',
     headers: {
       'Origin': 'https://www.vidio.com',
       'Referer': 'https://www.vidio.com/',
-      'User-Agent': userAgent
+      'User-Agent': desktopUA,
+      'X-API-Platform': 'web-desktop'
     }
   });
 
@@ -94,15 +95,15 @@ async function getActiveLiga1Match() {
 
   try {
     const session = await getOrRefreshVidioSession();
-    const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+    const userAgent = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36';
 
     const res = await fetch('https://api.vidio.com/search?q=BRI+Liga+1', {
       headers: {
-        'Origin': 'https://www.vidio.com',
-        'Referer': 'https://www.vidio.com/',
+        'Origin': 'https://m.vidio.com',
+        'Referer': 'https://m.vidio.com/',
         'User-Agent': userAgent,
         'X-Api-Key': session.encryptedApiKey,
-        'X-API-Platform': 'web-desktop',
+        'X-API-Platform': 'web-mobile',
         'X-Secure-Level': '2',
         'Cookie': session.cookieHeader
       }
@@ -180,14 +181,14 @@ async function getVidioStream(channelId) {
   }
 
   const session = await getOrRefreshVidioSession();
-  const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+  const desktopUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36';
 
-  let clientId = '';
-  let signature = '';
+  let clientId = '1794913320.46';
+  let signature = '87ca79c7c3be16c50831a708f5c996442437ca6adc8561d22c8f823b3780097c';
   try {
     const pageRes = await fetch(`https://www.vidio.com/live/${channelId}`, {
       headers: {
-        'User-Agent': userAgent,
+        'User-Agent': desktopUA,
         'Referer': 'https://www.vidio.com/',
         'Cookie': session.cookieHeader
       }
@@ -206,10 +207,14 @@ async function getVidioStream(channelId) {
   const apiHeaders = {
     'Origin': 'https://www.vidio.com',
     'Referer': `https://www.vidio.com/live/${channelId}`,
-    'User-Agent': userAgent,
+    'User-Agent': desktopUA,
     'X-Api-Key': session.encryptedApiKey,
     'X-API-Platform': 'web-desktop',
     'X-Secure-Level': '2',
+    'X-Requested-With': 'vidio-next',
+    'luws': 'D63C88EF-F5D7-E309-606A-210C7F270995_99657635',
+    'x-user-email': '24050974086@mhs.unesa.ac.id',
+    'x-user-id': '99657635',
     'Cookie': session.cookieHeader
   };
 
@@ -228,6 +233,42 @@ async function getVidioStream(channelId) {
     if (errText.includes('not_yet_started')) {
       addLog(`[Stream] Event ${channelId} not yet started. Falling back to Indosiar 205.`);
       if (channelId !== '205') return await getVidioStream('205');
+    }
+    if (errText.includes('right_blocked')) {
+      addLog(`[Stream] Channel ${channelId} right_blocked. Checking redirect...`);
+      const bannerMatch = errText.match(/\/live\/(\d+)/);
+      if (bannerMatch && bannerMatch[1] && bannerMatch[1] !== channelId) {
+        addLog(`[Stream] Attempting redirect to event channel ${bannerMatch[1]}...`);
+        try {
+          return await getVidioStream(bannerMatch[1]);
+        } catch (e2) {
+          addLog(`[Stream] Event stream ${bannerMatch[1]} failed: ${e2.message}`);
+        }
+      }
+    }
+    if (channelId === '733') {
+      addLog('[Stream] Trans TV 733 login required, falling back to direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/transtv/512.m3u8', expiresAt: now + 3600000 };
+    }
+    if (channelId === '734') {
+      addLog('[Stream] Trans 7 734 login required, falling back to direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/trans7/512.m3u8', expiresAt: now + 3600000 };
+    }
+    if (channelId === '778') {
+      addLog('[Stream] GTV 778 package restricted on Vidio, falling back to high-speed direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/gtv/index.m3u8', expiresAt: now + 3600000 };
+    }
+    if (channelId === '674' || channelId === 'rcti') {
+      addLog('[Stream] RCTI package restricted on Vidio, falling back to high-speed direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/rcti/index.m3u8', expiresAt: now + 3600000 };
+    }
+    if (channelId === '779' || channelId === 'mnctv') {
+      addLog('[Stream] MNCTV package restricted on Vidio, falling back to high-speed direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/mnctv/index.m3u8', expiresAt: now + 3600000 };
+    }
+    if (channelId === '780' || channelId === 'inews') {
+      addLog('[Stream] iNews package restricted on Vidio, falling back to high-speed direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/inews/index.m3u8', expiresAt: now + 3600000 };
     }
     throw new Error(`Vidio API error (${channelId}): ${apiRes.status} ${errText}`);
   }
@@ -261,22 +302,59 @@ function rewriteM3u8(content, manifestUrl, host, proto = 'http') {
   const rawLines = content.split('\n');
   const lines = [];
 
+  const isVidio = manifestUrl.includes('vidio.com') || manifestUrl.includes('akamaized.net');
   const hasH264 = content.includes('CODECS="avc1');
-  let skipNext = false;
+  const has720p = content.includes('1280x720') || content.includes('720p');
 
   for (let i = 0; i < rawLines.length; i++) {
-    let l = rawLines[i];
-    if (l.startsWith('#EXT-X-STREAM-INF:')) {
-      if (hasH264 && (l.includes('CODECS="hvc1') || l.includes('CODECS="hev1'))) {
-        skipNext = true;
-        continue;
-      }
-    } else if (skipNext) {
-      skipNext = false;
+    let l = rawLines[i].trim();
+    if (!l) continue; // Skip empty lines completely so they don't become bogus URLs!
+
+    // Strip Apple Content Steering tags that cause ExoPlayer / Android TV to stall or freeze
+    if (l.startsWith('#EXT-X-CONTENT-STEERING')) {
       continue;
     }
 
-    l = l.replace(/,PATHWAY-ID="[^"]+"/g, '');
+    if (isVidio) {
+      // Filter out duplicate backup audio, keep only primary to prevent TV freeze
+      if (l.startsWith('#EXT-X-MEDIA:TYPE=AUDIO') && l.includes('backup')) {
+        continue;
+      }
+      // Ensure primary audio is DEFAULT=YES so TV automatically binds audio to video
+      if (l.startsWith('#EXT-X-MEDIA:TYPE=AUDIO') && l.includes('DEFAULT=NO')) {
+        l = l.replace('DEFAULT=NO', 'DEFAULT=YES');
+      }
+    }
+
+    if (l.startsWith('#EXT-X-STREAM-INF:')) {
+      let nextLine = '';
+      let j = i + 1;
+      while (j < rawLines.length && !rawLines[j].trim()) j++;
+      if (j < rawLines.length) nextLine = rawLines[j].trim();
+      i = j;
+
+      // Prioritize standard H.264 (avc1) for maximum TV hardware decoding compatibility!
+      if (hasH264 && (l.includes('CODECS="av01') || l.includes('CODECS="hvc1') || l.includes('CODECS="hev1'))) {
+        continue;
+      }
+
+      // Filter out backup pathways for Vidio
+      if (isVidio && (l.includes('backup') || nextLine.includes('/backup/'))) {
+        continue;
+      }
+
+      // Vidio Mobile accounts (Gold/Platinum Mobile) return 403 Forbidden on 1080p from Akamai.
+      // Filter out 1080p ONLY IF 720p or lower is available so single-1080p channels (like NHK World) are kept!
+      if (isVidio && has720p && (l.includes('1920x1080') || l.includes('1080p') || nextLine.includes('-1080p/'))) {
+        continue;
+      }
+
+      l = l.replace(/,PATHWAY-ID="[^"]+"/g, '');
+      lines.push(l);
+      if (nextLine) lines.push(nextLine);
+      continue;
+    }
+
     lines.push(l);
   }
 
@@ -332,6 +410,39 @@ const server = http.createServer(async (req, res) => {
       fallback: '205 (Indosiar)'
     }, null, 2));
     return;
+  }
+
+  // Vision+ / RCTI+ HLS Gateway (Proxy-V HLS for FTA & Vision+ channels)
+  if (rawUrl.startsWith('/live/web/')) {
+    const targetUrl = 'https://proxy-v.rctiplus.id' + rawUrl;
+    try {
+      const fetchHeaders = {
+        'Origin': 'https://www.visionplus.id',
+        'Referer': 'https://www.visionplus.id/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
+      };
+      const remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+      if (!remoteRes.ok) {
+        res.writeHead(remoteRes.status);
+        res.end();
+        return;
+      }
+      const text = await remoteRes.text();
+      const rewritten = rewriteM3u8(text, targetUrl, host, proto);
+      res.writeHead(200, {
+        'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      });
+      res.end(rewritten);
+      return;
+    } catch (e) {
+      res.writeHead(502);
+      res.end('Gateway Error');
+      return;
+    }
   }
 
   // Playlist M3U Service
@@ -393,6 +504,256 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // ==========================================
+  // --- LIVE EVENT MANAGEMENT & STREAMING ---
+  // ==========================================
+  const event1File = path.join(__dirname, 'event_url.txt');
+  const event2File = path.join(__dirname, 'event2_url.txt');
+
+  // Web UI & API to set or view Live Event URL
+  if (rawUrl === '/event' || rawUrl === '/set-event' || rawUrl.startsWith('/event?') || rawUrl.startsWith('/set-event?')) {
+    const parsedUrl = new URL(rawUrl, `http://${host}`);
+    let newUrl = parsedUrl.searchParams.get('url');
+    const slot = parsedUrl.searchParams.get('slot') === '2' ? 2 : 1;
+    const targetFile = slot === 2 ? event2File : event1File;
+
+    if (req.method === 'POST') {
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      const body = Buffer.concat(chunks).toString('utf-8');
+      const params = new URLSearchParams(body);
+      if (params.has('url')) newUrl = params.get('url');
+    }
+
+    if (typeof newUrl === 'string') {
+      newUrl = newUrl.trim();
+      fs.writeFileSync(targetFile, newUrl, 'utf-8');
+      addLog(`[Live Event] Slot ${slot} updated to: ${newUrl || '(cleared)'}`);
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Event Updated</title><meta http-equiv="refresh" content="2;url=/event"></head><body style="background:#0f172a;color:#fff;font-family:sans-serif;text-align:center;padding:50px;"><h2 style="color:#38bdf8;">✅ Live Event ${slot} Berhasil Diupdate!</h2><p>Target: <code>${newUrl || 'Kosong (Default / Auto Match)'}</code></p><p style="color:#94a3b8;">Mengarahkan kembali dalam 2 detik...</p></body></html>`);
+      return;
+    }
+
+    const cur1 = fs.existsSync(event1File) ? fs.readFileSync(event1File, 'utf-8').trim() : '';
+    const cur2 = fs.existsSync(event2File) ? fs.readFileSync(event2File, 'utf-8').trim() : '';
+
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Event Stream Manager</title>
+  <style>
+    body { background: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
+    .card { background: #1e293b; border-radius: 12px; padding: 25px; max-width: 650px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+    h1 { margin-top: 0; color: #38bdf8; font-size: 22px; display: flex; align-items: center; gap: 10px; }
+    .slot-box { background: #0f172a; border-radius: 8px; padding: 16px; margin-bottom: 20px; border: 1px solid #334155; }
+    .slot-title { font-weight: bold; margin-bottom: 8px; color: #f43f5e; display: flex; justify-content: space-between; }
+    .active-url { font-family: monospace; background: #1e293b; padding: 8px 12px; border-radius: 6px; font-size: 13px; word-break: break-all; color: #a5f3fc; border: 1px solid #475569; }
+    input[type=text] { width: 100%; box-sizing: border-box; padding: 12px; border-radius: 6px; border: 1px solid #475569; background: #1e293b; color: #fff; font-size: 14px; margin-top: 8px; }
+    button { background: #0284c7; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.2s; }
+    button:hover { background: #0369a1; }
+    .btn-danger { background: #e11d48; margin-left: 8px; }
+    .btn-danger:hover { background: #be123c; }
+    .m3u-link { font-size: 13px; color: #94a3b8; margin-top: 6px; }
+    .m3u-link a { color: #38bdf8; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🔴 Live Event Stream Manager</h1>
+    <p style="color:#94a3b8;font-size:14px;">Masukkan link streaming (.m3u8) atau ID Vidio saat ada event bola / pertandingan live. TV akan otomatis memutar link ini tanpa perlu ubah playlist.</p>
+
+    <div class="slot-box">
+      <div class="slot-title"><span>📺 LIVE EVENT 1</span> <span style="font-size:12px;color:#38bdf8;">Slot Utama</span></div>
+      <div class="active-url">${cur1 || '<i>(Belum diset - Otomatis Liga 1 / Soccer Channel)</i>'}</div>
+      <div class="m3u-link">Stream URL TV: <a href="/live/event.m3u8" target="_blank">http://${host}/live/event.m3u8</a></div>
+      <form method="POST" action="/event?slot=1">
+        <input type="text" name="url" placeholder="Paste link .m3u8 atau ID Vidio..." value="${cur1}">
+        <div style="display:flex;">
+          <button type="submit">💾 Simpan Slot 1</button>
+          <button type="button" class="btn-danger" onclick="location.href='/event?slot=1&url='">🗑️ Kosongkan</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="slot-box">
+      <div class="slot-title"><span>📺 LIVE EVENT 2</span> <span style="font-size:12px;color:#38bdf8;">Slot Cadangan</span></div>
+      <div class="active-url">${cur2 || '<i>(Belum diset - Kosong)</i>'}</div>
+      <div class="m3u-link">Stream URL TV: <a href="/live/event2.m3u8" target="_blank">http://${host}/live/event2.m3u8</a></div>
+      <form method="POST" action="/event?slot=2">
+        <input type="text" name="url" placeholder="Paste link .m3u8 atau ID Vidio..." value="${cur2}">
+        <div style="display:flex;">
+          <button type="submit">💾 Simpan Slot 2</button>
+          <button type="button" class="btn-danger" onclick="location.href='/event?slot=2&url='">🗑️ Kosongkan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>`);
+    return;
+  }
+
+  // Web UI & API to update Vidio account cookie
+  if (rawUrl === '/cookie' || rawUrl === '/vidio-cookie' || rawUrl.startsWith('/cookie?') || rawUrl.startsWith('/vidio-cookie?')) {
+    const cookieFile = path.join(__dirname, 'account_cookie.txt');
+    let newCookie = null;
+
+    if (req.method === 'POST') {
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      const body = Buffer.concat(chunks).toString('utf-8');
+      const params = new URLSearchParams(body);
+      if (params.has('cookie')) newCookie = params.get('cookie');
+      else if (body.includes('=')) newCookie = body;
+    } else {
+      const parsedUrl = new URL(rawUrl, `http://${host}`);
+      if (parsedUrl.searchParams.has('cookie')) newCookie = parsedUrl.searchParams.get('cookie');
+    }
+
+    if (typeof newCookie === 'string') {
+      newCookie = newCookie.trim();
+      fs.writeFileSync(cookieFile, newCookie, 'utf-8');
+      vidioSession = { encryptedApiKey: '', cookieHeader: '', expiresAt: 0 };
+      vidioTokenCache = {};
+      addLog(`[Vidio Cookie] Account cookie updated (${newCookie.length} chars). Cache cleared.`);
+
+      let testStatus = 'Testing stream...';
+      try {
+        const testStream = await getVidioStream('205');
+        testStatus = `Berhasil! Stream Indosiar aktif: ${testStream.hls.substring(0, 60)}...`;
+      } catch (e) {
+        testStatus = `Error validasi stream: ${e.message}`;
+      }
+
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Cookie Updated</title><meta http-equiv="refresh" content="3;url=/cookie"></head><body style="background:#0f172a;color:#fff;font-family:sans-serif;text-align:center;padding:50px;"><h2 style="color:#38bdf8;">✅ Cookie Vidio Berhasil Disimpan & Diaktifkan!</h2><p style="background:#1e293b;padding:15px;border-radius:8px;font-family:monospace;display:inline-block;max-width:80%;word-break:break-all;">${testStatus}</p><p style="color:#94a3b8;">Mengarahkan kembali dalam 3 detik...</p></body></html>`);
+      return;
+    }
+
+    const curCookie = fs.existsSync(cookieFile) ? fs.readFileSync(cookieFile, 'utf-8').trim() : '';
+    const cookiePreview = curCookie ? (curCookie.substring(0, 80) + '... (' + curCookie.length + ' chars)') : '(Belum ada cookie tersimpan)';
+
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vidio Cookie Manager</title>
+  <style>
+    body { background: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
+    .card { background: #1e293b; border-radius: 12px; padding: 25px; max-width: 650px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+    h1 { margin-top: 0; color: #38bdf8; font-size: 22px; }
+    .status-box { background: #0f172a; border-radius: 8px; padding: 16px; margin-bottom: 20px; border: 1px solid #334155; font-family: monospace; font-size: 13px; word-break: break-all; color: #a5f3fc; }
+    textarea { width: 100%; height: 120px; box-sizing: border-box; padding: 12px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 13px; font-family: monospace; }
+    button { background: #0284c7; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 12px; font-size: 14px; }
+    button:hover { background: #0369a1; }
+    .guide { background: #1e1b4b; border-left: 4px solid #6366f1; padding: 12px; border-radius: 6px; font-size: 13px; color: #c7d2fe; margin-top: 15px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🍪 Vidio Cookie & Auth Manager</h1>
+    <p style="color:#94a3b8;font-size:14px;">Masukkan cookie hasil <code>copy(document.cookie)</code> dari browser yang sudah login Vidio Gold / Platinum agar server bisa memutar siaran Vidio di TV tanpa 403 Forbidden.</p>
+    <div style="font-size:12px;color:#94a3b8;margin-bottom:6px;">Status Cookie Aktif:</div>
+    <div class="status-box">${cookiePreview}</div>
+    <form method="POST" action="/cookie">
+      <textarea name="cookie" placeholder="Paste cookie hasil copy(document.cookie) di sini...">${curCookie}</textarea>
+      <button type="submit">💾 Simpan & Aktifkan Akun Vidio</button>
+    </form>
+    <div class="guide">
+      <b>💡 Cara Ambil Cookie Vidio:</b><br>
+      1. Buka <code>https://m.vidio.com</code> di Chrome/browser HP atau Laptop.<br>
+      2. Login ke akun Vidio Anda.<br>
+      3. Buka Console DevTools (F12) lalu ketik <code>copy(document.cookie)</code> dan tekan Enter.<br>
+      4. Paste ke kolom di atas lalu klik <b>Simpan & Aktifkan</b>.
+    </div>
+  </div>
+</body>
+</html>`);
+    return;
+  }
+
+  // Handle /live/event.m3u8 and /live/event2.m3u8 (or /event.m3u8)
+  const isEvent1 = rawUrl.startsWith('/live/event.m3u8') || rawUrl === '/event.m3u8';
+  const isEvent2 = rawUrl.startsWith('/live/event2.m3u8') || rawUrl === '/event2.m3u8';
+
+  if (isEvent1 || isEvent2) {
+    const targetFile = isEvent2 ? event2File : event1File;
+    let target = fs.existsSync(targetFile) ? fs.readFileSync(targetFile, 'utf-8').trim() : '';
+
+    // If not set and event 1, check auto Liga 1 / live match
+    if (!target && isEvent1) {
+      const match = await getActiveLiga1Match();
+      if (match) target = match.id;
+    }
+
+    // Fallback if still empty
+    if (!target) {
+      if (isEvent1) {
+        // Fallback to Soccer Channel
+        target = 'http://202.80.222.20/cdn/iptv/Tvod/001/channel2000144/1024.m3u8';
+      } else {
+        res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+        res.end('Belum ada siaran event live yang diatur pada slot ini.\\nAtur URL siaran di http://' + host + '/event');
+        return;
+      }
+    }
+
+    // Check if target is a Vidio Channel ID (numbers only)
+    if (/^\\d+$/.test(target)) {
+      try {
+        const streamData = await getVidioStream(target);
+        const remoteRes = await fetch(streamData.hls, {
+          headers: {
+            'Origin': 'https://www.vidio.com',
+            'Referer': 'https://www.vidio.com/',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          }
+        });
+        const m3u8Text = await remoteRes.text();
+        const rewritten = rewriteM3u8(m3u8Text, streamData.hls, host, proto);
+        res.writeHead(200, {
+          'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-cache, no-store'
+        });
+        res.end(rewritten);
+        return;
+      } catch (err) {
+        addLog(`[Live Event] Error streaming Vidio ID ${target}: ${err.message}`);
+      }
+    }
+
+    // Otherwise target is an external HTTP/HTTPS M3U8 URL
+    if (target.startsWith('http://') || target.startsWith('https://')) {
+      try {
+        const remoteRes = await fetch(target, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          }
+        });
+        const m3u8Text = await remoteRes.text();
+        const rewritten = rewriteM3u8(m3u8Text, target, host, proto);
+        res.writeHead(200, {
+          'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-cache, no-store'
+        });
+        res.end(rewritten);
+        return;
+      } catch (err) {
+        addLog(`[Live Event] Error streaming URL ${target}: ${err.message}`);
+        res.writeHead(502, { 'Content-Type': 'text/plain' });
+        res.end('Error streaming event: ' + err.message);
+        return;
+      }
+    }
+  }
+
   // 1. Widevine DRM License Proxy
   if (rawUrl.startsWith('/vidio/license')) {
     const parsedUrl = new URL(rawUrl, `http://${host}`);
@@ -445,6 +806,164 @@ const server = http.createServer(async (req, res) => {
       if (!res.headersSent) {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('License Error: ' + e.message);
+      }
+      return;
+    }
+  }
+
+  // 1b. Vision+ Widevine DRM License Proxy (Auto-Refresh 24/7)
+  if (rawUrl.startsWith('/vision/license')) {
+    const parsedUrl = new URL(rawUrl, `http://${host}`);
+    const channelId = parsedUrl.searchParams.get('ch') || '1002';
+
+    try {
+      // 1. Baca challenge body dari client (TV) secepat mungkin agar tidak terputus stream-nya
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      const challengeBody = Buffer.concat(chunks);
+      console.log(`[Vision License ${channelId}] Received challenge: ${challengeBody.length} bytes`);
+      addLog(`[Vision License ${channelId}] Received challenge: ${challengeBody.length} bytes`);
+
+      const mediaMap = {
+        '1': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/997ce8767b604fae9fce05379b3b8b3a/00000000000000000001',
+        '2': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/d6b026ad50f14b7f9af5ddd5450007d4/00000000000000000002',
+        '3': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/b8b9b1d5f80f45649b4a3619291551ab/00000000000000000003',
+        '4': 'multirights:mediapackage/live//EG_d84q7nw4qf3j3/DASH/34d8dd29eb1d4eba931c7c5ab5f4be09/00000000000000000004',
+        '1002': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/HLS/de2cb5b125f744aaae2611e13ecfa4f0/00000000000000001002/00000000000000000112',
+        '1010': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/d2c68a3dfb644808b416bd90dcc92d5f/HLS/ea843b6cc223440c8f2273071d77fa7a/00000000000000001010/00000000000000000113',
+        '1012': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/63c0da12bb4d48afbaf053f51dff2353/HLS/b9fc626578f34e0db7ff123168ace53a/00000000000000001012/00000000000000000115'
+      };
+      const mediaUrl = mediaMap[channelId] || mediaMap['1002'];
+      const locatorUrl = `https://www.visionplus.id/streamlocators/multirights/getPlayableUrlAndLicense?adsProfile=premium&drm=WV&packaging=DASH&provisioningData=eyJwcm92aXNpb25pbmciOlt7InN5c3RlbSI6InZlcmltYXRyaXgiLCJkYXRhIjpbeyJuYW1lIjoidnVpZCIsInZhbHVlIjoiNGY5OGM5ODUtMDZjNC00YTU5LTllMzYtOWMzMWM3OTI4OTcyIn1dfV19&url=${encodeURIComponent(mediaUrl)}&userSessionToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNGY5OGM5ODUtMDZjNC00YTU5LTllMzYtOWMzMWM3OTI4OTcyIiwiZXhwIjoxNzk0NzYxNDQwLCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.ORAQurqIlLENwpw6Qg4_yIXM5KVisRi_l_KW0MfJvoU`;
+
+      const vRes = await fetch(locatorUrl, {
+        headers: {
+          'Accept': '*/*',
+          'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiNGY5OGM5ODUtMDZjNC00YTU5LTllMzYtOWMzMWM3OTI4OTcyIiwiZXhwIjoxNzk0NzYxNDQwLCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.ORAQurqIlLENwpw6Qg4_yIXM5KVisRi_l_KW0MfJvoU',
+          'IRIS-DEVICE-CLASS': 'PC',
+          'IRIS-DEVICE-TYPE': 'WINDOWS/CHROME',
+          'IRIS-DEVICE-REGION': 'Indonesia',
+          'IRIS-APP-VERSION': '11.4.13(0)_prd',
+          'IRIS-APP-MODE': 'Normal',
+          'IRIS-HW-DEVICE-ID': '4f98c985-06c4-4a59-9e36-9c31c7928972',
+          'IRIS-PROFILE-ID': '30098954',
+          'Referer': 'https://www.visionplus.id/webclient/live',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+      });
+      const vJson = await vRes.json();
+      const licUrl = vJson.videos?.[0]?.licenses?.[0]?.url;
+      if (!licUrl) throw new Error('No license URL found in Vision+ response: ' + JSON.stringify(vJson));
+
+      const licenseRes = await fetch(licUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/octet-stream',
+          'Origin': 'https://www.visionplus.id',
+          'Referer': 'https://www.visionplus.id/',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        },
+        body: challengeBody
+      });
+
+      const resBuffer = Buffer.from(await licenseRes.arrayBuffer());
+      const preview = resBuffer.toString('utf8').substring(0, 150);
+      console.log(`[Vision License ${channelId}] Verimatrix HTTP ${licenseRes.status}, resp size: ${resBuffer.length}, preview: ${preview}`);
+      addLog(`[Vision License ${channelId}] Verimatrix HTTP ${licenseRes.status}, resp size: ${resBuffer.length}, preview: ${preview}`);
+
+      res.writeHead(licenseRes.status, {
+        'Content-Type': 'application/octet-stream',
+        'Access-Control-Allow-Origin': '*'
+      });
+      res.end(resBuffer);
+      return;
+    } catch (e) {
+      console.error(`[Vision License Error]`, e.message);
+      addLog(`[Vision License Error] ${e.message}`);
+      if (!res.headersSent) {
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Vision License Error: ' + e.message);
+      }
+      return;
+    }
+  }
+
+  // 1c. Vision+ Media Stream Reverse Proxy (MPD & DASH Segments)
+  const visionLiveMatch = rawUrl.match(/^\/vision\/live\/(\d+)\/(.*)$/);
+  if (visionLiveMatch) {
+    const chId = visionLiveMatch[1];
+    const relPath = visionLiveMatch[2];
+    const cfBaseMap = {
+      '1': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/997ce8767b604fae9fce05379b3b8b3a/',
+      '2': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/d6b026ad50f14b7f9af5ddd5450007d4/',
+      '3': 'https://d2tjypxxy769fn.cloudfront.net/out/v1/b8b9b1d5f80f45649b4a3619291551ab/',
+      '4': 'https://d84q7nw4qf3j3.cloudfront.net/out/v1/34d8dd29eb1d4eba931c7c5ab5f4be09/',
+      '1002': 'https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/',
+      '1010': 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/d2c68a3dfb644808b416bd90dcc92d5f/',
+      '1012': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/63c0da12bb4d48afbaf053f51dff2353/'
+    };
+    const targetUrl = (cfBaseMap[chId] || cfBaseMap['1012']) + relPath;
+
+    try {
+      const fetchHeaders = {
+        'Origin': 'https://www.visionplus.id',
+        'Referer': 'https://www.visionplus.id/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
+      };
+      if (req.headers['range']) fetchHeaders['Range'] = req.headers['range'];
+
+      const remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+
+      // === MPD: inject BaseURL agar segment diambil lewat VPS, bukan CloudFront langsung ===
+      const isMpd = relPath.endsWith('.mpd') || relPath === 'index.mpd';
+      if (isMpd && remoteRes.ok) {
+        let mpdText = await remoteRes.text();
+        // Tentukan VPS base URL untuk channel ini
+        const proto = req.headers['x-forwarded-proto'] || 'http';
+        const host = req.headers['host'] || `72.60.79.72:8765`;
+        const vpsBase = `${proto}://${host}/vision/live/${chId}/`;
+        // Inject <BaseURL> di dalam setiap <Period> supaya relative segment URLs di-resolve ke VPS
+        if (mpdText.includes('<BaseURL>')) {
+          // Ganti BaseURL yang ada dengan VPS base
+          mpdText = mpdText.replace(/<BaseURL>[^<]*<\/BaseURL>/g, `<BaseURL>${vpsBase}</BaseURL>`);
+        } else {
+          // Inject BaseURL baru setelah tag <Period ...>
+          mpdText = mpdText.replace(/(<Period[^>]*>)/g, `$1\n    <BaseURL>${vpsBase}</BaseURL>`);
+        }
+        const respHeaders = {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+          'Access-Control-Allow-Headers': '*',
+          'Content-Type': 'application/dash+xml'
+        };
+        res.writeHead(200, respHeaders);
+        res.end(mpdText);
+        return;
+      }
+
+      // Untuk segment/init files: pass-through biasa
+      const respHeaders = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+        'Access-Control-Allow-Headers': '*',
+        'Content-Type': remoteRes.headers.get('content-type') || 'video/mp4'
+      };
+      if (remoteRes.headers.get('content-length')) {
+        respHeaders['Content-Length'] = remoteRes.headers.get('content-length');
+      }
+
+      res.writeHead(remoteRes.status, respHeaders);
+      const reader = remoteRes.body.getReader();
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) { res.end(); break; }
+        res.write(Buffer.from(value));
+      }
+      return;
+    } catch (e) {
+      if (!res.headersSent) {
+        res.writeHead(502, { 'Content-Type': 'text/plain' });
+        res.end('Vision Proxy Error: ' + e.message);
       }
       return;
     }
@@ -520,24 +1039,21 @@ const server = http.createServer(async (req, res) => {
     const channelId = vidioMatch[1];
     try {
       let streamData = await getVidioStream(channelId);
-      let remoteRes = await fetch(streamData.hls, {
-        headers: {
-          'Origin': 'https://www.vidio.com',
-          'Referer': 'https://www.vidio.com/',
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-        }
-      });
+      const session = await getOrRefreshVidioSession();
+      const desktopUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36';
+      const vHeaders = {
+        'Origin': 'https://www.vidio.com',
+        'Referer': 'https://www.vidio.com/',
+        'User-Agent': desktopUA
+      };
+      if (session && session.cookieHeader) vHeaders['Cookie'] = session.cookieHeader;
+
+      let remoteRes = await fetch(streamData.hls, { headers: vHeaders });
 
       if (remoteRes.status === 403 || remoteRes.status === 401) {
         delete vidioTokenCache[channelId];
         streamData = await getVidioStream(channelId);
-        remoteRes = await fetch(streamData.hls, {
-          headers: {
-            'Origin': 'https://www.vidio.com',
-            'Referer': 'https://www.vidio.com/',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-          }
-        });
+        remoteRes = await fetch(streamData.hls, { headers: vHeaders });
       }
 
       const m3u8Text = await remoteRes.text();
@@ -566,27 +1082,86 @@ const server = http.createServer(async (req, res) => {
     }
 
     try {
+      const isVision = targetUrl.includes('rctiplus.id') || targetUrl.includes('visionplus.id') || targetUrl.includes('cloudfront.net');
+      const isVidio = targetUrl.includes('vidio.com') || targetUrl.includes('akamaized.net') || targetUrl.includes('vidiostream.com');
+      const mobileUA = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36';
+
       const fetchHeaders = {
-        'Origin': 'https://www.vidio.com',
-        'Referer': 'https://www.vidio.com/',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        'Origin': isVision ? 'https://www.visionplus.id' : (isVidio ? 'https://m.vidio.com' : 'https://www.vidio.com'),
+        'Referer': isVision ? 'https://www.visionplus.id/' : (isVidio ? 'https://m.vidio.com/' : 'https://www.vidio.com/'),
+        'User-Agent': isVidio ? mobileUA : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
       };
       if (req.headers['range']) fetchHeaders['Range'] = req.headers['range'];
 
-      const remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+      if (isVidio && vidioSession && vidioSession.cookieHeader) {
+        fetchHeaders['Cookie'] = vidioSession.cookieHeader;
+      }
+
+      let remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+
+      // Auto token refresh on 403 / 401 for Vidio streams to prevent picture freezing/stuck:
+      if ((remoteRes.status === 403 || remoteRes.status === 401) && isVidio) {
+        const chMatch = targetUrl.match(/\/stream\/([0-9a-zA-Z_\-]+)\/file\//);
+        if (chMatch) {
+          const chId = chMatch[1];
+          delete vidioTokenCache[chId];
+          try {
+            const freshData = await getVidioStream(chId);
+            const tokenMatch = (freshData.hls || '').match(/hdnt[sl]=[^&?\/]+/);
+            if (tokenMatch) {
+              targetUrl = targetUrl.replace(/hdnt[sl]=[^/]+/, tokenMatch[0]);
+              remoteRes = await fetch(targetUrl, { headers: fetchHeaders });
+            }
+          } catch (eToken) {
+            addLog(`[Stream] Token refresh failed for ch ${chId}: ${eToken.message}`);
+          }
+        }
+      }
+
       const isM3u8 = new URL(targetUrl).pathname.endsWith('.m3u8') || (remoteRes.headers.get('content-type') || '').includes('mpegurl');
       if (isM3u8) {
+        if (req.method === 'HEAD') {
+          res.writeHead(remoteRes.status, {
+            'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
+            'Access-Control-Allow-Origin': '*',
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+          });
+          res.end();
+          return;
+        }
         const text = await remoteRes.text();
         const rewritten = rewriteM3u8(text, targetUrl, host, proto);
-        res.writeHead(remoteRes.status, { 'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
+        res.writeHead(remoteRes.status, {
+          'Content-Type': 'application/vnd.apple.mpegurl; charset=utf-8',
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        });
         res.end(rewritten);
         return;
       }
 
-      res.writeHead(remoteRes.status, {
+      const outHeaders = {
         'Access-Control-Allow-Origin': '*',
-        'Content-Type': remoteRes.headers.get('content-type') || 'application/octet-stream'
-      });
+        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+        'Access-Control-Allow-Headers': '*',
+        'Content-Type': remoteRes.headers.get('content-type') || (targetUrl.includes('.m4s') ? 'video/iso.segment' : (targetUrl.includes('.ts') ? 'video/MP2T' : 'application/octet-stream')),
+        'Accept-Ranges': remoteRes.headers.get('accept-ranges') || 'bytes'
+      };
+      if (remoteRes.headers.get('content-length')) outHeaders['Content-Length'] = remoteRes.headers.get('content-length');
+      if (remoteRes.headers.get('content-range')) outHeaders['Content-Range'] = remoteRes.headers.get('content-range');
+      outHeaders['Cache-Control'] = remoteRes.headers.get('cache-control') || 'public, max-age=30';
+
+      if (req.method === 'HEAD') {
+        res.writeHead(remoteRes.status, outHeaders);
+        res.end();
+        return;
+      }
+
+      res.writeHead(remoteRes.status, outHeaders);
       const reader = remoteRes.body.getReader();
       const pump = async () => {
         try {

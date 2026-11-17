@@ -254,6 +254,22 @@ async function getVidioStream(channelId) {
       addLog('[Stream] Trans 7 734 login required, falling back to direct feed.');
       return { hls: 'https://proxy-v.rctiplus.id/live/web/trans7/512.m3u8', expiresAt: now + 3600000 };
     }
+    if (channelId === '778') {
+      addLog('[Stream] GTV 778 package restricted on Vidio, falling back to high-speed direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/gtv/index.m3u8', expiresAt: now + 3600000 };
+    }
+    if (channelId === '674' || channelId === 'rcti') {
+      addLog('[Stream] RCTI package restricted on Vidio, falling back to high-speed direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/rcti/index.m3u8', expiresAt: now + 3600000 };
+    }
+    if (channelId === '779' || channelId === 'mnctv') {
+      addLog('[Stream] MNCTV package restricted on Vidio, falling back to high-speed direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/mnctv/index.m3u8', expiresAt: now + 3600000 };
+    }
+    if (channelId === '780' || channelId === 'inews') {
+      addLog('[Stream] iNews package restricted on Vidio, falling back to high-speed direct feed.');
+      return { hls: 'https://proxy-v.rctiplus.id/live/web/inews/index.m3u8', expiresAt: now + 3600000 };
+    }
     throw new Error(`Vidio API error (${channelId}): ${apiRes.status} ${errText}`);
   }
 

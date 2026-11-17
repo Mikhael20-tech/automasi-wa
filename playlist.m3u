@@ -465,6 +465,22 @@ http://72.60.79.72:8765/vidio/783.m3u8
 #EXTVLCOPT:network-caching=5000
 http://72.60.79.72:8765/vidio/782.m3u8
 
+#EXTINF:-1 tvg-id="GTV" tvg-name="GTV" tvg-logo="https://www.visionplus.id/images/repository/582/582-LOGO-l.png" group-title="VIDIO",GTV (Vidio HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/vidio/778.m3u8
+
+#EXTINF:-1 tvg-id="RCTI" tvg-name="RCTI" tvg-logo="https://www.visionplus.id/images/repository/580/580-LOGO-l.png" group-title="VIDIO",RCTI (Vidio HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/vidio/674.m3u8
+
+#EXTINF:-1 tvg-id="MNCTV" tvg-name="MNCTV" tvg-logo="https://www.visionplus.id/images/repository/581/581-LOGO-l.png" group-title="VIDIO",MNCTV (Vidio HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/vidio/779.m3u8
+
+#EXTINF:-1 tvg-id="iNews" tvg-name="iNews" tvg-logo="https://www.visionplus.id/images/repository/583/583-LOGO-l.png" group-title="VIDIO",iNews (Vidio HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/vidio/780.m3u8
+
 #EXTINF:-1 tvg-id="BTV" tvg-name="BTV" tvg-logo="https://thumbor.prod.vidiocdn.com/8w6ZkU-rW0U-gO9_9mK0cW0-aY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/6165/btv.jpg" group-title="VIDIO",BTV
 #EXTVLCOPT:network-caching=5000
 http://72.60.79.72:8765/vidio/6165.m3u8
