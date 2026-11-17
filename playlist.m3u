@@ -288,6 +288,31 @@ https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/8m8cd46i1t/out/v1
 #EXTVLCOPT:network-caching=5000
 https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/q4u5nwaogz/out/v1/18de6d3e65934f3a8de4358e69eab86c/cenc.mpd
 
+#EXTINF:-1 tvg-id="Real Madrid TV" tvg-name="Real Madrid TV" tvg-logo="https://image.xumo.com/v1/channels/channel/99951381/168x168.png?type=color_onBlack" group-title="Sports Channels",Real Madrid TV HD
+#EXTVLCOPT:network-caching=5000
+https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/master.m3u8
+
+#EXTINF:-1 tvg-id="Champions TV 1.id" tvg-name="Champions TV 1" tvg-logo="https://i.pinimg.com/736x/1a/a3/31/1aa331ed48c9ac45612850f604eb830c.jpg" group-title="Sports Channels",Champions TV 1 HD
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+#KODIPROP:mimetype=application/dash+xml
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=https://drm.emonaja.com/licence/v2/widevine/6685/Pollygon.do?hdntl=acl=/licence/v2/widevine/6685/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=f4fb590dcd36c4d16c7503741ea6097eb9fce86ec7b93a2b5392e4f71e10c037
+https://yuki.emonaja.com/live/eds/v2/ChampionsTV/dash/ChampionsTV.mpd?hdntl=acl=/live/eds/v2/ChampionsTV/dash/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=f7628f2441167dbd10f7c5f3b0b1d7fd50d6c182807128ee705f1e0e52cc64c8
+
+#EXTINF:-1 tvg-id="Champions TV 2.id" tvg-name="Champions TV 2" tvg-logo="https://i.pinimg.com/736x/1a/a3/31/1aa331ed48c9ac45612850f604eb830c.jpg" group-title="Sports Channels",Champions TV 2 HD
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+#KODIPROP:mimetype=application/dash+xml
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=https://drm.emonaja.com/licence/v2/widevine/6686/Pollygon.do?hdntl=acl=/licence/v2/widevine/6686/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=77872b5bcf02a24f449f9de72b11a67812f8c36eaf5e25d12f8976e72fd5a0ee
+https://yuki.emonaja.com/live/eds/v2/ChampionsTV2/dash/ChampionsTV2.mpd?hdntl=acl=/live/eds/v2/ChampionsTV2/dash/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=b8fbe3fda65e148f228716bc0966b4850fa7ecc1ccd60bd7f831ddaad90deb70
+
+#EXTINF:-1 tvg-id="Champions TV 3.id" tvg-name="Champions TV 3" tvg-logo="https://i.pinimg.com/736x/1a/a3/31/1aa331ed48c9ac45612850f604eb830c.jpg" group-title="Sports Channels",Champions TV 3 HD
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+#KODIPROP:mimetype=application/dash+xml
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=https://drm.emonaja.com/licence/v2/widevine/6786/Pollygon.do?hdntl=acl=/licence/v2/widevine/6786/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=22993e0bbf9d8d6efdac76c1f6621c4c8741d970d8afde21bd5f709737275d31
+https://yuki.emonaja.com/live/eds/v2/ChampionsTV3/dash/ChampionsTV3.mpd?hdntl=acl=/live/eds/v2/ChampionsTV3/dash/*~client=YmxhY2tob2xl~data=hdnts~exp=1794746853097~s=5bc1749b2fa52899~st=1794721653097~type=DiamondUser~usn=blackhole~hmac=6420b41e866a41edc72a77214333f30d16390664252f58fb00964162e1e394bd
+
 #EXTINF:-1 tvg-id="TVRI Sport" tvg-name="TVRI Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TVRI_Sport_2022.svg/960px-TVRI_Sport_2022.svg.png" group-title="Sports Channels",TVRI Sport HD
 #EXTVLCOPT:network-caching=5000
 https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD-avc1_1200000%3D10001-mp4a_128000%3D20001.m3u8
