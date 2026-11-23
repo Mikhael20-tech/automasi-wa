@@ -876,7 +876,7 @@ http://72.60.79.72:8765/live/web/tvone/512.m3u8
 
 #EXTINF:-1 tvg-id="Kompas TV" tvg-name="Kompas TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_kompastv.png" group-title="VISION+",Kompas TV
 #EXTVLCOPT:network-caching=5000
-http://72.60.79.72:8765/live/web/kompas/512.m3u8
+https://op-flashcon-digdayahd-1.dens.tv/s/s104/index.m3u8
 
 #EXTINF:-1 tvg-id="Metro TV" tvg-name="Metro TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_metrotv.png" group-title="VISION+",Metro TV
 #EXTVLCOPT:network-caching=5000
@@ -888,7 +888,7 @@ http://72.60.79.72:8765/live/web/rtv/512.m3u8
 
 #EXTINF:-1 tvg-id="TVRI" tvg-name="TVRI" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_tvri.png" group-title="VISION+",TVRI Nasional
 #EXTVLCOPT:network-caching=5000
-http://72.60.79.72:8765/live/web/tvri/512.m3u8
+http://72.60.79.72:8765/vidio/6441.m3u8
 
 #EXTINF:-1 tvg-id="Jak TV" tvg-name="Jak TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/c/c5/Jak_TV_2021.png" group-title="VISION+",Jak TV
 #EXTVLCOPT:network-caching=5000
