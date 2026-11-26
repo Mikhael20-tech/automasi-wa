@@ -8,6 +8,59 @@ const PORT = 8765;
 let vidioTokenCache = {};
 const recentLogs = [];
 
+// ============================================================
+// Vision+ Token & Stream URL Cache
+// ============================================================
+const VISION_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiMjBmYjUzMmMtODFmZi00OGQ0LWI1NmUtNTRlYWNhMDEwZWEyIiwiZXhwIjoxNzk1NzA1NTczLCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.9iVcxLA-RZrwvb2I9c3zFXN0rLdXfR_XFkGtHpuJPqk';
+const VISION_HW_ID = '20fb532c-81ff-48d4-b56e-54eaca010ea2';
+const VISION_PROV_DATA = 'eyJwcm92aXNpb25pbmciOlt7InN5c3RlbSI6InZlcmltYXRyaXgiLCJkYXRhIjpbeyJuYW1lIjoidnVpZCIsInZhbHVlIjoiMjBmYjUzMmMtODFmZi00OGQ0LWI1NmUtNTRlYWNhMDEwZWEyIn1dfV19';
+const VISION_PROFILE_ID = '30098954';
+
+// mediapackage "url" param per channel untuk getPlayableUrlAndLicense
+const VISION_MEDIA_MAP = {
+  '1':    'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/997ce8767b604fae9fce05379b3b8b3a/00000000000000000001',
+  '2':    'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/d6b026ad50f14b7f9af5ddd5450007d4/00000000000000000002',
+  '3':    'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/b8b9b1d5f80f45649b4a3619291551ab/00000000000000000003',
+  '4':    'multirights:mediapackage/live//EG_d84q7nw4qf3j3/DASH/34d8dd29eb1d4eba931c7c5ab5f4be09/00000000000000000004',
+  '1002': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/HLS/de2cb5b125f744aaae2611e13ecfa4f0/00000000000000001002/00000000000000000112',
+  '1010': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/d2c68a3dfb644808b416bd90dcc92d5f/HLS/ea843b6cc223440c8f2273071d77fa7a/00000000000000001010/00000000000000000113',
+  '1012': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/63c0da12bb4d48afbaf053f51dff2353/HLS/b9fc626578f34e0db7ff123168ace53a/00000000000000001012/00000000000000000115'
+};
+
+// Cache stream URL per channel (ttl: 55 menit)
+const visionUrlCache = {}; // { chId: { url, expiresAt } }
+
+async function getVisionStreamUrl(chId) {
+  const now = Date.now();
+  if (visionUrlCache[chId] && visionUrlCache[chId].expiresAt > now) {
+    return visionUrlCache[chId].url;
+  }
+  const mediaUrl = VISION_MEDIA_MAP[chId] || VISION_MEDIA_MAP['1002'];
+  const locatorUrl = `https://www.visionplus.id/streamlocators/multirights/getPlayableUrlAndLicense?adsProfile=premium&drm=WV&packaging=DASH&provisioningData=${VISION_PROV_DATA}&url=${encodeURIComponent(mediaUrl)}&userSessionToken=${VISION_TOKEN}`;
+  const vRes = await fetch(locatorUrl, {
+    headers: {
+      'Accept': '*/*',
+      'Authorization': VISION_TOKEN,
+      'IRIS-DEVICE-CLASS': 'PC',
+      'IRIS-DEVICE-TYPE': 'WINDOWS/CHROME',
+      'IRIS-DEVICE-REGION': 'Indonesia',
+      'IRIS-APP-VERSION': '11.4.13(0)_prd',
+      'IRIS-APP-MODE': 'Normal',
+      'IRIS-HW-DEVICE-ID': VISION_HW_ID,
+      'IRIS-PROFILE-ID': VISION_PROFILE_ID,
+      'Referer': 'https://www.visionplus.id/webclient/live',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+    }
+  });
+  const vJson = await vRes.json();
+  const streamUrl = vJson.videos?.[0]?.url;
+  if (!streamUrl) throw new Error('Vision+ getPlayableUrlAndLicense: no url — ' + JSON.stringify(vJson).substring(0, 200));
+  // Cache 55 menit
+  visionUrlCache[chId] = { url: streamUrl, expiresAt: now + 55 * 60 * 1000 };
+  addLog(`[Vision] ch=${chId} stream URL refreshed: ${streamUrl}`);
+  return streamUrl;
+}
+
 let vidioSession = {
   encryptedApiKey: '',
   cookieHeader: '',
@@ -882,29 +935,21 @@ const server = http.createServer(async (req, res) => {
       console.log(`[Vision License ${channelId}] Received challenge: ${challengeBody.length} bytes`);
       addLog(`[Vision License ${channelId}] Received challenge: ${challengeBody.length} bytes`);
 
-      const mediaMap = {
-        '1': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/997ce8767b604fae9fce05379b3b8b3a/00000000000000000001',
-        '2': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/d6b026ad50f14b7f9af5ddd5450007d4/00000000000000000002',
-        '3': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/b8b9b1d5f80f45649b4a3619291551ab/00000000000000000003',
-        '4': 'multirights:mediapackage/live//EG_d84q7nw4qf3j3/DASH/34d8dd29eb1d4eba931c7c5ab5f4be09/00000000000000000004',
-        '1002': 'multirights:mediapackage/live//EG_d2tjypxxy769fn/DASH/89a6e4261cd7470f83e5869e90440cff/HLS/de2cb5b125f744aaae2611e13ecfa4f0/00000000000000001002/00000000000000000112',
-        '1010': 'multirights:mediapackage/live//EG_d3b0v7fggu5zwm/DASH/d2c68a3dfb644808b416bd90dcc92d5f/HLS/ea843b6cc223440c8f2273071d77fa7a/00000000000000001010/00000000000000000113',
-        '1012': 'multirights:mediapackage/live//EG_d2xz2v5wuvgur6/DASH/63c0da12bb4d48afbaf053f51dff2353/HLS/b9fc626578f34e0db7ff123168ace53a/00000000000000001012/00000000000000000115'
-      };
-      const mediaUrl = mediaMap[channelId] || mediaMap['1002'];
-      const locatorUrl = `https://www.visionplus.id/streamlocators/multirights/getPlayableUrlAndLicense?adsProfile=premium&drm=WV&packaging=DASH&provisioningData=eyJwcm92aXNpb25pbmciOlt7InN5c3RlbSI6InZlcmltYXRyaXgiLCJkYXRhIjpbeyJuYW1lIjoidnVpZCIsInZhbHVlIjoiMjBmYjUzMmMtODFmZi00OGQ0LWI1NmUtNTRlYWNhMDEwZWEyIn1dfV19&url=${encodeURIComponent(mediaUrl)}&userSessionToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiMjBmYjUzMmMtODFmZi00OGQ0LWI1NmUtNTRlYWNhMDEwZWEyIiwiZXhwIjoxNzk1NzA1NTczLCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.9iVcxLA-RZrwvb2I9c3zFXN0rLdXfR_XFkGtHpuJPqk`;
+      // Gunakan VISION_MEDIA_MAP dan konstanta dari atas file
+      const mediaUrl = VISION_MEDIA_MAP[channelId] || VISION_MEDIA_MAP['1002'];
+      const locatorUrl = `https://www.visionplus.id/streamlocators/multirights/getPlayableUrlAndLicense?adsProfile=premium&drm=WV&packaging=DASH&provisioningData=${VISION_PROV_DATA}&url=${encodeURIComponent(mediaUrl)}&userSessionToken=${VISION_TOKEN}`;
 
       const vRes = await fetch(locatorUrl, {
         headers: {
           'Accept': '*/*',
-          'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ5NzE4NTQ2LCJ0eSI6IlVTRVIiLCJwY2kiOiIxMTM2NjgxNTUiLCJod0lkIjoiMjBmYjUzMmMtODFmZi00OGQ0LWI1NmUtNTRlYWNhMDEwZWEyIiwiZXhwIjoxNzk1NzA1NTczLCJwbiI6Ik1OQyIsImNpZCI6MjE3Njc1NDg0fQ.9iVcxLA-RZrwvb2I9c3zFXN0rLdXfR_XFkGtHpuJPqk',
+          'Authorization': VISION_TOKEN,
           'IRIS-DEVICE-CLASS': 'PC',
           'IRIS-DEVICE-TYPE': 'WINDOWS/CHROME',
           'IRIS-DEVICE-REGION': 'Indonesia',
           'IRIS-APP-VERSION': '11.4.13(0)_prd',
           'IRIS-APP-MODE': 'Normal',
-          'IRIS-HW-DEVICE-ID': '20fb532c-81ff-48d4-b56e-54eaca010ea2',
-          'IRIS-PROFILE-ID': '30098954',
+          'IRIS-HW-DEVICE-ID': VISION_HW_ID,
+          'IRIS-PROFILE-ID': VISION_PROFILE_ID,
           'Referer': 'https://www.visionplus.id/webclient/live',
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
@@ -951,16 +996,31 @@ const server = http.createServer(async (req, res) => {
   if (visionLiveMatch) {
     const chId = visionLiveMatch[1];
     const relPath = visionLiveMatch[2];
-    const cfBaseMap = {
-      '1': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/997ce8767b604fae9fce05379b3b8b3a/',
-      '2': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/d6b026ad50f14b7f9af5ddd5450007d4/',
-      '3': 'https://d2tjypxxy769fn.cloudfront.net/out/v1/b8b9b1d5f80f45649b4a3619291551ab/',
-      '4': 'https://d84q7nw4qf3j3.cloudfront.net/out/v1/34d8dd29eb1d4eba931c7c5ab5f4be09/',
-      '1002': 'https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/',
-      '1010': 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/d2c68a3dfb644808b416bd90dcc92d5f/',
-      '1012': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/63c0da12bb4d48afbaf053f51dff2353/'
-    };
-    const targetUrl = (cfBaseMap[chId] || cfBaseMap['1012']) + relPath;
+
+    // Untuk MPD: resolve base URL dinamis dari Vision+ API (dengan cache 55 menit)
+    // Untuk segment files (non-MPD): bisa pakai cache dari MPD sebelumnya
+    let targetUrl;
+    try {
+      // Ambil base URL dari API untuk channel ini
+      const streamUrl = await getVisionStreamUrl(chId);
+      // streamUrl contoh: https://d84q7nw4qf3j3.cloudfront.net/out/v1/XXXXX/index.mpd
+      // Base = semua sebelum "index.mpd"
+      const cfBase = streamUrl.replace(/index\.mpd.*$/, '');
+      targetUrl = cfBase + relPath;
+    } catch (e) {
+      // Fallback ke hardcoded map jika API gagal
+      addLog(`[Vision] getVisionStreamUrl ch=${chId} error: ${e.message} — fallback to hardcoded`);
+      const cfBaseMap = {
+        '1': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/997ce8767b604fae9fce05379b3b8b3a/',
+        '2': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/d6b026ad50f14b7f9af5ddd5450007d4/',
+        '3': 'https://d2tjypxxy769fn.cloudfront.net/out/v1/b8b9b1d5f80f45649b4a3619291551ab/',
+        '4': 'https://d84q7nw4qf3j3.cloudfront.net/out/v1/34d8dd29eb1d4eba931c7c5ab5f4be09/',
+        '1002': 'https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/',
+        '1010': 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/d2c68a3dfb644808b416bd90dcc92d5f/',
+        '1012': 'https://d2xz2v5wuvgur6.cloudfront.net/out/v1/63c0da12bb4d48afbaf053f51dff2353/'
+      };
+      targetUrl = (cfBaseMap[chId] || cfBaseMap['1012']) + relPath;
+    }
 
     try {
       const fetchHeaders = {
