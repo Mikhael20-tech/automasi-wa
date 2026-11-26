@@ -290,6 +290,20 @@ async function getVidioStream(channelId) {
       addLog('[Stream] iNews package restricted on Vidio, falling back to high-speed direct feed.');
       return { hls: 'https://proxy-v.rctiplus.id/live/web/inews/index.m3u8', expiresAt: now + 3600000 };
     }
+    // Auto-follow Vidio right_blocked redirect banner (e.g. Moji 206 -> Event 22876)
+    if (apiRes.status === 403 && errText.includes('right_blocked')) {
+      try {
+        const errJson = JSON.parse(errText);
+        const bannerUrl = errJson?.errors?.[0]?.meta?.blocking_banner?.url || '';
+        const match = bannerUrl.match(/\/live\/(\d+)/);
+        if (match && match[1] && match[1] !== String(channelId)) {
+          addLog(`[Stream] ${channelId} right_blocked -> Auto-redirecting to event ID ${match[1]}`);
+          return await getVidioStream(match[1]);
+        }
+      } catch (e) {
+        // Ignore JSON parse errors and fall through
+      }
+    }
     throw new Error(`Vidio API error (${channelId}): ${apiRes.status} ${errText}`);
   }
 
