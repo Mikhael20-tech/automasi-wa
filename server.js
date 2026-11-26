@@ -841,11 +841,11 @@ const server = http.createServer(async (req, res) => {
       const licenseRes = await fetch(licUrl, {
         method: 'POST',
         headers: {
-          'Origin': 'https://www.vidio.com',
-          'Referer': 'https://www.vidio.com/',
+          'Origin': 'https://m.vidio.com',
+          'Referer': 'https://m.vidio.com/',
           'pallycon-customdata-v2': widevineToken,
           'Content-Type': 'application/octet-stream',
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          'User-Agent': 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
         },
         body: challengeBody
       });
