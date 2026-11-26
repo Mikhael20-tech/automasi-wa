@@ -733,6 +733,10 @@ http://72.60.79.72:8765/vision/live/202/index.mpd
 #EXTVLCOPT:network-caching=5000
 http://72.60.79.72:8765/vision/live/203/index.mpd
 
+#EXTINF:-1 tvg-id="tvN" tvg-name="tvN" tvg-logo="https://www.visionplus.id/images/repository/103/458103-LOGO-l.png" group-title="VISION+",tvN (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/tvn/1024.m3u8
+
 #EXTINF:-1 tvg-id="TVN Movies" tvg-name="TVN Movies" tvg-logo="https://www.visionplus.id/images/repository/614/614-LOGO-l.png" group-title="VISION+",TVN Movies (Vision+ HD)
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=dash
