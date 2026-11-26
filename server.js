@@ -241,13 +241,36 @@ async function getVidioStream(channelId) {
   if (clientId) apiHeaders['X-Client'] = clientId;
   if (signature) apiHeaders['X-Signature'] = signature;
 
-  const apiRes = await fetch(`https://api.vidio.com/livestreamings/${channelId}/stream?initialize=true`, {
+  let apiRes = await fetch(`https://api.vidio.com/livestreamings/${channelId}/stream?initialize=true`, {
     headers: apiHeaders
   });
 
   if (!apiRes.ok) {
-    const errText = await apiRes.text().catch(() => '');
-    if (errText.includes('invalid_api_key') || errText.includes('Unauthorized application')) {
+    let errText = await apiRes.text().catch(() => '');
+
+    // Auto-retry disguised as web-mobile (HP Android) if blocked for TV/Desktop (code 10032013)
+    if (apiRes.status === 403 && errText.includes('10032013')) {
+      addLog(`[Stream] ${channelId} blocked for TV/Desktop (10032013) -> Retrying disguised as web-mobile (HP)...`);
+      const mobileUA = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36';
+      const mobileHeaders = {
+        ...apiHeaders,
+        'Origin': 'https://m.vidio.com',
+        'Referer': `https://m.vidio.com/live/${channelId}`,
+        'User-Agent': mobileUA,
+        'X-API-Platform': 'web-mobile'
+      };
+      const retryRes = await fetch(`https://api.vidio.com/livestreamings/${channelId}/stream?initialize=true`, {
+        headers: mobileHeaders
+      });
+      if (retryRes.ok) {
+        apiRes = retryRes;
+      } else {
+        errText = await retryRes.text().catch(() => '');
+      }
+    }
+
+    if (!apiRes.ok) {
+      if (errText.includes('invalid_api_key') || errText.includes('Unauthorized application')) {
       vidioSession.expiresAt = 0;
     }
     if (errText.includes('not_yet_started')) {
@@ -305,6 +328,7 @@ async function getVidioStream(channelId) {
       }
     }
     throw new Error(`Vidio API error (${channelId}): ${apiRes.status} ${errText}`);
+    }
   }
 
   const json = await apiRes.json();
