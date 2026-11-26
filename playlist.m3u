@@ -836,6 +836,82 @@ http://72.60.79.72:8765/vision/live/60/index.mpd
 #EXTVLCOPT:network-caching=5000
 http://72.60.79.72:8765/vision/live/102/index.mpd
 
+#EXTINF:-1 tvg-id="AXN" tvg-name="AXN" tvg-logo="https://www.visionplus.id/images/repository/638/638-LOGO-l.png" group-title="VISION+",AXN (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/axn/1024.m3u8
+
+#EXTINF:-1 tvg-id="Animax" tvg-name="Animax" tvg-logo="https://www.visionplus.id/images/repository/628/628-LOGO-l.png" group-title="VISION+",Animax (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/animax/1024.m3u8
+
+#EXTINF:-1 tvg-id="Cineedge" tvg-name="Cineedge" tvg-logo="https://www.visionplus.id/images/repository/376/273376-LOGO-l.png" group-title="VISION+",Cineedge (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/cineedge/1024.m3u8
+
+#EXTINF:-1 tvg-id="DreamWorks" tvg-name="DreamWorks" tvg-logo="https://www.visionplus.id/images/repository/630/630-LOGO-l.png" group-title="VISION+",DreamWorks (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/dreamworks/1024.m3u8
+
+#EXTINF:-1 tvg-id="HITS" tvg-name="HITS" tvg-logo="https://www.visionplus.id/images/repository/637/637-LOGO-l.png" group-title="VISION+",HITS (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/hits/1024.m3u8
+
+#EXTINF:-1 tvg-id="HITS Movies" tvg-name="HITS Movies" tvg-logo="https://www.visionplus.id/images/repository/610/610-LOGO-l.png" group-title="VISION+",HITS Movies (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/hitsmovies/1024.m3u8
+
+#EXTINF:-1 tvg-id="HITS Now" tvg-name="HITS Now" tvg-logo="https://www.visionplus.id/images/repository/376/612376-LOGO-l.png" group-title="VISION+",HITS Now (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/hitsnow/1024.m3u8
+
+#EXTINF:-1 tvg-id="IDX Channel" tvg-name="IDX Channel" tvg-logo="https://www.visionplus.id/images/repository/659/659-LOGO-l.png" group-title="VISION+",IDX Channel (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/idx/1024.m3u8
+
+#EXTINF:-1 tvg-id="Love Nature" tvg-name="Love Nature" tvg-logo="https://www.visionplus.id/images/repository/682/295682-LOGO-l.png" group-title="VISION+",Love Nature (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/lovenature/1024.m3u8
+
+#EXTINF:-1 tvg-id="Originals" tvg-name="Originals" tvg-logo="https://www.visionplus.id/images/repository/360/273360-LOGO-l.png" group-title="VISION+",Originals (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/originals/1024.m3u8
+
+#EXTINF:-1 tvg-id="Outdoor Channel" tvg-name="Outdoor Channel" tvg-logo="https://www.visionplus.id/images/repository/647/647-LOGO-l.png" group-title="VISION+",Outdoor Channel (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/outdoor/1024.m3u8
+
+#EXTINF:-1 tvg-id="Rock Action" tvg-name="Rock Action" tvg-logo="https://www.visionplus.id/images/repository/645/645-LOGO-l.png" group-title="VISION+",Rock Action (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/rockaction/1024.m3u8
+
+#EXTINF:-1 tvg-id="Rock Entertainment" tvg-name="Rock Entertainment" tvg-logo="https://www.visionplus.id/images/repository/644/644-LOGO-l.png" group-title="VISION+",Rock Entertainment (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/rockent/1024.m3u8
+
+#EXTINF:-1 tvg-id="Superrix" tvg-name="Superrix" tvg-logo="https://www.visionplus.id/images/repository/394/273394-LOGO-l.png" group-title="VISION+",Superrix (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/superrix/1024.m3u8
+
+#EXTINF:-1 tvg-id="Uniques" tvg-name="Uniques" tvg-logo="https://www.visionplus.id/images/repository/397/273397-LOGO-l.png" group-title="VISION+",Uniques (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/uniques/1024.m3u8
+
+#EXTINF:-1 tvg-id="Vision Prime" tvg-name="Vision Prime" tvg-logo="https://www.visionplus.id/images/repository/641/641-LOGO-l.png" group-title="VISION+",Vision Prime (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/visionprime/1024.m3u8
+
+#EXTINF:-1 tvg-id="DENS Food Channel" tvg-name="DENS Food Channel" tvg-logo="https://www.visionplus.id/images/repository/711/112711-LOGO-l.png" group-title="VISION+",DENS Food Channel (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://op-group1-densxvisionhd-1.dens.tv/h/h248/index.m3u8
+
+#EXTINF:-1 tvg-id="DENS Showbizz Channel" tvg-name="DENS Showbizz Channel" tvg-logo="https://www.visionplus.id/images/repository/712/112712-LOGO-l.png" group-title="VISION+",DENS Showbizz Channel (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://op-group1-densxvisionhd-1.dens.tv/h/h203/index.m3u8
+
+#EXTINF:-1 tvg-id="DENSPLAY Channel" tvg-name="DENSPLAY Channel" tvg-logo="https://www.visionplus.id/images/repository/088/115088-LOGO-l.png" group-title="VISION+",DENSPLAY Channel (Vision+ HD)
+#EXTVLCOPT:network-caching=5000
+http://72.60.79.72:8765/stream/https://op-group1-densxvisionhd-1.dens.tv/h/h225/index.m3u8
+
 #EXTINF:-1 tvg-id="Kompas TV" tvg-name="Kompas TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_kompastv.png" group-title="VISION+",Kompas TV
 #EXTVLCOPT:network-caching=5000
 https://op-flashcon-digdayahd-1.dens.tv/s/s104/index.m3u8
