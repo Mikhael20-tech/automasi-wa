@@ -517,8 +517,56 @@ http://72.60.79.72:8765/vidio/22252.m3u8
 #EXTVLCOPT:network-caching=5000
 http://72.60.79.72:8765/vidio/22337.m3u8
 # ==========================================
-# 📡 VISION+ & MNC GROUP (DIRECT HLS NO DRM)
+# 📡 VISION+ & MNC GROUP
 # ==========================================
+
+#EXTINF:-1 tvg-id="RCTI" tvg-name="RCTI" tvg-logo="https://www.visionplus.id/images/repository/580/580-LOGO-l.png" group-title="VISION+",RCTI (Vision+ HD)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=1
+#EXTVLCOPT:network-caching=5000
+https://d2xz2v5wuvgur6.cloudfront.net/out/v1/997ce8767b604fae9fce05379b3b8b3a/index.mpd
+
+#EXTINF:-1 tvg-id="MNCTV" tvg-name="MNCTV" tvg-logo="https://www.visionplus.id/images/repository/581/581-LOGO-l.png" group-title="VISION+",MNCTV (Vision+ HD)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=2
+#EXTVLCOPT:network-caching=5000
+https://d2xz2v5wuvgur6.cloudfront.net/out/v1/d6b026ad50f14b7f9af5ddd5450007d4/index.mpd
+
+#EXTINF:-1 tvg-id="GTV" tvg-name="GTV" tvg-logo="https://www.visionplus.id/images/repository/582/582-LOGO-l.png" group-title="VISION+",GTV (Vision+ HD)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=3
+#EXTVLCOPT:network-caching=5000
+https://d2tjypxxy769fn.cloudfront.net/out/v1/b8b9b1d5f80f45649b4a3619291551ab/index.mpd
+
+#EXTINF:-1 tvg-id="Sportstars" tvg-name="Sportstars" tvg-logo="https://www.visionplus.id/images/repository/652/652-LOGO-l.png" group-title="VISION+",Sport Stars HD (Vision+)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=1002
+#EXTVLCOPT:network-caching=5000
+https://d2tjypxxy769fn.cloudfront.net/out/v1/89a6e4261cd7470f83e5869e90440cff/index.mpd
+
+#EXTINF:-1 tvg-id="Sportstars 2" tvg-name="Sportstars 2" tvg-logo="https://www.visionplus.id/images/repository/653/653-LOGO-l.png" group-title="VISION+",Sport Stars 2 HD (Vision+)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=1010
+#EXTVLCOPT:network-caching=5000
+https://d3b0v7fggu5zwm.cloudfront.net/out/v1/d2c68a3dfb644808b416bd90dcc92d5f/index.mpd
+
+#EXTINF:-1 tvg-id="Soccer Channel" tvg-name="Soccer Channel" tvg-logo="https://www.visionplus.id/images/repository/655/655-LOGO-l.png" group-title="VISION+",Soccer Channel HD (Vision+)
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=1012
+#EXTVLCOPT:network-caching=5000
+https://d2xz2v5wuvgur6.cloudfront.net/out/v1/63c0da12bb4d48afbaf053f51dff2353/index.mpd
 
 #EXTINF:-1 tvg-id="Kompas TV" tvg-name="Kompas TV" tvg-logo="https://raw.githubusercontent.com/apistech/project/refs/heads/main/logo/image_ch_kompastv.png" group-title="VISION+",Kompas TV
 #EXTVLCOPT:network-caching=5000
