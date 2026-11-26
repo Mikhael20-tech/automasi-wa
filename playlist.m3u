@@ -554,15 +554,8 @@ http://72.60.79.72:8765/vision/live/2/index.mpd
 http://72.60.79.72:8765/vision/live/3/index.mpd
 
 #EXTINF:-1 tvg-id="iNews" tvg-name="iNews" tvg-logo="https://www.visionplus.id/images/repository/583/583-LOGO-l.png" group-title="VISION+",iNews (Vision+ HD)
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=dash
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=http://72.60.79.72:8765/vision/license?ch=4
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
-#KODIPROP:inputstream.adaptive.stream_headers=User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36&Referer=https://www.visionplus.id/
-#EXTVLCOPT:http-referrer=https://www.visionplus.id/
 #EXTVLCOPT:network-caching=5000
-http://72.60.79.72:8765/vision/live/4/index.mpd
+http://72.60.79.72:8765/stream/https://dsgtq5sngxkde.cloudfront.net/inews/1024.m3u8
 
 #EXTINF:-1 tvg-id="Sportstars" tvg-name="Sportstars" tvg-logo="https://www.visionplus.id/images/repository/652/652-LOGO-l.png" group-title="VISION+",Sport Stars HD (Vision+)
 #KODIPROP:inputstreamaddon=inputstream.adaptive
